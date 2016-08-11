@@ -1,4 +1,5 @@
-name: NVLI-464-content-type-and-media-entity
+name: resources
+description: 'Content type Resource and media entity bundles.'
 type: module
 core: 8.x
 dependencies:
@@ -12,8 +13,7 @@ dependencies:
   - menu_ui
   - node
   - path
+  - taxonomy
   - text
   - user
-  - video_embed_field
   - video_embed_media
-version: ' 8.x-1.0'
