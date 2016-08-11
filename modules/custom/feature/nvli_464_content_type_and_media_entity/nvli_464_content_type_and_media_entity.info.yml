@@ -1,0 +1,19 @@
+name: NVLI-464-content-type-and-media-entity
+type: module
+core: 8.x
+dependencies:
+  - datetime
+  - field
+  - image
+  - media_entity
+  - media_entity_audio
+  - media_entity_document
+  - media_entity_image
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
+  - video_embed_field
+  - video_embed_media
+version: ' 8.x-1.0'
