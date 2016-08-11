@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_image_path
+    - media_entity.bundle.images
+id: media.images.field_image_path
+field_name: field_image_path
+entity_type: media
+bundle: images
+label: 'Image Path'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

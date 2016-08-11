@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_image_description
+    - media_entity.bundle.images
+  module:
+    - text
+id: media.images.field_image_description
+field_name: field_image_description
+entity_type: media
+bundle: images
+label: Description
+description: 'Description about image'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

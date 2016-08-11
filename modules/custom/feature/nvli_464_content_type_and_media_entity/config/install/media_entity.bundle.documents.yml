@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_document
+id: documents
+label: Documents
+description: 'Media bundle to store documents'
+type: document
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: ''
+field_map: {  }
