@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_doc_short_description
+    - media_entity.bundle.documents
+  module:
+    - text
+id: media.documents.field_doc_short_description
+field_name: field_doc_short_description
+entity_type: media
+bundle: documents
+label: 'Short Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

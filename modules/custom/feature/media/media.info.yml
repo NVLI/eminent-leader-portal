@@ -1,0 +1,20 @@
+name: media
+description: 'Media Bundles'
+type: module
+core: 8.x
+dependencies:
+  - datetime
+  - field
+  - image
+  - media_entity
+  - media_entity_audio
+  - media_entity_document
+  - media_entity_image
+  - path
+  - taxonomy
+  - text
+  - user
+  - video_embed_field
+  - video_embed_media
+  - views
+version: 8.x-1.0
