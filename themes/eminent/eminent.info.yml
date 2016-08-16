@@ -1,0 +1,21 @@
+name: Eminent Portal
+description: A complete light weight theme with bootstrap framework for eminent portal.
+type: theme
+core: 8.x
+
+# Defines the base theme
+base theme: stable
+
+# Defines libraries group in which we can add css/js.
+libraries:
+  - eminent/global-components
+  - eminent/global-js
+
+# Defines the regions for the theme
+regions:
+  content: 'Main Content'
+  header: 'Header'
+  footer: 'Footer'
+  sidebar_first: 'First Sidebar'
+  sidebar_second: 'Second Sidebar'
+  main_navigation: 'Main Navigation'
