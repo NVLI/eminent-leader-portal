@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_time_line_date
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - datetime
+id: paragraph.time_line_story.field_time_line_date
+field_name: field_time_line_date
+entity_type: paragraph
+bundle: time_line_story
+label: Date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

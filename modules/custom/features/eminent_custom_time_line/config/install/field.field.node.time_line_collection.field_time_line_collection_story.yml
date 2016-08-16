@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_line_collection_story
+    - node.type.time_line_collection
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - entity_reference_revisions
+id: node.time_line_collection.field_time_line_collection_story
+field_name: field_time_line_collection_story
+entity_type: node
+bundle: time_line_collection
+label: 'Time Line story'
+description: 'The individual time line story'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      time_line_story: time_line_story
+    target_bundles_drag_drop:
+      time_line_story:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

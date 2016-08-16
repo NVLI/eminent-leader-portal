@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.time_line_collection.body
+    - field.field.node.time_line_collection.field_time_line_collection_front
+    - field.field.node.time_line_collection.field_time_line_collection_story
+    - node.type.time_line_collection
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.time_line_collection.default
+targetEntityType: node
+bundle: time_line_collection
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_time_line_collection_front:
+    weight: 103
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+  field_time_line_collection_story:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden: {  }

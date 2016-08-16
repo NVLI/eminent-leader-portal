@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.time_line_story.field_time_line_date
+    - field.field.paragraph.time_line_story.field_time_line_description
+    - field.field.paragraph.time_line_story.field_time_line_image
+    - field.field.paragraph.time_line_story.field_time_line_media_reference
+    - field.field.paragraph.time_line_story.field_time_line_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - datetime
+    - image
+id: paragraph.time_line_story.default
+targetEntityType: paragraph
+bundle: time_line_story
+mode: default
+content:
+  field_time_line_date:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_time_line_description:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_time_line_image:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_time_line_media_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_time_line_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+hidden:
+  created: true
+  status: true
+  uid: true
