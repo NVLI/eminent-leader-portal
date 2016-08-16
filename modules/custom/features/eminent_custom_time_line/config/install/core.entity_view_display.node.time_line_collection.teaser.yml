@@ -4,6 +4,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.time_line_collection.body
+    - field.field.node.time_line_collection.field_time_line_collection_front
+    - field.field.node.time_line_collection.field_time_line_collection_image
+    - field.field.node.time_line_collection.field_time_line_collection_story
     - node.type.time_line_collection
   module:
     - text
@@ -22,4 +25,7 @@ content:
     third_party_settings: {  }
   links:
     weight: 100
-hidden: {  }
+hidden:
+  field_time_line_collection_front: true
+  field_time_line_collection_image: true
+  field_time_line_collection_story: true

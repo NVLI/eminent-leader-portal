@@ -4,9 +4,12 @@ dependencies:
   config:
     - field.field.node.time_line_collection.body
     - field.field.node.time_line_collection.field_time_line_collection_front
+    - field.field.node.time_line_collection.field_time_line_collection_image
     - field.field.node.time_line_collection.field_time_line_collection_story
+    - image.style.thumbnail
     - node.type.time_line_collection
   module:
+    - image
     - paragraphs
     - path
     - text
@@ -34,6 +37,13 @@ content:
       display_label: false
     third_party_settings: {  }
     type: boolean_checkbox
+  field_time_line_collection_image:
+    weight: 34
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
   field_time_line_collection_story:
     type: entity_reference_paragraphs
     weight: 32

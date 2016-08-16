@@ -36,14 +36,6 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
-  field_time_line_media_reference:
-    weight: 4
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
   field_time_line_title:
     weight: 1
     settings:
@@ -53,5 +45,6 @@ content:
     type: string_textfield
 hidden:
   created: true
+  field_time_line_media_reference: true
   status: true
   uid: true
