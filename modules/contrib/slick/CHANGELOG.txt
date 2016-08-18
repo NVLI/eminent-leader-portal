@@ -1,0 +1,163 @@
+
+Slick 8.x-2.0-dev, 2016-05-09
+-----------------------------
+- Removed redundant Preloader option since the classes are within image
+  containers. Maybe more reasonable for Views later which can text, images, etc.
+
+Slick 8.x-2.0-dev, 2016-05-07
+-----------------------------
+- Fixed for broken dots.
+- Update arrows defaults values.
+- Updated slick.load.min.js to v1.6.0.
+
+Slick 8.x-2.0-dev, 2016-05-05
+-----------------------------
+- Updated JS to Blazy JS v1.6.0 as per [#2716765].
+- Added option Preloader for Slick > 1.5.9 which is unfortunately still broken.
+- Removed _slick_build_slide() to reduce function calls.
+- Removed expensive SlickManager::getAvailableSkins().
+- More cleanups.
+
+Slick 8.x-2.0-dev, 2016-04-22
+-----------------------------
+- A couple of cleanups.
+- #2710221 by xanterax: Fatal error by colliding constructor traits.
+
+Slick 8.x-2.0-dev, 2016-04-11
+-----------------------------
+- Ported hook_requirements().
+- A couple of cleanups.
+
+Slick 8.x-2.0-dev, 2016-04-09
+-----------------------------
+- Fixed for broken core library grid Rows.
+
+Slick 8.x-2.0-dev, 2016-04-08
+-----------------------------
+- Cleaned up thumbnails leftovers.
+
+Slick 8.x-2.0-dev, 2016-04-06
+-----------------------------
+- Allowed modules to not use slick_image at module level.
+- Refined form elements for thumbnails vs. thumb_captions selections to allow
+  supporting VEF which has no captions but may have thumbnails.
+
+Slick 8.x-2.0-dev, 2016-04-04
+-----------------------------
+- Fixed for overridables.
+- Added support to turn images into CSS background images.
+
+Slick 8.x-2.0-dev, 2016-04-03
+-----------------------------
+- Removed media iframe stuffs out of slick-image.html.twig, and moved to which
+  they belong: slick_media.module. Be sure to clear cache.
+
+Slick 8.x-2.0-dev, 2016-04-02
+-----------------------------
+- Removed noscript fallback, see:
+  http://goo.gl/FQLFQ6
+  https://goo.gl/f78pMl
+- Removed theme_slick_media(), and merged it into theme_slick_image() to get
+  along well with Blazy::buildAttributes(), and reduce complication with aspect
+  ratio when IMG, IFRAME and lightbox/image link A tags are _all optional.
+- Fixed for broken slick with Blazy, aspect ratio and hidden containers, e.g.:
+  - Hidden Slick containers such as within hidden Ultimenu regions.
+  - Blazy lazyload, not Slick own builtin lazyload.
+  - Aspect ratio enabled.
+  - Blazied images are large enough to render too late when Slick kicks in.
+  - Blazied small images are not affected.
+
+Slick 8.x-2.0-dev, 2016-03-30
+-----------------------------
+- A few cleanups, Blazy option at Slick UI, skins, composer.json, etc.
+
+Slick 8.x-2.0-dev, 2016-03-28
+-----------------------------
+- #2693089: Add dependency on Blazy.
+  Be sure to clear cache.
+- Renamed visible_slides into visible_items to allow re-usable by Blazy.
+- Changed thumbnail_hover option into thumbnail_effect to allow variant
+  thumbnail stylings: hoverable, static grid.
+- Moved Slick admin CSS into Blazy to re-use for a few related modules.
+- Moved slick.media.js, slick.photobox.js, and all re-usable stuffs into Blazy.
+
+Slick 8.x-2.0-dev, 2016-03-23
+-----------------------------
+- Made nice with ESLint.
+- Recommended dependency on Blazy module to reduce DRY stuffs shared across
+  Blazy, Mason, GridStack, Slick Views and Slick. Will require prior to Betas.
+- Simplified slick-image.html.twig.
+- Added entity_keys status to disable Default optionset.
+- Fixed for Blazy integration.
+- Renamed ::getSkinOptions() into ::getSkinsByGroupOptions() for clarity.
+- Removed image dimensions fail safe, and moved most logic to ::getImage(), so
+  using ::getImage() is a must than calling theme_slick_image() directly. This
+  prevented loading image_style objects multiple times, and dup lines.
+- Moved SlickFormatterTrait.php into FieldFormatter directory.
+- Deleted SlickFormatterBase.php, and merged it into SlickFormatterTrait.php
+- Moved aspect ratio fluid style attribute from JS into PHP, otherwise defeating
+  the purpose to solve the layout reflow before the images are actually loaded.
+- Moved SlickInterface.php into Entity.
+
+Slick 8.x-2.0-dev, 2016-02-11
+-----------------------------
+- Updated useTransform to TRUE to reflect post v1.5.9.
+- Fixed for non-editable ID during Duplicate operation.
+- Removed focusOnSelect asnavfor failsafe.
+- Merged methods getArrows(), getDots(), getDefinedSkins() into getSkins().
+
+Slick 8.x-2.0-dev, 2016-01-20
+-----------------------------
+- Fixed for Route "entity.responsive_image_style.collection" does not exist
+  error when responsive_image is not installed.
+- Updated deprecated \Drupal::url as per [#2605546]
+- Fixed for undefined index notice: current_view_mode.
+- Moved common functions to SlickFormatterTrait for slick formatters.
+- Removed trivial settings: pattern, wrapper class.
+- Removed unused services.
+
+Slick 8.x-2.0-dev, 2016-01-19
+-----------------------------
+- A few cleanup here and there.
+- Fixed for Slick media 'overlay' option.
+
+Slick 8.x-2.0-dev, 2016-01-18
+-----------------------------
+- Updated descriptions here and there.
+- Removed skin Test from SlickSkin.php.
+- Fixed skin JS library.
+
+Slick 8.x-2.0-dev, 2016-01-17
+-----------------------------
+- Added the CHANGELOG.txt
+- Issue #2651690: Add slick.api.php
+- Issue #2651686: Add composer.json
+- Issue #2651656: Create a slick text formatter
+- Issue #2651652: Create a slick image formatter
+- Issue #2651650: Provide Configuration UI (slick UI port)
+- Issue #2651648: Implement CMI
+- Issue #2432711 by valkum: 8.x-1.x Port
+- Initial commit.
+
+Slick 8.x-2.0-dev, 2015-12-12
+-----------------------------
+- Removed "slide_" prefixed options, e.g.: slide_layout becomes layout.
+- Changed colorbox_style to box_style to be generic enough for other lightboxes.
+- Renamed theme_slick_item() to theme_slick_slide() to match the library
+  slick-slide.
+
+Slick 8.x-2.0-dev, 2015-01-15
+-----------------------------
+- Converted all skins into library assets via hook_library_info_build().
+
+Slick 8.x-2.0-dev, 2014-09-26
+-----------------------------
+- Converted most of the preprocessed classes and attributes into twig templates.
+- Added config/schema and config/install files.
+- Added slick.links.action.yml
+- Converted CTools menu into slick.links.menu.yml
+- Converted hook_library_info() into slick.libraries.yml
+- Converted slick_fields into an image formatter plugin.
+- Converted CTools plugin into CMI.
+- Removed dependencies on CTools, libraries and jquery_update modules.
+- Initial D8 WIP locally.

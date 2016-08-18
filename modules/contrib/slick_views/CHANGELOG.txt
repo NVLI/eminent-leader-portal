@@ -1,0 +1,46 @@
+
+Slick views 8.x-1.0-dev, 2016-05-05
+-----------------------------------
+- Changed description to the Main image option to reflect the latest features.
+
+Slick views 8.x-1.0-dev, 2016-04-11
+-----------------------------------
+- Added overlay description.
+
+Slick views 8.x-1.0-dev, 2016-04-06
+-----------------------------------
+- Added nav key to reflect Slick > 8.x-1.0-alpha7 refinements.
+
+Slick views 8.x-1.0-dev, 2016-03-31
+-----------------------------------
+- #2697155 by fortis: "delta" is an invalid render array key.
+- A few little cleanups.
+
+Slick views 8.x-1.0-dev, 2016-03-29
+-----------------------------------
+- Fixed for missing $settings['item_id'].
+
+Slick views 8.x-1.0-dev, 2016-03-28
+-----------------------------------
+- Added dependency on Blazy as per [#2693089].
+
+Slick views 8.x-1.0-dev, 2016-03-23
+-----------------------------------
+- Added potential dependency on Blazy to reduce DRY stuffs.
+- Fixed for missing schema grid_header.
+
+Slick views 8.x-1.0-dev, 2016-02-11
+-----------------------------------
+- Simplified thumbnail building to use a single function call instead.
+
+Slick views 8.x-1.0-dev, 2016-01-20
+------------------------------------
+- Fixed for undefined index notice: current_view_mode.
+- Added hook_help().
+- Removed trivial settings: pattern, wrapper class.
+
+Slick views 8.x-1.0-dev, 2016-01-18
+-----------------------------------
+- Added missing dependencies on Views.
+- Issue #2651730: D8 port
+- Initial D8 port.

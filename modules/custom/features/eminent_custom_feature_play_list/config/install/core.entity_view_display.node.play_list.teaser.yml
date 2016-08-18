@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.play_list.field_resource
+    - node.type.play_list
+  module:
+    - user
+id: node.play_list.teaser
+targetEntityType: node
+bundle: play_list
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_resource: true

@@ -1,0 +1,20 @@
+name: 'Play List'
+description: 'feature  for playlist'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - eminent_custom_media_bundles
+  - field
+  - image
+  - media_entity
+  - menu_ui
+  - node
+  - path
+  - slick
+  - system
+  - text
+  - user
+  - views
+version: 8.x-1.0
+package: 'Eminent Custom'
