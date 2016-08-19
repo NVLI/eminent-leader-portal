@@ -423,6 +423,10 @@ time {
     text-align: justify;
     padding: 15px;
 }
+#block-views-block-time-line-collections-block-1 .views-view-grid .views-col {
+    text-align: justify;
+    padding: 15px;
+}
 
 .slide__caption div > div:first-child {
     display: none;
