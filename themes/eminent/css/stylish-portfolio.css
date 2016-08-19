@@ -419,7 +419,7 @@ time {
     color: #000;
     text-align: justify;
 }
-#block-views-block-exhibition-block-2 views-field-field-description { 
-    padding: 12px;
+#block-views-block-exhibition-block-2 .views-view-grid .views-col {
     text-align: justify;
+    padding: 15px;
 }
