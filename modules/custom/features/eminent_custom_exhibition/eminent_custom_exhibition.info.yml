@@ -6,8 +6,12 @@ dependencies:
   - block
   - image
   - media_entity
+  - node
   - slick
+  - slick_media
   - system
+  - text
+  - user
   - views
 version: 8.x-1.0
 package: 'Eminent Custom'
