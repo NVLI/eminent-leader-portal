@@ -415,7 +415,11 @@ time {
   text-align: left;
 }
 .slick--skin--classic .slide__caption {
-    background-color: null;
+    background-color: #fff;
     color: #000;
-    left: auto;
+    text-align: justify;
+}
+#block-views-block-exhibition-block-2 views-field-field-description { 
+    padding: 12px;
+    text-align: justify;
 }
