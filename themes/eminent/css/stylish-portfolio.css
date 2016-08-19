@@ -431,6 +431,7 @@ time {
 .slide__caption div > div:first-child {
     display: none;
 }
-.timeline p {
+.timeline p,
+.container p {
 text-align: justify;
 }
