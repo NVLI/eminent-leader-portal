@@ -8,9 +8,9 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: Playlist
-type: playlist
-description: test
+name: 'Play List'
+type: play_list
+description: ' Content type to show collections'
 help: ''
 new_revision: false
 preview_mode: 1

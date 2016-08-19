@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.play_list.field_description
     - field.field.node.play_list.field_resource
     - node.type.play_list
   module:
     - path
+    - text
 id: node.play_list.default
 targetEntityType: node
 bundle: play_list
@@ -16,6 +18,14 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_description:
+    weight: 32
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
   field_resource:
     weight: 31
     settings:
