@@ -1,0 +1,13 @@
+name: exhibition
+description: 'Play list views and blocks'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - image
+  - media_entity
+  - slick
+  - system
+  - views
+version: 8.x-1.0
+package: 'Eminent Custom'
