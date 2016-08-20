@@ -1,0 +1,6 @@
+name: Eminent Custom
+type: module
+description: Contains the custom functionalities of Eminent Portal.
+core: 8.x
+version: 8.x-1.0
+package: Custom
