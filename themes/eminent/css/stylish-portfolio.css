@@ -427,3 +427,30 @@ time {
 .slide__caption div > div:first-child {
     display: none;
 }
+#block-views-block-featured-quote-block-1 {
+  margin-top: 40px;
+}
+#block-views-block-featured-quote-block-1 img {
+  width: 250px;
+  height: 100px;
+  border-radius: 50%;
+}
+#block-views-block-featured-quote-block-1 p:before {
+  content: "\f10d";
+  font-family: 'Fontawesome';
+  float: left;
+  margin-right: 10px;
+}
+#block-views-block-featured-quote-block-1 p {
+  font-size: 18px;
+  font-style: italic;
+  padding: 10px 120px;
+}
+#block-views-block-featured-quote-block-1 .quote-author::before {
+  content: "— ";
+}
+#block-views-block-featured-quote-block-1 .quote-author {
+  color: #777;
+  display: block;
+  line-height: 1.42857;
+}
