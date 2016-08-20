@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.document.field_dc_date
     - field.field.media.document.field_dc_description
     - field.field.media.document.field_dc_title
     - field.field.media.document.field_document_path
@@ -9,6 +10,7 @@ dependencies:
     - image.style.thumbnail
     - media_entity.bundle.document
   module:
+    - datetime
     - file
     - image
     - user
@@ -26,6 +28,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+  field_dc_date:
+    weight: 6
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 3
     label: above

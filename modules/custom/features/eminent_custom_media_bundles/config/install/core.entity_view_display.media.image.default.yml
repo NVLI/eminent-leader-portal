@@ -2,13 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_dc_date
     - field.field.media.image.field_dc_description
     - field.field.media.image.field_dc_title
     - field.field.media.image.field_dummy_image
     - field.field.media.image.field_image_path
-    - image.style.thumbnail
+    - image.style.media_entity_browser_thumbnail
     - media_entity.bundle.image
   module:
+    - datetime
     - image
     - user
 id: media.image.default
@@ -25,6 +27,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+  field_dc_date:
+    weight: 6
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 3
     label: above
@@ -35,14 +45,14 @@ content:
     weight: 2
     label: above
     settings:
-      link_to_entity: false
+      link_to_entity: true
     third_party_settings: {  }
     type: string
   field_dummy_image:
     weight: 5
     label: above
     settings:
-      image_style: ''
+      image_style: media_entity_browser_thumbnail
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -65,7 +75,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: thumbnail
+      image_style: media_entity_browser_thumbnail
       image_link: ''
     third_party_settings: {  }
   uid:

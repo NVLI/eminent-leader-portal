@@ -3,12 +3,14 @@ status: true
 dependencies:
   config:
     - field.field.media.audio.field_audio_path
+    - field.field.media.audio.field_dc_date
     - field.field.media.audio.field_dc_description
     - field.field.media.audio.field_dc_title
     - field.field.media.audio.field_dummy_audio
     - image.style.thumbnail
     - media_entity.bundle.audio
   module:
+    - datetime
     - file
     - image
     - user
@@ -33,6 +35,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+  field_dc_date:
+    weight: 6
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 3
     label: above

@@ -3,11 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.media.audio.field_audio_path
+    - field.field.media.audio.field_dc_date
     - field.field.media.audio.field_dc_description
     - field.field.media.audio.field_dc_title
     - field.field.media.audio.field_dummy_audio
     - media_entity.bundle.audio
   module:
+    - datetime
     - file
 id: media.audio.default
 targetEntityType: media
@@ -26,6 +28,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+  field_dc_date:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 12
     settings:

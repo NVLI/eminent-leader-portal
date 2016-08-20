@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_dc_date
     - field.field.media.image.field_dc_description
     - field.field.media.image.field_dc_title
     - field.field.media.image.field_dummy_image
@@ -9,6 +10,7 @@ dependencies:
     - image.style.thumbnail
     - media_entity.bundle.image
   module:
+    - datetime
     - image
 id: media.image.default
 targetEntityType: media
@@ -20,6 +22,11 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_dc_date:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 12
     settings:

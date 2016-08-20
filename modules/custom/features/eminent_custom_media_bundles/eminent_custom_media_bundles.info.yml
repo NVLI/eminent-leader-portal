@@ -3,7 +3,7 @@ description: 'Contains the media entity bundles and related fields'
 type: module
 core: 8.x
 dependencies:
-  - comment
+  - datetime
   - features
   - field
   - file
@@ -12,9 +12,7 @@ dependencies:
   - media_entity_audio
   - media_entity_document
   - media_entity_image
-  - path
   - taxonomy
-  - text
   - user
   - video_embed_field
   - video_embed_media
