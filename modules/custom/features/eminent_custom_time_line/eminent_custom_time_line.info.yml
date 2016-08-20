@@ -6,6 +6,7 @@ dependencies:
   - block
   - datetime
   - eminent_custom_media_bundles
+  - entity_browser
   - entity_reference_revisions
   - field
   - file

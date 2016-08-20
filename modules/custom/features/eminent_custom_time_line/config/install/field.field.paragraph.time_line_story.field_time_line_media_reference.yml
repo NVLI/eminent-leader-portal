@@ -14,7 +14,7 @@ entity_type: paragraph
 bundle: time_line_story
 label: 'Media Reference'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

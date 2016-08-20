@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.time_line_story.field_time_line_date
     - field.field.paragraph.time_line_story.field_time_line_description
+    - field.field.paragraph.time_line_story.field_time_line_from_media
     - field.field.paragraph.time_line_story.field_time_line_image
     - field.field.paragraph.time_line_story.field_time_line_media_reference
     - field.field.paragraph.time_line_story.field_time_line_title
@@ -48,5 +49,6 @@ content:
     type: string
 hidden:
   created: true
+  field_time_line_from_media: true
   field_time_line_media_reference: true
   uid: true
