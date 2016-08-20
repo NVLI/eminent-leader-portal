@@ -8,6 +8,8 @@ dependencies:
   - menu_ui
   - node
   - path
+  - slick
+  - slick_views
   - text
   - user
   - views
