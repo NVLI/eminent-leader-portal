@@ -1,5 +1,4 @@
 bundle: eminent_custom
 excluded:
-  - block.block.views_block__featured_quote_block_1
   - slick.optionset.quote
 required: true
