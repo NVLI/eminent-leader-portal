@@ -423,10 +423,15 @@ time {
     text-align: justify;
     padding: 15px;
 }
+#block-views-block-time-line-collections-block-1 .views-view-grid .views-col {
+    text-align: justify;
+    padding: 15px;
+}
 
 .slide__caption div > div:first-child {
     display: none;
 }
+
 #block-views-block-featured-quote-block-1 {
   margin-top: 40px;
 }
@@ -453,4 +458,8 @@ time {
   color: #777;
   display: block;
   line-height: 1.42857;
+}
+.timeline p,
+.container p {
+  text-align: justify;
 }
