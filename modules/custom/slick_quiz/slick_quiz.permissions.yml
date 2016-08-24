@@ -1,0 +1,18 @@
+'add slick_quiz entity':
+  title: Add slick_quiz content.
+'view slick_quiz entity':
+  title: View slick_quiz content.
+'view own slick_quiz entity':
+  title: View own slick_quiz content.
+'edit slick_quiz entity':
+  title: Edit slick_quiz content.
+'edit own slick_quiz entity':
+  title: Edit own slick_quiz content.
+'delete slick_quiz entity':
+  title: Delete slick_quiz content.
+'delete own slick_quiz entity':
+  title: Delete own slick_quiz content.
+'administer entity verification':
+  title: Administer entity verification settings.
+'administer slick_quiz entity':
+  title: Administer slick_quiz entity settings.

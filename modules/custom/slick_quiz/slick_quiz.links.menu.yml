@@ -1,0 +1,7 @@
+# Define the menu links for this module
+
+slick_quiz.admin.structure.settings:
+  title: Slick Quiz
+  description: 'Manage Slick Quiz Entity'
+  route_name:  slick_quiz.slick_quiz_settings
+  parent: system.admin_structure
