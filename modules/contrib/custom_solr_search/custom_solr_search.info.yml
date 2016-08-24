@@ -1,0 +1,5 @@
+name: Custom Solr Search
+type: module
+description: Custom Solr Search
+core: 8.x
+package: Custom
