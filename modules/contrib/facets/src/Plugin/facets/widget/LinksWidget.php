@@ -29,9 +29,10 @@ class LinksWidget extends WidgetPluginBase {
    */
   public function build(FacetInterface $facet) {
     $build = parent::build($facet);
-    if (!empty($configuration['soft_limit'])) {
+    $soft_limit = (int) $this->getConfiguration()['soft_limit'];
+    if ($soft_limit !== 0) {
       $build['#attached']['library'][] = 'facets/soft-limit';
-      $build['#attached']['drupalSettings']['facets']['softLimit'][$facet->id()] = (int) $configuration['soft_limit'];
+      $build['#attached']['drupalSettings']['facets']['softLimit'][$facet->id()] = $soft_limit;
     }
     return $build;
   }

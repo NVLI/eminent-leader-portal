@@ -4,6 +4,7 @@ namespace Drupal\facets\Plugin\facets\processor;
 
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\FacetSource\SearchApiFacetSourceInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @FacetsProcessor(
  *   id = "list_item",
  *   label = @Translation("List item label"),
- *   description = @Translation("Fields that are a list (such as list (integer), list (text)) can use this processor to show the value instead of the key."),
+ *   description = @Translation("Fields that are a list (such as list (integer), list (text)) or a bundle field can use this processor to show the value instead of the key."),
  *   stages = {
  *     "build" = 5
  *   }
@@ -40,14 +41,34 @@ class ListItemProcessor extends ProcessorPluginBase implements BuildProcessorInt
   private $entityFieldManager;
 
   /**
-   * {@inheritdoc}
+   * The entity_type bundle info service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigManagerInterface $config_manager, EntityFieldManagerInterface $entity_field_manager) {
+  private $entityTypeBundleInfo;
+
+  /**
+   * Constructs a Drupal\Component\Plugin\PluginBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
+   *   The config manager.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   The entity field manager.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity bundle info service.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigManagerInterface $config_manager, EntityFieldManagerInterface $entity_field_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->configManager = $config_manager;
-
     $this->entityFieldManager = $entity_field_manager;
+    $this->entityTypeBundleInfo = $entity_type_bundle_info;
   }
 
   /**
@@ -59,7 +80,8 @@ class ListItemProcessor extends ProcessorPluginBase implements BuildProcessorInt
       $plugin_id,
       $plugin_definition,
       $container->get('config.manager'),
-      $container->get('entity_field.manager')
+      $container->get('entity_field.manager'),
+      $container->get('entity_type.bundle.info')
     );
   }
 
@@ -101,6 +123,14 @@ class ListItemProcessor extends ProcessorPluginBase implements BuildProcessorInt
       }
       else {
         $allowed_values = ${$function}($field);
+      }
+
+      // If no values are found for the current field, try to see if this is a
+      // bundle field.
+      if (empty($allowed_values) && $bundles = $this->entityTypeBundleInfo->getBundleInfo($entity)) {
+        foreach ($bundles as $key => $bundle) {
+          $allowed_values[$key] = $bundle['label'];
+        }
       }
 
       if (is_array($allowed_values)) {

@@ -19,9 +19,7 @@ display:
       query:
         type: search_api_query
         options:
-          bypass_access: true
           skip_access: true
-          parse_mode: terms
       exposed_form:
         type: basic
         options:
@@ -138,7 +136,7 @@ display:
             operator_id: search_api_fulltext_op
             label: 'Fulltext search'
             description: ''
-            use_operator: false
+            use_operator: true
             operator: search_api_fulltext_op
             identifier: search_api_fulltext
             required: false
@@ -160,10 +158,122 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          min_length: 0
+          min_length: 3
           fields: {  }
           plugin_id: search_api_fulltext
-      sorts: {  }
+        id:
+          plugin_id: search_api_numeric
+          id: id
+          table: search_api_index_database_search_index
+          field: id
+          relationship: none
+          admin_label: ''
+          operator: '='
+          group: 1
+          exposed: true
+          expose:
+            operator_id: id_op
+            label: ''
+            description: ''
+            use_operator: true
+            operator: id_op
+            identifier: id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+        created:
+          plugin_id: search_api_date
+          id: created
+          table: search_api_index_database_search_index
+          field: created
+          relationship: none
+          admin_label: ''
+          operator: '='
+          group: 1
+          exposed: true
+          expose:
+            operator_id: created_op
+            label: ''
+            description: ''
+            use_operator: true
+            operator: created_op
+            identifier: created
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+        keywords:
+          plugin_id: search_api_string
+          id: keywords
+          table: search_api_index_database_search_index
+          field: keywords
+          relationship: none
+          admin_label: ''
+          operator: '='
+          group: 1
+          exposed: true
+          expose:
+            operator_id: keywords_op
+            label: ''
+            description: ''
+            use_operator: true
+            operator: keywords_op
+            identifier: keywords
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+        search_api_language:
+          plugin_id: search_api_language
+          id: search_api_language
+          table: search_api_index_database_search_index
+          field: search_api_language
+          relationship: none
+          admin_label: ''
+          operator: 'in'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: language_op
+            label: ''
+            description: ''
+            use_operator: true
+            operator: language_op
+            identifier: language
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+      sorts:
+        search_api_id:
+          id: search_api_id
+          table: search_api_index_database_search_index
+          field: search_api_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: 'Fulltext test index'
       header:
         result:
@@ -173,13 +283,31 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
           content: 'Displaying @total search results'
           plugin_id: result
       footer: {  }
       empty: {  }
       relationships: {  }
-      arguments: {  }
+      arguments:
+        search_api_datasource:
+          plugin_id: search_api
+          id: search_api_datasource
+          table: search_api_index_database_search_index
+          field: search_api_datasource
+          break_phrase: true
+        type:
+          plugin_id: search_api
+          id: type
+          table: search_api_index_database_search_index
+          field: type
+          break_phrase: false
+          not: true
+        keywords:
+          plugin_id: search_api
+          id: keywords
+          table: search_api_index_database_search_index
+          field: keywords
+          break_phrase: true
   page_1:
     display_plugin: page
     id: page_1

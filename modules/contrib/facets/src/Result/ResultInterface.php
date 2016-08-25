@@ -85,7 +85,7 @@ interface ResultInterface {
   /**
    * Returns children results.
    *
-   * @return \Drupal\facets\Result\ResultInterface $children
+   * @return \Drupal\facets\Result\ResultInterface[] $children
    *   The children results.
    */
   public function getChildren();

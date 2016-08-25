@@ -94,7 +94,7 @@ class SearchApiViews extends SearchApiBaseFacetSource implements SearchApiFacetS
    */
   public function fillFacetsWithResults($facets) {
     // Check if there are results in the static cache.
-    $results = $this->searchApiResultsCache->getResults($this->pluginId);
+    $results = $this->searchApiQueryHelper->getResults($this->pluginId);
 
     // If our results are not there, execute the view to get the results.
     if (!$results) {
@@ -102,7 +102,7 @@ class SearchApiViews extends SearchApiBaseFacetSource implements SearchApiFacetS
       $view = Views::getView($this->pluginDefinition['view_id']);
       $view->setDisplay($this->pluginDefinition['view_display']);
       $view->execute();
-      $results = $this->searchApiResultsCache->getResults($this->pluginId);
+      $results = $this->searchApiQueryHelper->getResults($this->pluginId);
     }
 
     // Get the results from the cache. It is possible it still errored out.

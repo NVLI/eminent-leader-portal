@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\facets\Unit\Plugin\processor;
 
+use Drupal\Core\Entity\EntityTypeBundleInfo;
 use Drupal\facets\Entity\Facet;
 use Drupal\facets\Plugin\facets\processor\ListItemProcessor;
 use Drupal\facets\Result\Result;
@@ -52,8 +53,12 @@ class ListItemProcessorTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
 
+    $entity_type_bundle_info = $this->getMockBuilder(EntityTypeBundleInfo::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+
     $processor_id = 'list_item';
-    $this->processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager);
+    $this->processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager, $entity_type_bundle_info);
   }
 
   /**
@@ -87,8 +92,12 @@ class ListItemProcessorTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
 
+    $entity_type_bundle_info = $this->getMockBuilder(EntityTypeBundleInfo::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+
     $processor_id = 'list_item';
-    $processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager);
+    $processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager, $entity_type_bundle_info);
 
     // Config entity field facet.
     $module_field_facet = new Facet([], 'facets_facet');
@@ -106,6 +115,65 @@ class ListItemProcessorTest extends UnitTestCase {
     $this->assertEquals('llama', $module_field_results[0]->getDisplayValue());
     $this->assertEquals('badger', $module_field_results[1]->getDisplayValue());
     $this->assertEquals('kitten', $module_field_results[2]->getDisplayValue());
+  }
+
+  /**
+   * Tests facet build with field.module field.
+   */
+  public function testBundle() {
+    $module_field = $this->getMockBuilder(FieldStorageConfig::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $module_field->expects($this->at(0))
+      ->method('getSetting')
+      ->with('allowed_values_function')
+      ->willReturn([]);
+    $module_field->expects($this->at(1))
+      ->method('getSetting')
+      ->with('allowed_values')
+      ->willReturn([]);
+
+    $config_manager = $this->getMockBuilder(ConfigManager::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $config_manager->expects($this->any())
+      ->method('loadConfigEntityByName')
+      ->willReturn($module_field);
+
+    $entity_field_manager = $this->getMockBuilder(EntityFieldManager::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+
+    $entity_type_bundle_info = $this->getMockBuilder(EntityTypeBundleInfo::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $entity_type_bundle_info->expects($this->exactly(1))
+      ->method('getBundleInfo')
+      ->willReturn([
+        1 => ['label' => 'Monkey'],
+        2 => ['label' => 'Donkey'],
+        3 => ['label' => 'Kong'],
+      ]);
+
+    $processor_id = 'list_item';
+    $processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager, $entity_type_bundle_info);
+
+    // Config entity field facet.
+    $module_field_facet = new Facet([], 'facets_facet');
+    $module_field_facet->setFieldIdentifier('test_facet');
+    $module_field_facet->setResults($this->results);
+    $module_field_facet->addProcessor([
+      'processor_id' => 'list_item',
+      'weights' => [],
+      'settings' => [],
+    ]);
+    /* @var \Drupal\facets\Result\Result[] $module_field_facet- */
+    $module_field_results = $processor->build($module_field_facet, $this->results);
+
+    $this->assertCount(3, $module_field_results);
+    $this->assertEquals('Monkey', $module_field_results[0]->getDisplayValue());
+    $this->assertEquals('Donkey', $module_field_results[1]->getDisplayValue());
+    $this->assertEquals('Kong', $module_field_results[2]->getDisplayValue());
   }
 
   /**
@@ -143,8 +211,12 @@ class ListItemProcessorTest extends UnitTestCase {
         'test_facet_baseprop' => $base_field,
       ]);
 
+    $entity_type_bundle_info = $this->getMockBuilder(EntityTypeBundleInfo::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+
     $processor_id = 'list_item';
-    $processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager);
+    $processor = new ListItemProcessor([], $processor_id, [], $config_manager, $entity_field_manager, $entity_type_bundle_info);
 
     // Base prop facet.
     $base_prop_facet = new Facet([], 'facets_facet');

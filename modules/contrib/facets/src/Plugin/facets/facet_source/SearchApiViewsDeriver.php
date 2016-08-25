@@ -30,49 +30,49 @@ class SearchApiViewsDeriver extends FacetSourceDeriverBase {
     catch (PluginNotFoundException $e) {
       return [];
     }
+    $plugin_derivatives = array();
 
-    if (!isset($this->derivatives[$base_plugin_id])) {
-      $plugin_derivatives = array();
+    /** @var \Drupal\views\Entity\View $view */
+    foreach ($all_views as $view) {
+      // Hardcoded usage of Search API views, for now.
+      if (strpos($view->get('base_table'), 'search_api_index') !== FALSE) {
+        $displays = $view->get('display');
+        foreach ($displays as $display_id => $display_info) {
 
-      /** @var \Drupal\views\Entity\View $view */
-      foreach ($all_views as $view) {
-        // Hardcoded usage of Search API views, for now.
-        if (strpos($view->get('base_table'), 'search_api_index') !== FALSE) {
-          $displays = $view->get('display');
-          foreach ($displays as $display_id => $display_info) {
+          // We only support page, block and REST export displays for views.
+          $allowed_plugins = ['page', 'block', 'rest_export'];
+          if (in_array($display_info['display_plugin'], $allowed_plugins)) {
+            $machine_name = $view->id() . PluginBase::DERIVATIVE_SEPARATOR . $display_id;
 
-            // We only support page, block and REST export displays for views.
-            $allowed_plugins = ['page', 'block', 'rest_export'];
-            if (in_array($display_info['display_plugin'], $allowed_plugins)) {
-              $machine_name = $view->id() . PluginBase::DERIVATIVE_SEPARATOR . $display_id;
+            $label_arguments = [
+              '%view_name' => $view->label(),
+              '%display_title' => $display_info['display_title'],
+              '%display_type' => $display_info['display_plugin'],
+            ];
+            $plugin_derivatives[$machine_name] = [
+              'id' => $base_plugin_id . PluginBase::DERIVATIVE_SEPARATOR . $machine_name,
+              'label' => $this->t('Search API view: %view_name, display: %display_title (%display_type)',
+                $label_arguments
+              ),
+              'description' => $this->t('Provides a facet source.'),
+              'view_id' => $view->id(),
+              'view_display' => $display_id,
+            ] + $base_plugin_definition;
 
-              $label_arguments = [
-                '%view_name' => $view->label(),
-                '%display_title' => $display_info['display_title'],
-                '%display_type' => $display_info['display_plugin'],
-              ];
-              $plugin_derivatives[$machine_name] = [
-                'id' => $base_plugin_id . PluginBase::DERIVATIVE_SEPARATOR . $machine_name,
-                'label' => $this->t('Search API view: %view_name, display: %display_title (%display_type)',
-                  $label_arguments
-                ),
-                'description' => $this->t('Provides a facet source.'),
-                'view_id' => $view->id(),
-                'view_display' => $display_id,
-              ] + $base_plugin_definition;
-
-              $sources[] = $this->t(
-                'Search API view: %view, display: %display',
-                ['%view' => $view->label(), '%display' => $display_info['display_title']]
-              );
-            }
+            $sources[] = $this->t(
+              'Search API view: %view, display: %display',
+              [
+                '%view' => $view->label(),
+                '%display' => $display_info['display_title'],
+              ]
+            );
           }
         }
       }
-      uasort($plugin_derivatives, array($this, 'compareDerivatives'));
-
-      $this->derivatives[$base_plugin_id] = $plugin_derivatives;
     }
+    uasort($plugin_derivatives, array($this, 'compareDerivatives'));
+
+    $this->derivatives[$base_plugin_id] = $plugin_derivatives;
     return $this->derivatives[$base_plugin_id];
   }
 

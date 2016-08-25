@@ -8,8 +8,8 @@ test_dependencies:
   - search_api:search_api
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2016-07-06
-version: '8.x-1.0-alpha4'
+# Information added by Drupal.org packaging script on 2016-08-24
+version: '8.x-1.0-alpha4+11-dev'
 core: '8.x'
 project: 'facets'
-datestamp: 1467826141
+datestamp: 1472060341

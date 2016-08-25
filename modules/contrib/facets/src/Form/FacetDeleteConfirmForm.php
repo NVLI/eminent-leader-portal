@@ -22,7 +22,7 @@ class FacetDeleteConfirmForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.facets_facet.canonical', array('facets_facet' => $this->entity->id()));
+    return new Url('facets.overview');
   }
 
   /**

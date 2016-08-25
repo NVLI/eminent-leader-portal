@@ -48,7 +48,6 @@ use Drupal\facets\FacetInterface;
  *     "facet_configs",
  *   },
  *   links = {
- *     "canonical" = "/admin/config/search/facets",
  *     "add-form" = "/admin/config/search/facets/add-facet",
  *     "edit-form" = "/admin/config/search/facets/{facets_facet}/edit",
  *     "settings-form" = "/admin/config/search/facets/{facets_facet}/settings",

@@ -842,12 +842,20 @@ class IntegrationTest extends WebTestBase {
     $facet_id = $this->convertNameToMachineName($facet_name);
 
     $facet_delete_page = '/admin/config/search/facets/' . $facet_id . '/delete';
+    $facet_overview = '/admin/config/search/facets';
 
     // Go to the facet delete page and make the warning is shown.
     $this->drupalGet($facet_delete_page);
     $this->assertResponse(200);
-    // @TODO Missing this text on local test. Not sure why.
-    // $this->assertText($this->t('Are you sure you want to delete the facet'));
+    $this->assertText("This action cannot be undone.");
+
+    // Click the cancel link and see that we redirect to the overview page.
+    $this->clickLink("Cancel");
+    $this->assertUrl($facet_overview);
+
+    // Back to the delete page.
+    $this->drupalGet($facet_delete_page);
+
     // Actually submit the confirmation form.
     $this->drupalPostForm(NULL, [], $this->t('Delete'));
 
@@ -857,7 +865,6 @@ class IntegrationTest extends WebTestBase {
 
     // Refresh the page because on the previous page the $facet_name is still
     // visible (in the message).
-    $facet_overview = '/admin/config/search/facets';
     $this->drupalGet($facet_overview);
     $this->assertResponse(200);
     $this->assertNoText($facet_name);

@@ -28,6 +28,7 @@ abstract class WebTestBase extends SimpletestWebTestBase {
     'facets',
     'block',
     'facets_search_api_dependency',
+    'taxonomy',
   ];
 
   /**

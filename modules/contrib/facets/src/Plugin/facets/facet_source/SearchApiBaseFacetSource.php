@@ -25,9 +25,9 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
   /**
    * The search result cache.
    *
-   * @var \Drupal\search_api\Query\ResultsCacheInterface
+   * @var \Drupal\search_api\Utility\QueryHelper
    */
-  protected $searchApiResultsCache;
+  protected $searchApiQueryHelper;
 
   /**
    * {@inheritdoc}
@@ -40,7 +40,7 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
     $this->pluginDefinition = $plugin_definition;
     $this->pluginId = $plugin_id;
     $this->configuration = $configuration;
-    $this->searchApiResultsCache = $search_results_cache;
+    $this->searchApiQueryHelper = $search_results_cache;
   }
 
   /**
@@ -50,9 +50,9 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
     /** @var \Drupal\facets\QueryType\QueryTypePluginManager $query_type_plugin_manager */
     $query_type_plugin_manager = $container->get('plugin.manager.facets.query_type');
 
-    /** @var \Drupal\search_api\Query\ResultsCacheInterface $results_cache */
-    $search_results_cache = $container->get('search_api.results_static_cache');
-    return new static($configuration, $plugin_id, $plugin_definition, $query_type_plugin_manager, $search_results_cache);
+    /** @var \Drupal\search_api\Utility\QueryHelper $query_helper */
+    $query_helper = $container->get('search_api.query_helper');
+    return new static($configuration, $plugin_id, $plugin_definition, $query_type_plugin_manager, $query_helper);
   }
 
   /**

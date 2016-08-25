@@ -40,7 +40,11 @@ class Result implements ResultInterface {
    */
   protected $active = FALSE;
 
-
+  /**
+   * Children results.
+   *
+   * @var \Drupal\facets\Result\ResultInterface[]
+   */
   protected $children = [];
 
   /**

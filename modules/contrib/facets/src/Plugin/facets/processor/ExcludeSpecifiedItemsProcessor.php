@@ -38,8 +38,12 @@ class ExcludeSpecifiedItemsProcessor extends ProcessorPluginBase implements Buil
         }
       }
       else {
-        if ($result->getRawValue() == $exclude_item || $result->getDisplayValue() == $exclude_item) {
-          unset($results[$id]);
+        $exclude_items = explode(',', $exclude_item);
+        foreach ($exclude_items as $item) {
+          $item = trim($item);
+          if ($result->getRawValue() == $item || $result->getDisplayValue() == $item) {
+            unset($results[$id]);
+          }
         }
       }
     }
