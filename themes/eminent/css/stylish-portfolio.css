@@ -463,3 +463,17 @@ time {
 .container p {
   text-align: justify;
 }
+
+.search-item-row article {
+  background: #f9ae28 none repeat scroll 0 0;
+  margin-bottom: 20px;
+  min-height: 460px;
+  padding: 5px;
+}
+.search-item-row article img {
+  display: block;
+  max-width: 100%;
+}
+.views-element-container {
+  margin-top: 80px;
+}

@@ -1264,7 +1264,7 @@ class SearchApiSolrBackend extends BackendPluginBase implements SolrBackendInter
             }
           }
           */
-          //$value = $value->toText();
+          $value = $value->toText();
           break;
 
         case 'string':
