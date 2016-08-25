@@ -14,7 +14,9 @@ libraries:
 # Defines the regions for the theme
 regions:
   content: 'Main Content'
-  header: 'Header'
+  top_header: 'Top Header'
+  higlighted_header: 'Highlighted'
+  secondary_header: 'Secondary Header'
   footer: 'Footer'
   sidebar_first: 'First Sidebar'
   sidebar_second: 'Second Sidebar'
