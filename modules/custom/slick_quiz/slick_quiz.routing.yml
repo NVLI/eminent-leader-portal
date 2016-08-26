@@ -1,3 +1,7 @@
+# This file brings everything together. Very nifty!
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
 entity.slick_quiz.canonical:
   path: '/slick_quiz/{slick_quiz}'
   defaults:
@@ -7,8 +11,17 @@ entity.slick_quiz.canonical:
   requirements:
   # Calls the access controller of the entity, $operation 'view'
     _entity_access: 'slick_quiz.view'
-    _slick_quiz_view_access_check: 'TRUE'
-
+    
+entity.slick_quiz.collection:
+  path: '/slick_quiz/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the contact entity.
+    _entity_list: 'slick_quiz'
+    _title: 'Quiz List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'view slick_quiz entity'
+    
 slick_quiz.slick_quiz_add:
   path: '/slick_quiz/add'
   defaults:
@@ -17,7 +30,6 @@ slick_quiz.slick_quiz_add:
     _title: 'Add Quiz'
   requirements:
     _entity_create_access: 'slick_quiz'
-    _slick_quiz_add_access_check: 'TRUE'
 
 entity.slick_quiz.edit_form:
   path: '/slick_quiz/{slick_quiz}/edit'
@@ -27,7 +39,6 @@ entity.slick_quiz.edit_form:
     _title: 'Edit Quiz'
   requirements:
     _entity_access: 'slick_quiz.edit'
-    _slick_quiz_edit_access_check: 'TRUE'
 
 entity.slick_quiz.delete_form:
   path: '/slick_quiz/{slick_quiz}/delete'
@@ -37,7 +48,6 @@ entity.slick_quiz.delete_form:
     _title: 'Delete Quiz'
   requirements:
     _entity_access: 'slick_quiz.delete'
-    _slick_quiz_delete_access_check: 'TRUE'
 
 slick_quiz.slick_quiz_settings:
   path: 'admin/structure/slick_quiz_settings'

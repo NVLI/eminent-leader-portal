@@ -24,7 +24,7 @@ class SlickQuizForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\slick_quiz\Entity\SlickQuiz */
+    /* @var $entity \Drupal\content_entity_example\Entity\Contact */
     $form = parent::buildForm($form, $form_state);
     $entity = $this->entity;
 
@@ -41,27 +41,9 @@ class SlickQuizForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
+    $form_state->setRedirect('entity.slick_quiz.collection');
     $entity = $this->getEntity();
     $entity->save();
-
-    // Take userid of the respective SlickQuiz entity.
-    $uid_value = $entity->user_id->getValue();
-    $uid = $uid_value['0']['target_id'];
-
-    // Take eid of the respective SlickQuiz entity.
-    $eid_value = $entity->id->getValue();
-    $eid = $eid_value['0']['value'];
-
-    // Take status of respective SlickQuiz entity.
-    $entity_status = $entity->verification_status->getValue();
-    $status = $entity_status['0']['value'];
-
-    if ($status == 1) {
-      $user_role = User::load($uid);
-      $user_role->addRole('slick_quiz');
-      $user_role->save();
-    }
-    $form_state->setRedirectUrl(Url::fromRoute('entity.slick_quiz.canonical', ['slick_quiz' => $eid]));
   }
 
 }

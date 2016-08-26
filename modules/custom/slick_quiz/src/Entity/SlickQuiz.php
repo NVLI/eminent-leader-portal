@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\slick_quiz\SlickSlickQuizInterface;
+use Drupal\slick_quiz\SlickQuizInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
 
@@ -52,7 +52,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   field_ui_base_route = "slick_quiz.slick_quiz_settings",
  * )
  */
-class SlickQuiz extends ContentEntityBase {
+class SlickQuiz extends ContentEntityBase implements SlickQuizInterface {
 
   use EntityChangedTrait;
 
@@ -149,9 +149,9 @@ class SlickQuiz extends ContentEntityBase {
     // Name field for the slick_quiz.
     // We set display options for the view as well as the form.
     // Users with correct privileges can change the view and edit configuration.
-    $fields['slick_quiz_name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('SlickQuiz Name'))
-      ->setDescription(t('The name of the SlickQuiz entity.'))
+    $fields['qstn_name'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Question Name'))
+      ->setDescription(t('The name of Question.'))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 255,
@@ -168,10 +168,28 @@ class SlickQuiz extends ContentEntityBase {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+      
+    $fields['question'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Question'))
+      ->setDescription(t('Question.'))
+      ->setSettings(array(
+        'default_value' => '',
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'text_textarea',
+        'weight' => -7,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'text_default',
+        'weight' => -7,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);   
     // Choice field for the slick_quiz.
-    $fields['choice'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Options'))
-      ->setDescription(t('The address of the SlickQuiz entity.'))
+    $fields['choice_a'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Option a'))
+      ->setDescription(t('Options.'))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 255,
@@ -188,10 +206,88 @@ class SlickQuiz extends ContentEntityBase {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+      
+      $fields['choice_b'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Option b'))
+      ->setDescription(t('Options.'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 255,
+        'text_processing' => 0,
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+      
+      $fields['choice_c'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Option c'))
+      ->setDescription(t('Options.'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 255,
+        'text_processing' => 0,
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+      
+      $fields['choice_d'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Option d'))
+      ->setDescription(t('Options.'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 255,
+        'text_processing' => 0,
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+      
+      $fields['feed_back'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Question Feedback'))
+      ->setDescription(t('Feedback this Question.'))
+      ->setSettings(array(
+        'default_value' => '',
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'text_textarea',
+        'weight' => -7,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'text_default',
+        'weight' => -7,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE); 
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
-      ->setDescription(t('The language code of ContentEntityExample entity.'));
+      ->setDescription(t('The language code of Quiz entity.'));
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));

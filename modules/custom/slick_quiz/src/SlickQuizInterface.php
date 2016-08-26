@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\slick_quiz\SlickSlickQuizInterface.
+ * Contains \Drupal\slick_quiz\SlickQuizInterface.
  */
 
 namespace Drupal\slick_quiz;
@@ -18,6 +18,6 @@ use Drupal\Core\Entity\EntityChangedInterface;
  *
  * @ingroup slick_quiz
  */
-interface SlickSlickQuizInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface{
+interface SlickQuizInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface{
 
 }

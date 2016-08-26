@@ -1,7 +1,11 @@
 # Define the menu links for this module
-
+slick_quiz.collection:
+  title: 'Slick Quiz'
+  route_name: entity.slick_quiz.collection
+  description: 'List Quiz'
+  weight: 15
 slick_quiz.admin.structure.settings:
   title: Slick Quiz
   description: 'Manage Slick Quiz Entity'
   route_name:  slick_quiz.slick_quiz_settings
-  parent: system.admin_structure
+  parent: system.admin_structure 

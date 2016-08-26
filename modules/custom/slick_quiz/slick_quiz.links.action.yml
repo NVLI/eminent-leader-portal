@@ -1,0 +1,11 @@
+# All action links for this module
+
+slick_quiz.contact_add:
+  # Which route will be called by the link
+  route_name: slick_quiz.slick_quiz_add
+  title: 'Add Contact'
+
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.slick_quiz.collection
+    - entity.slick_quiz.canonical
