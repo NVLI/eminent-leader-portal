@@ -8,8 +8,8 @@ label: Image
 description: 'The image media bundle.'
 type: image
 queue_thumbnail_downloads: false
-new_revision: false
+new_revision: true
 type_configuration:
-  source_field: ''
-  gather_exif: false
+  source_field: field_dummy_image
+  gather_exif: true
 field_map: {  }

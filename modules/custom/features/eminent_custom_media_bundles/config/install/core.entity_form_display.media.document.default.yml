@@ -2,12 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.document.field_dc_date
     - field.field.media.document.field_dc_description
     - field.field.media.document.field_dc_title
     - field.field.media.document.field_document_path
     - field.field.media.document.field_dummy_document
     - media_entity.bundle.document
   module:
+    - datetime
     - file
 id: media.document.default
 targetEntityType: media
@@ -19,6 +21,11 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_dc_date:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 12
     settings:

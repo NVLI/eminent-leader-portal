@@ -76,6 +76,7 @@ class ComposerStaticInitDrupal8
         ),
         'D' => 
         array (
+            'Drupal\\composer_manager\\Composer\\' => 33,
             'Drupal\\Driver\\' => 14,
             'Drupal\\Core\\Composer\\' => 21,
             'Drupal\\Core\\' => 12,
@@ -238,6 +239,10 @@ class ComposerStaticInitDrupal8
         array (
             0 => __DIR__ . '/..' . '/fabpot/goutte/Goutte',
         ),
+        'Drupal\\composer_manager\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/contrib/composer_manager/src/Composer',
+        ),
         'Drupal\\Driver\\' => 
         array (
             0 => __DIR__ . '/../..' . '/drivers/lib/Drupal/Driver',
@@ -300,6 +305,10 @@ class ComposerStaticInitDrupal8
             'Stack' => 
             array (
                 0 => __DIR__ . '/..' . '/stack/builder/src',
+            ),
+            'Solarium\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/solarium/solarium/library',
             ),
         ),
         'P' => 

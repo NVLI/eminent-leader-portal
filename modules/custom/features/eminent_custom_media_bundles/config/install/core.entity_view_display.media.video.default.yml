@@ -2,12 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video.field_dc_date
     - field.field.media.video.field_dc_description
     - field.field.media.video.field_dc_title
     - field.field.media.video.field_media_video_embed_field
     - image.style.thumbnail
     - media_entity.bundle.video
   module:
+    - datetime
     - image
     - user
     - video_embed_field
@@ -25,6 +27,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+  field_dc_date:
+    weight: 5
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 4
     label: above

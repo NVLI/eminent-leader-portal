@@ -2,11 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video.field_dc_date
     - field.field.media.video.field_dc_description
     - field.field.media.video.field_dc_title
     - field.field.media.video.field_media_video_embed_field
     - media_entity.bundle.video
   module:
+    - datetime
     - video_embed_field
 id: media.video.default
 targetEntityType: media
@@ -18,6 +20,11 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_dc_date:
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
   field_dc_description:
     weight: 13
     settings:
