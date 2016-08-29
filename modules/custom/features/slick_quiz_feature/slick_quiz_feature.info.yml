@@ -1,0 +1,13 @@
+name: 'Slick Quiz'
+description: 'Slick Quiz content type'
+type: module
+core: 8.x
+dependencies:
+  - field
+  - field_collection
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
+version: 8.x-1.
