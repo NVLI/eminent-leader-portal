@@ -1,0 +1,24 @@
+SlickQuiz:
+  remote: https://github.com/jewlofthelotus/SlickQuiz
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/SlickQuiz/js/slickQuiz.js: { minified: false }
+  css:
+    theme:
+      /libraries/SlickQuiz/css/slickQuiz.css: {}
+      /libraries/SlickQuiz/css/reset.css: {}
+      /libraries/SlickQuiz/css/master.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+DrupalSlickQuiz:
+  version: VERSION
+  js:
+    js/quiz-load.js: {}
+    js/slickQuiz-config.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
