@@ -1,0 +1,16 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements template_preprocess_field.
+ */
+function eminent_svp_preprocess_field(&$variables, $hook) {
+  $element = $variables['element'];
+  if ($variables['field_name'] == "field_time_line_title") {
+    $media_entity_id = $element['#object']->get('field_time_line_media_reference')->target_id;;
+    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
+    $variables['media_url'] = $media_url;
+  }
+}

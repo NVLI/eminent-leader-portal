@@ -1,0 +1,12 @@
+global-components:
+  css:
+    theme:
+      css/bootstrap.min.css: {}
+      font-awesome/css/font-awesome.min.css: {}
+      css/style.css: {}
+global-js:
+  js:
+    js/bootstrap.min.js: {}
+    js/time-line.js: {}
+
+

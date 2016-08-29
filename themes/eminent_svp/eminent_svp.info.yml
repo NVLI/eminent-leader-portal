@@ -1,0 +1,22 @@
+name: Eminent Portal for Sardhar Vallabhai Patel
+description: A complete light weight theme with bootstrap framework for eminent portal.
+type: theme
+core: 8.x
+
+# Defines the base theme
+base theme: stable
+
+# Defines libraries group in which we can add css/js.
+libraries:
+  - eminent_svp/global-components
+  - eminent_svp/global-js
+
+# Defines the regions for the theme
+regions:
+  content: 'Main Content'
+  top_header: 'Top Header'
+  higlighted_header: 'Highlighted'
+  footer: 'Footer'
+  sidebar_first: 'First Sidebar'
+  sidebar_second: 'Second Sidebar'
+  main_navigation: 'Main Navigation'
