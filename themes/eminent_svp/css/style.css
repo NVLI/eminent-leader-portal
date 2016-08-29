@@ -543,7 +543,7 @@ Modules - reusable parts of our design
     transform: translateX(0);
   }
 }
-#block-eminent-svp-views-block-featured-time-line-collection-block-1-2 .views-row{
+.featured-time-line-collection {
   padding: 10px;
   background-color: #e9f0f5;
   color: #7f8c97;
@@ -572,16 +572,16 @@ Modules - reusable parts of our design
   font-size: 12px;
   padding: 15px 0;
 }
-#block-views-block-exhibition-block-1-3 .views-row {
+.slick-exhibition .views-row {
   background-color: #e9f0f5;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-#block-views-block-exhibition-block-1-3 .views-row .media__image {
+.slick-exhibition .views-row .media__image {
   margin:10px;
   width: 67%;
 }
-#block-views-block-exhibition-block-1-3 .views-row .slide__caption {
+.slick-exhibition .views-row .slide__caption {
   width: 30%;
   margin:10px;
 }
