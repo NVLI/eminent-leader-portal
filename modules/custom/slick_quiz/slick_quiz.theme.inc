@@ -38,10 +38,10 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
     $slick_quiz['questions'][$id]["q"] = $title['0']['value'];
 
     foreach ($quiz_options as $option_item) {
+      $correct = true;
       $option =FieldCollectionItem::load($option_item['value']);
       $option_val = $option->get($quiz_field_option)->getValue();
       $option_correct = $option->get($quiz_field_option_correct)->getValue();
-
       if ($option_correct['0']['value'] == 0) {
         $correct = false;
       }
