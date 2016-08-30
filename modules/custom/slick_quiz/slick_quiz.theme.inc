@@ -41,6 +41,7 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
       $option =FieldCollectionItem::load($option_item['value']);
       $option_val = $option->get($quiz_field_option)->getValue();
       $option_correct = $option->get($quiz_field_option_correct)->getValue();
+
       if ($option_correct['0']['value'] == 0) {
         $correct = false;
       }
@@ -49,7 +50,7 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
         'correct' => $correct,
       );
       $correct_feedback = $entity->get($quiz_field_correct_option_feedback)->getValue();
-      $wrong_feedback = $entity->get($quiz_field_correct_option_feedback)->getValue();
+      $wrong_feedback = $entity->get($quiz_field_wrong_option_feedback)->getValue();
       $slick_quiz['questions'][$id]["correct"] = $correct_feedback['0']['value'];
       $slick_quiz['questions'][$id]["incorrect"] = $wrong_feedback['0']['value'];
     }
