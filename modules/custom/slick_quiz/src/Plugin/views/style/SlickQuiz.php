@@ -117,11 +117,18 @@ class SlickQuiz extends StylePluginBase {
       '#description' => t('The machine name of quiz field collection option.'),
     );
     // The machine name of quiz field collection option.
-    $form['field_settings']['quiz_field_option_feedback'] = array(
+    $form['field_settings']['quiz_field_correct_option_feedback'] = array(
       '#type' => 'textfield',
-      '#title' => t('Machine name of quiz field collection option'),
-      '#default_value' => (isset($this->options['field_settings']['quiz_field_option_feedback'])) ? $this->options['field_settings']['quiz_field_option_feedback'] : '',
-      '#description' => t('The machine name of quiz field collection option feedback.'),
+      '#title' => t('Machine name of quiz field correct option feedback'),
+      '#default_value' => (isset($this->options['field_settings']['quiz_field_correct_option_feedback'])) ? $this->options['field_settings']['quiz_field_correct_option_feedback'] : '',
+      '#description' => t('The machine name of quiz field collection correct option feedback.'),
+    );
+    // The machine name of quiz field collection option.
+    $form['field_settings']['quiz_field_wrong_option_feedback'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Machine name of quiz field wrong option feedback'),
+      '#default_value' => (isset($this->options['field_settings']['quiz_field_wrong_option_feedback'])) ? $this->options['field_settings']['quiz_field_wrong_option_feedback'] : '',
+      '#description' => t('The machine name of quiz field collection wrong option feedback.'),
     );
     // The machine name of quiz field collection option.
     $form['field_settings']['quiz_field_option_correct'] = array(

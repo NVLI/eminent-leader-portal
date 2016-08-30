@@ -24,7 +24,8 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
   // Get the machine names of the quiz fields.
   $quiz_field_options = $options['field_settings']['quiz_field'];
   $quiz_field_option = $options['field_settings']['quiz_field_option'];
-  $quiz_field_option_feedback = $options['field_settings']['quiz_field_option_feedback'];
+  $quiz_field_correct_option_feedback = $options['field_settings']['quiz_field_correct_option_feedback'];
+  $quiz_field_wrong_option_feedback = $options['field_settings']['quiz_field_wrong_option_feedback'];
   $quiz_field_option_correct = $options['field_settings']['quiz_field_option_correct'];
 
   // Build a two-dimension array with quiz options.
@@ -47,8 +48,10 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
         'option' => $option_val['0']['value'],
         'correct' => $correct,
       );
-      $slick_quiz['questions'][$id]["correct"] = "correct Feedback";
-      $slick_quiz['questions'][$id]["incorrect"] = "in correct Feedback";
+      $correct_feedback = $entity->get($quiz_field_correct_option_feedback)->getValue();
+      $wrong_feedback = $entity->get($quiz_field_correct_option_feedback)->getValue();
+      $slick_quiz['questions'][$id]["correct"] = $correct_feedback['0']['value'];
+      $slick_quiz['questions'][$id]["incorrect"] = $wrong_feedback['0']['value'];
     }
     $slick_quiz_config = json_encode($slick_quiz);
 
