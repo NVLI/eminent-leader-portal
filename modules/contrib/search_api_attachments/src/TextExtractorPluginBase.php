@@ -60,7 +60,12 @@ abstract class TextExtractorPluginBase extends PluginBase implements TextExtract
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
-        $configuration, $plugin_id, $plugin_definition, $container->get('config.factory'), $container->get('stream_wrapper_manager'), $container->get('file.mime_type.guesser')
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('config.factory'),
+      $container->get('stream_wrapper_manager'),
+      $container->get('file.mime_type.guesser')
     );
   }
 
@@ -91,7 +96,7 @@ abstract class TextExtractorPluginBase extends PluginBase implements TextExtract
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return [];
+    return array();
   }
 
   /**
@@ -108,14 +113,13 @@ abstract class TextExtractorPluginBase extends PluginBase implements TextExtract
    * {@inheritdoc}
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
-    
   }
 
   /**
    * {@inheritdoc}
    */
   public function calculateDependencies() {
-    return [];
+    return array();
   }
 
   /**
@@ -146,7 +150,7 @@ abstract class TextExtractorPluginBase extends PluginBase implements TextExtract
    *   An array of the PDF MIME types.
    */
   public function getPdfMimeTypes() {
-    $pdf_mime_types = [];
+    $pdf_mime_types = array();
     $pdf_mime_types[] = $this->mimeTypeGuesser->guess('dummy.pdf');
     return $pdf_mime_types;
   }

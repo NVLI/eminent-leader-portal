@@ -44,7 +44,13 @@ class SolrExtractor extends TextExtractorPluginBase {
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
-        $configuration, $plugin_id, $plugin_definition, $container->get('config.factory'), $container->get('stream_wrapper_manager'), $container->get('file.mime_type.guesser'), $container->get('entity_type.manager')
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('config.factory'),
+      $container->get('stream_wrapper_manager'),
+      $container->get('file.mime_type.guesser'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -60,10 +66,10 @@ class SolrExtractor extends TextExtractorPluginBase {
   public function extract(File $file) {
     $filepath = $this->getRealpath($file->getFileUri());
     // Load the chosen Solr server entity.
-    $conditions = [
+    $conditions = array(
       'status' => TRUE,
       'id' => $this->configuration['solr_server'],
-    ];
+    );
     $server = $this->entityTypeManager->getStorage('search_api_server')->loadByProperties($conditions);
     $server = reset($server);
     // Get the Solr backend.
@@ -108,23 +114,23 @@ class SolrExtractor extends TextExtractorPluginBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $form = [];
-    $conditions = [
+    $form = array();
+    $conditions = array(
       'status' => TRUE,
-      'backend' => [
+      'backend' => array(
         'search_api_solr',
         'search_api_solr_acquia',
         'search_api_solr_acquia_multi_subs',
-      ],
-    ];
+      ),
+    );
 
     $search_api_solr_servers = $this->entityTypeManager->getStorage('search_api_server')->loadByProperties($conditions);
-    $options = [];
+    $options = array();
     foreach ($search_api_solr_servers as $solr_server) {
       $options[$solr_server->id()] = $solr_server->label();
     }
 
-    $form['solr_server'] = [
+    $form['solr_server'] = array(
       '#type' => 'select',
       '#title' => $this->t('Solr server'),
       '#description' => $this->t('Select the solr server you want to use.'),
@@ -132,9 +138,9 @@ class SolrExtractor extends TextExtractorPluginBase {
       '#options' => $options,
       '#default_value' => $this->configuration['solr_server'],
       '#required' => TRUE,
-    ];
+    );
 
-    $form['solr_tika_path'] = [
+    $form['solr_tika_path'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Tika path'),
       '#description' => $this->t('Specify a custom Tika extractor handler for
@@ -142,7 +148,7 @@ class SolrExtractor extends TextExtractorPluginBase {
         provided, the default "update/extract" is used. When no value is
         set, then the handler provided by Solarium is used.'),
       '#default_value' => empty($this->configuration['solr_tika_path']) ? 'update/extract' : $this->configuration['solr_tika_path'],
-    ];
+    );
 
     return $form;
   }
