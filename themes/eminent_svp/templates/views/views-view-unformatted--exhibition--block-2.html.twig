@@ -15,17 +15,14 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-{% if title %}
-  <h3>{{ title }}</h3>
-{% endif %}
 {% for row in rows %}
   {%
     set row_classes = [
       default_row_class ? 'views-row',
     ]
   %}
-  <div{{ row.attributes.addClass(row_classes) }}>
-    <div class="thumbnail grid-equal-height">
+  <div class = "col-xs-12 col-sm-4 col-md-3">
+    <div class="recent-work-wrap">
       {{ row.content }}
     </div>
   </div>

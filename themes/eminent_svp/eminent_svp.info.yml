@@ -15,6 +15,11 @@ libraries:
 regions:
   content: 'Main Content'
   top_header: 'Top Header'
+  quotes: 'Home Featured Quotes'
+  home_time_line: 'Home Featured Time Line'
+  home_exhibitions: 'Home Exhibitions'
+  home_timelines: 'Home Time Lines'
+  header: 'Header'
   higlighted_header: 'Highlighted'
   footer: 'Footer'
   sidebar_first: 'First Sidebar'
