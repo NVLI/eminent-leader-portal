@@ -1,0 +1,5 @@
+name: Eminent Admin
+type: module
+description: 'Eminent Admin'
+package: Custom
+core: 8.x
