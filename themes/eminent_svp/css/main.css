@@ -2571,3 +2571,6 @@ shortcodes page css
   color: #999999;
 }
 /** Quote theme end */
+#views-exposed-form-eminent-search-page-1 #edit-actions {
+  display: none;
+}
