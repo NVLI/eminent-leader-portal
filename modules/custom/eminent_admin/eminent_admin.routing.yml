@@ -11,7 +11,7 @@ eminent_admin.add.playlist:
     _permission: 'Add eminent_admin content'
 
 eminent_admin.add.timeline:
-  path: '/media/add/timeline'
+  path: '/media/add/timeline/{media_id}'
   defaults:
     _form: '\Drupal\eminent_admin\Form\AddTimeLineForm'
     _title: 'Add Time Line'

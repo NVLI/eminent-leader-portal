@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 /**
- * Landing page form class.
+ * Play list form class.
  */
 class AddPlayListForm extends FormBase {
   /**
@@ -23,10 +23,7 @@ class AddPlayListForm extends FormBase {
   }
 
   /**
-   * Callback from webform_insightly_menu().
-   *
-   * Form to processes all tpl files.
-   * To configure custom path and rescan the template files.
+   * form to add play list.
    */
   public function buildForm(array $form, FormStateInterface $form_state, $media_id = NULL) {
     $option = $this->eminent_admin_get_content_type('play_list');
@@ -43,17 +40,17 @@ class AddPlayListForm extends FormBase {
     ];
     
     $form['submit'] = [
-    '#type' => 'submit',
-    '#value' => $this->t('Add'),
+      '#type' => 'submit',
+      '#value' => $this->t('Add'),
     ];
     
     return $form;
   }
 
   /**
-   * Callback for admin configuration form.
+   * Callback for play list form.
    *
-   * If a custom path is set, set it into a variable.
+   * Add a media to play list programatically.
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $play_list = $form_state->getValue('play_list');
