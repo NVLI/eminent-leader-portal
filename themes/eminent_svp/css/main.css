@@ -2574,3 +2574,6 @@ shortcodes page css
 #views-exposed-form-eminent-search-page-1 #edit-actions {
   display: none;
 }
+#views-exposed-form-eminent-search-page-1 .js-form-type-textfield {
+  display: inline;
+}
