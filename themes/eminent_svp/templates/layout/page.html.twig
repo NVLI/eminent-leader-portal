@@ -28,103 +28,165 @@
  *   comment/reply/12345).
  *
  * Regions:
- * - page.main_navigation: Items for the main menu region.
  * - page.header: Items for the header region.
+ * - page.primary_menu: Items for the primary menu region.
+ * - page.secondary_menu: Items for the secondary menu region.
+ * - page.highlighted: Items for the highlighted content region.
+ * - page.help: Dynamic help text, mostly for admin pages.
  * - page.content: The main content of the current page.
  * - page.sidebar_first: Items for the first sidebar.
  * - page.sidebar_second: Items for the second sidebar.
  * - page.footer: Items for the footer region.
+ * - page.breadcrumb: Items for the breadcrumb region.
  *
  * @see template_preprocess_page()
  * @see html.html.twig
  */
 #}
-
-{{ page.top_header }}
-
-<!-- End of Navigation -->
-
-<!-- Header Carousel -->
-<header id="myCarousel" class="carousel slide" style="background-image:url('/themes/eminent_svp/images/banner.jpg')">
-</header>
-<!-- End of Header Carousel -->
-
-<!-- Page Content -->
-<div class="container">
-
-  {{ page.content }}
-
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer id="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 widget">
-        <h3 class="widget-title">Contact</h3>
-        <div class="widget-body">
-          <p>+234 23 9873237<br>
-            <a href="mailto:#">some.email@somewhere.com</a><br>
-            <br>
-            234 Hidden Pond Road, Ashland City, TN 37015
-          </p>
+<header id="header">
+  <div class="top-bar navbar-fixed-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-xs-4">
+            <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
         </div>
-      </div>
-
-      <div class="col-md-3 widget">
-        <h3 class="widget-title">Follow me</h3>
-        <div class="widget-body">
-          <p class="follow-me-icons">
-            <a href=""><i class="fa fa-twitter fa-2"></i></a>
-            <a href=""><i class="fa fa-dribbble fa-2"></i></a>
-            <a href=""><i class="fa fa-github fa-2"></i></a>
-            <a href=""><i class="fa fa-facebook fa-2"></i></a>
-          </p>
+        <div class="col-sm-6 col-xs-8">
+          <div class="social">
+              <ul class="social-share">
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                  <li><a href="#"><i class="fa fa-skype"></i></a></li>
+              </ul>
+              <div class="search">
+                {{ page.top_header }}
+             </div>
+           </div>
+          </div>
         </div>
-      </div>
+      </div><!--/.container-->
+  </div><!--/.top-bar-->
 
-      <div class="col-md-3 widget">
-        <h3 class="widget-title">Text widget</h3>
-        <div class="widget-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, nihil natus explicabo ipsum quia iste aliquid repellat eveniet velit ipsa sunt libero sed aperiam id soluta officia asperiores adipisci maxime!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, nihil natus explicabo ipsum quia iste aliquid repellat eveniet velit ipsa sunt libero sed aperiam id soluta officia asperiores adipisci maxime!</p>
+{{ page.header }}
+
+</header><!--/header-->
+
+<div class="layout-container">
+
+
+  {{ page.primary_menu }}
+  {{ page.secondary_menu }}
+
+  {{ page.breadcrumb }}
+
+  {{ page.highlighted }}
+
+  {{ page.help }}
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+    <div class="layout-content">
+      {{ page.content }}
+    </div>{# /.layout-content #}
+
+    {% if page.sidebar_first %}
+      <aside class="layout-sidebar-first" role="complementary">
+        {{ page.sidebar_first }}
+      </aside>
+    {% endif %}
+
+    {% if page.sidebar_second %}
+      <aside class="layout-sidebar-second" role="complementary">
+        {{ page.sidebar_second }}
+      </aside>
+    {% endif %}
+
+  </main>
+
+</div>{# /.layout-container #}
+
+<section id="bottom">
+    <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="widget">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">We are hiring</a></li>
+                        <li><a href="#">Meet the team</a></li>
+                        <li><a href="#">Copyright</a></li>
+                        <li><a href="#">Terms of use</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </div>
+            </div><!--/.col-md-3-->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="widget">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Refund policy</a></li>
+                        <li><a href="#">Ticket system</a></li>
+                        <li><a href="#">Billing system</a></li>
+                    </ul>
+                </div>
+            </div><!--/.col-md-3-->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="widget">
+                    <h3>Developers</h3>
+                    <ul>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">SEO Marketing</a></li>
+                        <li><a href="#">Theme</a></li>
+                        <li><a href="#">Development</a></li>
+                        <li><a href="#">Email Marketing</a></li>
+                        <li><a href="#">Plugin Development</a></li>
+                        <li><a href="#">Article Writing</a></li>
+                    </ul>
+                </div>
+            </div><!--/.col-md-3-->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="widget">
+                    <h3>Our Partners</h3>
+                    <ul>
+                        <li><a href="#">Adipisicing Elit</a></li>
+                        <li><a href="#">Eiusmod</a></li>
+                        <li><a href="#">Tempor</a></li>
+                        <li><a href="#">Veniam</a></li>
+                        <li><a href="#">Exercitation</a></li>
+                        <li><a href="#">Ullamco</a></li>
+                        <li><a href="#">Laboris</a></li>
+                    </ul>
+                </div>
+            </div><!--/.col-md-3-->
         </div>
-      </div>
+    </div>
+</section><!--/#bottom-->
 
-      <div class="col-md-3 widget">
-        <h3 class="widget-title">Form widget</h3>
-        <div class="widget-body">
-          <p>+234 23 9873237<br>
-            <a href="mailto:#">some.email@somewhere.com</a><br>
-            <br>
-            234 Hidden Pond Road, Ashland City, TN 37015
-          </p>
+<footer id="footer" class="midnight-blue">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+            </div>
+            <div class="col-sm-6">
+                <ul class="pull-right">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Faq</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-
-    </div> <!-- /row of widgets -->
-  </div>
-</footer>
-
-<footer id="underfooter">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-6 widget">
-        <div class="widget-body">
-          <p>234 Hidden Pond Road, Ashland City, TN 37015 </p>
-        </div>
-      </div>
-
-      <div class="col-md-6 widget">
-        <div class="widget-body">
-          <p class="text-right">
-            Copyright &copy; 2014, Your awesome name here<br>
-            Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> </p>
-        </div>
-      </div>
-
-    </div> <!-- /row of widgets -->
-  </div>
-</footer>
+    </div>
+</footer><!--/#footer-->

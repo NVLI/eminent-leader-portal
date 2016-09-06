@@ -53,3 +53,11 @@ function eminent_custom_node_presave(EntityInterface $entity) {
     $entity->field_time_line_collection_image->target_id = $image;
   }
 }
+
+function eminent_custom_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == "views_exposed_form") {
+    $form['content']['#attributes']['placeholder'] = t("Type and hit enter to search");
+    $form['content']['#attributes']['class'][] = 'search-form';
+    $form['content']['#suffix'] = '<i class="fa fa-search"></i>';
+  }
+}

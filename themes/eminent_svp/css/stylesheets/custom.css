@@ -1,0 +1,44 @@
+/******************************************************
+Customization styles for the missing pages in the html*/
+/******************************************************
+Excibition page*/
+/* line 6, ../sass/custom.scss */
+.exibition_slider {
+  margin-bottom: 20px;
+}
+
+/* line 10, ../sass/custom.scss */
+.exibition_pager .excibition_thumb {
+  cursor: pointer;
+}
+
+/******************************************************
+General styles for the prev next for the slick slider*/
+/* line 17, ../sass/custom.scss */
+.slick-slider {
+  position: relative;
+}
+/* line 19, ../sass/custom.scss */
+.slick-slider .slick-arrow {
+  position: absolute;
+  top: 50%;
+  background-color: #c52d2f;
+  color: #fff;
+  display: inline-block;
+  margin-top: -25px;
+  line-height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 999;
+  cursor: pointer;
+  border: 0;
+}
+/* line 34, ../sass/custom.scss */
+.slick-slider .slick-next {
+  right: 0;
+}
+/* line 38, ../sass/custom.scss */
+.slick-slider .slick-prev {
+  left: 0;
+}
