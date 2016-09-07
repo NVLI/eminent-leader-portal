@@ -25,13 +25,15 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes.addClass(center wow fadeInDown) }}>
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes}}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+<div class = "center wow fadeInDown svp-block-content">
+  <div{{ attributes }}>
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{ title_attributes}}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
 </div>
