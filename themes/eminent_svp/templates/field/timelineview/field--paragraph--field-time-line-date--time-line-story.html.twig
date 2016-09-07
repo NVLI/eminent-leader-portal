@@ -36,9 +36,9 @@
  * @see template_preprocess_field()
  */
 #}
-{% for item in items %}
-  {% if item.content %}
-    <span {{ item.attributes.addClass('cd-date') }}> {{ item.content }} </span>
-    </div>
-  {% endif %}
-{% endfor %}
+  {% for item in items %}
+    {% if item.content %}
+      <span {{ item.attributes.addClass('cd-date') }}> {{ item.content }} </span>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -39,6 +39,6 @@
 {% for item in items %}
   {% if item.content %}
     <p {{ item.attributes.addClass('time-line-description') }}>{{ item.content }}</p>
-    <a href = {{ media_url }}>Read more</a>
   {% endif %}
 {% endfor %}
+

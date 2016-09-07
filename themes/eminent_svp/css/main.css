@@ -2591,3 +2591,9 @@ shortcodes page css
 .slide__caption a {
   color: #fff;
 }
+.cd-timeline-content p {
+  text-align: justify;
+}
+.cd-timeline-content h4 {
+  text-align: left;
+}
