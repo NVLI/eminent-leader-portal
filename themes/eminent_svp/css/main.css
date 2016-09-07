@@ -2597,3 +2597,6 @@ shortcodes page css
 .cd-timeline-content h4 {
   text-align: left;
 }
+.media-content {
+  text-align: justify;
+}
