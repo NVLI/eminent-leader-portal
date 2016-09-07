@@ -19,10 +19,10 @@ class MediaAddListBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-
+	$path_args = arg();
     return array(
       '#type' => 'markup',
-      '#markup' => 'Add to Play List.',
+      '#markup' => '<a href ="/media/add/playlist/"' . $path_args[3] .'>Add to play list</a>',
     );
   }
 
