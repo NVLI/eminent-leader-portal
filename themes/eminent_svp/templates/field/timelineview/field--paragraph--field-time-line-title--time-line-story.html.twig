@@ -36,11 +36,10 @@
  * @see template_preprocess_field()
  */
 #}
-
-<div class="cd-timeline-content">
+<div class="cd-timeline-content bounce-in">
   {% for item in items %}
     {% if item.content %}
-      <h2><a href = {{ media_url }}>{{ item.content }}</a></h2>
+      <h4><a href = {{ media_url }}>{{ item.content }}</a></h4>
     {% endif %}
   {% endfor %}
 

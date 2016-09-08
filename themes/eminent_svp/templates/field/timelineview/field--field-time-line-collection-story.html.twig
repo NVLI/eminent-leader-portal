@@ -26,10 +26,10 @@
  * @see comment_preprocess_field()
  */
 #}
-<section id="cd-timeline" class="cd-container">
+<section id="cd-timeline" class="cd-container cd-container wow fadeInDown">
   {% for item in items %}
     {% if item.content is not null and item.content is not empty %}
-      <div class="cd-timeline-block">{{ item.content }}</div>
+      {{ item.content }}
     {% endif %}
   {% endfor %}
 </section>
