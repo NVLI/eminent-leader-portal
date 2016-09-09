@@ -1,6 +1,6 @@
 name: Eminent Admin
 type: module
-description: 'Eminent Admin'
+description: 'The admin functionalities of eminent portal'
 package: Custom
 core: 8.x
 dependencies:

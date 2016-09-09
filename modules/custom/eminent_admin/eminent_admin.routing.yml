@@ -2,18 +2,24 @@
 
 # Route name can be used in several places; e.g. links, redirects, and local
 # actions.
-eminent_admin.add.playlist:
-  path: '/media/add/playlist/{media_id}'
+eminent_admin.AddPlaylist:
+  path: '/playlist/{media_id}/add'
   defaults:
     _form: '\Drupal\eminent_admin\Form\AddPlayListForm'
     _title: 'Add Play list'
   requirements:
-    _permission: 'Add eminent_admin content'
-
-eminent_admin.add.timeline:
-  path: '/media/add/timeline/{media_id}'
+    _permission: 'access content'
+eminent_admin.AddTimeline:
+  path: '/timeline/{media_id}/add'
   defaults:
     _form: '\Drupal\eminent_admin\Form\AddTimeLineForm'
     _title: 'Add Time Line'
+  requirements:
+    _permission: 'access content'
+eminent_admin.addPlaylistTimeline:
+  path: '/add/{media_id}/{group}'
+  defaults:
+    _title: 'Add Media'
+    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::AddMedia'
   requirements:
     _permission: 'access content'
