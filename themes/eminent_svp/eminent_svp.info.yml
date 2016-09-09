@@ -16,6 +16,7 @@ regions:
   content: 'Main Content'
   top_header: 'Top Header'
   quotes: 'Home Featured Quotes'
+  home_quiz: 'Home Quiz'
   home_time_line: 'Home Featured Time Line'
   home_exhibitions: 'Home Exhibitions'
   home_timelines: 'Home Time Lines'

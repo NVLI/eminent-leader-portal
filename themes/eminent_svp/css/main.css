@@ -273,7 +273,7 @@ input.search-form:hover {
   border-radius: 0;
   margin-bottom: 0;
   background: #151515;
-  padding: 45px 0;
+  padding: 15px 0;
   padding-bottom: 0;
 }
 
@@ -372,6 +372,7 @@ input.search-form:hover {
 
 #main-slider {
   position: relative;
+  margin-top: 60px;
 }
 
 .no-margin {
@@ -2534,9 +2535,22 @@ shortcodes page css
 
 /** Quote theme start */
 .slick--view--featured-quote {
-  background-color: white;
   padding-bottom: 50px;
   padding-top: 50px;
+}
+.slick--view--featured-quote .carousel-text p::before {
+  color: #888;
+  content: "";
+  display: inline;
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
+.slick--view--featured-quote .carousel-text p::after {
+  color: #888;
+  content: "";
+  display: inline;
+  font-family: FontAwesome;
+  margin-left: 5px;
 }
 .slick--view--featured-quote .quote-slick {
   margin-left: auto;
@@ -2562,7 +2576,6 @@ shortcodes page css
   vertical-align: bottom;
 }
 .slick--view--featured-quote .carousel-text {
-  border-left: 3px solid #ccd0d9;
   padding: 20px 0 20px 20px;
   float: right;
   margin-right: 0;
