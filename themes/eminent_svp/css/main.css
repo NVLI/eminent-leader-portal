@@ -126,7 +126,6 @@ body > section {
 
 .center {
   text-align: center;
-  padding-bottom: 55px;
 }
 
 .scaleIn {
@@ -2612,4 +2611,18 @@ shortcodes page css
 }
 .media-content {
   text-align: justify;
+}
+#views-exposed-form-quotes-page-1 .form-text {
+  border-color: #DEDEDE;
+  height: 48px;
+  outline: medium none;
+  box-shadow: none;
+}
+#quote-search-form #edit-submit-quotes {
+  background: #27ae60 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 10px;
+  padding: 8px 20px;
 }

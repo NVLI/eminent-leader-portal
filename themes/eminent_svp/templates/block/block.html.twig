@@ -28,7 +28,9 @@
 <div{{ attributes }}>
   {{ title_prefix }}
   {% if label %}
-    <h2 class = "center wow fadeInDown svp-block-content">{{ label }}</h2>
+    <div class = "center">
+      <h2 class = "wow fadeInDown svp-block-content">{{ label }}</h2>
+    </div>
   {% endif %}
   {{ title_suffix }}
   {% block content %}
