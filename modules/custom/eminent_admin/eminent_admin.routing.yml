@@ -16,10 +16,24 @@ eminent_admin.AddTimeline:
     _title: 'Add Time Line'
   requirements:
     _permission: 'access content'
+eminent_admin.CreatePlaylist:
+  path: '/playlist/{media_id}/create'
+  defaults:
+    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createPlaylist'
+    _title: 'Add Time Line'
+  requirements:
+    _permission: 'access content'
+eminent_admin.CreateTimeline:
+  path: '/timeline/{media_id}/create'
+  defaults:
+    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createTimeline'
+    _title: 'Add Time Line'
+  requirements:
+    _permission: 'access content'
 eminent_admin.addPlaylistTimeline:
   path: '/add/{media_id}/{group}'
   defaults:
     _title: 'Add Media'
-    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::AddMedia'
+    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::addMedia'
   requirements:
     _permission: 'access content'

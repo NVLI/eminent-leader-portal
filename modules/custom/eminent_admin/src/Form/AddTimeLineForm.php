@@ -7,18 +7,16 @@
 namespace Drupal\eminent_admin\Form;
 
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
-use Drupal\Core\Ajax\CssCommand;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
- * Time line form class.
+ * Add media item to Timeline form.
  */
 class AddTimeLineForm extends FormBase {
   /**
@@ -29,37 +27,43 @@ class AddTimeLineForm extends FormBase {
   }
 
   /**
-   * form to add time line.
+   * Form to add media items to timeline.
    */
   public function buildForm(array $form, FormStateInterface $form_state, $media_id = NULL) {
-    $option = $this->eminent_admin_get_timelines($media_id);
-    if (!empty($option)) {
-      $form['time_line'] = [
-        '#title' => t('Time Line'),
-        '#type' => 'select',
-        '#description' => 'Select the desired Time Line',
-        '#options' => $option,
-      ];
+    // Store the media id in fromstate for future use.
+    $storage = array('media_id' => $media_id);
+    $form_state->setStorage($storage);
 
-       $form['media_id'] = [
-        '#type' => 'hidden',
-        '#default_value' => $media_id,
-      ];
+    // Fetch all the timelines added to the system.
+    $option = $this->eminentAdminGetTimelines($media_id);
 
-      $form['submit'] = [
+    // Generate the create timeline url.
+    $create_timeline_url = Url::fromRoute('eminent_admin.CreateTimeline', ['media_id' => $media_id]);
+    // We will be displaying the link content in a popup.
+    $create_timeline_url->setOptions([
+      'attributes' => [
+        'class' => ['use-ajax', 'button', 'button--small'],
+        'data-dialog-type' => 'modal',
+        'data-dialog-options' => '{"width": "70%"}',
+      ],
+    ]);
+    $create_timeline_link = Link::fromTextAndUrl(t('Create Timeline'), $create_timeline_url)->toString();
+    $help_text = t('Select the timeline from above list or @link', array('@link' => $create_timeline_link));
+
+    $form['time_line'] = [
+      '#title' => t('Time Line'),
+      '#type' => 'select',
+      '#description' => $help_text,
+      '#options' => $option,
+    ];
+
+    $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add to timeline'),
       '#ajax' => array(
-         'callback' => '::add_to_timeline',
-       ),
-      ];
-    }
-    else {
-      $form['media_id'] = [
-        '#type' => 'markup',
-        '#markup' => t('This media item is added to all the timelines in the system'),
-      ];
-    }
+        'callback' => '::addToTimeline',
+      ),
+    ];
     return $form;
   }
   /**
@@ -77,33 +81,32 @@ class AddTimeLineForm extends FormBase {
   }
 
   /**
-   * Callback for play list form.
-   *
-   * Add a media to play list programatically.
+   * Callback for add to timeline form.
    */
-  public function add_to_timeline(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function addToTimeline(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $time_line = $form_state->getValue('time_line');
-    $media_id = $form_state->getValue('media_id');
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
     $media_content = entity_load('media', $media_id);
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
       'type' => 'time_line_story',
       'field_time_line_description' => [
-          'value' => $media_content->get('field_dc_description')->value,
-          'format' => 'wysiwyg',
-        ],
-        'field_time_line_image->' => [
-          ['target_id' => $media_content->thumbnail->target_id],
-        ],
-        'field_time_line_media_reference' => [
-          ['target_id' => $media_id],
-        ],
-        'field_time_line_title' => [
-          'value' => $media_content->get('field_dc_title')->value,
-        ],
-        'field_time_line_date' => [
-          'value' => $media_content->get('field_dc_date')->value,
-        ],
+        'value' => $media_content->get('field_dc_description')->value,
+        'format' => 'wysiwyg',
+      ],
+      'field_time_line_image->' => [
+        ['target_id' => $media_content->thumbnail->target_id],
+      ],
+      'field_time_line_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_time_line_title' => [
+        'value' => $media_content->get('field_dc_title')->value,
+      ],
+      'field_time_line_date' => [
+        'value' => $media_content->get('field_dc_date')->value,
+      ],
     ]);
     $media_paragraph->save();
     $paragraph_id = $media_paragraph->id();
@@ -135,7 +138,14 @@ class AddTimeLineForm extends FormBase {
     ];
   }
 
-  public function eminent_admin_get_timelines($media_id) {
+  /**
+   * Gathers all the timelines items added to the system.
+   *
+   * @param int $media_id
+   *   The media id. The timelines in which this media id is not added will be
+   *   returned.
+   */
+  public function eminentAdminGetTimelines($media_id) {
     $options = array();
 
     // Database query for fetching timelines.
@@ -159,9 +169,12 @@ class AddTimeLineForm extends FormBase {
           $time_line_node_id = $time_line->nid;
         }
         $options[$time_line->nid] = $time_line->title;
-        unset($options[$time_line_node_id]);
+        if (!empty($time_line_node_id)) {
+          unset($options[$time_line_node_id]);
+        }
       }
     }
     return $options;
   }
+
 }

@@ -2626,3 +2626,6 @@ shortcodes page css
   margin-top: 10px;
   padding: 8px 20px;
 }
+#admin-tabs {
+  padding-top: 35px;
+}

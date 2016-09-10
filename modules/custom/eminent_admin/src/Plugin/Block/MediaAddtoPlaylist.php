@@ -20,7 +20,6 @@ use Drupal\Core\Link;
  *   category = @Translation("Blocks")
  * )
  */
-
 class MediaAddtoPlaylist extends BlockBase {
 
   /**
@@ -37,7 +36,7 @@ class MediaAddtoPlaylist extends BlockBase {
         'class' => ['use-ajax', 'button', 'button--small'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => '{"width": "30%"}',
-      ]
+      ],
     ]);
     return array(
       '#type' => 'markup',
@@ -48,4 +47,5 @@ class MediaAddtoPlaylist extends BlockBase {
       ],
     );
   }
+
 }

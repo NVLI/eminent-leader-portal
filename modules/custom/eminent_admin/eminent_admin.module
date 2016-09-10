@@ -1,9 +1,6 @@
 <?php
+
 /**
  * @file
- * A module to implement custom landing pages.
+ * Contains the admin functionalities of Eminent Portal.
  */
-
-use Drupal\Core\Form\FormStateInterface;
-
-

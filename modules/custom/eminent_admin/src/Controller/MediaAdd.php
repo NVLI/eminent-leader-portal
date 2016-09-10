@@ -8,35 +8,42 @@
 namespace Drupal\eminent_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use \Drupal\Core\Ajax;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\OpenModalDialogCommand;
-use Drupal\Core\Ajax\CssCommand;
 
+/**
+ * MediaAdd Class. Contains the methods for playlist/timeline creation.
+ */
 class MediaAdd extends ControllerBase {
 
-    public function AddMedia($media_id, $group) {
-      // Get the form form.
-      if ($group == 'playlist') {
-        $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\AddPlayListForm', $media_id);
-        $title = $this->t('Add to playlist');
-      }
-      elseif ($group == 'timeline')  {
-        $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\AddTimeLineForm', $media_id);
-        $title = $this->t('Add to timeline');
-      }
-      //$response = new AjaxResponse();
-      //$form['#attached']['library'][] = 'core/drupal.dialog.ajax';
-      //$response->setAttachments($form['#attached']);
-
-      $options = array(
-        'dialogClass' => 'popup-dialog-class',
-        'width' => '50%',
-      );
-
-      //$modal = new OpenModalDialogCommand($title, $form, $options);
-      //$response->addCommand($modal);
-      return $form;
+  /**
+   * Adds the media item to playlist/timeline depending on the parametrs.
+   */
+  public function addMedia($media_id, $group) {
+    // Get the add media to playlist/timeline form.
+    if ($group == 'playlist') {
+      $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\AddPlayListForm', $media_id);
     }
+    elseif ($group == 'timeline') {
+      $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\AddTimeLineForm', $media_id);
+    }
+    return $form;
+  }
+
+  /**
+   * Displays the form to create new playlist.
+   */
+  public function createPlaylist($media_id) {
+    // Get the form form.
+    $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\CreatePlaylistForm', $media_id);
+    return $form;
+  }
+
+  /**
+   * Displays the form to create new timeline.
+   */
+  public function createTimeline($media_id) {
+    // Get the form form.
+    $form = \Drupal::formBuilder()->getForm('\Drupal\eminent_admin\Form\CreateTimelineForm', $media_id);
+    return $form;
+  }
 
 }
