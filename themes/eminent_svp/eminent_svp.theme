@@ -10,7 +10,6 @@ use Drupal\block\Entity\Block;
 function eminent_svp_preprocess_field(&$variables, $hook) {
   $element = $variables['element'];
   if ($variables['field_name'] == "field_time_line_title") {
-    dpm($variables['attributes']);
     $media_entity_id = $element['#object']->get('field_time_line_media_reference')->target_id;;
     $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
     $variables['media_url'] = $media_url;
@@ -31,30 +30,3 @@ function eminent_svp_theme_suggestions_alter(array &$suggestions, array $variabl
   return $suggestions;
 }
 
-
-/**
- * Prepares variables for views single grouping templates.
- *
- * Default template: views-view-grouping.html.twig.
- *
- * @param array $variables
- *   An associative array containing:
- *   - view: The view object.
- *   - rows: The rows returned from the view.
- *   - grouping_level: Integer indicating the hierarchical level of the
- *     grouping.
- *   - content: The content to be grouped.
- *   - title: The group heading.
- */
-function eminent_svp_preprocess_views_view_grouping(&$variables) {
-  dpm('test');
-  dpm($variables['title']);
-  if ($variables['title'] == "Time Line Collection") {
-    $variables['title']->string = t("Timelines");
-    $variables['class'] = "search-timelines";
-  }
-  if ($variables['title'] == "Play List") {
-    $variables['title']->string = t("Exhibitions");
-    $variables['class'] = "search-playlists";
-  }
-}
