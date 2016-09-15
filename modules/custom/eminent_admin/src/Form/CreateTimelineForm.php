@@ -78,7 +78,6 @@ class CreateTimelineForm extends FormBase {
       'type' => 'time_line_collection',
       'body' => [
         'value' => $description,
-        'format' => 'wysiwyg',
       ],
       'title'  => $title,
       'field_time_line_collection_image' => [
@@ -91,7 +90,6 @@ class CreateTimelineForm extends FormBase {
       'type' => 'time_line_story',
       'field_time_line_description' => [
         'value' => $media_content->get('field_dc_description')->value,
-        'format' => 'wysiwyg',
       ],
       'field_time_line_image->' => [
         ['target_id' => $media_content->thumbnail->target_id],
