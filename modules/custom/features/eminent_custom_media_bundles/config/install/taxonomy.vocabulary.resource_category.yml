@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Resource Category'
-vid: resource_category
-description: 'The resource category'
-hierarchy: 0
-weight: 0

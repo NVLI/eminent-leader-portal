@@ -1,7 +1,0 @@
-bundle: eminent_custom
-excluded:
-  - media_entity.bundle.audio
-  - media_entity.bundle.document
-  - media_entity.bundle.image
-  - media_entity.bundle.video
-required: true

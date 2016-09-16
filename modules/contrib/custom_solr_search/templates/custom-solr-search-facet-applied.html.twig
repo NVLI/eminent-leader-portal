@@ -1,5 +1,0 @@
-<ul style="list-style: none;">
-    {% for facet in facets %}
-        <li><a href="{{ facet.url }}">{{ facet.key|replace({'-': ' '}) }}: {{ facet.value }}</a></li>
-    {% endfor %}
-</ul>
