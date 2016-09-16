@@ -1,0 +1,9 @@
+{
+  "name": "drupal/custom_solr_search",
+  "description": "Custom Solr Search module will provide the option to search the data from and external resources.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "require": {
+    "solarium/solarium": "3.5.1"
+  }
+}

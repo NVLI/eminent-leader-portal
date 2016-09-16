@@ -1,0 +1,12 @@
+name: 'Embedded Google Docs Viewer'
+description: 'An embedded Document field using Google Docs'
+dependencies:
+  - field
+# core: 8.x
+type: module
+
+# Information added by Drupal.org packaging script on 2015-11-15
+version: '8.x-1.0'
+core: '8.x'
+project: 'gdoc_field'
+datestamp: 1447608240

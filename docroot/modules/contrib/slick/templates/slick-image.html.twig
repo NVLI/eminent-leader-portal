@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a lazyloaded, or responsive image.
+ *
+ * The Slick image supports core image, and responsive image.
+ *
+ * Available variables:
+ *   - image: A collection of image data.
+ *   - attributes: An array of attributes.
+ *   - url: An optional URL the image can be linked to, can be any of
+ *       entity URLs, when using Colorbox/Photobox, or Link to content.
+ *   - settings: An array containing the given settings.
+ *
+ * @see template_preprocess_slick_image().
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'media',
+    settings.lazy ? 'media--loading',
+    settings.type ? 'media--' ~ settings.type,
+    settings.ratio ? 'media--ratio media--ratio--' ~ settings.ratio,
+    settings.media_switch ? 'media--switch media--switch--' ~ settings.media_switch|clean_class,
+    settings.responsive_image_style_id ? 'media--responsive'
+  ]
+%}
+
+{% set media %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ image }}
+    {{ settings.icon }}
+  </div>
+{% endset %}
+
+{% spaceless %}
+  {% if url and not settings.player %}
+    <a href="{{ url }}"{{ url_attributes }}>{{ media }}</a>
+  {% else %}
+    {{ media }}
+  {% endif %}
+{% endspaceless %}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quote_featured
+    - node.type.quote
+id: node.quote.field_quote_featured
+field_name: field_quote_featured
+entity_type: node
+bundle: quote
+label: Featured
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Featured Quote'
+  off_label: 'Featured Quote'
+field_type: boolean

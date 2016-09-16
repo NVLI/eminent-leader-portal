@@ -1,0 +1,8 @@
+name: Eminent Admin
+type: module
+description: 'The admin functionalities of Eminent Portal'
+package: Custom
+core: 8.x
+dependencies:
+- node
+- block

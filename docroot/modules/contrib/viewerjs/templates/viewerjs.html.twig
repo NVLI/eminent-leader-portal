@@ -1,0 +1,31 @@
+{#
+
+/**
+ * @file
+ * Default theme implementation for ViewerJsFormatter.
+ *
+ * Available variables:
+ * - description :  The filename or file description if exist.
+ * - attributes : File type icon classes.
+ * - download_link : Download url for file.
+ * - size : The size of the document.
+ * - preview_link : Contain all preview link attributes.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_viewerjs()
+ * @see template_process()
+ */
+#}
+<div class="viewerjs-field-item">
+    <div {{ attributes }}>
+      {{ description }}
+      <span class="size">{{ size }}</span>
+      <a href="{{ download_link }}" target="_blank" class="download">{{ 'Download'|t }}</a>
+      {% if(preview_link) %}
+        <a class="{{ preview_link.class }}" href="{{ preview_link.path }}"
+            data-viewerjs-overlay-width="{{ preview_link.width }}"
+            data-viewerjs-overlay-height="{{ preview_link.height }}"
+            data-viewerjs-overlay-id="{{ preview_link.id }}" >{{ 'Preview'|t }}</a>
+      {% endif %}
+    </div>
+</div>

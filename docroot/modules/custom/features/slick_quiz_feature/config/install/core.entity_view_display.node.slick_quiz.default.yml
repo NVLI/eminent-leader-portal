@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.slick_quiz.body
+    - field.field.node.slick_quiz.field_correct_answer_feed_back
+    - field.field.node.slick_quiz.field_options
+    - field.field.node.slick_quiz.field_wrong_answer_feedback
+    - node.type.slick_quiz
+  module:
+    - field_collection
+    - text
+    - user
+id: node.slick_quiz.default
+targetEntityType: node
+bundle: slick_quiz
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_correct_answer_feed_back:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_options:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_collection_list
+  field_wrong_answer_feedback:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  links:
+    weight: 100
+hidden: {  }

@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.time_line_story.field_time_line_date
+    - field.field.paragraph.time_line_story.field_time_line_description
+    - field.field.paragraph.time_line_story.field_time_line_from_media
+    - field.field.paragraph.time_line_story.field_time_line_image
+    - field.field.paragraph.time_line_story.field_time_line_media_reference
+    - field.field.paragraph.time_line_story.field_time_line_title
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - entity_browser
+id: paragraph.time_line_story.default
+targetEntityType: paragraph
+bundle: time_line_story
+mode: default
+content:
+  field_time_line_media_reference:
+    type: entity_browser_entity_reference
+    weight: 0
+    settings:
+      entity_browser: media_entity_browser
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: append
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_time_line_date: true
+  field_time_line_description: true
+  field_time_line_from_media: true
+  field_time_line_image: true
+  field_time_line_title: true
+  status: true
+  uid: true

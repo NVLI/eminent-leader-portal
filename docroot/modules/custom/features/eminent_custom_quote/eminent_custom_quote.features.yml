@@ -1,0 +1,4 @@
+bundle: eminent_custom
+excluded:
+  - slick.optionset.quote
+required: true

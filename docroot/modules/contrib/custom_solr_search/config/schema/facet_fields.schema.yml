@@ -1,0 +1,15 @@
+custom_solr_search.facet_fields.*:
+  type: config_entity
+  label: 'Facet fields config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    fields:
+      type: string
+      label: 'Facet field.'
+    uuid:
+      type: string

@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a slick wrapper.
+ *
+ * Available variables:
+ * - items: A list of items containing main and thumbnail of slick.html.twig.
+ * - attributes: HTML attributes to be applied to the list.
+ * - settings: An array containing the given settings.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'slick-wrapper',
+    settings.nav ? 'slick-wrapper--asnavfor',
+    settings.skin ? 'slick-wrapper--' ~ settings.skin|clean_class,
+    settings.skin_thumbnail ? 'slick-wrapper--' ~ settings.skin_thumbnail|clean_class
+  ]
+%}
+
+{% spaceless %}
+{% if settings.nav %}<div{{ attributes.addClass(classes)|without('id') }}>{% endif %}
+  {% for item in items %}
+    {{ item }}
+  {% endfor %}
+{% if settings.nav %}</div>{% endif %}
+{% endspaceless %}

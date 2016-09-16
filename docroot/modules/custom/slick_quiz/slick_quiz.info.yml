@@ -1,0 +1,7 @@
+name: Slick Quiz
+type: module
+description: 'Provides a View display style that integrates Slick Quiz jquery plugin.'
+package: Views
+core: '8.x'
+dependencies:
+  - views

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.time_line_collection
+  module:
+    - text
+id: node.time_line_collection.body
+field_name: body
+entity_type: node
+bundle: time_line_collection
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

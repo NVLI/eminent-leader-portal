@@ -1,0 +1,17 @@
+#viewerjslibrary:
+#  remote: http://viewerjs.org/getit/
+#  version: 0.5.4
+#  js:
+#    viewer.js: {}
+
+viewerjs:
+  version: 1.x
+  css:
+    theme:
+      css/viewerjs.theme.css: {}
+  js:
+    js/viewerjs.behaviors.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupal
+      - file/drupal.file.formatter.generic

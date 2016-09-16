@@ -1,0 +1,119 @@
+<?php
+/**
+ * @file
+ * File previewer using ViewerJS Library.
+ */
+
+use Drupal\Component\Utility\String;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Extension;
+
+/**
+ * Implements hook_libraries_info().
+ */
+function viewerjs_libraries_info() {
+  $libraries['viewerjs'] = array(
+    'name' => 'ViewerJs.org',
+    'vendor url' => 'http://viewerjs.org/getit/',
+    'download url' => 'http://viewerjs.org/releases/viewerjs-0.5.4.zip',
+    'version' => '0.5.4',
+  );
+  // Info to download viewerJS library.
+  return $libraries;
+}
+
+/**
+ * Get the location of the viewerjs library.
+ *
+ * @return string
+ *   The location of the library, or FALSE if the library isn't installed.
+ */
+function viewerjs_get_viewerjs_path() {
+  if (Drupal::moduleHandler()->moduleExists('libraries') && function_exists('libraries_get_path')) {
+    return libraries_get_path('viewerjs');
+  }
+
+  // The following logic is taken from libraries_get_libraries()
+  $searchdir = array();
+
+  // Similar to 'modules' and 'themes' directories inside an installation
+  // profile, installation profiles may want to place libraries into a
+  // 'libraries' directory.
+  $searchdir[] = 'profiles/' . drupal_get_profile() . '/libraries';
+
+  // Always search libraries.
+  $searchdir[] = 'libraries';
+
+  // Always search sites/all/libraries.
+  $searchdir[] = 'sites/all/libraries';
+
+  // Also search sites/<domain>/*.
+  $searchdir[] = conf_path() . '/libraries';
+
+  foreach ($searchdir as $dir) {
+    if (file_exists($dir . '/viewerjs/viewer.js')) {
+      return $dir . '/viewerjs';
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function viewerjs_theme() {
+  return array(
+    'viewerjs' => array(
+      'template' => 'viewerjs',
+      'variables' => array(
+        'file' => NULL,
+        'description' => NULL,
+        'size' => NULL,
+        'thumbnail' => NULL,
+        'download_link' => NULL,
+        'preview_link' => array(),
+        'attributes' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function template_preprocess_viewerjs(&$variables) {
+  $file = $variables['file'];
+  $mime_type = $file->getMimeType();
+  $preview_link = $variables['preview_link'];
+
+  if (!empty($variables['description'])) {
+    $variables['description'] = String::checkPlain($variables['description']);
+  }
+  else {
+    $variables['description'] = $file->getFilename();
+  }
+
+  // Classes to add to the file field for icons.
+  $classes = array(
+    'file',
+    // Add a specific class for each and every mime type.
+    'file--mime-' . strtr($mime_type, array('/' => '-', '.' => '-')),
+    // Add a more general class for groups of well known mime types.
+    'file--' . file_icon_class($mime_type),
+  );
+
+  // Set file classes to the options array.
+  $variables['attributes'] = new Attribute();
+  $variables['attributes']->addClass($classes);
+
+  // Set the preview link options.
+  $variables['preview_link'] = new Attribute();
+  $variables['preview_link']->addClass($preview_link['class']);
+  $variables['preview_link']->setAttribute('path', $preview_link['path']);
+  $variables['preview_link']->setAttribute('width', $preview_link['width']);
+  $variables['preview_link']->setAttribute('height', $preview_link['height']);
+  $variables['preview_link']->setAttribute('id', $preview_link['id']);
+
+}

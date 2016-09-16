@@ -1,0 +1,273 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.main_navigation: Items for the main menu region.
+ * - page.header: Items for the header region.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer: Items for the footer region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+<header id="header" class = "navbar-fixed-top wow fadeInDown">
+  <div class="top-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 hidden-xs col-xs-4">
+            <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <div class="social">
+              <ul class="social-share">
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                  <li><a href="#"><i class="fa fa-skype"></i></a></li>
+              </ul>
+              <div class="search">
+                {{ page.top_header }}
+             </div>
+           </div>
+          </div>
+        </div>
+      </div><!--/.container-->
+  </div><!--/.top-bar-->
+
+{{ page.header }}
+
+</header><!--/header-->
+
+<section id="main-slider" class="no-margin">
+    <div class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slider" data-slide-to="1"></li>
+            <li data-target="#main-slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active" style="background-image: url(/themes/eminent_svp/images/slider/banner_man-who-united-india.png)">
+                <div class="container">
+                    <div class="row slide-margin">
+                        <div class="col-sm-6 col-md-6 pull-right">
+                            <div class="carousel-content">
+                                <h1 class="animation animated-item-1">Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
+                                <h2 class="animation animated-item-2">Accusantium doloremque laudantium totam rem aperiam, eaque ipsa...</h2>
+                                <a class="btn-slide animation animated-item-3" href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.item-->
+
+            <div class="item" style="background-image: url(/themes/eminent_svp/images/slider/banner_quotes.png)">
+                <div class="container">
+                    <div class="row slide-margin">
+                        <div class="col-sm-6">
+                            <div class="carousel-content">
+                                <h1>Work is undoubtedly worship but laughter is life. </h1>
+                                <h2> Any one who takes life too seriously must prepare himself for a miserable existence. Anyone who greets joys and sorrows with equal facility can really get the best of life... </h2>
+                                <a class="btn-slide animation animated-item-3" href="#">View more quotes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.item-->
+
+            <div class="item" style="background-image: url(/themes/eminent_svp/images/slider/Banner_Biography.png)">
+                <div class="container">
+                    <div class="row slide-margin">
+                        <div class="col-sm-6 col-md-6 pull-right">
+                            <div class="carousel-content">
+                                <h1 class="animation animated-item-1">Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
+                                <h2 class="animation animated-item-2">Accusantium doloremque laudantium totam rem aperiam, eaque ipsa...</h2>
+                                <a class="btn-slide animation animated-item-3" href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.item-->
+        </div><!--/.carousel-inner-->
+    </div><!--/.carousel-->
+    <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+        <i class="fa fa-chevron-left"></i>
+    </a>
+    <a class="next hidden-xs" href="#main-slider" data-slide="next">
+        <i class="fa fa-chevron-right"></i>
+    </a>
+</section><!--/#main-slider-->
+
+<section id="feature" >
+    <div class="container">
+       <div class="center wow fadeInDown">
+            <h2>Sardhar Patel, The iron Man of india</h2>
+            <p class="lead">Vallabhbhai Patel was a man of his words. His childhood was very humble, but it showed signs of his strong character and will. <br> Know More about patel</p>
+        </div>
+
+        <div class="row">
+            <div class="features">
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-bullhorn"></i>
+                        <h2>THE LIFE AND TIMES OF SARDAR PATEL </h2>
+                        <h3> For the uninitiated, Sardar Patel was one of the founding fathers of the Republic of India who along with ...</h3>
+                    </div>
+                </div><!--/.col-md-4-->
+
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-comments"></i>
+                        <h2>Early Life</h2>
+                        <h3>The date of birth of Vallabhbhai Patel was never officially recorded – Patel entered 31 October as his date of birth on his matriculation examination papers...</h3>
+                    </div>
+                </div><!--/.col-md-4-->
+
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-cloud-download"></i>
+                        <h2>Leading India</h2>
+                        <h3>The Governor-General of India, Chakravarti Rajagopalachari, along with Nehru and Patel formed the triumvirate which ruled India from 1948 to 1950... </h3>
+                    </div>
+                </div><!--/.col-md-4-->
+
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-leaf"></i>
+                        <h2> Gandhi's death and relations with Nehru</h2>
+                        <h3>Patel was intensely loyal to Gandhi and both he and Nehru looked to him to arbitrate disputes. However, Nehru and Patel sparred over national issues...</h3>
+                    </div>
+                </div><!--/.col-md-4-->
+
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-cogs"></i>
+                        <h2>Death</h2>
+                        <h3>Patel's health declined rapidly through the summer of 1950. He later began coughing blood, whereupon Maniben began limiting his meetings and working hours...</h3>
+                    </div>
+                </div><!--/.col-md-4-->
+
+                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap">
+                        <i class="fa fa-heart"></i>
+                        <h2> Legacy </h2>
+                        <h3>Among Patel's surviving family, Maniben Patel lived in a flat in Mumbai for the rest of her life following her father's death; she often led the work...</h3>
+                    </div>
+                </div><!--/.col-md-4-->
+            </div><!--/.services-->
+        </div><!--/.row-->
+    </div><!--/.container-->
+</section><!--/#feature-->
+
+<section id="recent-works">
+    <div class="container">
+        <div class="center wow fadeInDown">
+            <h2>Exhibitions</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+          {{ page.home_exhibitions }}
+    </div><!--/.container-->
+</section><!--/#partner-->
+
+<section id="services" class="service-item">
+  <div class="container">
+    <div class="center wow fadeInDown">
+        <h2>TimeLines</h2>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+    </div>
+    {{ page.home_timelines }}
+    </div><!--/.container-->
+</section><!--/#services-->
+
+<section id="middle">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6 wow fadeInDown">
+              <div class="skill">
+                  <h2>Quotes</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  {{ page.quotes }}
+              </div>
+
+          </div><!--/.col-sm-6-->
+
+          <div class="col-sm-6 wow fadeInDown">
+             <div class="quick-quiz">
+                <h2>Check your knowledge <i class="fa fa-lightbulb-o" aria-hidden="true"></i></h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#launchquiz">
+                 Launch quiz now &nbsp; <i class="fa fa-rocket" aria-hidden="true"></i>
+                </button>
+
+            </div>
+          </div>
+
+      </div><!--/.row-->
+  </div><!--/.container-->
+</section><!--/#middle-->
+  <footer id="footer" class="midnight-blue">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-6">
+                  &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+              </div>
+              <div class="col-sm-6">
+                  <ul class="pull-right">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Faq</a></li>
+                      <li><a href="#">Contact Us</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer><!--/#footer-->
+
+
+<!-- Quiz modal -->
+<div class="modal fade quick-quiz" id="launchquiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Quiz</h4>
+      </div>
+      <div class="modal-body">
+        {{ page.home_quiz }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

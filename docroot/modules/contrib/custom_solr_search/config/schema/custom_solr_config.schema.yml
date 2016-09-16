@@ -1,0 +1,12 @@
+custom_solr_search.custom_solr_config.*:
+  type: config_entity
+  label: 'Custom solr config config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

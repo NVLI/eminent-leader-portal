@@ -1,0 +1,22 @@
+services:
+  custom_solr_search.server:
+    class: Drupal\custom_solr_search\Server
+  custom_solr_search.search:
+    class: Drupal\custom_solr_search\Search
+    #arguments: ["@custom_solr_search.server"]
+  custom_solr_search.solr_servers:
+    class: Drupal\custom_solr_search\SolrServerDetails
+    arguments: []
+  custom_solr_search.search_all:
+    class: Drupal\custom_solr_search\SearchSolrAll
+    arguments: []
+  custom_solr_search.filter_query_settings:
+    class: Drupal\custom_solr_search\FilterQuerySettings
+    arguments: []
+  custom_solr_search.facet:
+    class: Drupal\custom_solr_search\Facet
+    arguments: []
+  custom_solr_search.facet_config:
+    class: Drupal\custom_solr_search\FacetQueryConfig
+    arguments: []
+

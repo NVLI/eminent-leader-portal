@@ -1,0 +1,5 @@
+services:
+  eminent_migrate.migrate_subscriber:
+    class: Drupal\eminent_migrate\Event\MigrateEvent
+    tags:
+      - { name: event_subscriber }

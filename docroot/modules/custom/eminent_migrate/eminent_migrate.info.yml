@@ -1,0 +1,9 @@
+name: Eminent Migrate
+type: module
+description: Eminent Migrate
+core: 8.x
+package: Migration
+dependencies:
+  - migrate_source_csv
+  - migrate_plus
+  - migrate_tools

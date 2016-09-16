@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.time_line_story.field_time_line_date
+    - field.field.paragraph.time_line_story.field_time_line_description
+    - field.field.paragraph.time_line_story.field_time_line_from_media
+    - field.field.paragraph.time_line_story.field_time_line_image
+    - field.field.paragraph.time_line_story.field_time_line_media_reference
+    - field.field.paragraph.time_line_story.field_time_line_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - datetime
+    - image
+id: paragraph.time_line_story.default
+targetEntityType: paragraph
+bundle: time_line_story
+mode: default
+content:
+  field_time_line_date:
+    weight: 3
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_time_line_description:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_time_line_image:
+    weight: 0
+    label: above
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_time_line_title:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  created: true
+  field_time_line_from_media: true
+  field_time_line_media_reference: true
+  uid: true

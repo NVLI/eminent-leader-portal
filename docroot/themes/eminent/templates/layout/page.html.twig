@@ -1,0 +1,186 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.main_navigation: Items for the main menu region.
+ * - page.header: Items for the header region.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer: Items for the footer region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<div class="navbar-wrapper">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+        <h1 class="brand"><a href="/">The iron man of india!</a></h1>
+        {{ page.top_header }}
+      </div>
+    </div>
+  </div>
+</div>
+<div id="top"></div>
+<div id="headerwrap">
+  <header class="clearfix">
+    <h1><span>Sardar Patel!</span> The Best PM We never had.</h1>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          {{ page.higlighted_header }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <ul class="icon">
+            <li><a href="#"><i class="icon-pinterest-circled"></i></a></li>
+            <li><a href="#"><i class="icon-facebook-circled"></i></a></li>
+            <li><a href="#"><i class="icon-twitter-circled"></i></a></li>
+            <li><a href="#"><i class="icon-gplus-circled"></i></a></li>
+            <li><a href="#"><i class="icon-skype-circled"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="scrollblock">
+  <section id="feature">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          {{ page.secondary_header }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<hr>
+
+<section class="single-page scrollblock">
+  <div class="container">
+    <div class="layout-content">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+<section id="team" class="single-page scrollblock">
+  <div class="container">
+    <div class="align"><i class="icon-group-circled"></i></div>
+    <h1>Meet the team</h1>
+    <div class="row">
+      <div class="span2 offset1">
+        <div class="teamalign"> <img class="team-thumb img-circle" src="img/portrait-1.jpg" alt=""> </div>
+        <h3>Andrew</h3>
+        <div class="job-position">web designer</div>
+      </div>
+      <div class="span2">
+        <div class="teamalign"> <img class="team-thumb img-circle" src="img/portrait-2.jpg" alt=""> </div>
+        <h3>Stephen</h3>
+        <div class="job-position">web developer</div>
+      </div>
+      <div class="span2">
+        <div class="teamalign"> <img class="team-thumb img-circle" src="img/portrait-3.jpg" alt=""> </div>
+        <h3>Maria</h3>
+        <div class="job-position">graphic designer</div>
+      </div>
+      <div class="span2">
+        <div class="teamalign"> <img class="team-thumb img-circle" src="img/portrait-4.jpg" alt=""> </div>
+        <h3>John</h3>
+        <div class="job-position">project manager</div>
+      </div>
+      <div class="span2">
+        <div class="teamalign"> <img class="team-thumb img-circle" src="img/portrait-2.jpg" alt=""> </div>
+        <h3>Ashton</h3>
+        <div class="job-position">real owner</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span10 offset1">
+        <hr class="featurette-divider">
+        <div class="featurette">
+          <h2 class="featurette-heading">Want to know more? <span class="muted">| a little about us</span></h2>
+          <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores.</p>
+          <p>At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues.</p>
+          <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.</p>
+        </div>
+        <hr class="featurette-divider">
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="single-page scrollblock">
+  <div class="container">
+    <div class="align"><i class="icon-mail-2"></i></div>
+    <h1>Contact us now!</h1>
+    <div class="row">
+      <div class="span12">
+        <div class="cform" id="theme-form">
+          <form action="#" method="post" class="cform-form">
+            <div class="row">
+              <div class="span6"> <span class="your-name">
+                <input type="text" name="your-name" placeholder="Your Name" class="cform-text" size="40" title="your name">
+                </span> </div>
+              <div class="span6"> <span class="your-email">
+                <input type="text" name="your-email" placeholder="Your Email" class="cform-text" size="40" title="your email">
+                </span> </div>
+            </div>
+            <div class="row">
+              <div class="span6"> <span class="company">
+                <input type="text" name="company" placeholder="Your Company" class="cform-text" size="40" title="company">
+                </span> </div>
+              <div class="span6"> <span class="website">
+                <input type="text" name="website" placeholder="Your Website" class="cform-text" size="40" title="website">
+                </span> </div>
+            </div>
+            <div class="row">
+              <div class="span12"> <span class="message">
+                <textarea name="message" class="cform-textarea" cols="40" rows="10" title="drop us a line."></textarea>
+                </span> </div>
+            </div>
+            <div>
+              <input type="submit" value="Send message" class="cform-submit pull-left">
+            </div>
+            <div class="cform-response-output"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+<div class="footer-wrapper">
+  <div class="container">
+    <footer> <small>&copy; 2016 IITB. All rights reserved. </footer>
+  </div>
+</div>

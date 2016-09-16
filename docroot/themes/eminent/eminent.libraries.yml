@@ -1,0 +1,26 @@
+global-components:
+  css:
+    theme:
+      css/bootstrap.min.css: {}
+      css/bootstrap.css: {}
+      font-awesome/css/font-awesome.min.css: {}
+      http://fonts.googleapis.com/css?family=Source+Sans+Pro: { external: true }
+      css/bootstrap-responsive.css: {}
+      css/style.css: {}
+      css/prettyPhoto.css: {}
+      css/fontello.css: {}
+      css/quote.css: {}
+
+global-js:
+  js:
+    https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js: { external: true }
+    js/jquery.scrollTo-1.4.2-min.js: {}
+    js/jquery.localscroll-1.2.7-min.js: {}
+    js/jquery.prettyPhoto.js: {}
+    js/site.js: {}
+    js/custom.js: {}
+
+
+  dependencies:
+    - core/jquery
+

@@ -1,0 +1,19 @@
+{
+  "name": "drupal/blazy",
+  "description": "Provides basic bLazy integration for lazy loading and multi-serving images.",
+  "keywords": ["bLazy", "lazyload", "Drupal"],
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "homepage": "https://drupal.org/project/blazy",
+  "support": {
+    "issues": "https://drupal.org/project/issues/blazy",
+    "source": "http://cgit.drupalcode.org/blazy"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/project/blazy.git"
+    }
+  ],
+  "require": { }
+}

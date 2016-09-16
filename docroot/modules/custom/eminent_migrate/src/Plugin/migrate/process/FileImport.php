@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Contain \Drupal\eminent_migrate\migrate\process
+ */
+namespace Drupal\eminent_migrate\Plugin\migrate\process;
+use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\ProcessPluginBase;
+use Drupal\migrate\Row;
+use \Drupal\file\Entity\File;
+
+/**
+ * Example on how to migrate an image from any place in Drupal.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "file_import"
+ * )
+ */
+class FileImport extends ProcessPluginBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    $user = \Drupal::currentUser();
+    $file = \Drupal::entityTypeManager()->getStorage('file')->create(['uri' => $value]);
+    $file->save();
+    return $file->id();
+  }
+}

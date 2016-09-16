@@ -1,0 +1,12 @@
+/**
+ * @file
+ * File previewer using ViewerJS Library.
+ */
+
+.viewerjs-overlay-fog {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.viewerjs-overlay-element,
+.viewerjs-overlay-fog {
+  z-index: 501;
+}
