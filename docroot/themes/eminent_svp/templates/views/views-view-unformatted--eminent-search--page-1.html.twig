@@ -15,62 +15,18 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-
-<div id = "play-list-results">
-  <div class = "row">
-    {% for row in play_list_row %}
-      {%
-        set row_classes = [
-          default_row_class ? 'views-row',
-        ]
-      %}
-      <div{{ row.attributes.addClass(row_classes) }}>
-        {{ row.content }}
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-<div id = "timeline-results">
-  <div class = "row">
-    {% for timelinerow in time_line_collection_row %}
-      {%
-        set row_classes = [
-          default_row_class ? 'views-row',
-        ]
-      %}
-      <div{{ timelinerow.attributes.addClass(row_classes) }}>
-        {{ timelinerow.content }}
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-<div id = "quote-results">
-  <div class = "row">
-    {% for quoterow in quote_row %}
-      {%
-        set row_classes = [
-          default_row_class ? 'views-row',
-        ]
-      %}
-      <div{{ quoterow.attributes.addClass(row_classes) }}>
-        {{ quoterow.content }}
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-<div id = "media-results">
-  {% for mediarow in media_row %}
+<div class = "row">
+  {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}
+  {% for row in rows %}
     {%
       set row_classes = [
         default_row_class ? 'views-row',
       ]
     %}
-    <div{{ mediarow.attributes.addClass(row_classes) }}>
-      {{ mediarow.content }}
+    <div{{ row.attributes.addClass(row_classes) }}>
+      {{ row.content }}
     </div>
   {% endfor %}
 </div>
-
