@@ -1,12 +1,12 @@
 # The source data is in CSV files, so we use the 'csv' source plugin.
-id: midia_migrate_01
+id: media_migrate_19
 label: CSV page migration
 migration_tags:
   - CSV
 source:
   plugin: csv
   # Full path to the file.
-  path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/data-import.csv'
+  path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/migrate-content.csv'
   # The number of rows at the beginning which are not data.
   header_row_count: 1
   # These are the field names from the source file representing the key
@@ -64,14 +64,13 @@ process:
   field_dc_contributor: creator
   field_dc_creator: creator
   field_dc_time_range: date
-  field_dc_format: format
   field_dc_identifier: identifier
-  field_dc_language: language
   field_dc_location: location
   field_dc_publisher: publisher
   field_dc_rights: copyright
-  field_dc_subject: keyword
   field_dc_type: file_type
+  field_dc_format: format
+  field_dc_language: language
 
   field_media_video:
     plugin: file_import
@@ -85,9 +84,10 @@ process:
   field_media_image:
     plugin: file_import
     source: source_path
-  field_dc_source:
+  field_dc_subject:
     plugin: taxonomy_import
     source: keyword
+
 # Required to cleanup CMI.
 dependencies:
   module:

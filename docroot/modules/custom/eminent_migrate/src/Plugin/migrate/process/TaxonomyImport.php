@@ -8,6 +8,7 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use \Drupal\file\Entity\File;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Example on how to migrate an image from any place in Drupal.
@@ -21,13 +22,15 @@ class TaxonomyImport extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    if ($terms = taxonomy_term_load_multiple_by_name($term_value, $vocabulary)) {
+    $vocabulary = "subject";
+    if ($terms = taxonomy_term_load_multiple_by_name($value, 'subject')) {
       $term = reset($terms);
     }
     else {
       $term = Term::create([
-        'name' => $term_value,
-        'vid' => $vocabulary,
+        'parent' => array(),
+        'name' => $value,
+        'vid' => 'subject',
       ]);
       $term->save();
     }
