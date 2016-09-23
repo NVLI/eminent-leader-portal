@@ -1,19 +1,19 @@
 # The source data is in CSV files, so we use the 'csv' source plugin.
-id: csv_test31_media
+id: midia_migrate_01
 label: CSV page migration
 migration_tags:
   - CSV
 source:
   plugin: csv
   # Full path to the file.
-  path: '/home/user/Projects/NVLI/IITB-svpp/web/eminent-leader-portal/sites/default/files/csv/people.csv'
+  path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/data-import.csv'
   # The number of rows at the beginning which are not data.
   header_row_count: 1
   # These are the field names from the source file representing the key
   # uniquely identifying each game - they will be stored in the migration
   # map table as columns sourceid1, sourceid2, and sourceid3.
   keys:
-    - file_name
+    - identifier
   # Here we identify the columns of interest in the source file. Each numeric
   # key is the 0-based index of the column. For each column, the key below
   # (e.g., "start_date") is the field name assigned to the data on import, to
@@ -25,27 +25,69 @@ source:
     # that name can be used to map the value below. "Date of game" will appear
     # in the UI to describe this field.
     0:
-      directory: Directory
+      identifier: Unique ID
     1:
-      file_name: File Name
+      file_name: Filename
     2:
-      extension: File Extension
+      title: Title
     3:
+      creator: Creator
+    4:
+      date: Date
+    5:
+      date_range: Coverage.Temporal
+    6:
+      location: Coverage.Spatial
+    7:
+      publisher: Publisher
+    8:
       description: Description
+    9:
+      language: Language
+    10:
+      file_type: File type
+    11:
+      format: Format
+    12:
+      copyright: Copyright
+    13:
+      keyword: Keyword/Subject
 destination:
   # Here we're saying that each row of data (line from the CSV file) will be
-  # used to create a node entity.
+  # used to create a media entity.
   plugin: entity:media
 process:
   bundle: media_bundle
-  name: file_name
+  name: title
+  field_dc_title: title
   field_dc_description: description
-  field_dummy_image:
+  field_dc_contributor: creator
+  field_dc_creator: creator
+  field_dc_time_range: date
+  field_dc_format: format
+  field_dc_identifier: identifier
+  field_dc_language: language
+  field_dc_location: location
+  field_dc_publisher: publisher
+  field_dc_rights: copyright
+  field_dc_subject: keyword
+  field_dc_type: file_type
+
+  field_media_video:
     plugin: file_import
     source: source_path
-  field_dummy_document:
+  field_media_audio:
     plugin: file_import
     source: source_path
+  field_media_document:
+    plugin: file_import
+    source: source_path
+  field_media_image:
+    plugin: file_import
+    source: source_path
+  field_dc_source:
+    plugin: taxonomy_import
+    source: keyword
 # Required to cleanup CMI.
 dependencies:
   module:

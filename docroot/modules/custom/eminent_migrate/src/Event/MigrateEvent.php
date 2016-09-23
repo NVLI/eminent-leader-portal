@@ -29,16 +29,21 @@ class MigrateEvent implements EventSubscriberInterface {
    */
   public function onPrepareRow(MigratePrepareRowEvent $event) {
     $row = $event->getRow();
-    $directory = $row->getSourceProperty('directory');
     $file_name = $row->getSourceProperty('file_name');
-    $extension = $row->getSourceProperty('extension');
-    $source_path = "public://" . $directory . '/' . $file_name . '.' . $extension;
+    $extension = $row->getSourceProperty('format');
+    $source_path = "public://" . $file_name;
     $row->setSourceProperty('source_path', $source_path);
-    if ($extension == "pdf") {
+    if ($extension == "pdf" || $extension == "PDF") {
       $row->setSourceProperty('media_bundle', 'document');
     }
-    else {
+    else if ($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
       $row->setSourceProperty('media_bundle', 'image');
+    }
+    else if ($extension == "mp3" || $extension == "wav") {
+      $row->setSourceProperty('media_bundle', 'audio');
+    }
+    else if ($extension == "mp4" || $extension == "mpeg") {
+      $row->setSourceProperty('media_bundle', 'video');
     }
   }
 }

@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Contain \Drupal\eminent_migrate\migrate\process
+ */
+namespace Drupal\eminent_migrate\Plugin\migrate\process;
+use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\ProcessPluginBase;
+use Drupal\migrate\Row;
+use \Drupal\file\Entity\File;
+
+/**
+ * Example on how to migrate an image from any place in Drupal.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "taxonomy_import"
+ * )
+ */
+class TaxonomyImport extends ProcessPluginBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    if ($terms = taxonomy_term_load_multiple_by_name($term_value, $vocabulary)) {
+      $term = reset($terms);
+    }
+    else {
+      $term = Term::create([
+        'name' => $term_value,
+        'vid' => $vocabulary,
+      ]);
+      $term->save();
+    }
+    return $term->id();
+  }
+}
