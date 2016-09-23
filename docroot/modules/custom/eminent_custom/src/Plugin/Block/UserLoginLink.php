@@ -33,12 +33,15 @@ class UserLoginLink extends BlockBase {
       $current_path = \Drupal::service('path.current')->getPath();
       $login_url = Url::fromRoute('user.login', ['destination' => $current_path]);
       $login_url = \Drupal::l(t('Login'), $login_url);
-      $markup = '<li> <i class="fa fa-unlock-alt" aria-hidden="true"></i>' . $login_url . '</li>';
+      $markup = '<i class="fa fa-unlock-alt" aria-hidden="true"></i>' . $login_url;
     }
     else {
-      $name = 'Admin';
+      $name = $user->getUsername();
       $text = t('Welcome @name', array('@name' => $name));
-      $markup = '<li class="dropdown">
+      // Get current user roles.
+      $user_roles = \Drupal::currentUser()->getRoles();
+      if ($uid == 1 || in_array("curator", $user_roles)) {
+      $markup = '
         <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
         <span class="user-image">
         <img src="/themes/eminent_sardar/images/man4.jpg" alt="Full Name of the admin" class="img-responsive"></span> ' . $text . '</a>
@@ -48,11 +51,19 @@ class UserLoginLink extends BlockBase {
             <li><a href="404.html">Add Playlist</a></li>
             <li><a href="shortcodes.html">Add Quiz item</a></li>
           </ul>
-        </li>';
+       ';
+      }
+      else {
+        $markup = '
+        <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
+        <span class="user-image">
+         <img src="/themes/eminent_sardar/images/man4.jpg" alt="Full Name of the admin" class="img-responsive"></span> ' . $text . '</a>
+        ';
+      }
     }
     return array(
       '#type' => 'markup',
-      '#markup' => '<ul>' . $markup . '</ul>',
+      '#markup' => $markup,
       '#cache' => [
         'max-age' => 0,
       ],
