@@ -118,7 +118,7 @@ a:focus {
   margin-left: 20px;
 }
 
-body > section {
+body > section, #timeline, #recent-works {
   padding: 70px 0;
 }
 

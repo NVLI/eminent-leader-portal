@@ -1384,26 +1384,26 @@ quotes by sardar homepag eblock*/
 }
 
 /* line 1216, ../sass/custom.scss */
-#block-exposedformeminent-searchpage-1-6 {
+.searchresult-form {
   height: 60px;
 }
 @media (max-width: 480px) {
   /* line 1216, ../sass/custom.scss */
-  #block-exposedformeminent-searchpage-1-6 {
+  .searchresult-form {
     height: auto;
   }
 }
 /* line 1221, ../sass/custom.scss */
-#block-exposedformeminent-searchpage-1-6 input[type="checkbox"] {
+.searchresult-form input[type="checkbox"] {
   margin-right: 15px;
 }
 /* line 1224, ../sass/custom.scss */
-#block-exposedformeminent-searchpage-1-6 i.fa-search {
+.searchresult-form i.fa-search {
   border: 1px solid red;
   display: none;
 }
 /* line 1228, ../sass/custom.scss */
-#block-exposedformeminent-searchpage-1-6 input[type="text"] {
+.searchresult-form input[type="text"] {
   width: 80%;
   display: inline;
   float: left;
@@ -1412,14 +1412,14 @@ quotes by sardar homepag eblock*/
 }
 @media (max-width: 480px) {
   /* line 1228, ../sass/custom.scss */
-  #block-exposedformeminent-searchpage-1-6 input[type="text"] {
+  .searchresult-form input[type="text"] {
     float: none;
     width: 100%;
     margin-bottom: 20px;
   }
 }
 /* line 1240, ../sass/custom.scss */
-#block-exposedformeminent-searchpage-1-6 .btn {
+.searchresult-form .btn {
   display: inline;
   width: 100%;
   float: right;
@@ -1427,7 +1427,7 @@ quotes by sardar homepag eblock*/
 }
 @media (max-width: 480px) {
   /* line 1240, ../sass/custom.scss */
-  #block-exposedformeminent-searchpage-1-6 .btn {
+  .searchresult-form .btn {
     float: none;
     height: auto;
     margin-bottom: 20px;
