@@ -20,6 +20,9 @@ global-js:
     js/main.js: {}
     js/wow.min.js: {}
     js/timeline.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 
 
