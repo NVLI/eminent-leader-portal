@@ -240,8 +240,7 @@ ul.social-share li a:hover {
 input.search-form {
   background: transparent;
   border: 0 none;
-  width: 40px;
-  padding: 0 10px;
+  width: auto;
   color: #7E7E7E;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
@@ -250,9 +249,9 @@ input.search-form {
   transition: all 400ms;
 }
 
-input.search-form:focus {
+/*input.search-form:focus {
   width: 100px;
-}
+}*/
 
 input.search-form::-webkit-input-placeholder{
   color: #777;
@@ -869,7 +868,7 @@ a.accordion-toggle  i{
 }
 
 .nav-tabs>li>a {
-  background: #353740;
+  background: #e67e22;
   color: #fff;
   border-radius: 0;
   border: 0 none;
@@ -2197,9 +2196,10 @@ ul.pagination > li > a {
   border: 1px solid #F1F1F1;
   margin-right:5px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 13px;
   padding: 5px 14px;
-  color: #27AE60;
+  color: #e67e22;
+  margin-bottom: 10px;
 }
 
 ul.pagination > li > a i{
@@ -2209,8 +2209,8 @@ ul.pagination > li > a i{
 
 ul.pagination > li.active > a, 
 ul.pagination > li:hover > a {
-  background-color: #27AE60 !important;
-  border-color: #27AE60 !important;
+  background-color: #e67e22 !important;
+  border-color: #e67e22 !important;
   color: #fff;
 }
 

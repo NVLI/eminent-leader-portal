@@ -12,14 +12,12 @@
  * @ingroup themeable
  */
 #}
-<div class = "media_details">
-  <div class = "media-item media-item-result">
-    <div class = "row">
-      <article{{ attributes }}>
-        {% if content %}
-          {{ content }}
-        {% endif %}
-      </article>
-    </div>
-  </div>
+<div class = "item-wrapper">
+  <section class = "item-body grid-equal-height">
+    <article{{ attributes }}>
+      {% if content %}
+        {{ content }}
+      {% endif %}
+    </article>
+  </section>
 </div>

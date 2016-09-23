@@ -2,3 +2,12 @@
   width: 100%;
   height: 100%;
 }
+#bottom .navbar-brand img {
+  width: 100%;
+}
+#header #views-exposed-form-eminent-search-page-1 #edit-actions {
+  display: none;
+}
+.searchresult-form .fa-search {
+  display: none;
+}

@@ -15,6 +15,9 @@ libraries:
 regions:
   content: 'Main Content'
   top_header: 'Top Header'
+  page_title: 'Title'
+  header_mobile_search: 'Header Search'
+  search_filters: 'Search form with filters'
   content_bottom: 'Content Bottom'
   footer_first_column: 'Footer first column'
   footer_second_column: 'Footer second column'

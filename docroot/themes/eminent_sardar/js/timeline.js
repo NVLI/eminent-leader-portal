@@ -1,4 +1,17 @@
 jQuery(document).ready(function($){
+	function equalgridheight(group) {
+    var tallest = 0;
+    group.each(function() {
+        var thisHeight = $(this).height();
+        if(thisHeight > tallest) {
+            tallest = thisHeight;
+        }
+    });
+    group.height(tallest);
+  };
+  if($('.grid-equal-height').length) {
+    equalgridheight($('.grid-equal-height'));
+  }
 	var timelineBlocks = $('.cd-timeline-block'),
 		offset = 0.8;
 
@@ -7,7 +20,7 @@ jQuery(document).ready(function($){
 
 	//on scolling, show/animate timeline blocks when enter the viewport
 	$(window).on('scroll', function(){
-		(!window.requestAnimationFrame) 
+		(!window.requestAnimationFrame)
 			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
 			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
 	});
