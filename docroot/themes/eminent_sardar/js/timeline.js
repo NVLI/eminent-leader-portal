@@ -12,6 +12,12 @@ jQuery(document).ready(function($){
   if($('.grid-equal-height').length) {
     equalgridheight($('.grid-equal-height'));
   }
+  if($('.time-line-grid-equal-height').length) {
+    equalgridheight($('.time-line-grid-equal-height'));
+  }
+  if($('.media-grid-equal-height').length) {
+    equalgridheight($('.media-grid-equal-height'));
+  }
 	var timelineBlocks = $('.cd-timeline-block'),
 		offset = 0.8;
 
