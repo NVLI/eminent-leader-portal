@@ -26,7 +26,7 @@
  */
 #}
 <div class = "col-sm-6 quotes-by-sardar-holder no-padding">
-  <div{{ attributes }}>
+  <div{{ attributes.addClass('featured-quote') }}>
     {{ title_prefix }}
     {% if label %}
       <div class = "center">
@@ -36,7 +36,7 @@
     {{ title_suffix }}
     {% block content %}
         {{ content }}
-      <a class="btn btn-primary" href="/quotes">View all</a>
+        <a class="btn btn-primary" href="/quotes">View all</a>
     {% endblock %}
   </div>
 </div>

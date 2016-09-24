@@ -1,7 +1,3 @@
-.quotes-by-sardar-holder div {
-  width: 100%;
-  height: 100%;
-}
 #bottom .navbar-brand img {
   width: 100%;
 }
@@ -10,4 +6,8 @@
 }
 .searchresult-form .fa-search {
   display: none;
+}
+.featured-quote {
+  width: 100%;
+  height: 100%;
 }
