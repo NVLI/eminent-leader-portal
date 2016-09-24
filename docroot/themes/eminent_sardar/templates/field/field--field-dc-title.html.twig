@@ -40,12 +40,12 @@
     {% if multiple %}
       <div{{ attributes }}>
         {% for item in items %}
-          <div{{ item.attributes }}>{{ item.content }}</div>
+          <h2{{ item.attributes }}>{{ item.content }}</h2>
         {% endfor %}
       </div>
     {% else %}
       {% for item in items %}
-        <span{{ item.attributes }}> <i class="fa fa-user"></i> {{ item.content }}</span>
+        <h2{{ item.attributes }}> {{ item.content }}</h2>
       {% endfor %}
     {% endif %}
   {% else %}
@@ -55,7 +55,7 @@
         <div>
       {% endif %}
       {% for item in items %}
-        <span{{ item.attributes }}> <i class="fa fa-user"></i> {{ item.content }}</span>
+        <h2{{ item.attributes }}> {{ item.content }}</h2>
       {% endfor %}
       {% if multiple %}
         </div>
