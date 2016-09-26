@@ -25,19 +25,10 @@
  * @see template_preprocess_block()
  */
 #}
-<section id="recent-works" class="exibition-listing">
-  <div class="container wow">
-    <div class="row">
-      {{ title_prefix }}
-      {% if label %}
-      <div class="center wow">
-        <h2{{ title_attributes }}>{{ label }}</h2>
-      </div>
-      {% endif %}
-      {{ title_suffix }}
-      {% block content %}
-        {{ content }}
-      {% endblock %}
-    </div>
+<div class = "row">
+  <div class = "exibition_pager col-md-12 slick-initialized slick-slider">
+    {% block content %}
+      {{ content }}
+    {% endblock %}
   </div>
-</section>
+</div>

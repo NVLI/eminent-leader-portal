@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present a media entity.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+<div>
+  <div class = "recent-work-wrap excibition_thumb">
+    {% if content %}
+      {{ content }}
+    {% endif %}
+
+  </div>
+</div>
