@@ -23,6 +23,10 @@ class FileImport extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $user = \Drupal::currentUser();
     $file = \Drupal::entityTypeManager()->getStorage('file')->create(['uri' => $value]);
+    $extension = $row->getSourceProperty('format');
+    if ($extension == "pdf" || $extension == "PDF") {
+      $file->setMimeType('application/pdf');
+    }
     $file->save();
     return $file->id();
   }

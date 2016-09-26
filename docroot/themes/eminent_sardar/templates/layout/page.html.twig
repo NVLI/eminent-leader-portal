@@ -68,7 +68,9 @@
 <!--/header-->
 {{ page.page_title }}
 
-{{ page.search_filters }}
+{% if page.search_filters %}
+  {{ page.search_filters }}
+{% endif %}
 
 <div class="layout-container">
 

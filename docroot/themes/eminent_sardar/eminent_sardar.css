@@ -21,3 +21,6 @@
 .exhibition-slick-image iframe {
   min-height: 400px;
 }
+.exhibition-slick-image .video-js {
+  width: 100% !important;
+}
