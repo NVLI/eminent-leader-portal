@@ -12,8 +12,9 @@
  * @see template_preprocess_region()
  */
 #}
-{% if content.value %}
-  <div class = "container">
+{% if content is empty %}
+{% else %}
+  <div class = "container search-filters">
     <div class="widget search row searchresult-form">
       {{ content }}
     </div>
