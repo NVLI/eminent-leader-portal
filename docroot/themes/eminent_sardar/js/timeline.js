@@ -1,17 +1,32 @@
-jQuery(document).ready(function($){
-	function equalgridheight(group) {
-    var tallest = 0;
-    group.each(function() {
-        var thisHeight = $(this).height();
-        if(thisHeight > tallest) {
-            tallest = thisHeight;
-        }
-    });
-    group.height(tallest);
+(function ($, Drupal) {
+
+  Drupal.behaviors.Eminent = {
+    attach: function (context, settings) {
+      if ($('.searchresult-form .views-exposed-form').length == 0) {
+        $('.search-filters').remove();
+      }
+      $('#header .navbar-right .views-exposed-form').addClass('search');
+      $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
+      function equalgridheight(group) {
+        var tallest = 0;
+        group.each(function() {
+            var thisHeight = $(this).height();
+            if(thisHeight > tallest) {
+                tallest = thisHeight;
+            }
+        });
+        group.height(tallest);
+      };
+      if($('.grid-equal-height').length) {
+        equalgridheight($('.grid-equal-height'));
+      }
+    }
   };
-  if($('.grid-equal-height').length) {
-    equalgridheight($('.grid-equal-height'));
-  }
+})(jQuery, Drupal);
+
+
+jQuery(document).ready(function($){
+
 	var timelineBlocks = $('.cd-timeline-block'),
 		offset = 0.8;
 
