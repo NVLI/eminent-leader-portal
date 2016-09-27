@@ -24,3 +24,6 @@
 .exhibition-slick-image .video-js {
   width: 100% !important;
 }
+.quotes-by-sardar-holder > div {
+  width: 100%;
+}
