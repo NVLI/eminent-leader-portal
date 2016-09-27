@@ -34,22 +34,40 @@ function eminent_sardar_theme_suggestions_alter(array &$suggestions, array $vari
  */
 function eminent_sardar_preprocess_views_view_unformatted(&$variables) {
   $view = $variables['view'];
-  foreach ($variables['rows'] as $row) {
-   if (isset($row['content']['#node'])) {
-    $node = $row['content']['#node'];
-    $type = $node->getType();
-    if ($type == "play_list") {
-      $variables['play_list_row'][] = $row;
+  $view_title = $view->storage->id();
+  dpm($view_title);
+  if ($view_title == "eminent_search") {
+    $playlist_count = $timeline_count = $media_count = $quote_count = 0;
+    $variables['play_list_count'] = $variables['quote_count'] = $variables['timeline_count'] = $variables['media_count']= 0;
+    foreach ($variables['rows'] as $row) {
+     if (isset($row['content']['#node'])) {
+      $node = $row['content']['#node'];
+      $type = $node->getType();
+      if ($type == "play_list") {
+        $playlist_count++;
+        $variables['play_list_row'][] = $row;
+        $variables['play_list_result'] = TRUE;
+        $variables['play_list_count'] = $playlist_count;
+      }
+      if ($type == "quote") {
+        $quote_count++;
+        $variables['quote_row'][] = $row;
+        $variables['quote_result'] = TRUE;
+        $variables['quote_count'] = $quote_count;
+      }
+      if ($type == "time_line_collection") {
+        $timeline_count++;
+        $variables['time_line_collection_row'][] = $row;
+        $variables['time_line_collection_result'] = TRUE;
+        $variables['timeline_count'] = $timeline_count;
+      }
+     }
+     else {
+        $media_count++;
+        $variables['media_row'][] = $row;
+        $variables['media_result'] = TRUE;
+        $variables['media_count'] = $media_count;
+     }
     }
-    if ($type == "quote") {
-      $variables['quote_row'][] = $row;
-    }
-    if ($type == "time_line_collection") {
-      $variables['time_line_collection_row'][] = $row;
-    }
-   }
-   else {
-     $variables['media_row'][] = $row;
-   }
- }
+  }
 }

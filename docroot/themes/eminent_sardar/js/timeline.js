@@ -10,15 +10,18 @@
       function equalgridheight(group) {
         var tallest = 0;
         group.each(function() {
-            var thisHeight = $(this).height();
-            if(thisHeight > tallest) {
-                tallest = thisHeight;
-            }
+          var thisHeight = $(this).height();
+          if(thisHeight > tallest) {
+              tallest = thisHeight;
+          }
         });
         group.height(tallest);
       };
       if($('.grid-equal-height').length) {
         equalgridheight($('.grid-equal-height'));
+      }
+      if($('.media-grid-equal-height').length) {
+        equalgridheight($('.media-grid-equal-height'));
       }
     }
   };

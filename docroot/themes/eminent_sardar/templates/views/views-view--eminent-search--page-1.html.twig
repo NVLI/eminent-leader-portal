@@ -35,26 +35,11 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
-<div class="search-results-tab">
-  <div class="search-result-nav">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#exhibition" aria-controls="exhibition" role="tab" data-toggle="tab">Exhibition</a></li>
-      <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a></li>
-      <li role="presentation"><a href="#media" aria-controls="media" role="tab" data-toggle="tab">Media</a></li>
-      <li role="presentation"><a href="#quote" aria-controls="quote" role="tab" data-toggle="tab">Quote</a></li>
-    </ul>
-  </div>
+
   <div{{ attributes.addClass(classes) }}>
     {{ title_prefix }}
     {{ title }}
     {{ title_suffix }}
-
-    {% if header %}
-      <header>
-        <p class = "text-center">  {{ header }} </p>
-      </header>
-    {% endif %}
 
     {{ exposed }}
     {{ attachment_before }}
@@ -74,4 +59,4 @@
 
     {{ feed_icons }}
   </div>
-</div>
+
