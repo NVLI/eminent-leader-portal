@@ -16,64 +16,95 @@
  */
 #}
 
-
-<div class="tab-content row">
-  <div role="tabpanel" class="tab-pane active" id="exhibition">
-    <div class = "row">
-      {% for row in play_list_row %}
-        {%
-          set row_classes = [
-            default_row_class ? 'views-row col-md-4',
-          ]
-        %}
-        <div{{ row.attributes.addClass(row_classes) }}>
-          {{ row.content }}
-        </div>
-      {% endfor %}
-    </div>
+<div class="search-results-tab">
+  <div class="search-result-nav">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#exhibition" aria-controls="exhibition" role="tab" data-toggle="tab">Exhibition ( {{play_list_count}} )</a></li>
+      <li role="presentation"><a href="#timeline-collection" aria-controls="timeline" role="tab" data-toggle="tab">Timeline ( {{timeline_count}} )</a></li>
+      <li role="presentation"><a href="#media" aria-controls="media" role="tab" data-toggle="tab">Media ( {{media_count}} )</a></li>
+      <li role="presentation"><a href="#quote" aria-controls="quote" role="tab" data-toggle="tab">Quote ( {{ quote_count }} )</a></li>
+    </ul>
   </div>
-
-  <div role="tabpanel" class="tab-pane" id="timeline">
-    <div class = "row">
-      {% for timelinerow in time_line_collection_row %}
-        {%
-          set row_classes = [
-            default_row_class ? 'views-row col-md-4',
-          ]
-        %}
-        <div{{ timelinerow.attributes.addClass(row_classes) }}>
-          {{ timelinerow.content }}
+  <div class="tab-content row">
+    {% if play_list_result %}
+      <div role="tabpanel" class="tab-pane active" id="exhibition">
+        <div class = "row">
+          {% for row in play_list_row %}
+            {%
+              set row_classes = [
+                default_row_class ? 'views-row col-md-4',
+              ]
+            %}
+            <div{{ row.attributes.addClass(row_classes) }}>
+              {{ row.content }}
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div role="tabpanel" class="tab-pane" id="quote">
-    <div class = "row">
-      {% for quoterow in quote_row %}
-        {%
-          set row_classes = [
-            default_row_class ? 'views-row',
-          ]
-        %}
-        <div{{ quoterow.attributes.addClass(row_classes) }}>
-          {{ quoterow.content }}
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div role="tabpanel" class="tab-pane" id="media">
-    {% for mediarow in media_row %}
-      {%
-        set row_classes = [
-          default_row_class ? 'views-row col-md-4',
-        ]
-      %}
-      <div{{ mediarow.attributes.addClass(row_classes) }}>
-        {{ mediarow.content }}
       </div>
-    {% endfor %}
+    {% else %}
+      <div role="tabpanel" class="tab-pane active" id="exhibition">
+        <p class="text-center">No results found for exhibition.</p>
+      </div>
+    {% endif %}
+    {% if time_line_collection_result %}
+      <div role="tabpanel" class="tab-pane" id="timeline-collection">
+        <div class = "row">
+          {% for timelinerow in time_line_collection_row %}
+            {%
+              set row_classes = [
+                default_row_class ? 'views-row col-md-4',
+              ]
+            %}
+            <div{{ timelinerow.attributes.addClass(row_classes) }}>
+              {{ timelinerow.content }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div role="tabpanel" class="tab-pane" id="timeline-collection">
+        <p class="text-center">No results found for Timelines. </p>
+      </div>
+    {% endif %}
+    {% if quote_result %}
+      <div role="tabpanel" class="tab-pane" id="quote">
+        <div class = "row">
+          {% for quoterow in quote_row %}
+            {%
+              set row_classes = [
+                default_row_class ? 'views-row',
+              ]
+            %}
+            <div{{ quoterow.attributes.addClass(row_classes) }}>
+              {{ quoterow.content }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div role="tabpanel" class="tab-pane" id="quote">
+        <p class="text-center">No results found for Quote. </p>
+      </div>
+    {% endif %}
+    {% if media_result %}
+      <div role="tabpanel" class="tab-pane" id="media">
+        {% for mediarow in media_row %}
+          {%
+            set row_classes = [
+              default_row_class ? 'views-row col-md-4',
+            ]
+          %}
+          <div{{ mediarow.attributes.addClass(row_classes) }}>
+            {{ mediarow.content }}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div role="tabpanel" class="tab-pane" id="media">
+        <p class="text-center">No results found for Media.</p>
+      </div>
+    {% endif %}
   </div>
 </div>
 
