@@ -53,3 +53,19 @@ function eminent_sardar_preprocess_views_view_unformatted(&$variables) {
    }
  }
 }
+
+/**
+* Implements hook_preprocess_node() for NODE document templates.
+*/
+function eminent_sardar_preprocess_media(&$variables) {
+  $block = Block::load('eminent_sardar_addtotimeline');
+  $variables['addtotimeline'] = \Drupal::entityManager()
+    ->getViewBuilder('block')
+    ->view($block);
+
+  $block = Block::load('eminent_sardar_addtoplaylist');
+  $variables['addtoplaylist'] = \Drupal::entityManager()
+    ->getViewBuilder('block')
+    ->view($block);
+}
+
