@@ -14,20 +14,26 @@
 #}
 <article{{ attributes }}>
   <section class="container media_details" id="media_details">
-  <div class="mediablock">
-    <div class="row">
-      <div class="col-md-12">
-        <div class = "media-item">
-        <div class="media-item">
-          <div class="row">
-            {% if content %}
-              {{ content }}
-            {% endif %}
+    <div class="mediablock">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="media-item">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class = "entry-meta">
+                  <span class="meta-title">Meta Data</span>
+                  <span>{{ content|without('field_dc_description', 'field_media_image') }}</span>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                {% if content %}
+                  {{ content }}
+                {% endif %}
+              </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-  </div>
   </section
 </article>
