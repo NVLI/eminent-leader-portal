@@ -26,17 +26,8 @@
  */
 #}
 <div class = "col-sm-6 quotes-by-sardar-holder no-padding">
-  <div{{ attributes.addClass('featured-quote') }}>
-    {{ title_prefix }}
-    {% if label %}
-      <div class = "center">
-        <h2 class = "wow fadeInDown svp-block-content">{{ label }}</h2>
-      </div>
-    {% endif %}
-    {{ title_suffix }}
-    {% block content %}
-        {{ content }}
-        <a class="btn btn-primary" href="/quotes">View all</a>
-    {% endblock %}
-  </div>
+  {% block content %}
+      {{ content }}
+  {% endblock %}
+  <a class="btn btn-primary" href="/quotes">View all</a>
 </div>
