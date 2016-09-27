@@ -8,32 +8,39 @@ eminent_admin.AddPlaylist:
     _form: '\Drupal\eminent_admin\Form\AddPlayListForm'
     _title: 'Add Play list'
   requirements:
-    _permission: 'access content'
+    _permission: 'add playlist'
 eminent_admin.AddTimeline:
   path: '/timeline/{media_id}/add'
   defaults:
     _form: '\Drupal\eminent_admin\Form\AddTimeLineForm'
     _title: 'Add Time Line'
   requirements:
-    _permission: 'access content'
+    _permission: 'add timeline'
 eminent_admin.CreatePlaylist:
   path: '/playlist/{media_id}/create'
   defaults:
     _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createPlaylist'
     _title: 'Add Time Line'
   requirements:
-    _permission: 'access content'
+    _permission: 'add playlist'
+eminent_admin.CreateQuote:
+  path: '/quote/add'
+  defaults:
+    _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createQuote'
+    _title: 'Add Quote'
+  requirements:
+    _permission: 'add quote'
 eminent_admin.CreateTimeline:
   path: '/timeline/{media_id}/create'
   defaults:
     _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createTimeline'
     _title: 'Add Time Line'
   requirements:
-    _permission: 'access content'
+    _permission: 'add timeline'
 eminent_admin.addPlaylistTimeline:
   path: '/add/{media_id}/{group}'
   defaults:
     _title: 'Add Media'
     _controller: '\Drupal\eminent_admin\Controller\MediaAdd::addMedia'
   requirements:
-    _permission: 'access content'
+    _permission: 'add playlist'

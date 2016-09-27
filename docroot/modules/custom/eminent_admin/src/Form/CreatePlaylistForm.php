@@ -31,7 +31,7 @@ class CreatePlaylistForm extends FormBase {
     $storage = array('media_id' => $media_id);
     $form_state->setStorage($storage);
     $form['title'] = [
-      '#title' => t('title'),
+      '#title' => t('Title'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Title for the playlist'),
@@ -41,6 +41,10 @@ class CreatePlaylistForm extends FormBase {
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Description for the playlist'),
+    ];
+    $form['featured'] = [
+      '#title' => t('Display this item in Home page'),
+      '#type' => 'checkbox',
     ];
     $form['submit'] = [
       '#type' => 'submit',
@@ -64,6 +68,7 @@ class CreatePlaylistForm extends FormBase {
   public function createPlaylist(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
+    $featured = $form_state->getValue('featured');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
 
@@ -75,6 +80,7 @@ class CreatePlaylistForm extends FormBase {
     $node = Node::create([
       'type' => 'play_list',
       'field_description' => $description,
+      'field_playlist_featured' => $featured,
       'title'  => $title,
       'field_playlist_image' => [
         'target_id' => $image,
