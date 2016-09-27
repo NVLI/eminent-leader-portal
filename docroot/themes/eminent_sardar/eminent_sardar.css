@@ -27,3 +27,26 @@
 .quotes-by-sardar-holder > div {
   width: 100%;
 }
+.media-item {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.meta-title {
+  background: #27AE60 !important;
+  border-bottom: 5px solid #4e4e4e;
+  color: #fff !important;
+  padding: 5px 0;
+  text-align: center !important;
+}
+.entry-meta > span > div > div {
+  display: inline;
+}
+.entry-meta > span > div > div > div {
+  display: inline;
+}
+.entry-meta > span > div {
+  color: #888 !important;
+}
+.media-item img {
+  width: 100%;
+}

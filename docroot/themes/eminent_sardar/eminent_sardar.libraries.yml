@@ -7,10 +7,10 @@ global-components:
       css/prettyPhoto.css: {}
       css/main.css: {}
       css/responsive.css: {}
-      eminent_sardar.css: {}
       stylesheets/custom.css: {}
       https://fonts.googleapis.com/css?family=Ek+Mukta:200,400,800: { external: true }
       css/slick.css: {}
+      eminent_sardar.css: {}
 global-js:
   js:
     js/bootstrap.min.js: {}
