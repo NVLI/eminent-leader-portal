@@ -1,0 +1,4 @@
+#!/bin//bash
+
+drupalroot=/var/www/sardar/stage/docroot
+drush -r $drupalroot mi media_migrate_21

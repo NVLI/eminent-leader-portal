@@ -6,7 +6,8 @@ migration_tags:
 source:
   plugin: csv
   # Full path to the file.
-  path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/migrate-content.csv'
+  # path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/migrate-content.csv'
+   path: '/var/www/sardar/test/media-migrate/migrate-content.csv'
   # The number of rows at the beginning which are not data.
   header_row_count: 1
   # These are the field names from the source file representing the key
