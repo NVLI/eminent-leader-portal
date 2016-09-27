@@ -15,6 +15,9 @@
               tallest = thisHeight;
           }
         });
+        if (tallest == 0) {
+          tallest = 400;
+        }
         group.height(tallest);
       };
       if($('.grid-equal-height').length) {
