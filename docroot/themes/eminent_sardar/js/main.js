@@ -164,11 +164,6 @@ $('.search-results-tab .col-md-4:nth-child(3n+3)').after('<div class="clearfix">
 /***********************************************************************
 *******Auto play the home page video*/
 jQuery( document ).ready(function($) {
-  if ($('.searchresult-form .views-exposed-form').length == 0) {
-     $('.search-filters').remove();
-  }
-  $('#header .navbar-right .views-exposed-form').addClass('search');
-  $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
   if ($('#vid').length > 0) {
     var vid = document.getElementById("vid");
     function playVid() {
