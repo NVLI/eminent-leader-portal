@@ -21,6 +21,10 @@
 .exhibition-slick-image iframe {
   min-height: 400px;
 }
+.exibition_slider .exhibition-slick-image {
+  max-height: 500px;
+  overflow-y: scroll;
+}
 .exhibition-slick-image .video-js {
   width: 100% !important;
 }
