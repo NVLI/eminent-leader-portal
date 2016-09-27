@@ -35,7 +35,6 @@ function eminent_sardar_theme_suggestions_alter(array &$suggestions, array $vari
 function eminent_sardar_preprocess_views_view_unformatted(&$variables) {
   $view = $variables['view'];
   $view_title = $view->storage->id();
-  dpm($view_title);
   if ($view_title == "eminent_search") {
     $playlist_count = $timeline_count = $media_count = $quote_count = 0;
     $variables['play_list_count'] = $variables['quote_count'] = $variables['timeline_count'] = $variables['media_count']= 0;
