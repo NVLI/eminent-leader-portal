@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\eminent_admin\Form\CreatePlaylistForm.
+ * Contains \Drupal\eminent_admin\Form\CreateTimelineForm.
  */
 
 namespace Drupal\eminent_admin\Form;
@@ -33,7 +33,7 @@ class CreateTimelineForm extends FormBase {
     $form_state->setStorage($storage);
 
     $form['title'] = [
-      '#title' => t('title'),
+      '#title' => t('Title'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Title for the timeline'),
@@ -43,6 +43,10 @@ class CreateTimelineForm extends FormBase {
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Description for the timeline'),
+    ];
+    $form['featured'] = [
+      '#title' => t('Display this item in Home page'),
+      '#type' => 'checkbox',
     ];
     $form['submit'] = [
       '#type' => 'submit',
@@ -66,6 +70,7 @@ class CreateTimelineForm extends FormBase {
   public function createTimeline(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
+    $featured = $form_state->getValue('featured');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
 
@@ -80,6 +85,7 @@ class CreateTimelineForm extends FormBase {
         'value' => $description,
       ],
       'title'  => $title,
+      'field_time_line_collection_front' => $featured,
       'field_time_line_collection_image' => [
         'target_id' => $image,
       ],
