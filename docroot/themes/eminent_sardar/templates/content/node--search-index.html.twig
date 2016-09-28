@@ -71,11 +71,14 @@
  */
 #}
 <div class="item-wrapper">
-  {% if is_admin %}
-    <header class="item-header">
-    <a class="edit-tem pull-right" alt="edit entry" href="/node/1/edit">
-    <i aria-hidden="true" class="fa fa-pencil-square-o"></i></a></header>
-  {% endif %}
+  <header class="item-header">
+    {% if user.hasPermission('edit play_list content') %}
+      <a class="edit-tem pull-right" alt="edit entry" href="/node/{{ node.id }}/edit">
+        <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
+      </a>
+    {% endif %}
+  </header>
+
   <section class="item-body grid-equal-height">
     <article{{ attributes }}>
 
@@ -87,21 +90,22 @@
       {% endif %}
       {{ title_suffix }}
 
-      {% if display_submitted %}
-        <footer>
-          {{ author_picture }}
-          <div{{ author_attributes }}>
-            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-            {{ metadata }}
-          </div>
-        </footer>
-      {% endif %}
-
       <div{{ content_attributes }}>
         {{ content }}
       </div>
 
     </article>
   </section>
-  <footer class="item-footer"> <a href="{{ url }}" rel="bookmark">READ MORE</a></footer>
+
+  <footer class="item-footer">
+    <ul class="nav-foo">
+      <li>
+        <a href="{{ url }}" rel="bookmark">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          read more
+        </a>
+      </li>
+    </ul>
+
+  </footer>
 </div>
