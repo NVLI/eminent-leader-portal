@@ -44,12 +44,12 @@ class UserLoginLink extends BlockBase {
       $markup = '
         <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
         <span class="user-image">
-        <img src="/themes/eminent_sardar/images/man4.jpg" alt="Full Name of the admin" class="img-responsive"></span> ' . $text . '</a>
+        <img src="/themes/eminent_sardar/images/man4.jpg" class="img-responsive"></span> ' . $text . '</a>
           <ul class="dropdown-menu">
-            <li><a href="blog-item.html">Add Quote</a></li>
-            <li><a href="pricing.html">Add Timeline</a></li>
-            <li><a href="404.html">Add Playlist</a></li>
-            <li><a href="shortcodes.html">Add Quiz item</a></li>
+            <li><a href="/quote/add">Add Quote</a></li>
+            <li><a href="/node/add/time_line_collection">Add Timeline</a></li>
+            <li><a href="/node/add/play_list">Add Playlist</a></li>
+            <li><a href="/node/add/quiz">Add Quiz item</a></li>
           </ul>
        ';
       }
@@ -57,7 +57,7 @@ class UserLoginLink extends BlockBase {
         $markup = '
         <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
         <span class="user-image">
-         <img src="/themes/eminent_sardar/images/man4.jpg" alt="Full Name of the admin" class="img-responsive"></span> ' . $text . '</a>
+         <img src="/themes/eminent_sardar/images/man4.jpg" class="img-responsive"></span> ' . $text . '</a>
         ';
       }
     }

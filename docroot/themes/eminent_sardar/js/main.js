@@ -67,7 +67,7 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******Trigger the quiz manualy on scroll*/
 $(document).on('scroll', function() {
-    if( $(this).scrollTop() >= 800 ) {
+    if( $(this).scrollTop() >= 2000 ) {
         $(document).off('scroll');
         $('#launchquiz').modal('show');
     }
