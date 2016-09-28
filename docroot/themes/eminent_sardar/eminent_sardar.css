@@ -60,3 +60,8 @@
 .views-exposed-form form .form-item {
   margin-bottom: 0px;
 }
+.share-feedbackholder form input[type="text"],
+.share-feedbackholder form input[type="email"],
+.share-feedbackholder form textarea {
+  margin-bottom: 0px;
+}
