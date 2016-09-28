@@ -134,6 +134,47 @@ function eminent_sardar_preprocess_media(&$variables) {
   }
 }
 
+/**
+* Implements hook_preprocess_node() for Media document templates.
+*/
+function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
+  $form['#prefix'] = '<div id="myform-ajax-wrapper">';
+  $form['#suffix'] = '</div>';
+
+  // Name
+  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
+  unset($form['name']['#title']);
+
+  // Mail
+  $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+  unset($form['mail']['#title']);
+
+
+  // Subject
+  $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
+  $form['subject']['widget'][0]['#title'] = '';
+  unset($form['subject']['widget'][0]['value']['#title']);
+
+  // Message
+  $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
+  $form['message']['widget'][0]['#title'] = '';
+  unset($form['message']['widget'][0]['value']['#title']);
+
+  // Submit
+  $form['actions']['#prefix'] = '<div class="clearfix">';
+  $form['actions']['#suffix'] = '</div>';
+  $form['actions']['submit']['#attributes']['class'][] = 'btn';
+  $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
+  $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
+
+  // Preview
+  $form['actions']['#prefix'] = '<div class="clearfix">';
+  $form['actions']['#suffix'] = '</div>';
+  $form['actions']['preview']['#attributes']['class'][] = 'btn';
+  $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
+  $form['actions']['preview']['#attributes']['class'][] = 'hidden';
+
+}
 
 
