@@ -13,6 +13,13 @@
  */
 #}
 <div class = "item-wrapper media-teaser">
+  <header class="item-header">
+    {% if user.hasPermission('update any media') %}
+      <a class="edit-tem pull-right" alt="edit entry" href="#">
+        <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
+      </a>
+    {% endif %}
+  </header>
   <section class = "item-body grid-equal-height">
     <article{{ attributes }}>
       {% if content %}
@@ -20,4 +27,15 @@
       {% endif %}
     </article>
   </section>
+    <footer class="item-footer">
+    <ul class="nav-foo">
+      <li>
+        <a href="{{ url }}" rel="bookmark"> Read more </a>
+      </li>
+      <li>
+        {{ addtotimeline }}
+      </li>
+      <li>
+        {{ addtoplaylist }}
+      </li>
 </div>
