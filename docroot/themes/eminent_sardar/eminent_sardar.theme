@@ -187,3 +187,13 @@ function eminent_sardar_preprocess_page(&$variables) {
     $variables['show_filters'] = TRUE;
   }
 }
+
+/**
+ * Implements hook_preprocess_page.
+ */
+function eminent_sardar_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $media_entity_id = $paragraph->get('field_time_line_media_reference')->target_id;;
+  $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
+  $variables['media_url'] = $media_url;
+}
