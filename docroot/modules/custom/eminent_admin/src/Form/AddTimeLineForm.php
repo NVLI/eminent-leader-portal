@@ -14,6 +14,7 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Add media item to Timeline form.
@@ -88,11 +89,12 @@ class AddTimeLineForm extends FormBase {
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
     $media_content = entity_load('media', $media_id);
+    $description = $media_content->get('field_dc_description')->value;
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
       'type' => 'time_line_story',
       'field_time_line_description' => [
-        'value' => $media_content->get('field_dc_description')->value,
+        'value' => Unicode::truncate($description, 70),
       ],
       'field_time_line_image->' => [
         ['target_id' => $media_content->thumbnail->target_id],
