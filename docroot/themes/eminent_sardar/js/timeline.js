@@ -2,9 +2,6 @@
 
   Drupal.behaviors.Eminent = {
     attach: function (context, settings) {
-      if ($('.searchresult-form .views-exposed-form').length == 0) {
-        $('.search-filters').remove();
-      }
       $('#header .navbar-right .views-exposed-form').addClass('search');
       $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
       function equalgridheight(group) {

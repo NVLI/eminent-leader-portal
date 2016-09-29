@@ -12,6 +12,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use \Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Play list form class.
@@ -77,12 +78,12 @@ class CreateTimelineForm extends FormBase {
     // Load the media item.
     $media_content = entity_load('media', $media_id);
     $image = $media_content->thumbnail->target_id;
-
+    $description = $media_content->get('field_dc_description')->value;
     // Create node object with attached file.
     $node = Node::create([
       'type' => 'time_line_collection',
       'body' => [
-        'value' => $description,
+        'value' => Unicode::truncate($description, 70),
       ],
       'title'  => $title,
       'field_time_line_collection_front' => $featured,

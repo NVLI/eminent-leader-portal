@@ -1,11 +1,11 @@
 jQuery(function($) {'use strict',
 
   //#main-slider
-  $(function(){
+  /*$(function(){
     $('#main-slider.carousel').carousel({
       interval: 8000
     });
-  });
+  });*/
 
 
   // accordian
@@ -61,7 +61,6 @@ $(window).on("load resize scroll", function () {
       $(window).on("load resize", function () {
          if ($(window).width() > 973) {
           var height = $this.height();
-        console.log(height);
           var container = addheightto;
            $(this).css('position','relative');
          $(container).css("height", height + "px");
@@ -70,6 +69,7 @@ $(window).on("load resize scroll", function () {
     });
   };
   $('#main-slider .slider-item img').cloneheight("#main-slider .slider-item");
+
 
 
 /***********************************************************************
@@ -86,6 +86,9 @@ $(document).on('scroll', function() {
     var cloneHeight = $('.quotes-by-sardar-holder').height();
     $('.share-feedbackholder').css('height', cloneHeight + 'px');
   });
+
+
+
 /***********************************************************************
 *******Dyanmically distribute height for the slider*/
 
@@ -254,6 +257,29 @@ $(".quoteslider").slick({
       }
     ]
   });
+
+
+/***********************************************************************
+*******Vertical center the contents in the hopage slider*/
+
+$.fn.VerticalCenter = function(container) {
+    var $this = $(this)
+    $(window).on("load resize ", function () {
+      if ($(window).width() > 973) {
+      var element = $this;
+      var containerel = $(container)
+      var elementHeight = $(element).height();
+      var containerHeight = $(container).height();
+      var marginTop =  (containerHeight - elementHeight) / 2;
+      console.log($this.css('border', marginTop + 'px'))
+      $this.css('margin-top', marginTop + 'px');
+    }
+  });
+};
+
+$('.slidercontent').VerticalCenter('.slider-item img');
+
+
 
   //Initiat WOW JS
   new WOW().init();

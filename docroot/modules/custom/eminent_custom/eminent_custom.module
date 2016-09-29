@@ -9,6 +9,7 @@ use Drupal\node\NodeInterface;
 use Drupal\node\NodeTypeInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Url;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Implements hook_ENTITY_TYPE_presave.
@@ -31,6 +32,7 @@ function eminent_custom_paragraph_presave(EntityInterface $entity) {
       $date = $media->get('field_dc_date')->value;
       $media_url = Url::fromRoute('entity.media.canonical', array('media' => $time_line_story));
       $media_url = \Drupal::l($title, $media_url);
+      $description = Unicode::truncate($description, 70);
       $entity->field_time_line_description->setValue($description);
       $entity->field_time_line_title->setValue($title);
       $entity->field_time_line_date->setValue($date);
