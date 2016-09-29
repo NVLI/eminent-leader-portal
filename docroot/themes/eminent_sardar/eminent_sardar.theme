@@ -177,4 +177,13 @@ function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal
 
 }
 
-
+/**
+ * Implements hook_preprocess_page.
+ */
+function eminent_sardar_preprocess_page(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  // Display filters only in the search page.
+  if ($route_name == "search.view") {
+    $variables['show_filters'] = TRUE;
+  }
+}
