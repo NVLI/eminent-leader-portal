@@ -1,13 +1,14 @@
 jQuery(function($) {'use strict',
 
-	//#main-slider
-	$(function(){
-		$('#main-slider.carousel').carousel({
-			interval: 8000
-		});
-	});
+  //#main-slider
+  $(function(){
+    $('#main-slider.carousel').carousel({
+      interval: 8000
+    });
+  });
 
-	// accordian
+
+  // accordian
   $('.accordion-toggle').on('click', function(){
   $(this).closest('.panel-group').children().each(function(){
   $(this).find('>.panel-heading').removeClass('active');
@@ -30,6 +31,15 @@ jQuery(function($) {'use strict',
     };
   });
 /***********************************************************************
+******* send the header aboe the slider in homepage*/
+$(window).on("load resize scroll", function () {
+    if ($(window).width() > 768) {
+        var navbarHeight = $('header#header').height();
+        $('#main-slider').css('margin-top', '-' + navbarHeight + 'px');
+    };
+  });
+
+/***********************************************************************
 *******fix search show on the responsive*/
   $(window).on("load resize ", function () {
     if ($(window).width() < 768) {
@@ -45,11 +55,9 @@ jQuery(function($) {'use strict',
   });
 /***********************************************************************
 *******Initialize slick clone height to */
-
    $.fn.cloneheight = function ( addheightto ) {
     var $this = $(this);
     $this.each(function() {
-      console.log($this);
       $(window).on("load resize", function () {
          if ($(window).width() > 973) {
           var height = $this.height();
@@ -67,7 +75,7 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******Trigger the quiz manualy on scroll*/
 $(document).on('scroll', function() {
-    if( $(this).scrollTop() >= 2000 ) {
+    if( $(this).scrollTop() >= 800 ) {
         $(document).off('scroll');
         $('#launchquiz').modal('show');
     }
@@ -163,7 +171,9 @@ $('.search-results-tab .col-md-4:nth-child(3n+3)').after('<div class="clearfix">
 
 /***********************************************************************
 *******Auto play the home page video*/
-jQuery( document ).ready(function($) {
+/*jQuery( document ).ready(function($) {
+  $('#header .navbar-right .views-exposed-form').addClass('search');
+  $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
   if ($('#vid').length > 0) {
     var vid = document.getElementById("vid");
     function playVid() {
@@ -171,7 +181,7 @@ jQuery( document ).ready(function($) {
     }
     playVid();
   }
-});
+});*/
 /***********************************************************************
 *******Added the slider home page to show the quotes of Sardar Patel*/
   $(".triggersearchfilter").click(function(){
@@ -192,12 +202,12 @@ $(".quoteslider").slick({
 });
 
 
-$("#main-slider").slick({
+/*$("#main-slider").slick({
    slidesToShow: 1,
     slidesToScroll: 0,
     arrows: false,
     touchMove: false
-});
+});*/
 
 /***********************************************************************
 *******Added the slider in the exibition page with  content over slider*/
@@ -245,10 +255,10 @@ $("#main-slider").slick({
     ]
   });
 
-	//Initiat WOW JS
-	new WOW().init();
+  //Initiat WOW JS
+  new WOW().init();
 
-	// portfolio filter
+  // portfolio filter
   $(window).load(function(){'use strict';
   var $portfolio_selectors = $('.portfolio-filter >li>a');
   var $portfolio = $('.portfolio-items');
@@ -266,33 +276,33 @@ $("#main-slider").slick({
   });
   });
 
-	// Contact form
-	var form = $('#main-contact-form');
-	form.submit(function(event){
-		event.preventDefault();
-		var form_status = $('<div class="form_status"></div>');
-		$.ajax({
-			url: $(this).attr('action'),
+  // Contact form
+  var form = $('#main-contact-form');
+  form.submit(function(event){
+    event.preventDefault();
+    var form_status = $('<div class="form_status"></div>');
+    $.ajax({
+      url: $(this).attr('action'),
 
-			beforeSend: function(){
-				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
-			}
-		}).done(function(data){
-			form_status.html('<p class="text-success">' + data.message + '</p>').delay(3000).fadeOut();
-		});
-	});
+      beforeSend: function(){
+        form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
+      }
+    }).done(function(data){
+      form_status.html('<p class="text-success">' + data.message + '</p>').delay(3000).fadeOut();
+    });
+  });
 
 
-	//goto top
-	$('.gototop').click(function(event) {
-		event.preventDefault();
-		$('html, body').animate({
-			scrollTop: $("body").offset().top
-		}, 500);
-	});
+  //goto top
+  $('.gototop').click(function(event) {
+    event.preventDefault();
+    $('html, body').animate({
+      scrollTop: $("body").offset().top
+    }, 500);
+  });
 
-	//Pretty Photo
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		social_tools: false
-	});
+  //Pretty Photo
+  $("a[rel^='prettyPhoto']").prettyPhoto({
+    social_tools: false
+  });
 });
