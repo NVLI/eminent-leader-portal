@@ -15,26 +15,12 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-<section id="quotelisting" class="container quotelisting">
-  <div class="quote">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="quote-item">
-          {% if title %}
-            <h3>{{ title }}</h3>
-          {% endif %}
-          {% for row in rows %}
-            {%
-              set row_classes = [
-                default_row_class ? 'views-row',
-              ]
-            %}
-            <div{{ row.attributes.addClass(row_classes) }}>
-              {{ row.content }}
-            </div>
-          {% endfor %}
-        </div>
+<div id="recent-works" class="exibition-listing">
+  <div class = "row">
+    {% for row in rows %}
+      <div class="col-xs-12 col-md-4">
+        {{ row.content }}
       </div>
-    </div>
+    {% endfor %}
   </div>
-</section>
+</div>

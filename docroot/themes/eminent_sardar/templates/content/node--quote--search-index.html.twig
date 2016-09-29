@@ -70,13 +70,10 @@
  *   in different view modes.
  */
 #}
-<div class="recent-work-wrap">
-  {{ content.field_playlist_image }}
-  {{ content.field_time_line_collection_image }}
+<div class="recent-work-wrap quotes">
   <div class="overlay">
     <div class="recent-work-inner">
-      <h3><a href="{{ url }}">{{ label }}</a></h3>
-      <a class="preview" href= {{ url }}> Read Story</a>
+      {{ content.body }}
     </div>
   </div>
 </div>
