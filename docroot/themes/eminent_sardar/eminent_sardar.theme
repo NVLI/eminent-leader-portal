@@ -135,7 +135,7 @@ function eminent_sardar_preprocess_media(&$variables) {
 }
 
 /**
-* Implements hook_preprocess_node() for Media document templates.
+* Implements contact form alter.
 */
 function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 

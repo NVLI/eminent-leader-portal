@@ -15,21 +15,11 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-<div class="search-results-tab">
-  <div class = "tab-content row">
-    {% if title %}
-      <h3>{{ title }}</h3>
-    {% endif %}
+<div id="recent-works" class="exibition-listing">
+  <div class = "row">
     {% for row in rows %}
-      {%
-        set row_classes = [
-          default_row_class ? 'views-row',
-        ]
-      %}
-      <div{{ row.attributes.addClass(row_classes) }}>
-        <div>
-          {{ row.content }}
-        </div>
+      <div class="col-xs-12 col-md-3">
+        {{ row.content }}
       </div>
     {% endfor %}
   </div>

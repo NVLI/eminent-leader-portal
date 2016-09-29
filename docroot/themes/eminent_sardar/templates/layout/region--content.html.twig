@@ -13,11 +13,9 @@
  */
 #}
 <section id = "content">
-  <div class = "container">
-    {% if content %}
-      <div{{ attributes }}>
-        {{ content }}
-      </div>
-    {% endif %}
-  </div>
+  {% if content %}
+    <div{{ attributes }}>
+      {{ content }}
+    </div>
+  {% endif %}
 </section>

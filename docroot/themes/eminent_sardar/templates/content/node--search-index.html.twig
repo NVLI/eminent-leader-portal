@@ -70,41 +70,12 @@
  *   in different view modes.
  */
 #}
-<div class="item-wrapper">
-  <header class="item-header">
-    {% if user.hasPermission('edit play_list content') %}
-      <a class="edit-tem pull-right" alt="edit entry" href="/node/{{ node.id }}/edit">
-        <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
-      </a>
-    {% endif %}
-  </header>
-
-  <section class="item-body grid-equal-height">
-    <article{{ attributes }}>
-
-      {{ title_prefix }}
-      {% if not page %}
-        <h2{{ title_attributes }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-      {% endif %}
-      {{ title_suffix }}
-
-      <div{{ content_attributes }}>
-        {{ content }}
-      </div>
-
-    </article>
-  </section>
-
-  <footer class="item-footer">
-    <ul class="nav-foo">
-      <li>
-        <a href="{{ url }}" rel="bookmark">
-          read more
-        </a>
-      </li>
-    </ul>
-
-  </footer>
+<div class="recent-work-wrap">
+  {{ content.field_playlist_image }}
+  <div class="overlay">
+    <div class="recent-work-inner">
+      <h3><a href="{{ url }}">{{ label }}</a></h3>
+      <a class="preview" href= {{ url }}> Read Story</a>
+    </div>
+  </div>
 </div>
