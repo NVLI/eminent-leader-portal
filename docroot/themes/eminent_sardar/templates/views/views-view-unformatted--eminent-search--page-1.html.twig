@@ -26,20 +26,17 @@
       <li role="presentation"><a href="#quote" aria-controls="quote" role="tab" data-toggle="tab">Quote ({{ quote_count }})</a></li>
     </ul>
   </div>
-  <div class="tab-content row">
+  <div class="tab-content">
     {% if play_list_result %}
       <div role="tabpanel" class="tab-pane active" id="exhibition">
-        <div class = "row">
-          {% for row in play_list_row %}
-            {%
-              set row_classes = [
-                default_row_class ? 'views-row col-md-4',
-              ]
-            %}
-            <div{{ row.attributes.addClass(row_classes) }}>
-              {{ row.content }}
-            </div>
-          {% endfor %}
+        <div id="recent-works" class="exibition-listing">
+          <div class = "row">
+            {% for row in play_list_row %}
+              <div class="col-xs-12 col-md-3">
+                {{ row.content }}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% else %}
@@ -49,17 +46,14 @@
     {% endif %}
     {% if time_line_collection_result %}
       <div role="tabpanel" class="tab-pane" id="timeline-collection">
-        <div class = "row">
-          {% for timelinerow in time_line_collection_row %}
-            {%
-              set row_classes = [
-                default_row_class ? 'views-row col-md-4',
-              ]
-            %}
-            <div{{ timelinerow.attributes.addClass(row_classes) }}>
-              {{ timelinerow.content }}
-            </div>
-          {% endfor %}
+        <div id="recent-works" class="exibition-listing">
+          <div class = "row">
+            {% for timelinerow in time_line_collection_row %}
+              <div class="col-xs-12 col-md-3">
+                {{ timelinerow.content }}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% else %}
@@ -69,17 +63,14 @@
     {% endif %}
     {% if quote_result %}
       <div role="tabpanel" class="tab-pane" id="quote">
-        <div class = "row">
-          {% for quoterow in quote_row %}
-            {%
-              set row_classes = [
-                default_row_class ? 'views-row',
-              ]
-            %}
-            <div{{ quoterow.attributes.addClass(row_classes) }}>
-              {{ quoterow.content }}
-            </div>
-          {% endfor %}
+        <div id="recent-works" class="exibition-listing">
+          <div class = "row">
+            {% for quoterow in quote_row %}
+              <div class="col-xs-12 col-md-3">
+                {{ quoterow.content }}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% else %}
@@ -89,16 +80,15 @@
     {% endif %}
     {% if media_result %}
       <div role="tabpanel" class="tab-pane" id="media">
-        {% for mediarow in media_row %}
-          {%
-            set row_classes = [
-              default_row_class ? 'views-row col-md-4',
-            ]
-          %}
-          <div{{ mediarow.attributes.addClass(row_classes) }}>
-            {{ mediarow.content }}
+        <div id="recent-works" class="exibition-listing">
+          <div class = "row">
+            {% for mediarow in media_row %}
+              <div class="col-xs-12 col-md-3">
+                {{ mediarow.content }}
+              </div>
+            {% endfor %}
           </div>
-        {% endfor %}
+        </div>
       </div>
     {% else %}
       <div role="tabpanel" class="tab-pane" id="media">
