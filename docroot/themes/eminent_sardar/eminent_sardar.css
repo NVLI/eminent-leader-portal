@@ -81,3 +81,6 @@
 #header {
   position: relative;
 }
+section#feature {
+  padding: 70px;
+}
