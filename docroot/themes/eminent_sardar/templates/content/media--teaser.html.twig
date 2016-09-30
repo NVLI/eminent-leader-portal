@@ -17,8 +17,15 @@
 <div class = "thumbnail">
   <section class = "item-body grid-equal-height">
     <article{{ attributes }}>
-      {{ content.thumbnail }}
-      {{ content.field_media_image }}
+      {% if media_type == "audio" %}
+        <img src="themes/eminent_sardar/images/audio.png" class="img-responsive">
+      {% elseif media_type == "document" %}
+        <img src="themes/eminent_sardar/images/pdf.png" class="img-responsive">
+      {% elseif media_type == "video" %}
+        <img src="themes/eminent_sardar/images/video.png" class="img-responsive">
+      {% else %}
+        {{ content.field_media_image }}
+      {% endif %}
       <div class="text-center">{{ content.field_dc_title }}</div>
       <div>
         <a href="{{ url }}" rel="bookmark" class = "pull-right"> Read more </a>
