@@ -128,7 +128,7 @@ $(".quotes-by-sardar").slick({
 /***********************************************************************
 *******initialize the eqaul height on pages*/
 
-$('.equal_height').matchHeight();
+
 /***********************************************************************
 *******Added the exibition slider home page to show the lists of excibition*/
 $(".sliderexcibition").slick({
