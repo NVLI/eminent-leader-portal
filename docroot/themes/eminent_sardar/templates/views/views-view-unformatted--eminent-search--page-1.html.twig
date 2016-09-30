@@ -80,13 +80,15 @@
     {% endif %}
     {% if media_result %}
       <div role="tabpanel" class="tab-pane" id="media">
-        <div id="recent-works" class="exibition-listing">
-          <div class = "row">
-            {% for mediarow in media_row %}
-              <div class="col-xs-12 col-md-3">
-                {{ mediarow.content }}
-              </div>
-            {% endfor %}
+        <div class = "row">
+          <div class = "meidiablock">
+            <div class = "media_details_hold">
+              {% for mediarow in media_row %}
+                <div class="col-xs-12 col-md-3">
+                  {{ mediarow.content }}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
