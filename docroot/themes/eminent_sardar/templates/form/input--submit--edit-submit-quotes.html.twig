@@ -10,4 +10,6 @@
  * @see template_preprocess_input()
  */
 #}
-<input{{ attributes }} />{{ children }}
+<div class="input-group-addon">
+  <input{{ attributes.addClass('btn btn-primary') }} />{{ children }}
+</div>
