@@ -78,4 +78,6 @@
 .quotes .recent-work-inner {
   text-align: center;
 }
-
+#header {
+  position: relative;
+}
