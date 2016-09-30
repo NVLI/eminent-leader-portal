@@ -19,6 +19,7 @@ regions:
   header_mobile_search: 'Header Search'
   search_filters: 'Search form with filters'
   content_bottom: 'Content Bottom'
+  content_middle: 'Content Middle'
   footer_first_column: 'Footer first column'
   footer_second_column: 'Footer second column'
   footer_third_column: 'Footer third column'
