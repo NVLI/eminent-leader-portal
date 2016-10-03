@@ -84,3 +84,10 @@
 section#feature {
   padding: 70px;
 }
+
+#col-metadata .panel-body > div > div {
+  display: inline;
+}
+#col-metadata .panel-body > div > div div {
+  display: inline;
+}
