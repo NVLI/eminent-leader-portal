@@ -56,7 +56,7 @@ jQuery(function($) {'use strict',
          if ($(window).width() > 973) {
           var height = $this.height();
           var container = addheightto;
-           $(this).css('position','relative');
+          // $(this).css('position','relative');
          $(container).css("height", height + "px");
          }
          });
