@@ -56,7 +56,7 @@ jQuery(function($) {'use strict',
          if ($(window).width() > 973) {
           var height = $this.height();
           var container = addheightto;
-           //$(this).css('position','relative');
+           $(this).css('position','relative');
          $(container).css("height", height + "px");
          }
          });
@@ -114,6 +114,9 @@ $('#main-slider').centercontent()*/
 *******Initialize slick quiz for the quiz block in the home page*/
 if ($('#slickQuiz').length > 0) {
   $('#slickQuiz').slickQuiz();
+  $('.startQuiz').click(function(){
+    $('.quizHeader, .quizName').hide();
+  });
 }
 /***********************************************************************
 *******Added the slider home page to show the quotes of Sardar Patel*/
@@ -128,7 +131,7 @@ $(".quotes-by-sardar").slick({
 /***********************************************************************
 *******initialize the eqaul height on pages*/
 
-
+$('.equal_height').matchHeight();
 /***********************************************************************
 *******Added the exibition slider home page to show the lists of excibition*/
 $(".sliderexcibition").slick({

@@ -91,3 +91,21 @@ section#feature {
 #col-metadata .panel-body > div > div div {
   display: inline;
 }
+.quick-quiz .button {
+  border-radius: 0;
+  display: inline;
+  margin: 5px !important;
+}
+.quick-quiz .responses {
+  margin: auto;
+}
+.quiz-image {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+.quiz-image > img {
+  width: 100px;
+  display: block;
+  margin: auto;
+}
