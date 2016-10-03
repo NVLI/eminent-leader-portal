@@ -112,3 +112,6 @@ section#feature {
 .exibition_pager .recent-work-wrap .overlay {
   height: 104px;
 }
+#media_details iframe {
+  min-height: 500px;
+}
