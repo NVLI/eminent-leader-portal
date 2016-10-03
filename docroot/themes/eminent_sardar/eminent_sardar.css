@@ -109,3 +109,6 @@ section#feature {
   display: block;
   margin: auto;
 }
+.exibition_pager .recent-work-wrap .overlay {
+  height: 104px;
+}
