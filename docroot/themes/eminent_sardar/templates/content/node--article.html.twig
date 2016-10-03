@@ -80,8 +80,9 @@
   {% endif %}
   {{ title_suffix }}
 
-  <div{{ content_attributes }}>
-    {{ content }}
+  <div{{ content_attributes.addClass('article-content') }}>
+    {{ content.field_image }}
+    {{ content.body }}
   </div>
 
 </article>
