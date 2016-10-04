@@ -215,6 +215,13 @@ function eminent_sardar_preprocess_page(&$variables) {
   if ($route_name == "view.eminent_search.page_1") {
     $variables['show_filters'] = TRUE;
   }
+  $uid = \Drupal::currentUser()->id();
+  if ($uid == 0) {
+    $variables['user_class'] = "anonymous";
+  }
+  else {
+    $variables['user_class'] = "authenticated";
+  }
 }
 
 /**
