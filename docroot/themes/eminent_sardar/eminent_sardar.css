@@ -130,3 +130,6 @@ video,
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+#header .search-form {
+  width: 200px;
+}
