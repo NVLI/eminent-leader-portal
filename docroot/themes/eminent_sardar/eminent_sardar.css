@@ -121,3 +121,8 @@ section#feature {
   display: block;
   clear: both;
 }
+video,
+.video-js {
+  max-width: 100%;
+}
+
