@@ -21,12 +21,15 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******fix the top bar on scroll*/
   $(window).on("load resize scroll", function () {
+
     if ($(window).width() > 768) {
-        if ($(window).scrollTop() > 500) {
+        if ($(window).scrollTop() > 200) {
           $('#header').addClass('navbar-fixed-top  wow fadeInDown');
+          $('#header').css("position", "fixed");
         }
-        if ($(window).scrollTop() < 500) {
+        if ($(window).scrollTop() < 200) {
           $('#header').removeClass('navbar-fixed-top  wow fadeInDown');
+          $('#header').css("position", "relative");
         }
     };
   });
@@ -43,9 +46,9 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Initialize search i toggle header */
-  $('#header i.fa-search').click(function(){
+  /*$('#header i.fa-search').click(function(){
     $(this).closest('.search').toggleClass('active');
-  });
+  });*/
 /***********************************************************************
 *******Initialize slick clone height to */
    $.fn.cloneheight = function ( addheightto ) {
@@ -56,7 +59,7 @@ jQuery(function($) {'use strict',
          if ($(window).width() > 973) {
           var height = $this.height();
           var container = addheightto;
-           //$(this).css('position','relative');
+          // $(this).css('position','relative');
          $(container).css("height", height + "px");
          }
          });
@@ -114,6 +117,9 @@ $('#main-slider').centercontent()*/
 *******Initialize slick quiz for the quiz block in the home page*/
 if ($('#slickQuiz').length > 0) {
   $('#slickQuiz').slickQuiz();
+  $('.startQuiz').click(function(){
+    $('.quizHeader, .quizName').hide();
+  });
 }
 /***********************************************************************
 *******Added the slider home page to show the quotes of Sardar Patel*/
@@ -121,6 +127,7 @@ $(".quotes-by-sardar").slick({
    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    speed: 1000,
     touchMove: true,
     dots: true,
     autoplay: true
@@ -128,7 +135,7 @@ $(".quotes-by-sardar").slick({
 /***********************************************************************
 *******initialize the eqaul height on pages*/
 
-
+$('.equal_height').matchHeight();
 /***********************************************************************
 *******Added the exibition slider home page to show the lists of excibition*/
 $(".sliderexcibition").slick({

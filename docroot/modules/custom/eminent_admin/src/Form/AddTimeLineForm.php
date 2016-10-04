@@ -89,6 +89,13 @@ class AddTimeLineForm extends FormBase {
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
     $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+    if ($bundle == "image") {
+      $image = $media_content->field_media_image->target_id;
+    }
+    else {
+      $image = $media_content->thumbnail->target_id;
+    }
     $description = $media_content->get('field_dc_description')->value;
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
@@ -97,7 +104,7 @@ class AddTimeLineForm extends FormBase {
         'value' => Unicode::truncate($description, 70),
       ],
       'field_time_line_image->' => [
-        ['target_id' => $media_content->thumbnail->target_id],
+        ['target_id' => $image],
       ],
       'field_time_line_media_reference' => [
         ['target_id' => $media_id],

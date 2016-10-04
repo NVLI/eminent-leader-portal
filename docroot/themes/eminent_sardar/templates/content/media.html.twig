@@ -13,35 +13,50 @@
  */
 #}
 <article{{ attributes }}>
-  <section class="container media_details" id="media_details">
+  <section class="media_details" id="media_details">
     <div class="meidiablock">
       <div class="row">
-        <div class="col-sm-12">
-            <div class="col-md-7">
-              <div class="media-preview equal_height">
-                {% if content %}
-                  <section class="image">
-                    {{ content.field_media_image }}
-                  </section>
-                  <div class="pdf-holder-ex">
-                    {{ content.field_media_document }}
-                  </div>
-                  <div>
-                    {{ content.field_media_audio }}
-                  </div>
-                  <div>
-                    {{ content.field_media_video }}
-                  </div>
-                {% endif %}
-              </div>
+        <div class="col-md-7">
+          <div class="media-preview equal_height">
+            <section class="image">
+              {{ content.field_media_image }}
+            </section>
+            <div class="pdf-holder-ex">
+              {{ content.field_media_document }}
             </div>
-            <div class="col-md-5">
-                <div class="media-preview-description equal_height">
-                    <p>{{ content.field_dc_description }}</p>
+            <div>
+              {{ content.field_media_audio }}
+            </div>
+            <div>
+              {{ content.field_media_video }}
+            </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="media-preview-description equal_height">
+              <p>{{ content.field_dc_description }}</p>
+              <div class="panel-group" id="metadata" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#metadata" href="#col-metadata" aria-expanded="true" aria-controls="collapseOne">
+                        View Meta Data
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="col-metadata" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      {{ content|without('field_dc_title', 'field_dc_description', 'field_media_video', 'field_media_audio', 'field_media_document', 'field_media_image')}}
+                    </div>
+                  </div>
                 </div>
+              </div>
+              {{ addtoplaylist }}
+              {{ addtotimeline }}
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </section
+  </section>
 </article>

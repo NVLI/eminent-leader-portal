@@ -10,7 +10,6 @@ SlickQuiz:
     theme:
       /libraries/SlickQuiz/css/slickQuiz.css: {}
       /libraries/SlickQuiz/css/reset.css: {}
-      /libraries/SlickQuiz/css/master.css: {}
   dependencies:
     - core/jquery
     - core/jquery.once

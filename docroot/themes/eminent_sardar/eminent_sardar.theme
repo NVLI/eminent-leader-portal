@@ -107,6 +107,7 @@ function eminent_sardar_preprocess_media(&$variables) {
 
   // Fetch the media id.
   $media_id = $variables['elements']['#media']->id();
+  $variables['media_id'] = $media_id;
 
   // Fetch the media type.
   $variables['media_type'] = $variables['elements']['#media']->bundle();
@@ -171,20 +172,28 @@ function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal
   $form['#suffix'] = '</div>';
 
   // Name
+  $form['name']['#prefix'] = '<div class="col-sm-6">';
+  $form['name']['#suffix'] = '</div>';
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
   unset($form['name']['#title']);
 
   // Mail
+  $form['mail']['#prefix'] = '<div class="col-sm-6">';
+  $form['mail']['#suffix'] = '</div>';
   $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
   unset($form['mail']['#title']);
 
 
   // Subject
+  $form['subject']['#prefix'] = '<div class="col-sm-12">';
+  $form['subject']['#suffix'] = '</div>';
   $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
   $form['subject']['widget'][0]['#title'] = '';
   unset($form['subject']['widget'][0]['value']['#title']);
 
   // Message
+  $form['message']['#prefix'] = '<div class="col-sm-12">';
+  $form['message']['#suffix'] = '</div>';
   $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
   $form['message']['widget'][0]['#title'] = '';
   unset($form['message']['widget'][0]['value']['#title']);
@@ -213,6 +222,13 @@ function eminent_sardar_preprocess_page(&$variables) {
   // Display filters only in the search page.
   if ($route_name == "view.eminent_search.page_1") {
     $variables['show_filters'] = TRUE;
+  }
+  $uid = \Drupal::currentUser()->id();
+  if ($uid == 0) {
+    $variables['user_class'] = "anonymous";
+  }
+  else {
+    $variables['user_class'] = "authenticated";
   }
 }
 

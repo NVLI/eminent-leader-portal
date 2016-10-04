@@ -44,16 +44,13 @@
   <nav class="navbar navbar-inverse" role="banner">
     <div class="container">
       <div class="navbar-header">
-          <div class="search responsive-search">
-            {{ page.header_mobile_search}}
-          </div>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><img src="/themes/eminent_sardar/images/Sardar_logo.png" class="img-responsive" alt="logo"></a>
+          {{ page.logo }}
       </div>
 
       <div class="collapse navbar-collapse navbar-right">
@@ -66,23 +63,7 @@
 </header>
 <!--/header-->
 
-<!-- Banner -->
-<section id="main-slider" class="no-margin">
-    <div class="slider-item">
-    <img src="/themes/eminent_sardar/images/slider/crowd-united-india.jpg" class="img-responsive" alt="Sardar man who united india">
-     <div class="content-holder container">
-        <div class="col-md-6 slidercontent">
-          <h1>Sardar <br> <span>Patel</span></h1>
-          <h2>The Man who United India</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo atque mollitia consequuntur facere laudantium quas magnam.</p>
-          <a href="#" class="btn btn-primary">Biography</a>
-        </div>
-     </div>
-    </div>
-  <div class="clearfix"></div>
-</section><!--/#main-slider-->
-<!-- /Banner -->
-
+{{ page.home_banner }}
 
 {{ page.home_exhibitions }}
 
@@ -92,7 +73,7 @@
 
 
 <section id="conatcat-info">
-  <div class = row>
+  <div class = "row no-container-row">
     {{ page.content_bottom }}
   </div>
 </section>
@@ -126,7 +107,7 @@
   </div>
 </section><!--/#bottom-->
 
-<footer id="footer" class="midnight-blue">
+<footer id="footer" class="midnight-blue {{ user_class }}">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
@@ -147,9 +128,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Quiz</h4>
+        <h4 class="modal-title" id="myModalLabel">Check your knowledge about Sardar </h4>
       </div>
       <div class="modal-body">
+        <div class = "quiz-image">
+          <img src = "/themes/eminent_sardar/images/sardar_favicon.png" class = "img-responsive">
+        </div>
         {{ page.home_quiz }}
       </div>
     </div>

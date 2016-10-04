@@ -77,7 +77,14 @@ class CreateTimelineForm extends FormBase {
 
     // Load the media item.
     $media_content = entity_load('media', $media_id);
-    $image = $media_content->thumbnail->target_id;
+    $bundle = $media_content->bundle();
+    if ($bundle == "image") {
+      $image = $media_content->field_media_image->target_id;
+    }
+    else {
+      $image = $media_content->thumbnail->target_id;
+    }
+
     $description = $media_content->get('field_dc_description')->value;
     // Create node object with attached file.
     $node = Node::create([
