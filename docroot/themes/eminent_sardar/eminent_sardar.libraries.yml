@@ -20,6 +20,7 @@ global-js:
     js/main.js: {}
     js/wow.min.js: {}
     js/timeline.js: {}
+    js/jquery.matchHeight.js: {}
   dependencies:
     - core/drupal
     - core/jquery
