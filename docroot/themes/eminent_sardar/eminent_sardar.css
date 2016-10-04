@@ -130,3 +130,6 @@ video,
 #header .search-form {
   width: 200px;
 }
+#header .navbar-right .search {
+  margin-top: 14px;
+}
