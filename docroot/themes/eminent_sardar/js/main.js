@@ -46,9 +46,9 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Initialize search i toggle header */
-  $('#header i.fa-search').click(function(){
+  /*$('#header i.fa-search').click(function(){
     $(this).closest('.search').toggleClass('active');
-  });
+  });*/
 /***********************************************************************
 *******Initialize slick clone height to */
    $.fn.cloneheight = function ( addheightto ) {
