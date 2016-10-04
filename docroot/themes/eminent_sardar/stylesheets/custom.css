@@ -816,7 +816,7 @@ Main components
 }
 /* line 753, ../sass/custom.scss */
 .cd-timeline-block:nth-child(4n+3) .cd-timeline-content:before {
-  border-left-color: #873066 !important;
+  border-left-color: #873066;
 }
 @media (max-width: 973px) {
   /* line 753, ../sass/custom.scss */
