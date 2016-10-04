@@ -134,8 +134,8 @@ video,
   margin-top: 14px;
 }
 .anonymous .logout {
-  display: none;
+  display: none !important;
 }
 .authenticated .login {
-  display: none;
+  display: none !important;
 }
