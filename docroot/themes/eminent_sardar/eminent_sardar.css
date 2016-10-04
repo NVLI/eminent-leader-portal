@@ -126,3 +126,7 @@ video,
   max-width: 100%;
 }
 
+#conatcat-info .row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
