@@ -21,12 +21,15 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******fix the top bar on scroll*/
   $(window).on("load resize scroll", function () {
+
     if ($(window).width() > 768) {
-        if ($(window).scrollTop() > 500) {
+        if ($(window).scrollTop() > 200) {
           $('#header').addClass('navbar-fixed-top  wow fadeInDown');
+          $('#header').css("position", "fixed");
         }
-        if ($(window).scrollTop() < 500) {
+        if ($(window).scrollTop() < 200) {
           $('#header').removeClass('navbar-fixed-top  wow fadeInDown');
+          $('#header').css("position", "relative");
         }
     };
   });
