@@ -119,6 +119,7 @@ class AddPlayListForm extends FormBase {
    *   returned.
    */
   public function eminentAdminGetPlaylists($media_id) {
+    $options = array();
     // Database query for fetching timelines.
     $db = \Drupal::database();
     $query = $db->select('node__field_resource');

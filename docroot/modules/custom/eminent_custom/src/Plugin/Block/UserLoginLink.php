@@ -29,13 +29,7 @@ class UserLoginLink extends BlockBase {
   public function build() {
     $user = \Drupal::currentUser();
     $uid = \Drupal::currentUser()->id();
-    if ($uid == 0) {
-      $current_path = \Drupal::service('path.current')->getPath();
-      $login_url = Url::fromRoute('user.login', ['destination' => $current_path]);
-      $login_url = \Drupal::l(t('Login'), $login_url);
-      $markup = '<i class="fa fa-unlock-alt" aria-hidden="true"></i>' . $login_url;
-    }
-    else {
+    if ($uid != 0) {
       $name = $user->getUsername();
       $text = t('Welcome @name', array('@name' => $name));
       // Get current user roles.
@@ -52,13 +46,6 @@ class UserLoginLink extends BlockBase {
             <li><a href="/node/add/quiz">Add Quiz item</a></li>
           </ul>
        ';
-      }
-      else {
-        $markup = '
-        <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
-        <span class="user-image">
-         <img src="/themes/eminent_sardar/images/man4.jpg" class="img-responsive"></span> ' . $text . '</a>
-        ';
       }
     }
     return array(
