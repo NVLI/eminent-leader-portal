@@ -127,6 +127,7 @@ $(".quotes-by-sardar").slick({
    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    speed: 1000,
     touchMove: true,
     dots: true,
     autoplay: true
