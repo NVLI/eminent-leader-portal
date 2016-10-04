@@ -16,6 +16,7 @@ regions:
   content: 'Main Content'
   top_header: 'Top Header'
   page_title: 'Title'
+  home_banner: 'Home Banner'
   header_mobile_search: 'Header Search'
   search_filters: 'Search form with filters'
   content_bottom: 'Content Bottom'
