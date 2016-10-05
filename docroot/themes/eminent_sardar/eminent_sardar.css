@@ -156,3 +156,6 @@ video,
   max-height: 300px;
   overflow-y: scroll;
 }
+#header .navbar-right .search input.search-form {
+  width: 200px;
+}
