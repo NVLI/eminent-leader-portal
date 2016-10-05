@@ -23,11 +23,11 @@ jQuery(function($) {'use strict',
   $(window).on("load resize scroll", function () {
 
     if ($(window).width() > 768) {
-        if ($(window).scrollTop() > 200) {
+        if ($(window).scrollTop() > 50) {
           $('#header').addClass('navbar-fixed-top  wow fadeInDown');
           $('#header').css("position", "fixed");
         }
-        if ($(window).scrollTop() < 200) {
+        if ($(window).scrollTop() < 50) {
           $('#header').removeClass('navbar-fixed-top  wow fadeInDown');
           $('#header').css("position", "relative");
         }
