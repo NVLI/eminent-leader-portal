@@ -50,9 +50,9 @@ class AddTimeLineForm extends FormBase {
     ]);
     $create_timeline_link = Link::fromTextAndUrl(t('Create Timeline'), $create_timeline_url)->toString();
     $help_text = t('Select the timeline from above list or @link', array('@link' => $create_timeline_link));
-    $empty_text = t('Select Timeline'),
+    $empty_text = t('Select Timeline');
     if (empty($option)) {
-      $empty_text = t('No timelines to show'),
+      $empty_text = t('No timelines to show');
     }
     $form['time_line'] = [
       '#title' => t('Time Line'),
