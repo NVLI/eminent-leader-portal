@@ -188,3 +188,9 @@ video,
 #header .navbar-right .search input.search-form {
   width: 200px;
 }
+#conatcat-info .captcha {
+  padding: 15px;
+}
+.navbar-collapse {
+  padding: 0px;
+}

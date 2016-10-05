@@ -1,6 +1,12 @@
 add playlist:
   title: Add Playlist
   description: 'Add a playlist content'
+remove media from playlist:
+  title: Remove media from playlist
+  description: 'Remove a media item from playlist'
+remove media from timeline:
+  title: Remove media from timeline
+  description: 'Remove a media item from timeline'
 add timeline:
   title: Add timeline
   description: 'Add a Timeline content'

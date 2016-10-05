@@ -9,6 +9,20 @@ eminent_admin.AddPlaylist:
     _title: 'Add Play list'
   requirements:
     _permission: 'add playlist'
+eminent_admin.RemoveMediaFromPlaylist:
+  path: '/playlist/{playlist_id}/remove/{media_id}'
+  defaults:
+    _form: '\Drupal\eminent_admin\Form\RemoveMediaFromPlaylist'
+    _title: 'Remove Media From Play list'
+  requirements:
+    _permission: 'remove media from playlist'
+eminent_admin.RemoveMediaFromTimeline:
+  path: '/timeline/{timeline_id}/remove/{media_id}'
+  defaults:
+    _form: '\Drupal\eminent_admin\Form\RemoveMediaFromTimeline'
+    _title: 'Remove Media From Timeline'
+  requirements:
+    _permission: 'remove media from timeline'
 eminent_admin.AddTimeline:
   path: '/timeline/{media_id}/add'
   defaults:
