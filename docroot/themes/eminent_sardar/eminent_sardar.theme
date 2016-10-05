@@ -5,6 +5,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\block\Entity\Block;
 use Drupal\user\Entity;
 use Drupal\Core\Link;
+use Drupal\Core\Render\Markup;
 
 /**
  * Implements template_preprocess_field.
@@ -121,15 +122,17 @@ function eminent_sardar_preprocess_media(&$variables) {
     // We will be displaying the link content in a popup.
     $add_playlist_url->setOptions([
       'attributes' => [
-        'class' => ['use-ajax', 'button', 'button--small'],
+        'class' => ['use-ajax', 'button', 'button--small', 'btn', 'btn-default'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => '{"width": "30%"}',
+        'data-toggle' => "tooltip",
+        'title' => "Add To Timeline",
       ],
     ]);
 
     $variables['addtotimeline'] =  array(
       '#type' => 'markup',
-      '#markup' => Link::fromTextAndUrl(t('Add to timeline'), $add_playlist_url)->toString(),
+      '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-flag" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
       '#cache' => [
         'max-age' => 0,
@@ -146,15 +149,17 @@ function eminent_sardar_preprocess_media(&$variables) {
     // We will be displaying the link content in a popup.
     $add_playlist_url->setOptions([
       'attributes' => [
-        'class' => ['use-ajax', 'button', 'button--small'],
+        'class' => ['use-ajax', 'button', 'button--small', 'btn', 'btn-default'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => '{"width": "30%"}',
+        'data-toggle' => "tooltip",
+        'title' => "Add To Playlist",
       ],
     ]);
 
     $variables['addtoplaylist'] =  array(
       '#type' => 'markup',
-      '#markup' => Link::fromTextAndUrl(t('Add to playlist'), $add_playlist_url)->toString(),
+      '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-list" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
       '#cache' => [
         'max-age' => 0,
