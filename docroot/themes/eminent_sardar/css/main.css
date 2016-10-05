@@ -334,7 +334,7 @@ input.search-form:hover::-webkit-input-placeholder {
   margin-top: 0;
   border-top: 0;
   border-radius: 0;
-  left: 0;
+  left: -58px;
 }
 
 .navbar-inverse .navbar-nav .dropdown-menu:before{
