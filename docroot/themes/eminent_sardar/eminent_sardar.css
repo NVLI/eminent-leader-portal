@@ -145,3 +145,6 @@ video,
 .excibition_thumb .img-responsive {
   height: 100% !important;
 }
+.center {
+  padding-bottom: 0px !important;
+}
