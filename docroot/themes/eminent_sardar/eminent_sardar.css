@@ -152,3 +152,7 @@ video,
   padding-top: 0px !important;
   padding-bottom: 10px !important;
 }
+.deails_holder {
+  max-height: 300px;
+  overflow-y: scroll;
+}
