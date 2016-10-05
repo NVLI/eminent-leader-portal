@@ -19,7 +19,7 @@
 }
 .exhibition-slick-image,
 .exhibition-slick-image iframe {
-  min-height: 400px;
+  min-height: 350px;
 }
 .exhibition-slick-image .video-js {
   width: 100% !important;
