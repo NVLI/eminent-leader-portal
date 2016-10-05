@@ -29,6 +29,14 @@ class CreateTimelineForm extends FormBase {
    * Form to create timeline.
    */
   public function buildForm(array $form, FormStateInterface $form_state, $media_id = NULL) {
+    // Fetch the categories for playlist.
+    $vid = 'subject';
+    $categories = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+    $options = array();
+    foreach ($categories as $category) {
+      $options[$category->tid] = $category->name;
+    }
+
     // Store the media id in fromstate for future use.
     $storage = array('media_id' => $media_id);
     $form_state->setStorage($storage);
@@ -44,6 +52,13 @@ class CreateTimelineForm extends FormBase {
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Description for the timeline'),
+    ];
+    $form['category'] = [
+      '#title' => t('Category'),
+      '#type' => 'select',
+      '#required' => TRUE,
+      '#description' => t('Category for the playlist'),
+      '#options' => $options,
     ];
     $form['featured'] = [
       '#title' => t('Display this item in Home page'),
@@ -72,6 +87,7 @@ class CreateTimelineForm extends FormBase {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');
+    $category = $form_state->getValue('category');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
 
@@ -85,15 +101,15 @@ class CreateTimelineForm extends FormBase {
       $image = $media_content->thumbnail->target_id;
     }
 
-    $description = $media_content->get('field_dc_description')->value;
     // Create node object with attached file.
     $node = Node::create([
       'type' => 'time_line_collection',
       'body' => [
-        'value' => Unicode::truncate($description, 70),
+        'value' => $description,
       ],
       'title'  => $title,
       'field_time_line_collection_front' => $featured,
+      'field_category' => $category,
       'field_time_line_collection_image' => [
         'target_id' => $image,
       ],
