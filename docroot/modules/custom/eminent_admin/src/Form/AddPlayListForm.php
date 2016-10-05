@@ -48,18 +48,17 @@ class AddPlayListForm extends FormBase {
     ]);
     $create_playlist_link = Link::fromTextAndUrl(t('Create Playlist'), $create_playlist_url)->toString();
     $help_text = t('Select the playlist from above list or @link', array('@link' => $create_playlist_link));
-
+    $empty_text = t('Select Exhibition'),
+    if (empty($option)) {
+      $empty_text = t('No exhibitions to show'),
+    }
     $form['play_list'] = [
       '#title' => t('Select Play List'),
       '#type' => 'select',
       '#required' => TRUE,
+      '#empty_option' => $empty_text,
       '#description' => $help_text,
       '#options' => $option,
-    ];
-
-    $form['media_id'] = [
-      '#type' => 'hidden',
-      '#default_value' => $media_id,
     ];
 
     $form['submit'] = [
