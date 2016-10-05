@@ -139,3 +139,6 @@ video,
 .authenticated .login {
   display: none !important;
 }
+#conatcat-info .quotes-by-sardar-holder {
+  height: 575px;
+}
