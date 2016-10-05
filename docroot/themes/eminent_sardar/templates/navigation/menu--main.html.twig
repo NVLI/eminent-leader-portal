@@ -32,16 +32,27 @@
     {% if menu_level == 0 %}
       <ul id = "menu-main" {{ attributes.addClass('nav navbar-nav') }}>
     {% else %}
-      <ul id = "menu-main" class = "nav navbar-nav">
+      <ul class = "dropdown-menu">
     {% endif %}
     {% for item in items %}
-      <li{{ item.attributes }}>
-        {{ link(item.title, item.url) }}
-        {% if item.below %}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-        {% endif %}
-      </li>
+      {% if menu_level == 0 %}
+        <li{{ item.attributes.addClass('dropdown') }}>
+          {{ link(item.title, item.url) }}
+          {% if item.below %}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% else %}
+        <li>
+          {{ link(item.title, item.url) }}
+          {% if item.below %}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endif %}
     {% endfor %}
-
+    {% if menu_level != 0 %}
+      </ul>
+    {% endif %}
   {% endif %}
 {% endmacro %}
