@@ -19,7 +19,7 @@
 }
 .exhibition-slick-image,
 .exhibition-slick-image iframe {
-  min-height: 350px;
+  min-height: 300px;
 }
 .exhibition-slick-image .video-js {
   width: 100% !important;
@@ -142,6 +142,7 @@ video,
 #conatcat-info .quotes-by-sardar-holder {
   height: 575px;
 }
-.exhibition-slick-image .img-responsive {
+.exhibition-slick-image .img-responsive,
+.excibition_thumb .img-responsive {
   height: 100% !important;
 }
