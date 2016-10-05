@@ -4,9 +4,10 @@
 
 body {
   background: #fff;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Crimson Text', serif;
   color:#4e4e4e;
   line-height: 22px;
+  font-size: 14px;
 }
 
 h1,
@@ -44,7 +45,8 @@ h4{
 
 p {
   font-weight: 200;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Crimson Text', serif;
+  font-size: 16px;
 }
 
 a {
