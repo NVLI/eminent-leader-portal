@@ -142,3 +142,6 @@ video,
 #conatcat-info .quotes-by-sardar-holder {
   height: 575px;
 }
+.exhibition-slick-image .img-responsive {
+  height: 100% !important;
+}
