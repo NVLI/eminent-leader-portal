@@ -11,6 +11,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use \Drupal\node\Entity\Node;
+use Drupal\taxonomy;
+use Drupal\taxonomy\TermStorage;
 
 /**
  * Create playlist form.
@@ -27,6 +29,14 @@ class CreatePlaylistForm extends FormBase {
    * Form to create play list.
    */
   public function buildForm(array $form, FormStateInterface $form_state, $media_id = NULL) {
+    // Fetch the categories for playlist.
+    $vid = 'subject';
+    $categories = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+    $options = array();
+    foreach ($categories as $category) {
+      $options[$category->tid] = $category->name;
+    }
+
     // Store the media id in fromstate for future use.
     $storage = array('media_id' => $media_id);
     $form_state->setStorage($storage);
@@ -41,6 +51,13 @@ class CreatePlaylistForm extends FormBase {
       '#type' => 'textfield',
       '#required' => TRUE,
       '#description' => t('Description for the playlist'),
+    ];
+    $form['category'] = [
+      '#title' => t('Category'),
+      '#type' => 'select',
+      '#required' => TRUE,
+      '#description' => t('Category for the playlist'),
+      '#options' => $options,
     ];
     $form['featured'] = [
       '#title' => t('Display this item in Home page'),
@@ -69,6 +86,7 @@ class CreatePlaylistForm extends FormBase {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');
+    $category = $form_state->getValue('category');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
 
@@ -87,6 +105,7 @@ class CreatePlaylistForm extends FormBase {
       'type' => 'play_list',
       'field_description' => $description,
       'field_playlist_featured' => $featured,
+      'field_category' => $category,
       'title'  => $title,
       'field_playlist_image' => [
         'target_id' => $image,
