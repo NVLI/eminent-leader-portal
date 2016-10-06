@@ -2513,6 +2513,7 @@ shortcodes page css
 
 #bottom .widget {
   margin-bottom: 0;
+  margin-top: 20px;
 }
 
 #footer {
