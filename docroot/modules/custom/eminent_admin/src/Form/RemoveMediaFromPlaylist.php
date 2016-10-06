@@ -50,9 +50,6 @@ class RemoveMediaFromPlaylist extends FormBase {
     $form['continue'] = [
       '#type' => 'submit',
       '#value' => $this->t('Continue'),
-      '#ajax' => array(
-        'callback' => '::removeMedia',
-      ),
     ];
     $form['cancel'] = [
       '#type' => 'submit',
@@ -74,7 +71,23 @@ class RemoveMediaFromPlaylist extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+    $playlist_id = $storage['playlist_id'];
 
+    // Load the playlist.
+    $playlist_content = entity_load('node', $playlist_id);
+    $playlist_media = $playlist_content->field_resource->getValue();
+    // Loop through the media items and remove the selected media item.
+    foreach ($playlist_media as $key => $media) {
+      if ($media['target_id'] == $media_id) {
+        unset($playlist_media[$key]);
+      }
+    }
+    $playlist_content->field_resource->setValue($playlist_media);
+    $playlist_content->save();
+    //$login_url = Url::fromRoute('entity.media.canonical', ['id' => $media_id]);
+    $form_state->setRedirect('entity.media.canonical', ['id' => $media_id]);
   }
 
   /**

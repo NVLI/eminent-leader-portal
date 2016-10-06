@@ -47,9 +47,6 @@ class RemoveMediaFromTimeline extends FormBase {
     $form['continue'] = [
       '#type' => 'submit',
       '#value' => $this->t('Continue'),
-      '#ajax' => array(
-        'callback' => '::removeMedia',
-      ),
     ];
     $form['cancel'] = [
       '#type' => 'submit',
@@ -71,7 +68,24 @@ class RemoveMediaFromTimeline extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+    $timeline_id = $storage['timeline_id'];
 
+    // Load the playlist.
+    $timeline_content = entity_load('node', $timeline_id);
+    $timeline_paragraph = $timeline_content->field_time_line_collection_story->getValue();
+    foreach ($timeline_paragraph as $key => $paragraph) {
+      $paragraph_id = $paragraph['target_id'];
+      $paragraph_entity = entity_load('paragraph', $paragraph_id);
+      $timeline_media_id = $paragraph_entity->get('field_time_line_media_reference')->target_id;
+      if ($timeline_media_id == $media_id) {
+        unset($timeline_paragraph[$key]);
+      }
+    }
+    $timeline_content->field_time_line_collection_story->setValue($timeline_paragraph);
+    $timeline_content->save();
+    $form_state->setRedirect('entity.media.canonical', ['id' => $media_id]);
   }
 
   /**
