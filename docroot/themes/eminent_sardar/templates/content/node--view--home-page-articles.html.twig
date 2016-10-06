@@ -78,7 +78,7 @@
     </div>
     <div class="media-body">
      <h2><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
-     <p> {{ content.body }}
+     <p> {{ content|without('field_image') }}
      </p>
     </div>
   </div>
