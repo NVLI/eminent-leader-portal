@@ -112,11 +112,11 @@ function eminent_sardar_preprocess_media(&$variables) {
   $media_id = $variables['elements']['#media']->id();
   $variables['media_id'] = $media_id;
 
-  // Load the view
+  // Load the Media Referred Timeline View.
   $view = \Drupal\views\Views::getView('media_referred_timeline');
 
   // Set the display machine id.
-  $view->setDisplay('media_referred_timeline_block_1');
+  //$view->setDisplay('media_referred_timeline_block_1');
 
   // Get the title.
   $title = $view->getTitle();
@@ -129,9 +129,30 @@ function eminent_sardar_preprocess_media(&$variables) {
     '#allowed_tags' => ['h2'],
   ];
 
-  $variables['media_related_timeline']['view_title'] = $the_title_render_array;
-  // Or $variables['content']['view_title']['#prefix'] = $title;.
-  $variables['media_related_timeline']['view_output'] = $render;
+  $variables['media_referred_timeline']['view_title'] = $the_title_render_array;
+  // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
+  $variables['media_referred_timeline']['view_output'] = $render;
+
+  // Load the Media Referred Playlist View.
+  $view = \Drupal\views\Views::getView('media_referred_playlist');
+
+  // Set the display machine id.
+  //$view->setDisplay('media_referred_timeline_block_1');
+
+  // Get the title.
+  $title = $view->getTitle();
+
+  // Render.
+  $render = $view->render();
+
+  $the_title_render_array = [
+    '#markup' => t('@title', ['@title'=> $title]),
+    '#allowed_tags' => ['h2'],
+  ];
+
+  $variables['media_referred_playlist']['view_title'] = $the_title_render_array;
+  // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
+  $variables['media_referred_playlist']['view_output'] = $render;
 
   // Fetch the media type.
   $variables['media_type'] = $variables['elements']['#media']->bundle();
