@@ -201,3 +201,7 @@ video,
 #feature .center h2 {
   margin-top: 15px;
 }
+#exhibition-slick-image {
+  max-height: 350px;
+  overflow: scroll;
+}
