@@ -54,7 +54,12 @@
               {{ addtoplaylist }}
               {{ addtotimeline }}
               <div class="clearfix">
-                {{ media_related_timeline }}
+                <h2>{{ media_referred_timeline.view_title }}</h2>
+                {{ media_referred_timeline.view_output }}
+              </div>
+              <div class="clearfix">
+                <h2>{{ media_referred_playlist.view_title }}</h2>
+                {{ media_referred_playlist.view_output }}
               </div>
 
             </div>
