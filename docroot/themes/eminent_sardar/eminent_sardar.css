@@ -198,3 +198,6 @@ video,
   font-size: 12px;
   margin: 0px !important;
 }
+#feature .center h2 {
+  margin-top: 15px;
+}
