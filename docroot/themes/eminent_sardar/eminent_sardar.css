@@ -205,3 +205,14 @@ video,
   max-height: 350px;
   overflow-y: scroll;
 }
+.navbar-inverse .navbar-nav .dropdown-menu {
+  background-color: rgba(241, 241, 241, 1);
+}
+.a {
+  color: #D35400 !important;
+}
+.a:hover {
+  color: #111;
+  text-decoration: none;
+  outline: none;
+}
