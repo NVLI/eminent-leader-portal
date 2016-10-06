@@ -66,9 +66,6 @@ class CreatePlaylistForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Create and Add'),
-      '#ajax' => array(
-        'callback' => '::createPlaylist',
-      ),
     ];
     return $form;
   }
@@ -77,6 +74,40 @@ class CreatePlaylistForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $title = $form_state->getValue('title');
+    $description = $form_state->getValue('description');
+    $featured = $form_state->getValue('featured');
+    $category = $form_state->getValue('category');
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+
+    // Load the media item.
+    $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+    if ($bundle == "image") {
+      $image = $media_content->field_media_image->target_id;
+    }
+    else {
+      $image = $media_content->thumbnail->target_id;
+    }
+
+    // Create node object with attached file.
+    $node = Node::create([
+      'type' => 'play_list',
+      'field_description' => $description,
+      'field_playlist_featured' => $featured,
+      'field_category' => $category,
+      'title'  => $title,
+      'field_playlist_image' => [
+        'target_id' => $image,
+      ],
+    ]);
+    $node->save();
+    // Add the media item to the created node.
+    $node->field_resource->appendItem($media_id);
+    $node->save();
+    drupal_set_message(t('Successfully created playlist.'));
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**
