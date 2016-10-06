@@ -194,3 +194,7 @@ video,
 .navbar-collapse {
   padding: 0px;
 }
+#exibition_details .overlay h2 {
+  font-size: 12px;
+  margin: 0px !important;
+}
