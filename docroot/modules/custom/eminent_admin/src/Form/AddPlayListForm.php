@@ -41,7 +41,7 @@ class AddPlayListForm extends FormBase {
     // We will be displaying the link content in a popup.
     $create_playlist_url->setOptions([
       'attributes' => [
-        'class' => ['use-ajax', 'button', 'button--small'],
+        'class' => ['use-ajax', 'button', 'button--small', 'a'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => '{"width": "70%"}',
       ],
