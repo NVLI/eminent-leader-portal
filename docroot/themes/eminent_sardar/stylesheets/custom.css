@@ -1897,23 +1897,84 @@ quotes by sardar homepag eblock*/
   background: #7F8C8D;
 }
 
+/* line 1636, ../sass/custom.scss */
+.slick-slide {
+  outline: 0;
+}
+
 /******************************************************
 helper styles*/
-/* line 1638, ../sass/custom.scss */
+/* line 1641, ../sass/custom.scss */
 .no-padding {
   padding-left: 0;
   padding-right: 0;
 }
 
+/* Issue fix the menu in smaller resolutions */
+@media (max-width: 999px) {
+  /* line 1648, ../sass/custom.scss */
+  .navbar-header {
+    float: none;
+  }
+
+  /* line 1651, ../sass/custom.scss */
+  .navbar-left, .navbar-right {
+    float: none !important;
+  }
+
+  /* line 1654, ../sass/custom.scss */
+  .navbar-toggle {
+    display: block;
+  }
+
+  /* line 1657, ../sass/custom.scss */
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* line 1661, ../sass/custom.scss */
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+
+  /* line 1665, ../sass/custom.scss */
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+
+  /* line 1668, ../sass/custom.scss */
+  .navbar-nav {
+    float: none !important;
+    margin-top: 7.5px;
+  }
+
+  /* line 1672, ../sass/custom.scss */
+  .navbar-nav > li {
+    float: none;
+  }
+
+  /* line 1675, ../sass/custom.scss */
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* line 1679, ../sass/custom.scss */
+  .collapse.in {
+    display: block !important;
+  }
+}
 /******************************************************
 Mobile styles for the Recent works blocks*/
 @media (max-width: 973px) {
-  /* line 1644, ../sass/custom.scss */
+  /* line 1686, ../sass/custom.scss */
   #recent-works {
     padding-top: 50px;
   }
 }
-/* line 1648, ../sass/custom.scss */
+/* line 1690, ../sass/custom.scss */
 #recent-works .col-md-3 {
   padding-left: 0;
   padding-right: 0;
@@ -1921,12 +1982,12 @@ Mobile styles for the Recent works blocks*/
 
 /******************************************************
 Mobile styles for the biography*/
-/* line 1656, ../sass/custom.scss */
+/* line 1698, ../sass/custom.scss */
 .biography {
   background-size: cover !important;
   position: relative;
 }
-/* line 1659, ../sass/custom.scss */
+/* line 1701, ../sass/custom.scss */
 .biography:before {
   display: block;
   content: "";
@@ -1938,12 +1999,12 @@ Mobile styles for the biography*/
   left: 0;
 }
 
-/* line 1670, ../sass/custom.scss */
+/* line 1712, ../sass/custom.scss */
 .exibition-listing {
   position: relative;
   z-index: 9;
 }
-/* line 1673, ../sass/custom.scss */
+/* line 1715, ../sass/custom.scss */
 .exibition-listing .center {
   position: absolute;
   top: 25px;
@@ -1954,7 +2015,7 @@ Mobile styles for the biography*/
   margin: auto;
 }
 @media (max-width: 973px) {
-  /* line 1673, ../sass/custom.scss */
+  /* line 1715, ../sass/custom.scss */
   .exibition-listing .center {
     top: inherit;
     left: inherit;
@@ -1965,36 +2026,36 @@ Mobile styles for the biography*/
     position: relative;
   }
 }
-/* line 1690, ../sass/custom.scss */
+/* line 1732, ../sass/custom.scss */
 .exibition-listing .center h2 {
   background: #000;
   padding-top: 5px;
   color: #fff;
 }
 @media (max-width: 973px) {
-  /* line 1690, ../sass/custom.scss */
+  /* line 1732, ../sass/custom.scss */
   .exibition-listing .center h2 {
     background: transparent;
     color: #353740;
   }
 }
-/* line 1700, ../sass/custom.scss */
+/* line 1742, ../sass/custom.scss */
 .exibition-listing ul.slick-dots {
   text-align: center;
   padding-left: 0;
   margin-top: 20px;
 }
-/* line 1704, ../sass/custom.scss */
+/* line 1746, ../sass/custom.scss */
 .exibition-listing ul.slick-dots li {
   display: inline-block;
   list-style: none;
   margin-right: 10px;
 }
-/* line 1706, ../sass/custom.scss */
+/* line 1748, ../sass/custom.scss */
 .exibition-listing ul.slick-dots li.slick-active button {
   background: #616161;
 }
-/* line 1713, ../sass/custom.scss */
+/* line 1755, ../sass/custom.scss */
 .exibition-listing ul.slick-dots li button {
   display: block;
   width: 15px;
@@ -2008,14 +2069,14 @@ Mobile styles for the biography*/
 /******************************************************
 Mobile styles for the header slider*/
 @media (max-width: 640px) and (min-width: 481px) {
-  /* line 1729, ../sass/custom.scss */
+  /* line 1771, ../sass/custom.scss */
   #main-slider .carousel .slide-margin {
     margin-top: inherit;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 1735, ../sass/custom.scss */
+  /* line 1777, ../sass/custom.scss */
   #main-slider .carousel .slide-margin {
     margin-top: inherit;
   }
@@ -2023,7 +2084,7 @@ Mobile styles for the header slider*/
 
 /******************************************************
 styles for the header*/
-/* line 1742, ../sass/custom.scss */
+/* line 1784, ../sass/custom.scss */
 #header {
   /* position: absolute; */
   right: 0;
@@ -2033,20 +2094,20 @@ styles for the header*/
   margin-right: auto;
 }
 @media (max-width: 973px) {
-  /* line 1742, ../sass/custom.scss */
+  /* line 1784, ../sass/custom.scss */
   #header {
     background: #fff;
     position: relative;
   }
 }
 
-/* line 1754, ../sass/custom.scss */
+/* line 1796, ../sass/custom.scss */
 .navbar-fixed-top {
   background: #fff;
   border-bottom: 1px solid #C8C8C8;
 }
 
-/* line 1760, ../sass/custom.scss */
+/* line 1802, ../sass/custom.scss */
 .navbar-inverse .navbar-nav .dropdown-menu:before {
   content: '';
   position: absolute;
@@ -2063,36 +2124,36 @@ styles for the header*/
 
 /******************************************************
 styles for the search form in the header*/
-/* line 1777, ../sass/custom.scss */
+/* line 1819, ../sass/custom.scss */
 #header .search {
   margin-top: 17px;
   border-radius: 4px;
   margin-left: 20px;
 }
-/* line 1781, ../sass/custom.scss */
+/* line 1823, ../sass/custom.scss */
 #header .search form {
   border: 1px solid #d6d6d6;
 }
 @media (max-width: 973px) {
-  /* line 1777, ../sass/custom.scss */
+  /* line 1819, ../sass/custom.scss */
   #header .search {
     margin-left: 0;
     margin-top: 0;
   }
 }
-/* line 1788, ../sass/custom.scss */
+/* line 1830, ../sass/custom.scss */
 #header .search input.search-form {
   margin-left: 0;
   padding: 5px 15px;
   width: 86px;
 }
 @media (max-width: 973px) {
-  /* line 1788, ../sass/custom.scss */
+  /* line 1830, ../sass/custom.scss */
   #header .search input.search-form {
     width: 240px;
   }
 }
-/* line 1796, ../sass/custom.scss */
+/* line 1838, ../sass/custom.scss */
 #header .search i {
   cursor: pointer;
   color: #7E7E7E;
@@ -2101,35 +2162,35 @@ styles for the search form in the header*/
 
 /******************************************************
 styles for the header user profile image block*/
-/* line 1806, ../sass/custom.scss */
+/* line 1848, ../sass/custom.scss */
 .navbar-nav > li img {
   height: 25px;
   width: 25px;
   border-radius: 25px;
 }
-/* line 1811, ../sass/custom.scss */
+/* line 1853, ../sass/custom.scss */
 .navbar-nav > li i {
   margin-left: 6px;
   margin-top: 3px;
 }
 @media (max-width: 973px) {
-  /* line 1811, ../sass/custom.scss */
+  /* line 1853, ../sass/custom.scss */
   .navbar-nav > li i {
     margin-left: 0;
   }
 }
 
-/* line 1823, ../sass/custom.scss */
+/* line 1865, ../sass/custom.scss */
 .navbar-nav > li.dropdown a.user-profile-toggle {
   padding-left: 30px;
 }
 @media (max-width: 973px) {
-  /* line 1823, ../sass/custom.scss */
+  /* line 1865, ../sass/custom.scss */
   .navbar-nav > li.dropdown a.user-profile-toggle {
     padding-left: 44px;
   }
 }
-/* line 1828, ../sass/custom.scss */
+/* line 1870, ../sass/custom.scss */
 .navbar-nav > li.dropdown a.user-profile-toggle .user-image {
   display: inline-block;
   border: 1px solid #dadada;
@@ -2141,18 +2202,18 @@ styles for the header user profile image block*/
   left: 0;
 }
 @media (max-width: 973px) {
-  /* line 1828, ../sass/custom.scss */
+  /* line 1870, ../sass/custom.scss */
   .navbar-nav > li.dropdown a.user-profile-toggle .user-image {
     left: 12px;
   }
 }
 
 @media (max-width: 973px) {
-  /* line 1844, ../sass/custom.scss */
+  /* line 1886, ../sass/custom.scss */
   .navbar-inverse .navbar-nav .dropdown-menu {
     background-color: transparent;
   }
-  /* line 1847, ../sass/custom.scss */
+  /* line 1889, ../sass/custom.scss */
   .navbar-inverse .navbar-nav .dropdown-menu li {
     background: rgba(241, 241, 241, 0.85);
     margin-right: 15px;
@@ -2161,17 +2222,17 @@ styles for the header user profile image block*/
 
 /******************************************************
 styles for the search form in the home page*/
-/* line 1856, ../sass/custom.scss */
+/* line 1898, ../sass/custom.scss */
 #header .search.active {
   background: #ececec;
 }
-/* line 1858, ../sass/custom.scss */
+/* line 1900, ../sass/custom.scss */
 #header .search.active input[type="text"] {
   width: 100px;
   display: inline-block;
 }
 
-/* line 1864, ../sass/custom.scss */
+/* line 1906, ../sass/custom.scss */
 #header .search.responsive-search {
   position: absolute;
   top: 6px;
@@ -2179,33 +2240,33 @@ styles for the search form in the home page*/
   display: block;
 }
 @media (min-width: 1200px) {
-  /* line 1864, ../sass/custom.scss */
+  /* line 1906, ../sass/custom.scss */
   #header .search.responsive-search {
     display: none;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  /* line 1864, ../sass/custom.scss */
+  /* line 1906, ../sass/custom.scss */
   #header .search.responsive-search {
     display: none;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  /* line 1864, ../sass/custom.scss */
+  /* line 1906, ../sass/custom.scss */
   #header .search.responsive-search {
     display: none;
   }
 }
 
-/* line 1881, ../sass/custom.scss */
+/* line 1923, ../sass/custom.scss */
 #feature h2 {
   color: #ebebeb;
 }
-/* line 1885, ../sass/custom.scss */
+/* line 1927, ../sass/custom.scss */
 #feature .media h2 {
   color: #303e49;
 }
-/* line 1889, ../sass/custom.scss */
+/* line 1931, ../sass/custom.scss */
 #feature a.btn-primary {
   max-width: 175px;
   display: block;
@@ -2214,17 +2275,17 @@ styles for the search form in the home page*/
   border: 1px solid #fff;
   color: #fff;
 }
-/* line 1896, ../sass/custom.scss */
+/* line 1938, ../sass/custom.scss */
 #feature a.btn-primary:hover {
   color: #D35400;
   border-color: #D35400;
 }
 
-/* line 1905, ../sass/custom.scss */
+/* line 1947, ../sass/custom.scss */
 .recent-work-wrap .recent-work-inner p {
   text-align: center;
 }
-/* line 1908, ../sass/custom.scss */
+/* line 1950, ../sass/custom.scss */
 .recent-work-wrap .recent-work-inner a.preview {
   display: block;
   padding: 6px 12px;
@@ -2252,13 +2313,13 @@ styles for the search form in the home page*/
   border: 1px solid #e67e22;
   max-width: 190px;
 }
-/* line 1934, ../sass/custom.scss */
+/* line 1976, ../sass/custom.scss */
 .recent-work-wrap .recent-work-inner a.preview:hover {
   color: #D35400;
   border-color: #D35400;
 }
 
-/* line 1942, ../sass/custom.scss */
+/* line 1984, ../sass/custom.scss */
 .no-container-row {
   margin-left: inherit;
   margin-right: inherit;
@@ -2267,15 +2328,15 @@ styles for the search form in the home page*/
 /******************************************************
 Mobile styles for the header*/
 @media (max-width: 767px) and (min-width: 641px) {
-  /* line 1951, ../sass/custom.scss */
+  /* line 1993, ../sass/custom.scss */
   #header .navbar {
     padding-bottom: 15px;
   }
-  /* line 1954, ../sass/custom.scss */
+  /* line 1996, ../sass/custom.scss */
   #header .navbar .navbar-nav > li {
     margin-left: 0;
   }
-  /* line 1956, ../sass/custom.scss */
+  /* line 1998, ../sass/custom.scss */
   #header .navbar .navbar-nav > li a {
     background: transparent;
     display: inherit;
@@ -2283,15 +2344,15 @@ Mobile styles for the header*/
   }
 }
 @media (max-width: 640px) and (min-width: 481px) {
-  /* line 1951, ../sass/custom.scss */
+  /* line 1993, ../sass/custom.scss */
   #header .navbar {
     padding-bottom: 15px;
   }
-  /* line 1965, ../sass/custom.scss */
+  /* line 2007, ../sass/custom.scss */
   #header .navbar .navbar-nav > li {
     margin-left: 0;
   }
-  /* line 1967, ../sass/custom.scss */
+  /* line 2009, ../sass/custom.scss */
   #header .navbar .navbar-nav > li a {
     background: transparent;
     display: inherit;
@@ -2299,22 +2360,22 @@ Mobile styles for the header*/
   }
 }
 @media (max-width: 480px) {
-  /* line 1951, ../sass/custom.scss */
+  /* line 1993, ../sass/custom.scss */
   #header .navbar {
     padding-bottom: 15px;
   }
-  /* line 1976, ../sass/custom.scss */
+  /* line 2018, ../sass/custom.scss */
   #header .navbar .navbar-nav > li {
     margin-left: 0;
   }
-  /* line 1978, ../sass/custom.scss */
+  /* line 2020, ../sass/custom.scss */
   #header .navbar .navbar-nav > li a {
     background: transparent;
     display: inherit;
     margin-right: 15px;
   }
 }
-/* line 1986, ../sass/custom.scss */
+/* line 2028, ../sass/custom.scss */
 #header .navbar .navbar-inverse .navbar-toggle, #header .navbar .navbar-toggle {
   background: #333;
 }
