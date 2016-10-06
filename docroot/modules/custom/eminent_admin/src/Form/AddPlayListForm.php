@@ -64,9 +64,6 @@ class AddPlayListForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add to playlist'),
-      '#ajax' => array(
-        'callback' => '::addToPlaylist',
-      ),
     ];
 
     return $form;
@@ -76,6 +73,14 @@ class AddPlayListForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $play_list = $form_state->getValue('play_list');
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+    $node = Node::load($play_list);
+    $node->field_resource->appendItem($media_id);
+    $node->save();
+    drupal_set_message(t('Successfully added media to playlist.'));
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**
