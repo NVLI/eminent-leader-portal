@@ -203,7 +203,7 @@ video,
 }
 #exibition_details .exibition_slider .exhibition-slick-image {
   max-height: 350px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .navbar-inverse .navbar-nav .dropdown-menu {
   background-color: rgba(241, 241, 241, 1);
