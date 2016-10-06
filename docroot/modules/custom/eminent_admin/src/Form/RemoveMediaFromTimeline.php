@@ -85,7 +85,7 @@ class RemoveMediaFromTimeline extends FormBase {
     }
     $timeline_content->field_time_line_collection_story->setValue($timeline_paragraph);
     $timeline_content->save();
-    $form_state->setRedirect('entity.media.canonical', ['id' => $media_id]);
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**
