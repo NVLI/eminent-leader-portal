@@ -42,7 +42,7 @@ class RemoveMediaFromPlaylist extends FormBase {
     // Load the playlist.
     $playlist_content = entity_load('node', $playlist_id);
     $playlist_title = $playlist_content->getTitle();
-    $confirm_text = t('Do you really want to remove the media @media from playlist @playlist?', array('@media' => $media_name, '@playlist' => $playlist_title));
+    $confirm_text = t('Do you really want to remove this item from playlist @playlist?', array('@playlist' => $playlist_title));
     $form['time_line'] = [
       '#type' => 'markup',
       '#markup' => '<h2>' . $confirm_text .'</h2>',
@@ -106,7 +106,7 @@ class RemoveMediaFromPlaylist extends FormBase {
       'width' => '300',
       'height' => '300',
     );
-    $response->addCommand(new OpenModalDialogCommand($title, $content, $options));
+    $response->addCommand(new RedirectCommand('/media/'.$media_id));
     return $response;
   }
 

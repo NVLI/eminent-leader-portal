@@ -36,14 +36,10 @@ class RemoveMediaFromTimeline extends FormBase {
     $storage['timeline_id'] = $timeline_id;
     $form_state->setStorage($storage);
 
-    // Load the media item.
-    $media_content = entity_load('media', $media_id);
-    $media_name = $media_content->name;
-
     // Load the timeline.
     $timeline_content = entity_load('node', $timeline_id);
     $timeline_title = $timeline_content->getTitle();
-    $confirm_text = t('Do you really want to remove the media @media from timeline @playlist?', array('@media' => $media_name, '@playlist' => $timeline_title));
+    $confirm_text = t('Do you really want to remove this item from timeline @playlist?', array('@playlist' => $timeline_title));
     $form['time_line'] = [
       '#type' => 'markup',
       '#markup' => '<h2>' . $confirm_text .'</h2>',
