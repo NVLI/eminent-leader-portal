@@ -34,7 +34,7 @@ eminent_admin.CreatePlaylist:
   path: '/playlist/{media_id}/create'
   defaults:
     _controller: '\Drupal\eminent_admin\Controller\MediaAdd::createPlaylist'
-    _title: 'Add Time Line'
+    _title: 'Add Playlist'
   requirements:
     _permission: 'add playlist'
 eminent_admin.CreateQuote:
