@@ -205,3 +205,6 @@ video,
   max-height: 350px;
   overflow-y: scroll;
 }
+.navbar-inverse .navbar-nav .dropdown-menu {
+  background-color: rgba(241, 241, 241, 1);
+}
