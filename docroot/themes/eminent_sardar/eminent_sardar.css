@@ -203,5 +203,5 @@ video,
 }
 #exibition_details .exibition_slider .exhibition-slick-image {
   max-height: 350px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
