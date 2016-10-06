@@ -116,7 +116,7 @@ function eminent_sardar_preprocess_media(&$variables) {
   $view = \Drupal\views\Views::getView('media_referred_timeline');
 
   // Set the display machine id.
-  $view->setDisplay('media_referred_timeline_block_1');
+  //$view->setDisplay('media_referred_timeline_block_1');
 
   // Get the title.
   $title = $view->getTitle();
