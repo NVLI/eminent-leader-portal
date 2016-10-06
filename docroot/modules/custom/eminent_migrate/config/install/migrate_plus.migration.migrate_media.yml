@@ -1,12 +1,12 @@
 # The source data is in CSV files, so we use the 'csv' source plugin.
-id: media_migrate_19
+id: stage_migrate_22
 label: CSV page migration
 migration_tags:
   - CSV
 source:
   plugin: csv
   # Full path to the file.
-  path: '/var/www/sardar/test/docroot/modules/custom/eminent_migrate/migrate-content.csv'
+  path: '/home/nvli/sardar/svputils/processed-exb278-1006-video.csv'
   # The number of rows at the beginning which are not data.
   header_row_count: 1
   # These are the field names from the source file representing the key
@@ -47,10 +47,12 @@ source:
     10:
       file_type: File type
     11:
-      format: Format
+      content_type: Content Type
     12:
-      copyright: Copyright
+      format: Format
     13:
+      copyright: Copyright
+    14:
       keyword: Keyword/Subject
 destination:
   # Here we're saying that each row of data (line from the CSV file) will be
@@ -71,7 +73,7 @@ process:
   field_dc_type: file_type
   field_dc_format: format
   field_dc_language: language
-
+  field_dc_content_type: content_type
   field_media_video:
     plugin: file_import
     source: source_path

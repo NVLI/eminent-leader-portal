@@ -33,7 +33,7 @@ class MigrateEvent implements EventSubscriberInterface {
     $extension = $row->getSourceProperty('format');
     $source_path = "public://" . $file_name;
     $row->setSourceProperty('source_path', $source_path);
-    if ($extension == "pdf" || $extension == "PDF") {
+    if ($extension == "pdf" || $extension == "PDF" || $extension == "docx") {
       $row->setSourceProperty('media_bundle', 'document');
     }
     else if ($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
