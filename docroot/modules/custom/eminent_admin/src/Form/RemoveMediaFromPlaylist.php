@@ -86,8 +86,7 @@ class RemoveMediaFromPlaylist extends FormBase {
     }
     $playlist_content->field_resource->setValue($playlist_media);
     $playlist_content->save();
-    //$login_url = Url::fromRoute('entity.media.canonical', ['id' => $media_id]);
-    $form_state->setRedirect('entity.media.canonical', ['id' => $media_id]);
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**
