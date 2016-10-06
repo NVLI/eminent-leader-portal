@@ -1,8 +1,37 @@
 #bottom .navbar-brand img {
   width: 100%;
 }
-#header #views-exposed-form-eminent-search-page-1 #edit-actions {
-  display: none;
+#header .form-actions {
+  float: right;
+}
+#header .form-item-keyword {
+  float: left;
+}
+#header .input-group-addon {
+  padding: 0px;
+  margin: 0px;
+}
+#header form .form-text {
+  border: 1px solid #d6d6d6;
+}
+#header .search form {
+  border: none;
+}
+#header .input-group-addon .button {
+  margin: 0px;
+  background: rgba(0, 0, 0, 0) url("/themes/eminent_sardar/images/sprite.png") no-repeat scroll -161px -447px;
+  border: medium none;
+  border-radius: 50%;
+  display: block;
+  height: 30px;
+  margin-left: -30px;
+  margin-top: 2px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  text-indent: -999em;
+  width: 29px;
 }
 .searchresult-form .fa-search {
   display: none;
@@ -17,9 +46,8 @@
 .search-filters {
   padding-bottom: 60px;
 }
-.exhibition-slick-image,
 .exhibition-slick-image iframe {
-  min-height: 400px;
+  min-height: 300px;
 }
 .exhibition-slick-image .video-js {
   width: 100% !important;
@@ -138,4 +166,31 @@ video,
 }
 .authenticated .login {
   display: none !important;
+}
+#conatcat-info .quotes-by-sardar-holder {
+  height: 575px;
+}
+.exhibition-slick-image .img-responsive,
+.excibition_thumb .img-responsive {
+  height: 100% !important;
+}
+.center {
+  padding-bottom: 0px !important;
+}
+#exibition_details {
+  padding-top: 0px !important;
+  padding-bottom: 10px !important;
+}
+.deails_holder {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+#header .navbar-right .search input.search-form {
+  width: 200px;
+}
+#conatcat-info .captcha {
+  padding: 15px;
+}
+.navbar-collapse {
+  padding: 0px;
 }

@@ -39,19 +39,3 @@ function eminent_custom_paragraph_presave(EntityInterface $entity) {
     }
   }
 }
-
-/**
- * Implements hook_node_presave_presave.
- */
-function eminent_custom_node_presave(EntityInterface $entity) {
-  $entity_type = $entity->getType();
-  // Set a single time line image as the time line collection image.
-  if ($entity_type == "time_line_collection") {
-    $paragraph = $entity->get('field_time_line_collection_story')->target_id;
-    $paragraph_entity = entity_load('paragraph', $paragraph);
-    $time_line_story = $paragraph_entity->get('field_time_line_media_reference')->target_id;
-    $media = entity_load('media', $time_line_story);
-    $image = $media->thumbnail->target_id;
-    $entity->field_time_line_collection_image->target_id = $image;
-  }
-}

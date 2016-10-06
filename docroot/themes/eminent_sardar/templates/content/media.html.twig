@@ -17,7 +17,7 @@
     <div class="meidiablock">
       <div class="row">
         <div class="col-md-7">
-          <div class="media-preview equal_height">
+          <div class="media-preview ">
             <section class="image">
               {{ content.field_media_image }}
             </section>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="col-md-5">
-            <div class="media-preview-description equal_height">
+            <div class="media-preview-description ">
               <p>{{ content.field_dc_description }}</p>
               <div class="panel-group" id="metadata" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
@@ -53,6 +53,15 @@
               </div>
               {{ addtoplaylist }}
               {{ addtotimeline }}
+              <div class="clearfix">
+                <h2>{{ media_referred_timeline.view_title }}</h2>
+                {{ media_referred_timeline.view_output }}
+              </div>
+              <div class="clearfix">
+                <h2>{{ media_referred_playlist.view_title }}</h2>
+                {{ media_referred_playlist.view_output }}
+              </div>
+
             </div>
           </div>
         </div>

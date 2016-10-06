@@ -28,11 +28,24 @@ class CreateQuoteForm extends FormBase {
    * Form to create quote.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $category_options = array();
+    // Load the quote category vocabulary.
+    $quotes_category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('quotes_category');
+    foreach ($quotes_category as $category) {
+      $category_options[$category->tid] = $category->name;
+    }
     $form['description'] = [
       '#title' => t('Quote'),
       '#type' => 'textarea',
       '#required' => TRUE,
       '#description' => t('Enter the quote here'),
+    ];
+    $form['category'] = [
+      '#title' => t('Category'),
+      '#type' => 'select',
+      '#options' => $category_options,
+      '#empty_option' => t('Select Category'),
+      '#required' => TRUE,
     ];
     $form['featured'] = [
       '#title' => t('Mark as featured'),
@@ -53,6 +66,7 @@ class CreateQuoteForm extends FormBase {
     // Set node title.
     $title = Unicode::truncate($description, 10);
     $featured = $form_state->getValue('featured');
+    $category = $form_state->getValue('category');
 
     // Create node object.
     $node = Node::create([
@@ -60,6 +74,7 @@ class CreateQuoteForm extends FormBase {
       'body' => $description,
       'title'  => $title,
       'field_quote_featured' => $featured,
+      'field_category' => $category,
     ]);
     $node->save();
     $quotes_route = 'view.quotes.page_1';

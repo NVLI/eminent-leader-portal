@@ -29,6 +29,7 @@ class UserLoginLink extends BlockBase {
   public function build() {
     $user = \Drupal::currentUser();
     $uid = \Drupal::currentUser()->id();
+    $markup = NULL;
     if ($uid != 0) {
       $name = $user->getUsername();
       $text = t('Welcome @name', array('@name' => $name));

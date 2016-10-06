@@ -23,11 +23,11 @@ jQuery(function($) {'use strict',
   $(window).on("load resize scroll", function () {
 
     if ($(window).width() > 768) {
-        if ($(window).scrollTop() > 200) {
+        if ($(window).scrollTop() > 50) {
           $('#header').addClass('navbar-fixed-top  wow fadeInDown');
           $('#header').css("position", "fixed");
         }
-        if ($(window).scrollTop() < 200) {
+        if ($(window).scrollTop() < 50) {
           $('#header').removeClass('navbar-fixed-top  wow fadeInDown');
           $('#header').css("position", "relative");
         }
@@ -72,8 +72,15 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Trigger the quiz manualy on scroll*/
+function isVisible($el) {
+  var winTop = $(window).scrollTop();
+  var winBottom = winTop + $(window).height();
+  var elTop = $el.offset().top;
+  var elBottom = elTop + $el.height();
+  return ((elBottom<= winBottom) && (elTop >= winTop));
+}
 $(document).on('scroll', function() {
-    if( $(this).scrollTop() >= 800 ) {
+    if( isVisible($("#conatcat-info")) ) {
         $(document).off('scroll');
         $('#launchquiz').modal('show');
     }

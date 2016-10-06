@@ -14,6 +14,18 @@
 #}
 <div>
   {% if content %}
-    {{ content }}
+    <div class="col-md-8 exhibition-slick-image">
+      {{ content.field_media_image }}
+      {{ content.field_media_audio }}
+      {{ content.field_media_document }}
+      {{ content.field_media_video }}
+      {{ content.field_media_video_embed_field }}
+    </div>
+    <div class="col-md-4">
+      <div class="deails_holder">
+          <h2>{{ content.name}} </h2>
+      <p> {{ content.field_dc_description}} </p>
+      </div>
+    </div>
   {% endif %}
 </div>
