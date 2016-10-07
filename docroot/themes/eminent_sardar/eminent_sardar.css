@@ -231,3 +231,6 @@ video,
 #header + div {
   padding-top: 35px;
 }
+.media-teaser-title {
+  height: 45px;
+}
