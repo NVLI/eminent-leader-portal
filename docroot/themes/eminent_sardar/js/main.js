@@ -20,20 +20,24 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******fix the top bar on scroll*/
+
+  var lastScrollTop = 0;
   $(window).on("load resize scroll", function () {
 
-    if ($(window).width() > 768) {
-        if ($(window).scrollTop() > 50) {
-          $('#header').addClass('navbar-fixed-top  wow fadeInDown');
-          $('#header').css("position", "fixed");
-        }
-        if ($(window).scrollTop() < 50) {
-          $('#header').removeClass('navbar-fixed-top  wow fadeInDown');
-          $('#header').css("position", "relative");
-        }
-    };
-  });
+    var st = $(this).scrollTop();
 
+    if (st < lastScrollTop) {
+      $('#header').addClass('navbar-fixed-top ').fadeIn('slow');
+      //$('#header').css("position", "fixed");
+      //$('#header').fadeIn('slow');
+    }
+    else {
+      $('#header').fadeOut('slow');
+      //$('#header').css("position", "relative");
+    }
+
+    lastScrollTop = st;
+  });
 
 /***********************************************************************
 *******fix search show on the responsive*/
