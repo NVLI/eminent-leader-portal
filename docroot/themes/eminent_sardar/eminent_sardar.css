@@ -167,6 +167,7 @@ video,
 }
 #conatcat-info .quotes-by-sardar-holder {
   height: 575px;
+  background-attachment: fixed;
 }
 .exhibition-slick-image .img-responsive,
 .excibition_thumb .img-responsive {
@@ -220,4 +221,9 @@ video,
   top: -5px;
   font-size: 12px;
   font-weight: bold;
+}
+.biography {
+  background: url('/themes/eminent_sardar/images/biobg.png');
+  background-attachment: fixed;
+  height: 500px;
 }
