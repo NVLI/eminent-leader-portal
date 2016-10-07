@@ -25,18 +25,22 @@ jQuery(function($) {'use strict',
   $(window).on("load resize scroll", function () {
 
     var st = $(this).scrollTop();
+    if (st > 50) {
+      if (st <= lastScrollTop) {
+        $('#header').addClass('navbar-fixed-top ').fadeIn('slow');
+        //$('#header').css("position", "fixed");
+        //$('#header').fadeIn('slow');
+      }
+      else {
+        $('#header').fadeOut('slow');
+        //$('#header').css("position", "relative");
+      }
 
-    if (st <= lastScrollTop) {
-      $('#header').addClass('navbar-fixed-top ').fadeIn('slow');
-      //$('#header').css("position", "fixed");
-      //$('#header').fadeIn('slow');
+      lastScrollTop = st;
     }
     else {
-      $('#header').fadeOut('slow');
-      //$('#header').css("position", "relative");
+      $('#header').removeClass('navbar-fixed-top ').fadeIn('slow');
     }
-
-    lastScrollTop = st;
   });
 
 /***********************************************************************
