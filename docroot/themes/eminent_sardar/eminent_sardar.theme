@@ -8,6 +8,7 @@ use Drupal\Core\Link;
 use Drupal\views\Views;
 use Drupal\views\ViewEntityInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Implements template_preprocess_field.
@@ -214,6 +215,12 @@ function eminent_sardar_preprocess_media(&$variables) {
       ],
     );
   }
+
+  // Truncate the media title to be printed in the media teasers.
+  $media_teaser_title = $variables['elements']['#media']->get('field_dc_title')->value;
+  $variables['media_teaser_title'] = $media_teaser_title;
+  $variables['truncated_media_teaser_title'] = Unicode::truncate($media_teaser_title, 30);
+
 }
 
 /**

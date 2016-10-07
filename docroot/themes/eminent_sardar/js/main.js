@@ -26,7 +26,7 @@ jQuery(function($) {'use strict',
 
     var st = $(this).scrollTop();
 
-    if (st < lastScrollTop) {
+    if (st <= lastScrollTop) {
       $('#header').addClass('navbar-fixed-top ').fadeIn('slow');
       //$('#header').css("position", "fixed");
       //$('#header').fadeIn('slow');
