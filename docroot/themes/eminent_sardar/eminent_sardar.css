@@ -223,7 +223,11 @@ video,
   font-weight: bold;
 }
 .biography {
-  background: url('/themes/eminent_sardar/images/biobg.png');
-  background-attachment: fixed;
+  background: url(/themes/eminent_sardar/images/biobg.png) !important;
+  background-attachment: fixed !important;
   height: 500px;
+  background-size: cover !important;
+}
+#header + div {
+  padding-top: 35px;
 }
