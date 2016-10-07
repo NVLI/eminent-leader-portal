@@ -57,6 +57,7 @@ class CreatePlaylistForm extends FormBase {
       '#type' => 'select',
       '#description' => t('Category for the playlist'),
       '#options' => $options,
+      '#empty_option' => t('Select Category'),
     ];
     $form['featured'] = [
       '#title' => t('Display this item in Home page'),
