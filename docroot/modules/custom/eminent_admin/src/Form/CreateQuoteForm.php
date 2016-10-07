@@ -45,7 +45,6 @@ class CreateQuoteForm extends FormBase {
       '#type' => 'select',
       '#options' => $category_options,
       '#empty_option' => t('Select Category'),
-      '#required' => TRUE,
     ];
     $form['featured'] = [
       '#title' => t('Mark as featured'),
