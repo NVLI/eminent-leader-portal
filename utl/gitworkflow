@@ -1,0 +1,38 @@
+# local server
+git checkout dev
+git pull origin dev
+# make changes
+git commit -am 'some change'
+
+git push origin dev
+
+
+# test server
+# dump live.db > test.db
+# rsync live.files test.files
+git pull origin dev
+
+
+# local server: 
+git checkout stage 
+git pull origin stage
+#git pull origin dev
+git pull . dev  # ok if devs work on feature branches
+
+git push origin stage
+
+# stage server
+# dump live.db > stage.db
+# rsync live.files stage.files
+git pull origin stage
+
+
+# local server
+git checkout master
+git pull origin master
+git pull . stage
+git push origin master
+
+
+# live
+git pull origin master

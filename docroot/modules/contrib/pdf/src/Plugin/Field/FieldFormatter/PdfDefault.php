@@ -101,9 +101,9 @@ class PdfDefault extends FormatterBase {
           );
         }
       }
-      if ($force_pdfjs != TRUE) {
+      //if ($force_pdfjs != TRUE) {
         $elements['#attached']['library'][] = 'pdf/default';
-      }
+     // }
     }
     else {
       drupal_set_message($library['error message'], 'error');

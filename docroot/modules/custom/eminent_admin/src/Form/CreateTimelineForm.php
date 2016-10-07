@@ -57,7 +57,7 @@ class CreateTimelineForm extends FormBase {
       '#title' => t('Category'),
       '#type' => 'select',
       '#required' => TRUE,
-      '#description' => t('Category for the playlist'),
+      '#description' => t('Category for the timeline'),
       '#options' => $options,
     ];
     $form['featured'] = [
@@ -67,9 +67,6 @@ class CreateTimelineForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Create and Add'),
-      '#ajax' => array(
-        'callback' => '::createTimeline',
-      ),
     ];
     return $form;
   }
@@ -78,6 +75,62 @@ class CreateTimelineForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $title = $form_state->getValue('title');
+    $description = $form_state->getValue('description');
+    $featured = $form_state->getValue('featured');
+    $category = $form_state->getValue('category');
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+
+    // Load the media item.
+    $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+    if ($bundle == "image") {
+      $image = $media_content->field_media_image->target_id;
+    }
+    else {
+      $image = $media_content->thumbnail->target_id;
+    }
+
+    // Create node object with attached file.
+    $node = Node::create([
+      'type' => 'time_line_collection',
+      'body' => [
+        'value' => $description,
+      ],
+      'title'  => $title,
+      'field_time_line_collection_front' => $featured,
+      'field_category' => $category,
+      'field_time_line_collection_image' => [
+        'target_id' => $image,
+      ],
+    ]);
+
+    // Create paragraph entity.
+    $media_paragraph = Paragraph::create([
+      'type' => 'time_line_story',
+      'field_time_line_description' => [
+        'value' => $media_content->get('field_dc_description')->value,
+      ],
+      'field_time_line_image->' => [
+        ['target_id' => $media_content->thumbnail->target_id],
+      ],
+      'field_time_line_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_time_line_title' => [
+        'value' => $media_content->get('field_dc_title')->value,
+      ],
+      'field_time_line_date' => [
+        'value' => $media_content->get('field_dc_date')->value,
+      ],
+    ]);
+    $media_paragraph->save();
+    $paragraph_id = $media_paragraph->id();
+    $node->field_time_line_collection_story->appendItem($media_paragraph);
+    $node->save();
+    drupal_set_message(t('Successfully created timeline.'));
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**

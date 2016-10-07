@@ -1,22 +1,5 @@
 /* QUIZ STYLES */
-/* Styles to prettify the quiz page */
-
-html {
-    background: #eee;
-}
-
-body {
-    width: 800px;
-    margin: 0 auto;
-    border: 2px solid #ccc;
-    border-top: none;
-    background: #fff;
-    padding: 20px;
-    font-family: Trebuchet, Arial,Helvetica,sans-serif;
-    font-size: 16px;
-    color: #353535;
-    line-height: 1.5em;
-}
+/* Styles to prettify the quiz pag*/
 
 h1,h2,h3,h4,h5,h6 {font-weight: bold;}
 

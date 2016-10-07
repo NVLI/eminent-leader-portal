@@ -43,7 +43,7 @@ class AddTimeLineForm extends FormBase {
     // We will be displaying the link content in a popup.
     $create_timeline_url->setOptions([
       'attributes' => [
-        'class' => ['use-ajax', 'button', 'button--small'],
+        'class' => ['use-ajax', 'button', 'button--small', 'a'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => '{"width": "70%"}',
       ],
@@ -66,9 +66,6 @@ class AddTimeLineForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add to timeline'),
-      '#ajax' => array(
-        'callback' => '::addToTimeline',
-      ),
     ];
     return $form;
   }
@@ -83,7 +80,46 @@ class AddTimeLineForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    $time_line = $form_state->getValue('time_line');
+    $storage = $form_state->getStorage();
+    $media_id = $storage['media_id'];
+    $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+    if ($bundle == "image") {
+      $image = $media_content->field_media_image->target_id;
+    }
+    else {
+      $image = $media_content->thumbnail->target_id;
+    }
+    $description = $media_content->get('field_dc_description')->value;
+    // Create paragraph entity.
+    $media_paragraph = Paragraph::create([
+      'type' => 'time_line_story',
+      'field_time_line_description' => [
+        'value' => Unicode::truncate($description, 70),
+      ],
+      'field_time_line_image->' => [
+        ['target_id' => $image],
+      ],
+      'field_time_line_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_time_line_title' => [
+        'value' => $media_content->get('field_dc_title')->value,
+      ],
+      'field_time_line_date' => [
+        'value' => $media_content->get('field_dc_date')->value,
+      ],
+    ]);
+    $media_paragraph->save();
+    $paragraph_id = $media_paragraph->id();
 
+    // Attach the created paragraph entity to the timeline.
+    $timeline_node = Node::load($time_line);
+    $timeline_node->field_time_line_collection_story->appendItem($media_paragraph);
+    $timeline_node->save();
+    drupal_set_message(t('Successfully added media to timeline.'));
+    $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
   /**

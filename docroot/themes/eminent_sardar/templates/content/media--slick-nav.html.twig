@@ -15,7 +15,18 @@
 <div>
   <div class = "recent-work-wrap excibition_thumb">
     {% if content %}
-      {{ content }}
+      {% if media_type == "audio" %}
+        <img src="/themes/eminent_sardar/images/audio.png" class="img-responsive">
+      {% elseif media_type == "document" %}
+        <img src="/themes/eminent_sardar/images/pdf.png" class="img-responsive">
+      {% elseif media_type == "video" %}
+        <img src="/themes/eminent_sardar/images/video.png" class="img-responsive">
+      {% else %}
+        {{ content.field_media_image }}
+      {% endif %}
+      <div class="overlay hidden-xs">
+        {{ content.field_dc_title }}
+      </div>
     {% endif %}
 
   </div>
