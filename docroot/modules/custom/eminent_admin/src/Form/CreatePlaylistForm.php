@@ -55,7 +55,6 @@ class CreatePlaylistForm extends FormBase {
     $form['category'] = [
       '#title' => t('Category'),
       '#type' => 'select',
-      '#required' => TRUE,
       '#description' => t('Category for the playlist'),
       '#options' => $options,
     ];

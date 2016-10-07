@@ -56,7 +56,6 @@ class CreateTimelineForm extends FormBase {
     $form['category'] = [
       '#title' => t('Category'),
       '#type' => 'select',
-      '#required' => TRUE,
       '#description' => t('Category for the timeline'),
       '#options' => $options,
     ];

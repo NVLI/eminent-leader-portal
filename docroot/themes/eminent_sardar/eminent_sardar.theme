@@ -218,8 +218,10 @@ function eminent_sardar_preprocess_media(&$variables) {
 
   // Truncate the media title to be printed in the media teasers.
   $media_teaser_title = $variables['elements']['#media']->get('field_dc_title')->value;
-  $variables['media_teaser_title'] = $media_teaser_title;
-  $variables['truncated_media_teaser_title'] = Unicode::truncate($media_teaser_title, 30);
+  $variables['truncated_media_teaser_title'] = $variables['media_teaser_title'] = $media_teaser_title;
+  if (strlen($media_teaser_title) > 30) {
+    $variables['truncated_media_teaser_title'] = Unicode::truncate($media_teaser_title, 30) . '...';
+  }
 
 }
 
