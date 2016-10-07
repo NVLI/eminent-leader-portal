@@ -106,7 +106,7 @@ class CreatePlaylistForm extends FormBase {
     // Add the media item to the created node.
     $node->field_resource->appendItem($media_id);
     $node->save();
-    drupal_set_message(t('Successfully created playlist.'));
+    drupal_set_message(t('Successfully created playlist and added the media item.'));
     $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 

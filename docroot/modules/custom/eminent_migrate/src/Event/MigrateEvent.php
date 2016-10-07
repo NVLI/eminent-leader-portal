@@ -36,13 +36,13 @@ class MigrateEvent implements EventSubscriberInterface {
     if ($extension == "pdf" || $extension == "PDF" || $extension == "docx") {
       $row->setSourceProperty('media_bundle', 'document');
     }
-    else if ($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
+    else if ($extension == "jpg" || $extension == "png" || $extension == "jpeg" || $extension == "gif" || $extension == "Jpg" || $extension == "JPG") {
       $row->setSourceProperty('media_bundle', 'image');
     }
     else if ($extension == "mp3" || $extension == "wav") {
       $row->setSourceProperty('media_bundle', 'audio');
     }
-    else if ($extension == "mp4" || $extension == "mpeg") {
+    else if ($extension == "mp4" || $extension == "mpeg" || $extension == "mpg") {
       $row->setSourceProperty('media_bundle', 'video');
     }
   }

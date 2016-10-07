@@ -214,3 +214,10 @@ video,
   text-decoration: none;
   outline: none;
 }
+.ui-dialog-titlebar-close:after {
+  content: "X";
+  position: relative;
+  top: -5px;
+  font-size: 12px;
+  font-weight: bold;
+}

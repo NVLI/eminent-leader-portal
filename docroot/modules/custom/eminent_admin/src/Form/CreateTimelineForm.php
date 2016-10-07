@@ -129,7 +129,7 @@ class CreateTimelineForm extends FormBase {
     $paragraph_id = $media_paragraph->id();
     $node->field_time_line_collection_story->appendItem($media_paragraph);
     $node->save();
-    drupal_set_message(t('Successfully created timeline.'));
+    drupal_set_message(t('Successfully created timeline and added the media item.'));
     $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
 
