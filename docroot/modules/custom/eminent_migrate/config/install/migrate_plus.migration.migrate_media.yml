@@ -29,31 +29,34 @@ source:
     1:
       file_name: Filename
     2:
-      title: Title
+      sha1: SHA1 hash
     3:
-      creator: Creator
+      title: Title
     4:
-      date: Date
+      creator: Creator
     5:
-      date_range: Coverage.Temporal
+      date: Date
     6:
-      location: Coverage.Spatial
+      date_range: Coverage.Temporal
     7:
-      publisher: Publisher
+      location: Coverage.Spatial
     8:
-      description: Description
+      publisher: Publisher
     9:
-      language: Language
+      description: Description
     10:
-      file_type: File type
+      language: Language
     11:
-      content_type: Content Type
+      file_type: File type
     12:
-      format: Format
+      content_type: Content Type
     13:
-      copyright: Copyright
+      format: Format
     14:
+      copyright: Copyright
+    15:                         
       keyword: Keyword/Subject
+
 destination:
   # Here we're saying that each row of data (line from the CSV file) will be
   # used to create a media entity.
@@ -61,6 +64,7 @@ destination:
 process:
   bundle: media_bundle
   name: title
+  field_filehash: sha1
   field_dc_title: title
   field_dc_description: description
   field_dc_contributor: creator
