@@ -30,6 +30,7 @@ class MigrateEvent implements EventSubscriberInterface {
   public function onPrepareRow(MigratePrepareRowEvent $event) {
     $row = $event->getRow();
     $file_name = $row->getSourceProperty('file_name');
+    $id = $row->getSourceProperty('identifier');
     $extension = $row->getSourceProperty('format');
     $source_path = "public://" . $file_name;
     $row->setSourceProperty('source_path', $source_path);
@@ -51,6 +52,8 @@ class MigrateEvent implements EventSubscriberInterface {
     ->condition('field_filehash', $sha1)
     ->execute();
     if (!empty($media_id)) {
+      $message = "File " . $file_name . " already exists. aborting the import of csv item " . $id;
+      \Drupal::logger('eminent_migration')->error($message);
       return FALSE;
     }
   }
