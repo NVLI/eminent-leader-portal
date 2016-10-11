@@ -92,16 +92,30 @@ class CreatePlaylistForm extends FormBase {
     }
 
     // Create node object with attached file.
-    $node = Node::create([
-      'type' => 'play_list',
-      'field_description' => $description,
-      'field_playlist_featured' => $featured,
-      'field_category' => $category,
-      'title'  => $title,
-      'field_playlist_image' => [
-        'target_id' => $image,
-      ],
-    ]);
+    if (empty($category)) {
+      $node = Node::create([
+        'type' => 'play_list',
+        'field_description' => $description,
+        'field_playlist_featured' => $featured,
+        'title'  => $title,
+        'field_playlist_image' => [
+          'target_id' => $image,
+        ],
+      ]);
+    }
+    else {
+      $node = Node::create([
+        'type' => 'play_list',
+        'field_description' => $description,
+        'field_playlist_featured' => $featured,
+        'field_category' => $category,
+        'title'  => $title,
+        'field_playlist_image' => [
+          'target_id' => $image,
+        ],
+      ]);
+    }
+
     $node->save();
     // Add the media item to the created node.
     $node->field_resource->appendItem($media_id);

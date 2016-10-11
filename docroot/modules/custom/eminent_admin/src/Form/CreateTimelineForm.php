@@ -91,20 +91,36 @@ class CreateTimelineForm extends FormBase {
     else {
       $image = $media_content->thumbnail->target_id;
     }
+    if (empty($category)) {
+      // Create node object with attached file.
+      $node = Node::create([
+        'type' => 'time_line_collection',
+        'body' => [
+          'value' => $description,
+        ],
+        'title'  => $title,
+        'field_time_line_collection_front' => $featured,
+        'field_time_line_collection_image' => [
+          'target_id' => $image,
+        ],
+      ]);
+    }
+    else {
+      // Create node object with attached file.
+      $node = Node::create([
+        'type' => 'time_line_collection',
+        'body' => [
+          'value' => $description,
+        ],
+        'title'  => $title,
+        'field_time_line_collection_front' => $featured,
+        'field_category' => $category,
+        'field_time_line_collection_image' => [
+          'target_id' => $image,
+        ],
+      ]);
+    }
 
-    // Create node object with attached file.
-    $node = Node::create([
-      'type' => 'time_line_collection',
-      'body' => [
-        'value' => $description,
-      ],
-      'title'  => $title,
-      'field_time_line_collection_front' => $featured,
-      'field_category' => $category,
-      'field_time_line_collection_image' => [
-        'target_id' => $image,
-      ],
-    ]);
 
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
