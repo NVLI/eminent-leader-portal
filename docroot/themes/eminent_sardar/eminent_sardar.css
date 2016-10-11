@@ -235,9 +235,12 @@ video,
   height: 45px;
 }
 .media-teaser {
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 .navbar-inverse .navbar-nav > li > a:focus {
     background-color: transparent;
     color: #66686F;
+}
+.thumbnail {
+  margin-bottom: 0;
 }
