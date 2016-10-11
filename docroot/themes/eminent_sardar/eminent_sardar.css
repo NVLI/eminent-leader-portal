@@ -253,3 +253,8 @@ video,
   font-size: 18px;
   font-weight: normal;
 }
+@media (min-width: 768px) {
+  #header .search {
+    float: left;
+  }
+}
