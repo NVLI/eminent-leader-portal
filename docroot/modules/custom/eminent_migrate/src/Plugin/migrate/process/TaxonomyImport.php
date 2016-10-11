@@ -23,6 +23,9 @@ class TaxonomyImport extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $vocabulary = "subject";
+    if (empty($value)) {
+      $value = "sardar";
+    }
     if ($terms = taxonomy_term_load_multiple_by_name($value, 'subject')) {
       $term = reset($terms);
     }
