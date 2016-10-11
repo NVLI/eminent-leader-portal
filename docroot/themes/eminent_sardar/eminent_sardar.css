@@ -92,9 +92,6 @@
 .center.home-timeline {
   padding-bottom: 0px;
 }
-.quotes {
-  height: 200px;
-}
 .quotes p {
   display: inline;
   text-align: center;
@@ -102,7 +99,10 @@
 .quotes .recent-work-inner {
   text-align: center;
 }
-
+.quotes .overlay {
+  position: relative;
+  margin-bottom: 30px;
+}
 
 #col-metadata .panel-body > div > div {
   display: inline;
