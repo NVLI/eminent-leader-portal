@@ -249,3 +249,7 @@ video,
   width: 1px;
   border-right: 2px dashed #353740;
 }
+.cd-timeline-content .cd-date {
+  font-size: 18px;
+  font-weight: normal;
+}
