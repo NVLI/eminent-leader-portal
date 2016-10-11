@@ -13,7 +13,7 @@ source:
   # uniquely identifying each game - they will be stored in the migration
   # map table as columns sourceid1, sourceid2, and sourceid3.
   keys:
-    - identifier
+    - sha1
   # Here we identify the columns of interest in the source file. Each numeric
   # key is the 0-based index of the column. For each column, the key below
   # (e.g., "start_date") is the field name assigned to the data on import, to
@@ -54,7 +54,7 @@ source:
       format: Format
     14:
       copyright: Copyright
-    15:                         
+    15:
       keyword: Keyword/Subject
 
 destination:
