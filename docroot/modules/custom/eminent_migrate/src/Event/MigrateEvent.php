@@ -31,6 +31,14 @@ class MigrateEvent implements EventSubscriberInterface {
     $row = $event->getRow();
     $file_name = $row->getSourceProperty('file_name');
     $extension = $row->getSourceProperty('format');
+    $sha1 = $row->getSourceProperty('sha1');
+    // check whether the sha1 exists. if exists skip the csv row.
+    $media_id = \Drupal::entityQuery('media')
+    ->condition('field_filehash', $sha1)
+    ->execute();
+    if (!empty($media_id)) {
+      return FALSE;
+    }
     $source_path = "public://" . $file_name;
     $row->setSourceProperty('source_path', $source_path);
     if ($extension == "pdf" || $extension == "PDF" || $extension == "docx") {
