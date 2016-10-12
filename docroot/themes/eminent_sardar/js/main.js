@@ -82,10 +82,12 @@ function isVisible($el) {
   return ((elBottom<= winBottom) && (elTop >= winTop));
 }
 $(document).on('scroll', function() {
+  if($('#conatcat-info').length > 0 ) {
     if( isVisible($("#conatcat-info")) ) {
         $(document).off('scroll');
         $('#launchquiz').modal('show');
     }
+  }
 });
 /***********************************************************************
 *******Dyanmically distribute height for the slider*/
