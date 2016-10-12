@@ -92,9 +92,6 @@
 .center.home-timeline {
   padding-bottom: 0px;
 }
-.quotes {
-  height: 200px;
-}
 .quotes p {
   display: inline;
   text-align: center;
@@ -102,7 +99,10 @@
 .quotes .recent-work-inner {
   text-align: center;
 }
-
+.quotes .overlay {
+  position: relative;
+  margin-bottom: 30px;
+}
 
 #col-metadata .panel-body > div > div {
   display: inline;
@@ -233,4 +233,28 @@ video,
 }
 .media-teaser-title {
   height: 45px;
+}
+.media-teaser {
+  padding-bottom: 30px;
+}
+.navbar-inverse .navbar-nav > li > a:focus {
+  background-color: transparent;
+  color: #66686F;
+}
+.thumbnail {
+  margin-bottom: 0;
+}
+#cd-timeline::before {
+  height: 100%;
+  width: 1px;
+  border-right: 2px dashed #353740;
+}
+.cd-timeline-content .cd-date {
+  font-size: 18px;
+  font-weight: normal;
+}
+@media (min-width: 768px) {
+  #header .search {
+    float: left;
+  }
 }
