@@ -22,24 +22,18 @@ jQuery(function($) {'use strict',
 *******fix the top bar on scroll*/
 
   var lastScrollTop = 0;
-  $(window).on("load resize scroll", function () {
+  $(window).on("scroll", function () {
 
     var st = $(this).scrollTop();
     if (st > 50) {
       if (st <= lastScrollTop) {
-        $('#header').addClass('navbar-fixed-top ').fadeIn('slow');
-        //$('#header').css("position", "fixed");
-        //$('#header').fadeIn('slow');
+        $('#header').fadeIn('slow');
       }
       else {
         $('#header').fadeOut('slow');
-        //$('#header').css("position", "relative");
       }
 
       lastScrollTop = st;
-    }
-    else {
-      $('#header').removeClass('navbar-fixed-top ').fadeIn('slow');
     }
   });
 
