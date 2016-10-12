@@ -301,5 +301,13 @@ function eminent_sardar_preprocess_paragraph(&$variables) {
   $paragraph = $variables['elements']['#paragraph'];
   $media_entity_id = $paragraph->get('field_time_line_media_reference')->target_id;;
   $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
+  $media_content = entity_load('media', $media_entity_id);
+  $media_image_url = NULL;
+  if ($media_content->bundle() == "image") {
+    $image = $media_content->field_media_image->target_id;
+    $file = File::load($image);
+    $media_image_url = ImageStyle::load('timeline_image')->buildUrl($file->getFileUri());
+  }
   $variables['media_url'] = $media_url;
+  $variables['media_image_url'] = $media_image_url;
 }
