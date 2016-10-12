@@ -10,6 +10,7 @@ use Drupal\views\ViewEntityInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\Unicode;
 use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Implements template_preprocess_field.
