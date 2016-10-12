@@ -9,6 +9,7 @@ use Drupal\views\Views;
 use Drupal\views\ViewEntityInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\Unicode;
+use Drupal\file\Entity\File;
 
 /**
  * Implements template_preprocess_field.
