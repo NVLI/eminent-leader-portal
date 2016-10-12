@@ -230,8 +230,8 @@ video,
 #header + div {
   padding-top: 120px;
 }
-div + #header + div {
-  padding-top: 50px;
+body {
+  padding: 0 !important;
 }
 .media-teaser-title {
   height: 45px;
