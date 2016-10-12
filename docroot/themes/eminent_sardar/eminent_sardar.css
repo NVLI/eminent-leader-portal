@@ -182,7 +182,6 @@ video,
 }
 .deails_holder {
   max-height: 300px;
-  overflow-y: scroll;
 }
 #header .navbar-right .search input.search-form {
   width: 200px;
@@ -229,7 +228,10 @@ video,
   background-size: cover !important;
 }
 #header + div {
-  padding-top: 35px;
+  padding-top: 120px;
+}
+div + #header + div {
+  padding-top: 50px;
 }
 .media-teaser-title {
   height: 45px;
