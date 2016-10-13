@@ -36,10 +36,11 @@
                 {{ content.field_media_image }}
               </section>
             {% endif %}
-
+            {% if media_type == "document" %}
             <div class="resize-btn btn btn-default pull-right">
               <span class="glyphicon glyphicon-resize-full" title="View full screen."></span>
             </div>
+            {% endif %}
             <div class="clearfix"></div>
           </div>
         </div>
