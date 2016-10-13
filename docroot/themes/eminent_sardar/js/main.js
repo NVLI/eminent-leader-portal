@@ -38,6 +38,53 @@ jQuery(function($) {'use strict',
   });
 
 /***********************************************************************
+*******Full screen view for the media page*/
+
+  var fullscreen = false;
+  $('.resize-btn').on("click", function () {
+    alert('sdf');
+    if(!fullscreen)
+    {
+      $('.media-preview').css( {
+        'position': 'fixed',
+        'top': 0,
+        'bottom': 0,
+        'left': 0,
+        'right': 0,
+        'margin-bottom': 0,
+        'z-index': 9999
+      });
+
+      $('.resize-btn').css( {
+        'position': 'fixed',
+        'bottom': 0,
+        'right': 0,
+      });
+
+      $('.resize-btn').html('<span class="glyphicon glyphicon-resize-small" title="Exit full screen"></span>');
+
+      fullscreen = true;
+    }
+    else {
+      $('.media-preview').css( {
+        'position': 'relative',
+        'margin-bottom': '70px',
+        'z-index': 0
+      });
+
+      $('.resize-btn').css({
+        'position': 'relative'
+      });
+
+      $('.resize-btn').html('<span class="glyphicon glyphicon-resize-full" title="View full screen."></span>');
+
+      fullscreen = false;
+    }
+
+
+  });
+
+/***********************************************************************
 *******fix search show on the responsive*/
   $(window).on("load resize ", function () {
     if ($(window).width() < 768) {
