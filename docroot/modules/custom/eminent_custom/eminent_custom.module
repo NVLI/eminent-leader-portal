@@ -39,3 +39,16 @@ function eminent_custom_paragraph_presave(EntityInterface $entity) {
     }
   }
 }
+
+/**
+ * Implements hook_theme.
+ */
+function eminent_custom_theme($existing, $type, $theme, $path) {
+  return array(
+    'related_media' => array(
+      'variables' => array(
+        'media_items' => array(),
+      ),
+    ),
+  );
+}
