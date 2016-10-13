@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 #bottom .navbar-brand img {
   width: 100%;
@@ -139,6 +139,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #media_details .pdf-holder-ex iframe {
   min-height: 500px;
+  height: 100%;
 }
 .article-content img {
   float: left;
@@ -260,6 +261,10 @@ body {
 .cd-timeline-content .cd-date {
   font-size: 18px;
   font-weight: normal;
+}
+.pdf-holder-ex,
+.pdf-holder-ex > div {
+  height: 100%;
 }
 @media (min-width: 768px) {
   #header .search {
