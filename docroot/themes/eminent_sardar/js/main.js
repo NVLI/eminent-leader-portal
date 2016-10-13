@@ -42,7 +42,6 @@ jQuery(function($) {'use strict',
 
   var fullscreen = false;
   $('.resize-btn').on("click", function () {
-    alert('sdf');
     if(!fullscreen)
     {
       $('.media-preview').css( {
