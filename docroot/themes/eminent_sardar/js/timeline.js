@@ -2,7 +2,6 @@
 
   Drupal.behaviors.Eminent = {
     attach: function (context, settings) {
-      $('#header .navbar-right .views-exposed-form').addClass('search');
       $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
       function equalgridheight(group) {
         var tallest = 0;
