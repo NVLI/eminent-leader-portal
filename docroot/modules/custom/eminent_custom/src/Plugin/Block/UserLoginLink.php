@@ -11,6 +11,8 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use \Drupal\user\Entity\User;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Provides a 'User login links' block.
@@ -27,19 +29,29 @@ class UserLoginLink extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $user = \Drupal::currentUser();
+    // Fetch the current user id.
     $uid = \Drupal::currentUser()->id();
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     $markup = NULL;
+    // Display the block only for autherised users.
     if ($uid != 0) {
       $name = $user->getUsername();
       $text = t('Welcome @name', array('@name' => $name));
       // Get current user roles.
       $user_roles = \Drupal::currentUser()->getRoles();
       if ($uid == 1 || in_array("curator", $user_roles)) {
+      $image_fid = $user->get('user_picture')->target_id;
+      $file = File::load($image_fid);
+      if(!empty($file)) {
+        $media_image_url = ImageStyle::load('exhibition_grid')->buildUrl($file->getFileUri());
+      }
+      if (empty($media_image_url)) {
+        $media_image_url = "/themes/eminent_sardar/images/user-image.png";
+      }
       $markup = '
         <a href="/user" class="dropdown-toggle user-profile-toggle" data-toggle="dropdown">
         <span class="user-image">
-        <img src="/themes/eminent_sardar/images/man4.jpg" class="img-responsive"></span> ' . $text . '</a>
+        <img src="' . $media_image_url .'" class="img-responsive"></span> ' . $text . '</a>
           <ul class="dropdown-menu">
             <li><a href="/quote/add">Add Quote</a></li>
             <li><a href="/node/add/time_line_collection">Add Timeline</a></li>
