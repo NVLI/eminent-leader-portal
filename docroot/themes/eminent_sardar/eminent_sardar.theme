@@ -279,6 +279,15 @@ function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal
 }
 
 /**
+* Implements hook_form_alter.
+*/
+function eminent_sardar_views_exposed_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (isset($_GET['keyword'])) {
+    $form['keyword']['#default_value'] = $_GET['keyword'];
+  }
+}
+
+/**
  * Implements hook_preprocess_page.
  */
 function eminent_sardar_preprocess_page(&$variables) {
