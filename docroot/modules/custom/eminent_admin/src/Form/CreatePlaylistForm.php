@@ -30,7 +30,7 @@ class CreatePlaylistForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $media_id = NULL) {
     // Fetch the categories for playlist.
-    $vid = 'subject';
+    $vid = 'subject_classification';
     $categories = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
     $options = array();
     foreach ($categories as $category) {
