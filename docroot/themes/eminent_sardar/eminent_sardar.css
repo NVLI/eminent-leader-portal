@@ -282,6 +282,9 @@ body {
 .tab-content img {
   margin: auto;
 }
+.responses {
+margin-bottom: 10px;
+}
 @media (min-width: 768px) {
   #header .search {
     float: left;
