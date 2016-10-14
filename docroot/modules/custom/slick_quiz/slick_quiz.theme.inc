@@ -22,6 +22,7 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
   $slick_quiz['info']['level5'] = $options['general_settings']['quiz_level_5'];
 
   // Get the machine names of the quiz fields.
+  $quiz_field_question = $options['field_settings']['quiz_question'];
   $quiz_field_options = $options['field_settings']['quiz_field'];
   $quiz_field_option = $options['field_settings']['quiz_field_option'];
   $quiz_field_correct_option_feedback = $options['field_settings']['quiz_field_correct_option_feedback'];
@@ -34,7 +35,7 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
   foreach ($variables['view']->result as $id => $result) {
     $entity = $result->_entity;
     $quiz_options = $entity->get($quiz_field_options)->getValue();
-    $title = $entity->get('title')->getValue();
+    $title = $entity->get($quiz_field_question)->getValue();
     $slick_quiz['questions'][$id]["q"] = $title['0']['value'];
 
     foreach ($quiz_options as $option_item) {

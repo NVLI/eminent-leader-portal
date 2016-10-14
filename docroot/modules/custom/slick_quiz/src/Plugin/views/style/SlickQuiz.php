@@ -102,6 +102,13 @@ class SlickQuiz extends StylePluginBase {
       '#open' => FALSE,
     );
 
+    // The machine name of quiz question field.
+    $form['field_settings']['quiz_question'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Machine name of quiz question field'),
+      '#default_value' => (isset($this->options['field_settings']['quiz_question'])) ? $this->options['field_settings']['quiz_question'] : '',
+      '#description' => t('The machine name of quiz question field.'),
+    );
     // The machine name of quiz field collection.
     $form['field_settings']['quiz_field'] = array(
       '#type' => 'textfield',
