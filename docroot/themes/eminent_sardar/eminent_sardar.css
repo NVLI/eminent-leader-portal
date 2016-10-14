@@ -281,3 +281,17 @@ body {
     float: left;
   }
 }
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-block:nth-child(odd) .cd-timeline-content .cd-date {
+    right: auto;
+    left: 120%;
+    text-align: left;
+    top: 5px;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+    left: auto;
+    right: 120%;
+    text-align: right;
+    top: 5px;
+  }
+}
