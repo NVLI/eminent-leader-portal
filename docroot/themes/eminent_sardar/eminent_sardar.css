@@ -118,7 +118,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .quick-quiz .button {
   border-radius: 0;
-  display: inline;
   margin: 5px !important;
 }
 .quick-quiz .responses {

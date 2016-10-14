@@ -285,7 +285,6 @@ General styles for the Quiz block in the home page*/
   color: #fff;
   border: none;
   margin-top: 10px;
-  display: table;
   text-align: center;
   margin: auto;
   margin-bottom: 10px;
@@ -723,7 +722,7 @@ General styles for the timeline  story telling*/
   margin-bottom: 20px;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Modules - reusable parts of our design
 
@@ -742,9 +741,9 @@ Modules - reusable parts of our design
   clear: both;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main components 
+Main components
 
 -------------------------------- */
 @media only screen and (min-width: 1170px) {
