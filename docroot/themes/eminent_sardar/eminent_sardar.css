@@ -11,6 +11,10 @@ p,
 a {
   font-family: sans-serif !important;
 }
+.slidercontent h1 {
+  font-family: serif !important;
+}
+}
 #bottom .navbar-brand img {
   width: 100%;
 }
