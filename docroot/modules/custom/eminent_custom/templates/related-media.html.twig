@@ -1,0 +1,37 @@
+{% if media_items is not null %}
+  <div class="center">
+    <h2 class="wow svp-block-content animated" style="visibility: visible;">Related Media</h2>
+  </div>
+  <div>
+    <div class = "row">
+      {% for media_items in media_items %}
+        <div class="col-xs-12 col-md-3">
+          <div class = "media-teaser">
+            <div class = "item">
+              <div class = "thumbnail">
+                <section class = "item-body">
+                  <article{{ attributes }}>
+                    <img class = "img-responsive" src = "{{ media_items.image }}" />
+                    <div class="text-center media-teaser-title">
+                      <h2>
+                       <a href = "/media/{{ media_items.media_id }}" title = " {{ media_items.title }}">{{ media_items.truncated_title }}</a>
+                      </h2>
+                    </div>
+                    <div>
+                      <a href="/media/{{ media_items.media_id }}" rel="bookmark" class="pull-right"> Read more </a>
+                    </div>
+                    <hr>
+                    <div class = "clear-fix">
+                      {{ media_items.addtotimeline }}
+                      {{ media_items.addtoplaylist }}
+                    </div>
+                  </article>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

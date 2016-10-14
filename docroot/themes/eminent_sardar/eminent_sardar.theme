@@ -9,6 +9,8 @@ use Drupal\views\Views;
 use Drupal\views\ViewEntityInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\Unicode;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Implements template_preprocess_field.
@@ -306,7 +308,9 @@ function eminent_sardar_preprocess_paragraph(&$variables) {
   if ($media_content->bundle() == "image") {
     $image = $media_content->field_media_image->target_id;
     $file = File::load($image);
-    $media_image_url = ImageStyle::load('timeline_image')->buildUrl($file->getFileUri());
+    if (!empty($file)) {
+      $media_image_url = ImageStyle::load('timeline_image')->buildUrl($file->getFileUri());
+    }
   }
   $variables['media_url'] = $media_url;
   $variables['media_image_url'] = $media_image_url;
