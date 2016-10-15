@@ -51,7 +51,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
       <div class="cd-timeline-content">
         <h2>{{ content.field_time_line_title }}</h2>
         {% if media_image_url is not null %}
-          <div class = "time-image"> <img src = "{{ media_image_url }}" /></div>
+          <div class = "time-image"> <img class = "img-responsive img-blog" src = "{{ media_image_url }}" /></div>
         {% endif %}
         <p> {{ content.field_time_line_description }} </p>
         <a href= {{ media_url }} class="more">More</a>

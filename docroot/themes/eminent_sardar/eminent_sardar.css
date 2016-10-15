@@ -304,3 +304,6 @@ margin-bottom: 10px;
     top: 5px;
   }
 }
+#bottom .navbar-brand img {
+  width: 100% !important;
+}
