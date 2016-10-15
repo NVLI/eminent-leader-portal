@@ -25,11 +25,16 @@
  * @see template_preprocess_block()
  */
 #}
-<div class = "search-filter hidden">
-{% block content %}
-  <div class = "col-md-4">
-    <h2>{{ label }}</h2>
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {% if label %}
+    <div class = "center">
+      <h2 class = "wow svp-block-content">{{ label }}</h2>
+    </div>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
     {{ content }}
-  </div>
-{% endblock %}
+  {% endblock %}
+</div>
 
