@@ -315,6 +315,6 @@ margin-bottom: 10px;
   margin: auto;
   width: auto;
 }
-.search-results-tab .search-result-nav .nav-tabs li {
-  margin: 1px;
+#main-slider .slider-item .content-holder h1 {
+  font-family: "G-Crimson Text-n4", Arial !important;
 }
