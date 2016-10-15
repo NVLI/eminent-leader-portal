@@ -315,3 +315,6 @@ margin-bottom: 10px;
   margin: auto;
   width: auto;
 }
+.search-results-tab .search-result-nav .nav-tabs li {
+  margin: 1px;
+}
