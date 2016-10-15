@@ -186,10 +186,6 @@ video,
   height: 575px;
   background-attachment: fixed;
 }
-.exhibition-slick-image .img-responsive,
-.excibition_thumb .img-responsive {
-  height: 100% !important;
-}
 .center {
   padding-bottom: 0px !important;
 }
@@ -306,4 +302,16 @@ margin-bottom: 10px;
 }
 #bottom .navbar-brand img {
   width: 100% !important;
+}
+#timeline img {
+  width: 100%;
+}
+.exibition_pager .excibition_thumb {
+  cursor: pointer;
+  border: 1px solid #bdc3c7;
+  padding: 10px;
+}
+.excibition_thumb img {
+  margin: auto;
+  width: auto;
 }
