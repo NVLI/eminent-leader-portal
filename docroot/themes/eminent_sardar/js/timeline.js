@@ -3,6 +3,22 @@
   Drupal.behaviors.Eminent = {
     attach: function (context, settings) {
       $('#header .navbar-right .views-exposed-form form').attr('role', 'form');
+      if ($('.exhibitions-wrapper').length > 0) {
+        $('a.search-tab').removeClass("active");
+        $('#exhibition-tab').addClass('active');
+      }
+      if ($('.timelines-wrapper').length > 0) {
+        $('a.search-tab').removeClass("active");
+        $('#timeline-tab').addClass('active');
+      }
+      if ($('.media-wrapper').length > 0) {
+        $('a.search-tab').removeClass("active");
+        $('#media-tab').addClass('active');
+      }
+      if ($('.quotes-wrapper').length > 0) {
+        $('a.search-tab').removeClass("active");
+        $('#quote-tab').addClass('active');
+      }
       function equalgridheight(group) {
         var tallest = 0;
         group.each(function() {

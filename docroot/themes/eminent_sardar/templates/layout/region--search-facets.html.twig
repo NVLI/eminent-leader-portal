@@ -14,5 +14,11 @@
 #}
 
 {% if content is not empty %}
-  {{ content }}
+  <div class = "search-filter hidden">
+    {{ content }}
+    <div class="clearfix"></div>
+  </div>
+  <button class="triggersearchfilter"><i class="fa fa-filter" aria-hidden="true"></i> &nbsp;Show filters</button>
+  <div class="clearfix"></div>
 {% endif %}
+

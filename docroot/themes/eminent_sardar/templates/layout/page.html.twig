@@ -71,7 +71,14 @@
 
 {% if show_filters %}
   {% if page.search_filters %}
-    {{ page.search_filters }}
+    <div class = "container search-filters">
+      <div class="widget search searchresult-form">
+        {{ page.search_filters }}
+        {% if page.search_facets %}
+          {{ page.search_facets }}
+        {% endif %}
+      </div>
+    </div>
   {% endif %}
 {% endif %}
 
