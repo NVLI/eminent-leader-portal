@@ -318,6 +318,9 @@ margin-bottom: 10px;
 #main-slider .slider-item .content-holder h1 {
   font-family: "G-Crimson Text-n4", Arial !important;
 }
+.exhibition-slick-image img {
+  margin: auto;
+}
 @media only screen and (max-width: 1170px) {
   #cd-timeline {
     margin-left: 150px;
