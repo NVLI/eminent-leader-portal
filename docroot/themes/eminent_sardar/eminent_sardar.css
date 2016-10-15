@@ -307,3 +307,6 @@ margin-bottom: 10px;
 #bottom .navbar-brand img {
   width: 100% !important;
 }
+#timeline img {
+  width: 100%;
+}
