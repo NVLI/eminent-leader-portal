@@ -41,9 +41,19 @@ function eminent_sardar_theme_suggestions_alter(array &$suggestions, array $vari
  * Implements template_preprocess_views.
  */
 function eminent_sardar_preprocess_views_view(&$variables) {
+  $keyword = NULL;
   $view = $variables['view'];
   $view_title = $view->storage;
   $route_name = \Drupal::routeMatch()->getRouteName();
+  if (isset($_GET['keyword'])) {
+    $keyword = $variables['search_keyword'] = $_GET['keyword'];
+  }
+
+  $variables['exhibitions_url'] = Url::fromRoute('view.eminent_search.page_1', ['keyword' => $keyword]);
+  $variables['timeline_url'] = Url::fromRoute('view.eminent_search.page_2', ['keyword' => $keyword]);
+  $variables['media_url'] = Url::fromRoute('view.eminent_search.page_3', ['keyword' => $keyword]);
+  $variables['quote_url'] = Url::fromRoute('view.eminent_search.page_4', ['keyword' => $keyword]);
+
   // Display filters only in the search page.
   if ($route_name == "view.eminent_search.page_1") {
     $variables['search_list_wrapper_class'] = 'exhibitions-wrapper';
@@ -56,9 +66,6 @@ function eminent_sardar_preprocess_views_view(&$variables) {
   }
   if ($route_name == "view.eminent_search.page_4") {
     $variables['search_list_wrapper_class'] = 'quotes-wrapper';
-  }
-  if (isset($_GET['keyword'])) {
-    $variables['search_keyword'] = $_GET['keyword'];
   }
 }
 

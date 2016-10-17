@@ -344,6 +344,18 @@ margin-bottom: 10px;
 #main-slider .slider-item {
   height: 550px;
 }
+
+#block-languagedropdownswitcher {
+  float: right;
+}
+#block-languagedropdownswitcher {
+  margin-top: 6px;
+  padding: 10px;
+}
+#block-languagedropdownswitcher select {
+  height: 35px;
+}
+
 .meidiablock .media_details_hold .item {
   margin-bottom: 0px;
 }

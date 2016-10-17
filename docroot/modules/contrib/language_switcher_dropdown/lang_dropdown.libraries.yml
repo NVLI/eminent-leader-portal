@@ -1,0 +1,43 @@
+lang-dropdown-form:
+  version: 1.x
+  css:
+    component:
+      css/lang_dropdown.css: {}
+  js:
+    js/lang_dropdown.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+ms-dropdown:
+  version: 3.5.2
+  title: 'Marghoob Suleman Dropdown jquery library'
+  website: 'https://github.com/marghoobsuleman/ms-Dropdown'
+  js:
+    /sites/all/libraries/ms-Dropdown/js/msdropdown/jquery.dd.min.js: {}
+  css:
+    component:
+      /sites/all/libraries/ms-Dropdown/css/msdropdown/dd.css: {}
+  dependencies:
+    - core/jquery
+
+chosen:
+  version: 1.0.0
+  title: 'Chosen'
+  website: http://harvesthq.github.com/chosen
+  js:
+   /sites/all/libraries/chosen/chosen.jquery.min.js: {}
+  css:
+    component:
+      /sites/all/libraries/chosen/chosen.css: {}
+  dependencies:
+    - core/jquery
+
+ddslick:
+  version: 2.0
+  title: ddSlick
+  website: http://designwithpc.com/Plugins/ddSlick
+  js:
+    /sites/all/libraries/ddslick/jquery.ddslick.min.js: {}
+  dependencies:
+    - core/jquery
