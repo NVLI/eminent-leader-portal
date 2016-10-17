@@ -343,6 +343,9 @@ margin-bottom: 10px;
   height: 550px;
 }
 #block-languagedropdownswitcher {
+  float: right;
+}
+#block-languagedropdownswitcher {
   margin-top: 6px;
   padding: 10px;
 }
