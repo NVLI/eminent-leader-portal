@@ -344,3 +344,6 @@ margin-bottom: 10px;
 #main-slider .slider-item {
   height: 550px;
 }
+.meidiablock .media_details_hold .item {
+  margin-bottom: 0px;
+}
