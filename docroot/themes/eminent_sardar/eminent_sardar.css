@@ -342,3 +342,10 @@ margin-bottom: 10px;
 #main-slider .slider-item {
   height: 550px;
 }
+#block-languagedropdownswitcher {
+  margin-top: 6px;
+  padding: 10px;
+}
+#block-languagedropdownswitcher select {
+  height: 35px;
+}
