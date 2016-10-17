@@ -321,6 +321,9 @@ margin-bottom: 10px;
 .exhibition-slick-image img {
   margin: auto;
 }
+.search-result-nav li {
+  margin: 1px;
+}
 @media only screen and (max-width: 1170px) {
   #cd-timeline {
     margin-left: 70px;
@@ -334,8 +337,4 @@ margin-bottom: 10px;
     top: 5px;
   }
 
-}
-#main-slider .banner-image {
-  width: 100%;
-  height: 100%;
 }
