@@ -323,7 +323,7 @@ margin-bottom: 10px;
 .search-result-nav li {
   margin: 1px;
 }
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 760px) {
   #cd-timeline {
     margin-left: 70px;
   }
@@ -344,18 +344,6 @@ margin-bottom: 10px;
 #main-slider .slider-item {
   height: 550px;
 }
-
-#block-languagedropdownswitcher {
-  float: right;
-}
-#block-languagedropdownswitcher {
-  margin-top: 6px;
-  padding: 10px;
-}
-#block-languagedropdownswitcher select {
-  height: 35px;
-}
-
 .meidiablock .media_details_hold .item {
   margin-bottom: 0px;
 }

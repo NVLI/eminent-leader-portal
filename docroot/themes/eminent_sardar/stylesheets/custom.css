@@ -746,7 +746,7 @@ Modules - reusable parts of our design
 Main components
 
 -------------------------------- */
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* line 702, ../sass/custom.scss */
   header h1 {
     font-size: 24px;
@@ -773,7 +773,7 @@ Main components
   border-right: 3px dotted #353740;
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* line 725, ../sass/custom.scss */
   #cd-timeline {
     margin-top: 3em;
