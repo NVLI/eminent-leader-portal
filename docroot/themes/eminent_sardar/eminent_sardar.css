@@ -195,7 +195,9 @@ video,
 }
 .deails_holder {
   max-height: 300px;
+  overflow: scroll;
 }
+
 #header .navbar-right .search input.search-form {
   width: 200px;
 }
