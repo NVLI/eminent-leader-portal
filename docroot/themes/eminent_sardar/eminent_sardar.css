@@ -347,3 +347,7 @@ margin-bottom: 10px;
 .meidiablock .media_details_hold .item {
   margin-bottom: 0px;
 }
+.form-select {
+  background: white;
+  border: 1px solid #d6d6d6;
+}
