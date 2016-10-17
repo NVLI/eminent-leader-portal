@@ -28,7 +28,7 @@ function eminent_custom_paragraph_presave(EntityInterface $entity) {
       $description = $media->get('field_dc_description')->value;
       $image = $media->thumbnail->target_id;
       $entity->field_time_line_image->target_id = $image;
-      $title = $media->get('field_dc_title')->value;
+      $title = $media->get('name')->value;
       $date = $media->get('field_dc_time_range')->value;
       $media_url = Url::fromRoute('entity.media.canonical', array('media' => $time_line_story));
       $media_url = \Drupal::l($title, $media_url);

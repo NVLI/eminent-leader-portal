@@ -135,7 +135,7 @@ class CreateTimelineForm extends FormBase {
         ['target_id' => $media_id],
       ],
       'field_time_line_title' => [
-        'value' => $media_content->get('field_dc_title')->value,
+        'value' => $media_content->get('name')->value,
       ],
       'field_time_line_date' => [
         'value' => $media_content->get('field_dc_date')->value,
@@ -197,7 +197,7 @@ class CreateTimelineForm extends FormBase {
         ['target_id' => $media_id],
       ],
       'field_time_line_title' => [
-        'value' => $media_content->get('field_dc_title')->value,
+        'value' => $media_content->get('name')->value,
       ],
       'field_time_line_date' => [
         'value' => $media_content->get('field_dc_date')->value,

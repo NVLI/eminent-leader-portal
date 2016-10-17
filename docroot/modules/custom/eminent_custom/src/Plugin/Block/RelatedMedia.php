@@ -121,7 +121,7 @@ class RelatedMedia extends BlockBase {
           elseif ($media_item->bundle() == "video") {
             $media_image_url = '/themes/eminent_sardar/images/video.png';
           }
-          $media_teaser_title = $media_item->get('field_dc_title')->value;
+          $media_teaser_title = $media_item->get('name')->value;
           $title = $truncated_title = $media_teaser_title;
           if (strlen($media_teaser_title) > 30) {
             $truncated_title = Unicode::truncate($media_teaser_title, 30) . '...';
