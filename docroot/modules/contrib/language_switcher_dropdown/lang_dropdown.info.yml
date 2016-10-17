@@ -1,0 +1,9 @@
+name: 'Language Switcher Dropdown'
+type: module
+description: 'Provides a dropdown select to switch between available languages.'
+package: Multilingual
+core: 8.x
+version: VERSION
+dependencies:
+  - language
+configure: block.admin_display
