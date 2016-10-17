@@ -40,10 +40,26 @@
     <div class="search-result-nav">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" id = "exhibition-tab" class = "search-tab"><a href="/search/exhibitions?keyword={{ search_keyword }}"role="tab">Exhibition</a></li>
-        <li role="presentation" id = "timeline-tab" class = "search-tab"><a href="/search/time-lines?keyword={{ search_keyword }}" role="tab">Timeline</a></li>
-        <li role="presentation" id = "media-tab" class = "search-tab"><a href="/search/media?keyword={{ search_keyword }}" role="tab">Media</a></li>
-        <li role="presentation" id = "quote-tab" class = "search-tab"><a href="/search/quotes?keyword={{ search_keyword }}" role="tab" >Quote</a></li>
+        <li role="presentation" id = "media-tab" class = "search-tab"><a href=" {{ media_url }}" role="tab">
+          {% trans %}
+            Media
+          {% endtrans %}
+        </a></li>
+        <li role="presentation" id = "exhibition-tab" class = "search-tab"><a href=" {{ exhibitions_url }}" role="tab">
+          {% trans %}
+            Thematic collection
+          {% endtrans %}
+        </a></li>
+        <li role="presentation" id = "timeline-tab" class = "search-tab"><a href="{{ timeline_url }}" role="tab">
+          {% trans %}
+            Timeline
+          {% endtrans %}
+        </a></li>
+        <li role="presentation" id = "quote-tab" class = "search-tab"><a href="{{ timeline_url }}" role="tab" >
+          {% trans %}
+            Quote
+          {% endtrans %}
+        </a></li>
       </ul>
     </div>
   <div{{ attributes.addClass(classes) }}>

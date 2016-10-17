@@ -59,7 +59,7 @@ class SearchForm extends FormBase {
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $keyword = $form_state->getValue('keyword');
-    $search_route = 'view.eminent_search.page_1';
+    $search_route = 'view.eminent_search.page_3';
     $route_name = \Drupal::routeMatch()->getRouteName();
     if ($route_name == "view.eminent_search.page_1" || $route_name == "view.eminent_search.page_2" || $route_name == "view.eminent_search.page_3" || $route_name == "view.eminent_search.page_4") {
       $search_route = $route_name;

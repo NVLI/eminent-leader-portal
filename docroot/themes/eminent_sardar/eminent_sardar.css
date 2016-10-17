@@ -195,7 +195,9 @@ video,
 }
 .deails_holder {
   max-height: 300px;
+  overflow: scroll;
 }
+
 #header .navbar-right .search input.search-form {
   width: 200px;
 }
@@ -245,9 +247,6 @@ video,
 }
 body {
   padding: 0 !important;
-}
-.media-teaser-title {
-  height: 45px;
 }
 .media-teaser {
   padding-bottom: 30px;
@@ -321,6 +320,9 @@ margin-bottom: 10px;
 .exhibition-slick-image img {
   margin: auto;
 }
+.search-result-nav li {
+  margin: 1px;
+}
 @media only screen and (max-width: 1170px) {
   #cd-timeline {
     margin-left: 70px;
@@ -342,6 +344,7 @@ margin-bottom: 10px;
 #main-slider .slider-item {
   height: 550px;
 }
+
 #block-languagedropdownswitcher {
   float: right;
 }
@@ -351,4 +354,8 @@ margin-bottom: 10px;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
+}
+
+.meidiablock .media_details_hold .item {
+  margin-bottom: 0px;
 }

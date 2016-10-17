@@ -12,9 +12,9 @@
  * @ingroup themeable
  */
 #}
-<div class = "media-teaser">
+<div class = "media-teaser ">
   <div class = "item">
-    <div class = "thumbnail">
+    <div class = "thumbnail equal_height">
       <section class = "item-body">
         <article{{ attributes }}>
           {% if media_type == "audio" %}
@@ -26,18 +26,19 @@
           {% else %}
             {{ content.field_media_image }}
           {% endif %}
-          <div class="text-center media-teaser-title">
+          <div class="text-center">
             <h2>
-             <a href = "/media/{{ media_id }}" title = " {{ media_teaser_title }}">{{ truncated_media_teaser_title }}</a>
+              {{ content.field_dc_title }}
             </h2>
           </div>
-          
-          <div class = "clear-fix">
-          {{ addtotimeline }}
-          {{ addtoplaylist }}
-          </div>
+
+
         </article>
       </section>
+    </div>
+    <div class = "clearfix">
+      {{ addtotimeline }}
+      {{ addtoplaylist }}
     </div>
   </div>
 </div>
