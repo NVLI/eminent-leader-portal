@@ -255,7 +255,6 @@ video,
 .biography {
   background: url(/themes/eminent_sardar/images/biobg.png) !important;
   background-attachment: fixed !important;
-  height: 500px;
   background-size: cover !important;
 }
 #header + div {
