@@ -50,7 +50,7 @@ p {
 }
 
 a {
-  color: #D35400;
+  color: #cc7722;
   -webkit-transition: color 300ms, background-color 300ms;
   -moz-transition: color 300ms, background-color 300ms;
   -o-transition:  color 300ms, background-color 300ms;
@@ -79,7 +79,7 @@ hr {
 
 .btn-primary:hover,
 .btn-primary:focus{
-  background: #D35400;
+  background: #cc7722;
   outline: none;
   box-shadow: none;
 }
@@ -231,7 +231,7 @@ ul.social-share li a {
 }
 
 ul.social-share li a:hover {
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
 }
 
@@ -446,7 +446,7 @@ input.search-form:hover::-webkit-input-placeholder {
 #main-slider .next {
   position: absolute;
   top: 50%;
-  background-color: #D35400;
+  background-color: #cc7722;
   color: #fff;
   display: inline-block;
   margin-top: -25px;
@@ -487,7 +487,7 @@ input.search-form:hover::-webkit-input-placeholder {
   height: 24px;
   border-radius: 100%;
   background: rgba(0, 0, 0, 0);
-  border: 1px solid #D35400;
+  border: 1px solid #cc7722;
   left: -3px;
   top: -3px;
 }
@@ -495,9 +495,9 @@ input.search-form:hover::-webkit-input-placeholder {
 #main-slider .carousel-indicators .active{
   width: 20px;
   height: 20px;
-  background-color: #D35400;
+  background-color: #cc7722;
    margin: 0 15px 0 0;
-   border: 1px solid #D35400;
+   border: 1px solid #cc7722;
    position: relative;
 }
 
@@ -507,8 +507,8 @@ input.search-form:hover::-webkit-input-placeholder {
   width: 24px;
   height: 24px;
   border-radius: 100%;
-  background: #D35400;
-  border: 1px solid #D35400;
+  background: #cc7722;
+  border: 1px solid #cc7722;
   left: -3px;
   top: -3px;
 }
@@ -576,7 +576,7 @@ input.search-form:hover::-webkit-input-placeholder {
   line-height: 110px;
   text-align:center;
   background: #ffffff;
-  color: #D35400;
+  color: #cc7722;
   border: 3px solid #ffffff;
   box-shadow: inset 0 0 0 5px #f2f2f2;
   -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
@@ -851,12 +851,12 @@ a.accordion-toggle  i{
 }
 
 .panel-heading.active a.accordion-toggle i{
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
 }
 
 .panel-heading.active a.accordion-toggle.collapsed i{
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
 }
 
@@ -1460,7 +1460,7 @@ ul.social_icons li  a i{
 }
 
 .request h4 a{
-  background:#D35400;
+  background:#cc7722;
   color: #fff;
   font-size: 14px;
   font-weight: normal;
@@ -1469,7 +1469,7 @@ ul.social_icons li  a i{
 }
 
 .request h4:after {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 12px;
   bottom: -18px;
@@ -1481,7 +1481,7 @@ ul.social_icons li  a i{
 }
 
 .request h4:before {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 12px;
   bottom: -18px;
@@ -1534,7 +1534,7 @@ ul.social_icons li  a i{
 
 .footer {
   background: none repeat scroll 0 0 #2E2E2E;
-  border-top: 5px solid #D35400;
+  border-top: 5px solid #cc7722;
   height: 84px;
   margin-top: 110px;
 }
@@ -1587,8 +1587,8 @@ ul.social_icons li  a i{
 .portfolio-filter > li a:hover,
 .portfolio-filter > li a.active{
   color:#fff;
-  background: #D35400;
-  border: 1px solid #D35400;
+  background: #cc7722;
+  border: 1px solid #cc7722;
   box-shadow: none;
   -webkit-box-shadow: none;
 }
@@ -2254,7 +2254,7 @@ ul.sidebar-gallery {
 }
 
 .tag-cloud li a:hover{
-  background:#D35400;
+  background:#cc7722;
   color: #fff;
 }
 
@@ -2393,7 +2393,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments h1 a:hover{
-  color:#D35400;
+  color:#cc7722;
 }
 
 .post_reply_comments h4{
@@ -2409,14 +2409,14 @@ ul.sidebar-gallery {
   bottom: 15px;
   position: absolute;
   right: 30px;
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
   border-radius: 5px;
   padding: 8px 20px;
 }
 
 .post_reply_comments a:before {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 16px;
   bottom: -11px;
