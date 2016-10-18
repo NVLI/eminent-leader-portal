@@ -79,7 +79,11 @@
   <div class="overlay">
     <div class="recent-work-inner">
       <h3><a href="{{ url }}">{{ label }}</a></h3>
-      <a class="preview" href= {{ url }}> Read Story</a>
+      <a class="preview" href= {{ url }}>
+        {% trans %}
+          Read Story
+        {% endtrans %}
+      </a>
     </div>
   </div>
 </div>
