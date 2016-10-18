@@ -26,7 +26,12 @@ class HeaderSearchFormBlock extends BlockBase {
    */
   public function build() {
     $form = \Drupal::formBuilder()->getForm('Drupal\eminent_custom\Form\HeaderSearchForm');
-    return $form;
+    return [
+      $form,
+       '#cache' => [
+         'max-age' => 0,
+       ],
+    ];
   }
 
 }
