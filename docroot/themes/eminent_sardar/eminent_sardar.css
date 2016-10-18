@@ -18,6 +18,7 @@ a {
 }
 #bottom .navbar-brand img {
   width: 100%;
+
 }
 #header .form-actions {
   float: right;
@@ -320,7 +321,7 @@ margin-bottom: 10px;
 }
 #main-slider .slider-item .content-holder h1 span {
   text-transform: capitalize;
-  color: #000;
+  color: #CC7722;
   font-weight: normal;
 }
 .exhibition-slick-image img {
