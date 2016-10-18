@@ -20,6 +20,15 @@ a {
   width: 100%;
 
 }
+#header {
+  background-color: #cc7722;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #e5e5e5;
+}
 #header .form-actions {
   float: right;
 }
@@ -31,7 +40,7 @@ a {
   margin: 0px;
 }
 #header form .form-text {
-  border: 1px solid #d6d6d6;
+  border: 1px solid #fff;
 }
 #header .search form {
   border: none;
@@ -355,8 +364,9 @@ margin-bottom: 10px;
   margin-bottom: 0px;
 }
 .form-select {
-  background: white;
-  border: 1px solid #d6d6d6;
+  background: transparent;
+  border: 1px solid #FFF;
+  color: #fff;
 }
 #block-languagedropdownswitcher {
   float: right;
