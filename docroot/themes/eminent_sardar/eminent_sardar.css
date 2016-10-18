@@ -403,3 +403,6 @@ margin-bottom: 10px;
 #main-slider .content-holder h1 {
   line-height: 0.84;
 }
+#recent-works .quotes .overlay {
+  height: 100%;
+}
