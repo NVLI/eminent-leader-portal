@@ -375,6 +375,10 @@ margin-bottom: 10px;
 .responses {
   padding-bottom: 15px;
 }
+.contextual-links li a {
+  color: #333;
+  padding: 0px;
+}
 #bottom ul:not(.contextual-links) li a {
   color: #FFF;
 }
