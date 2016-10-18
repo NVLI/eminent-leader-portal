@@ -255,11 +255,15 @@ video,
 .biography {
   background: url(/themes/eminent_sardar/images/biobg.png) !important;
   background-attachment: fixed !important;
-  height: 500px;
   background-size: cover !important;
 }
 #header + div {
   padding-top: 120px;
+}
+@media (max-width: 973px) {
+  #header + div {
+    padding-top: 20px;
+  }
 }
 body {
   padding: 0 !important;
@@ -376,11 +380,9 @@ margin-bottom: 10px;
   color: #000;
 }
 #block-languagedropdownswitcher {
-  float: right;
-}
-#block-languagedropdownswitcher {
   margin-top: 6px;
   padding: 10px;
+  float: left;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
@@ -416,4 +418,17 @@ margin-bottom: 10px;
 }
 .quotes-by-sardar-holder .quotes-by-sardar .quoteslideritem .quote-content p {
   display: inline;
+}
+#header .search {
+  float: left;
+}
+@media (max-width: 999px) {
+  #header .search {
+    width: 100%;
+  }
+  #block-languagedropdownswitcher {
+    clear: both;
+    width: 100%;
+    padding: 0;
+  }
 }
