@@ -215,6 +215,7 @@ video,
 
 #header .navbar-right .search input.search-form {
   width: 200px;
+  color: #fff;
 }
 #conatcat-info .captcha {
   padding: 15px;
