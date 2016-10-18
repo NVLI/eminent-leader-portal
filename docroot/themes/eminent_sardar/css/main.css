@@ -50,7 +50,7 @@ p {
 }
 
 a {
-  color: #D35400;
+  color: #cc7722;
   -webkit-transition: color 300ms, background-color 300ms;
   -moz-transition: color 300ms, background-color 300ms;
   -o-transition:  color 300ms, background-color 300ms;
@@ -58,7 +58,7 @@ a {
 }
 
 a:hover, a:focus {
-  color: #d43133;
+  color: #5c3f34;
 }
 
 hr {
@@ -69,7 +69,7 @@ hr {
 
 .btn-primary {
   padding: 8px 20px;
-  background: #e67e22;
+  background: #cc7722;
   color: #fff;
   border-radius: 0;
   border:none;
@@ -79,7 +79,7 @@ hr {
 
 .btn-primary:hover,
 .btn-primary:focus{
-  background: #D35400;
+  background: #5c3f34;
   outline: none;
   box-shadow: none;
 }
@@ -96,7 +96,7 @@ hr {
 
 a:hover,
 a:focus {
-  color: #111;
+  color: #5c3f34;
   text-decoration: none;
   outline: none;
 }
@@ -231,7 +231,7 @@ ul.social-share li a {
 }
 
 ul.social-share li a:hover {
-  background: #D35400;
+  background: #5c3f34;
   color: #fff;
 }
 
@@ -264,7 +264,7 @@ input.search-form::-webkit-input-placeholder {
 }
 
 input.search-form:hover::-webkit-input-placeholder {
-  color: #fff;
+  color: #5c3f34;
 }
 
 .navbar-brand {
@@ -446,7 +446,7 @@ input.search-form:hover::-webkit-input-placeholder {
 #main-slider .next {
   position: absolute;
   top: 50%;
-  background-color: #D35400;
+  background-color: #cc7722;
   color: #fff;
   display: inline-block;
   margin-top: -25px;
@@ -487,7 +487,7 @@ input.search-form:hover::-webkit-input-placeholder {
   height: 24px;
   border-radius: 100%;
   background: rgba(0, 0, 0, 0);
-  border: 1px solid #D35400;
+  border: 1px solid #cc7722;
   left: -3px;
   top: -3px;
 }
@@ -495,9 +495,9 @@ input.search-form:hover::-webkit-input-placeholder {
 #main-slider .carousel-indicators .active{
   width: 20px;
   height: 20px;
-  background-color: #D35400;
+  background-color: #cc7722;
    margin: 0 15px 0 0;
-   border: 1px solid #D35400;
+   border: 1px solid #cc7722;
    position: relative;
 }
 
@@ -507,8 +507,8 @@ input.search-form:hover::-webkit-input-placeholder {
   width: 24px;
   height: 24px;
   border-radius: 100%;
-  background: #D35400;
-  border: 1px solid #D35400;
+  background: #cc7722;
+  border: 1px solid #cc7722;
   left: -3px;
   top: -3px;
 }
@@ -576,7 +576,7 @@ input.search-form:hover::-webkit-input-placeholder {
   line-height: 110px;
   text-align:center;
   background: #ffffff;
-  color: #D35400;
+  color: #cc7722;
   border: 3px solid #ffffff;
   box-shadow: inset 0 0 0 5px #f2f2f2;
   -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
@@ -638,7 +638,8 @@ input.search-form:hover::-webkit-input-placeholder {
   width: 100%;
   height: 180px;
   border-radius: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: #2e2420 none repeat scroll 0 0;
+  opacity: 0.71;
   color: #fff;
   vertical-align: middle;
   -webkit-transition: opacity 500ms;
@@ -850,12 +851,12 @@ a.accordion-toggle  i{
 }
 
 .panel-heading.active a.accordion-toggle i{
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
 }
 
 .panel-heading.active a.accordion-toggle.collapsed i{
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
 }
 
@@ -1459,7 +1460,7 @@ ul.social_icons li  a i{
 }
 
 .request h4 a{
-  background:#D35400;
+  background:#cc7722;
   color: #fff;
   font-size: 14px;
   font-weight: normal;
@@ -1468,7 +1469,7 @@ ul.social_icons li  a i{
 }
 
 .request h4:after {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 12px;
   bottom: -18px;
@@ -1480,7 +1481,7 @@ ul.social_icons li  a i{
 }
 
 .request h4:before {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 12px;
   bottom: -18px;
@@ -1533,7 +1534,7 @@ ul.social_icons li  a i{
 
 .footer {
   background: none repeat scroll 0 0 #2E2E2E;
-  border-top: 5px solid #D35400;
+  border-top: 5px solid #cc7722;
   height: 84px;
   margin-top: 110px;
 }
@@ -1586,8 +1587,8 @@ ul.social_icons li  a i{
 .portfolio-filter > li a:hover,
 .portfolio-filter > li a.active{
   color:#fff;
-  background: #D35400;
-  border: 1px solid #D35400;
+  background: #cc7722;
+  border: 1px solid #cc7722;
   box-shadow: none;
   -webkit-box-shadow: none;
 }
@@ -2200,7 +2201,7 @@ ul.pagination > li > a {
   border-radius: 5px;
   font-size: 13px;
   padding: 5px 14px;
-  color: #e67e22;
+  color: #cc7722;
   margin-bottom: 10px;
 }
 
@@ -2211,8 +2212,8 @@ ul.pagination > li > a i{
 
 ul.pagination > li.active > a,
 ul.pagination > li:hover > a {
-  background-color: #e67e22 !important;
-  border-color: #e67e22 !important;
+  background-color: #cc7722 !important;
+  border-color: #cc7722 !important;
   color: #fff;
 }
 
@@ -2253,7 +2254,7 @@ ul.sidebar-gallery {
 }
 
 .tag-cloud li a:hover{
-  background:#D35400;
+  background:#cc7722;
   color: #fff;
 }
 
@@ -2392,7 +2393,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments h1 a:hover{
-  color:#D35400;
+  color:#cc7722;
 }
 
 .post_reply_comments h4{
@@ -2408,14 +2409,14 @@ ul.sidebar-gallery {
   bottom: 15px;
   position: absolute;
   right: 30px;
-  background: #D35400;
+  background: #cc7722;
   color: #fff;
   border-radius: 5px;
   padding: 8px 20px;
 }
 
 .post_reply_comments a:before {
-  border-color: #D35400 transparent transparent;
+  border-color: #cc7722 transparent transparent;
   border-style: solid;
   border-width: 16px;
   bottom: -11px;
@@ -2478,7 +2479,7 @@ shortcodes page css
 ********* Footer ******
 ************************/
 #bottom {
-  background: rgb(53, 55, 64);
+  background: #2e2420 none repeat scroll 0 0;
   font-size: 14px;
   border-top: 2px solid #FAF6F2;
 }
@@ -2520,7 +2521,7 @@ shortcodes page css
   padding-top: 30px;
   padding-bottom: 30px;
   color: #fff;
-  background: rgb(53, 55, 64);;
+  background: #2e2420 none repeat scroll 0 0;
 }
 
 #footer a {
@@ -2530,7 +2531,7 @@ shortcodes page css
 }
 
 #footer a:hover {
-  color: #e67e22;
+  color: #cc7722;
 }
 
 #footer ul {
