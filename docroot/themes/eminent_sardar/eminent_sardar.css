@@ -372,3 +372,16 @@ margin-bottom: 10px;
   background: none;
   padding-top: 0px;
 }
+.responses {
+  padding-bottom: 15px;
+}
+.contextual-links li a {
+  color: #333;
+  padding: 0px;
+}
+#bottom ul:not(.contextual-links) li a {
+  color: #FFF;
+}
+#bottom ul li a:hover {
+  color: #CC7722;
+}
