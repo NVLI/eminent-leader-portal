@@ -258,7 +258,12 @@ video,
   background-size: cover !important;
 }
 #header + div {
-  padding-top: 120px;
+  padding-top: 100px;
+}
+@@media (max-width: 973px) {
+  #header + div {
+    padding-top: 15px;
+  }
 }
 body {
   padding: 0 !important;
@@ -371,11 +376,9 @@ margin-bottom: 10px;
   color: #000;
 }
 #block-languagedropdownswitcher {
-  float: right;
-}
-#block-languagedropdownswitcher {
   margin-top: 6px;
   padding: 10px;
+  float: right;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
