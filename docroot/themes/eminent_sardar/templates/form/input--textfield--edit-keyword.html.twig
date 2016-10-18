@@ -10,5 +10,8 @@
  * @see template_preprocess_input()
  */
 #}
-<input{{ attributes.addClass('search-form') }} placeholder = 'Search' />
+
+<input{{ attributes.addClass('search-form') }} placeholder = {% trans %}
+    Search
+  {% endtrans %} />
 {{ children }}
