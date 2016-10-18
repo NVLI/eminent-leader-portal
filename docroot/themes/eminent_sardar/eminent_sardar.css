@@ -319,7 +319,7 @@ margin-bottom: 10px;
   font-family: 'EB Garamond', serif !important;
 }
 #main-slider .slider-item .content-holder h1 span {
-  text-transform: capitalize
+  text-transform: capitalize;
   color: #000;
 }
 .exhibition-slick-image img {
