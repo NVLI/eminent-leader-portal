@@ -315,3 +315,10 @@ function eminent_sardar_preprocess_views_view_unformatted(&$variables) {
     $variables['tabs'] = $tabs;
   }
 }
+
+/**
+ * Implements template_preprocess_block.
+ */
+function eminent_sardar_preprocess_block(&$variables) {
+  $variables['timelines_url'] = Url::fromRoute('view.time_line_collections.page_1');
+}
