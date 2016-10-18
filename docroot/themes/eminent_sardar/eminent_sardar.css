@@ -260,7 +260,7 @@ video,
 #header + div {
   padding-top: 100px;
 }
-@@media (max-width: 973px) {
+@media (max-width: 973px) {
   #header + div {
     padding-top: 15px;
   }
@@ -378,7 +378,7 @@ margin-bottom: 10px;
 #block-languagedropdownswitcher {
   margin-top: 6px;
   padding: 10px;
-  float: right;
+  float: left;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
