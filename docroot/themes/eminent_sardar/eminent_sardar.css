@@ -258,11 +258,11 @@ video,
   background-size: cover !important;
 }
 #header + div {
-  padding-top: 100px;
+  padding-top: 120px;
 }
 @media (max-width: 973px) {
   #header + div {
-    padding-top: 15px;
+    padding-top: 20px;
   }
 }
 body {
@@ -415,6 +415,7 @@ margin-bottom: 10px;
   #block-languagedropdownswitcher {
     clear: both;
     width: 100%;
+    padding: 0;
   }
 
 }
