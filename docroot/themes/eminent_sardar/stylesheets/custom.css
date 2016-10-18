@@ -956,7 +956,7 @@ Main components
   margin-bottom: 0;
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* line 868, ../sass/custom.scss */
   .cd-timeline-block {
     margin: 4em 0;
@@ -1032,7 +1032,7 @@ Main components
   background: #f0ca45;
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* line 922, ../sass/custom.scss */
   .cd-timeline-img {
     width: 34px;
@@ -1202,7 +1202,7 @@ Main components
     font-size: 0.875rem;
   }
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* line 1073, ../sass/custom.scss */
   .cd-timeline-content {
     margin-left: 0;
@@ -1302,7 +1302,7 @@ Main components
     animation: cd-bounce-2 0.6s;
   }
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   /* inverse bounce effect on even content blocks */
   /* line 1151, ../sass/custom.scss */
   .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {

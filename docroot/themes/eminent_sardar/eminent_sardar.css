@@ -285,7 +285,7 @@ margin-bottom: 10px;
     float: left;
   }
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 760px) {
   .cd-timeline-block:nth-child(odd) .cd-timeline-content .cd-date {
     right: auto;
     left: 120%;
@@ -350,4 +350,14 @@ margin-bottom: 10px;
 .form-select {
   background: white;
   border: 1px solid #d6d6d6;
+}
+#block-languagedropdownswitcher {
+  float: right;
+}
+#block-languagedropdownswitcher {
+  margin-top: 6px;
+  padding: 10px;
+}
+#block-languagedropdownswitcher select {
+  height: 35px;
 }
