@@ -69,7 +69,7 @@ hr {
 
 .btn-primary {
   padding: 8px 20px;
-  background: #e67e22;
+  background: #cc7722;
   color: #fff;
   border-radius: 0;
   border:none;
@@ -638,7 +638,8 @@ input.search-form:hover::-webkit-input-placeholder {
   width: 100%;
   height: 180px;
   border-radius: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: #2e2420 none repeat scroll 0 0;
+  opacity: 0.71;
   color: #fff;
   vertical-align: middle;
   -webkit-transition: opacity 500ms;
@@ -2200,7 +2201,7 @@ ul.pagination > li > a {
   border-radius: 5px;
   font-size: 13px;
   padding: 5px 14px;
-  color: #e67e22;
+  color: #cc7722;
   margin-bottom: 10px;
 }
 
@@ -2211,8 +2212,8 @@ ul.pagination > li > a i{
 
 ul.pagination > li.active > a,
 ul.pagination > li:hover > a {
-  background-color: #e67e22 !important;
-  border-color: #e67e22 !important;
+  background-color: #cc7722 !important;
+  border-color: #cc7722 !important;
   color: #fff;
 }
 
@@ -2478,7 +2479,7 @@ shortcodes page css
 ********* Footer ******
 ************************/
 #bottom {
-  background: rgb(53, 55, 64);
+  background: #2e2420 none repeat scroll 0 0;
   font-size: 14px;
   border-top: 2px solid #FAF6F2;
 }
@@ -2520,7 +2521,7 @@ shortcodes page css
   padding-top: 30px;
   padding-bottom: 30px;
   color: #fff;
-  background: rgb(53, 55, 64);;
+  background: #2e2420 none repeat scroll 0 0;
 }
 
 #footer a {
@@ -2530,7 +2531,7 @@ shortcodes page css
 }
 
 #footer a:hover {
-  color: #e67e22;
+  color: #cc7722;
 }
 
 #footer ul {
