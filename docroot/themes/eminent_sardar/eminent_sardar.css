@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond');
+@import url('https://fonts.googleapis.com/css?family=Mukta+Vaani');
 body {
-  font-family: sans-serif;
+  font-family: 'Mukta Vaani', sans-serif;
 }
 h1,
 h2,
@@ -9,14 +11,14 @@ h5,
 h6,
 p,
 a {
-  font-family: sans-serif !important;
+  font-family: 'Mukta Vaani', sans-serif;
 }
 .slidercontent h1 {
-  font-family: serif !important;
-}
+  font-family: 'Mukta Vaani', sans-serif;
 }
 #bottom .navbar-brand img {
   width: 100%;
+
 }
 #header .form-actions {
   float: right;
@@ -61,7 +63,7 @@ a {
   padding-bottom: 70px;
 }
 .search-filters {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 .exhibition-slick-image iframe {
   min-height: 300px;
@@ -285,7 +287,7 @@ margin-bottom: 10px;
     float: left;
   }
 }
-@media only screen and (min-width: 760px) {
+@media only screen and (min-width: 1170px) {
   .cd-timeline-block:nth-child(odd) .cd-timeline-content .cd-date {
     right: auto;
     left: 120%;
@@ -315,7 +317,12 @@ margin-bottom: 10px;
   width: auto;
 }
 #main-slider .slider-item .content-holder h1 {
-  font-family: "G-Crimson Text-n4", Arial !important;
+  font-family: 'EB Garamond', serif !important;
+}
+#main-slider .slider-item .content-holder h1 span {
+  text-transform: capitalize;
+  color: #CC7722;
+  font-weight: normal;
 }
 .exhibition-slick-image img {
   margin: auto;
@@ -323,7 +330,7 @@ margin-bottom: 10px;
 .search-result-nav li {
   margin: 1px;
 }
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 1170px) {
   #cd-timeline {
     margin-left: 70px;
   }
@@ -360,4 +367,11 @@ margin-bottom: 10px;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
+}
+.search-results-tab .search-result-nav {
+  background: none;
+  padding-top: 0px;
+}
+.responses {
+  padding-bottom: 15px;
 }
