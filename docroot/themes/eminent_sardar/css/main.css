@@ -196,12 +196,12 @@ body > section, #timeline, #recent-works, .inner-section {
 }
 
 .top-number{
-  color: #27AE60;
+  color: #CC7722;
 }
 
 .top-number p{
   margin: 0;
-  color: #27AE60;
+  color: #CC7722;
 }
 
 .social{
@@ -222,7 +222,7 @@ ul.social-share li {
 ul.social-share li a {
   display: inline-block;
   color: #fff;
-  background: #27AE60;
+  background: #CC7722;
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -236,7 +236,7 @@ ul.social-share li a:hover {
 }
 
 .search i {
-  color: #27AE60;
+  color: #CC7722;
 }
 
 input.search-form {
@@ -397,7 +397,7 @@ input.search-form:hover::-webkit-input-placeholder {
 
 #main-slider .carousel .btn-slide {
   padding: 8px 20px;
-  background: #27AE60;
+  background: #CC7722;
   color: #fff;
   border-radius: 4px;
   margin-top: 25px;
@@ -1748,7 +1748,7 @@ ul.social_icons li  a i{
 
 .pricing-area .heading-two,
 .pricing-area .price-two .plan-action .btn-primary {
-  background:#27AE60;
+  background:#CC7722;
 }
 
 .pricing-area .heading-three,
@@ -2016,12 +2016,12 @@ textarea#message{
 }
 
 .blog_category li a:hover{
-  background:#27AE60;
+  background:#CC7722;
   color: #fff;
 }
 
  .badge:before {
-  border-color: transparent transparent transparent #27AE60;
+  border-color: transparent transparent transparent #CC7722;
   border-style: solid;
   border-width: 10px;
   bottom: -8px;
@@ -2033,7 +2033,7 @@ textarea#message{
 }
 
 .badge {
-  background-color: #27AE60;
+  background-color: #CC7722;
   border-radius: 5px;
   color: #fff;
   padding: 8px;
@@ -2177,7 +2177,7 @@ ul.faq li > div h3 {
 }
 
 #publish_date {
-  background: #27AE60;
+  background: #CC7722;
   border-bottom: 5px solid #4e4e4e;
   color: #fff;
   padding: 5px 0;
@@ -2185,7 +2185,7 @@ ul.faq li > div h3 {
 }
 
 .blog .blog-item .entry-meta > span {
-  color: #27AE60;
+  color: #CC7722;
 }
 
 .blog .blog-item .entry-meta > span a {
@@ -2509,7 +2509,7 @@ shortcodes page css
 }
 
 #bottom ul:not(.contextual-links) li a:hover {
-  color: #27AE60;
+  color: #CC7722;
 }
 
 #bottom .widget {
