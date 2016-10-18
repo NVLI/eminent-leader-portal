@@ -281,7 +281,7 @@ General styles for the Quiz block in the home page*/
 /* line 276, ../sass/custom.scss */
 .quick-quiz a.button {
   padding: 8px 20px;
-  background: #27AE60;
+  background: #CC7722;
   color: #fff;
   border: none;
   margin-top: 10px;
@@ -624,7 +624,7 @@ General styles for the Media page*/
 }
 /* line 577, ../sass/custom.scss */
 .media_details .media-item .entry-meta > span {
-  color: #27AE60;
+  color: #CC7722;
 }
 /* line 580, ../sass/custom.scss */
 .media_details .media-item .entry-meta span {
@@ -645,7 +645,7 @@ General styles for the Media page*/
 }
 /* line 595, ../sass/custom.scss */
 .media_details .media-item .entry-meta #publish_date {
-  background: #27AE60;
+  background: #CC7722;
   border-bottom: 5px solid #4e4e4e;
   color: #fff;
   padding: 5px 0;
@@ -710,7 +710,7 @@ General styles for the Quaote listinng*/
 /* line 656, ../sass/custom.scss */
 .quotelisting .widget.search input[type="button"] {
   padding: 8px 20px;
-  background: #27AE60;
+  background: #CC7722;
   color: #fff;
   border-radius: 4px;
   border: none;
