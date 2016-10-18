@@ -408,3 +408,6 @@ margin-bottom: 10px;
 .navbar input:-ms-input-placeholder {
   color: white;
 }
+#main-slider .content-holder h1 {
+  line-height: 0.84;
+}
