@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=EB+Garamond');
+@import url('https://fonts.googleapis.com/css?family=Mukta+Vaani');
 body {
-  font-family: sans-serif;
+  font-family: 'Mukta Vaani', sans-serif;
 }
 h1,
 h2,
@@ -10,11 +11,10 @@ h5,
 h6,
 p,
 a {
-  font-family: sans-serif !important;
+  font-family: 'Mukta Vaani', sans-serif;
 }
 .slidercontent h1 {
-  font-family: serif !important;
-}
+  font-family: 'Mukta Vaani', sans-serif;
 }
 #bottom .navbar-brand img {
   width: 100%;
