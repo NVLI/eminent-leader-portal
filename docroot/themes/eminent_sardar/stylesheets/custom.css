@@ -70,14 +70,14 @@ Excibition page*/
 
 /* line 92, ../sass/custom.scss */
 .slick-next {
-  background-color: #e67e22 !important;
+  background-color: #CC7722 !important;
   right: 20px !important;
   border-radius: 0 !important;
 }
 
 /* line 97, ../sass/custom.scss */
 .slick-prev {
-  background-color: #e67e22 !important;
+  background-color: #CC7722 !important;
   left: 20px !important;
   border-radius: 0 !important;
 }
@@ -136,7 +136,7 @@ General styles bootstrap modal*/
 /* line 150, ../sass/custom.scss */
 .modal-header {
   border: 0;
-  background: #e67e22;
+  background: #CC7722;
   text-align: center;
   color: #fff;
 }
@@ -255,7 +255,7 @@ General styles for the Quiz block in the home page*/
 /* line 253, ../sass/custom.scss */
 .quick-quiz a.startQuiz {
   padding: 8px 20px;
-  background: #e67e22;
+  background: #CC7722;
   margin: auto;
   color: #fff;
   border: none;
@@ -485,7 +485,7 @@ General styles for the Banner image home page*/
   /* line 446, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 1.9em;
-    color: #e67e22;
+    color: #CC7722;
   }
 }
 @media (max-width: 973px) {
@@ -498,7 +498,7 @@ General styles for the Banner image home page*/
   /* line 455, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 2em;
-    color: #e67e22;
+    color: #CC7722;
   }
 }
 /* line 461, ../sass/custom.scss */
@@ -1161,7 +1161,7 @@ Main components
     left: auto;
     right: 100%;
     border-color: transparent;
-    border-right-color: #ddd;
+    border-right-color: #CC7722;
   }
 
   /* line 1123, ../sass/custom.scss */
@@ -1675,7 +1675,7 @@ login form eblock*/
 #block-eminent-sardar-local-tasks ul li {
   display: inline-block;
   padding: 10px;
-  background: #e67e22;
+  background: #CC7722;
 }
 /* line 1534, ../sass/custom.scss */
 #block-eminent-sardar-local-tasks ul li a {
@@ -2201,11 +2201,11 @@ styles for the search form in the home page*/
   user-select: none;
   padding: 8px 20px;
   background: transparent;
-  color: #e67e22;
+  color: #CC7722;
   border: none;
   margin-top: 10px;
   margin: auto;
-  border: 1px solid #e67e22;
+  border: 1px solid #CC7722;
   max-width: 190px;
 }
 /* line 1976, ../sass/custom.scss */
