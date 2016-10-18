@@ -183,11 +183,11 @@ if ($('#slickQuiz').length > 0) {
 $(".quotes-by-sardar").slick({
    slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     speed: 1000,
     touchMove: true,
     dots: true,
-    autoplay: true
+    autoplay: false
 });
 /***********************************************************************
 *******initialize the eqaul height on pages*/

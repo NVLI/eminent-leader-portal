@@ -1743,8 +1743,6 @@ quotes by sardar homepag eblock*/
 .quotes-by-sardar .quoteslideritem h2,
 .quotes-by-sardar .quoteslideritem p {
   color: #fff;
-  padding-right: 35px;
-  padding-left: 35px;
 }
 /* line 1595, ../sass/custom.scss */
 .quotes-by-sardar .quoteslideritem h2:before, .quotes-by-sardar .quoteslideritem h2:after,

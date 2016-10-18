@@ -300,6 +300,10 @@ margin-bottom: 10px;
   #header .search {
     float: left;
   }
+  .quotes-by-sardar-holder .quotes-by-sardar .quoteslideritem .quote-content {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
 }
 @media only screen and (min-width: 1170px) {
   .cd-timeline-block:nth-child(odd) .cd-timeline-content .cd-date {
@@ -405,4 +409,11 @@ margin-bottom: 10px;
 }
 #recent-works .quotes .overlay {
   height: 100%;
+}
+
+.quotes-by-sardar-holder .quotes-by-sardar .quoteslideritem .quote-content .fa {
+  color: #fff;
+}
+.quotes-by-sardar-holder .quotes-by-sardar .quoteslideritem .quote-content p {
+  display: inline;
 }
