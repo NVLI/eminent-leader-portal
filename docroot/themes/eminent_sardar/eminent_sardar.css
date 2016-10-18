@@ -63,7 +63,7 @@ a {
   padding-bottom: 70px;
 }
 .search-filters {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 .exhibition-slick-image iframe {
   min-height: 300px;
@@ -367,4 +367,8 @@ margin-bottom: 10px;
 }
 #block-languagedropdownswitcher select {
   height: 35px;
+}
+.search-results-tab .search-result-nav {
+  background: none;
+  padding-top: 0px;
 }
