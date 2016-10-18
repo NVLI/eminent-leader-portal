@@ -466,7 +466,6 @@ General styles for the Banner image home page*/
 }
 /* line 436, ../sass/custom.scss */
 #main-slider .slider-item .content-holder h1 {
-  text-transform: uppercase;
   color: #555;
   font-size: 5em;
 
@@ -491,7 +490,6 @@ General styles for the Banner image home page*/
 @media (max-width: 973px) {
   /* line 436, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 {
-    text-transform: uppercase;
     color: #000;
     font-size: 1.6em;
   }
@@ -504,7 +502,6 @@ General styles for the Banner image home page*/
 /* line 461, ../sass/custom.scss */
 #main-slider .slider-item .content-holder h2 {
   text-align: center;
-  text-transform: uppercase;
   color: #222;
   font-size: 1.5em;
   font-weight: 800;
