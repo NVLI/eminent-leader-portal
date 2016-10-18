@@ -405,3 +405,16 @@ margin-bottom: 10px;
 #main-slider .content-holder h1 {
   line-height: 0.84;
 }
+#header .search {
+  float: left;
+}
+@media (max-width: 999px) {
+  #header .search {
+    width: 100%;
+  }
+  #block-languagedropdownswitcher {
+    clear: both;
+    width: 100%;
+  }
+
+}
