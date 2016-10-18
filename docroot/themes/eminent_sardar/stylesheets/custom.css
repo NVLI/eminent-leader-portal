@@ -264,7 +264,7 @@ General styles for the Quiz block in the home page*/
 }
 /* line 261, ../sass/custom.scss */
 .quick-quiz a.startQuiz:hover {
-  background: #D35400;
+  background: #5c3f34;
   outline: none;
   box-shadow: none;
 }
@@ -291,7 +291,7 @@ General styles for the Quiz block in the home page*/
 }
 /* line 286, ../sass/custom.scss */
 .quick-quiz a.button:hover {
-  background: #D35400;
+  background: #5c3f34;
   outline: none;
   box-shadow: none;
 }
@@ -305,7 +305,7 @@ General styles for the Quiz block in the home page*/
 }
 /* line 299, ../sass/custom.scss */
 .quick-quiz .incorrect {
-  color: #D35400;
+  color: #5c3f34;
 }
 /* line 305, ../sass/custom.scss */
 .quick-quiz .startQuiz,
@@ -528,7 +528,7 @@ General styles for the Banner image home page*/
 }
 /* line 482, ../sass/custom.scss */
 #main-slider h1 {
-  color: #D35400;
+  color: #5c3f34;
 }
 
 /******************************************************
@@ -780,7 +780,7 @@ Main components
   #cd-timeline {
     margin-top: 3em;
     margin-bottom: 3em;
-    width: 85%;
+    width: 75%;
   }
 
   /* line 730, ../sass/custom.scss */
@@ -792,7 +792,7 @@ Main components
 /* line 736, ../sass/custom.scss */
 .cd-timeline-block {
   position: relative;
-  margin: 2em 0;
+  margin: 0;
 }
 /* line 740, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content {
@@ -855,7 +855,7 @@ Main components
 @media only screen and (min-width: 1170px) {
   /* line 868, ../sass/custom.scss */
   .cd-timeline-block {
-    margin: 4em 0;
+    margin: 0;
   }
 
   /* line 871, ../sass/custom.scss */
@@ -1117,22 +1117,22 @@ Main components
   /* line 1084, ../sass/custom.scss */
   .cd-timeline-block:nth-child(odd) .cd-timeline-content::after {
     content: "";
-    width: 22px;
+    width: 15px;
     height: 2px;
     border-bottom: 3px dotted #d7e4ed;
     position: absolute;
-    right: -25px;
+    right: -17px;
     top: 29px;
   }
 
   /* line 1094, ../sass/custom.scss */
   .cd-timeline-block:nth-child(even) .cd-timeline-content::after {
     content: "";
-    width: 20px;
+    width: 15px;
     height: 2px;
     border-bottom: 3px dotted #d7e4ed;
     position: absolute;
-    left: -28px;
+    left: -22px;
     top: 27px;
   }
 
@@ -2172,8 +2172,8 @@ styles for the search form in the home page*/
 }
 /* line 1938, ../sass/custom.scss */
 #feature a.btn-primary:hover {
-  color: #D35400;
-  border-color: #D35400;
+  color: #5c3f34;
+  border-color: #5c3f34;
 }
 
 /* line 1947, ../sass/custom.scss */
@@ -2210,8 +2210,8 @@ styles for the search form in the home page*/
 }
 /* line 1976, ../sass/custom.scss */
 .recent-work-wrap .recent-work-inner a.preview:hover {
-  color: #D35400;
-  border-color: #D35400;
+  color: #5c3f34;
+  border-color: #5c3f34;
 }
 
 /* line 1984, ../sass/custom.scss */
