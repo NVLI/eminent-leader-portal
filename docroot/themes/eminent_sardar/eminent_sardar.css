@@ -286,7 +286,7 @@ margin-bottom: 10px;
     float: left;
   }
 }
-@media only screen and (min-width: 760px) {
+@media only screen and (min-width: 1170px) {
   .cd-timeline-block:nth-child(odd) .cd-timeline-content .cd-date {
     right: auto;
     left: 120%;
@@ -329,7 +329,7 @@ margin-bottom: 10px;
 .search-result-nav li {
   margin: 1px;
 }
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 1170px) {
   #cd-timeline {
     margin-left: 70px;
   }
