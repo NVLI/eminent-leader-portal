@@ -55,7 +55,7 @@ h1 {
 }
 #header .input-group-addon .button {
   margin: 0px;
-  background: rgba(0, 0, 0, 0) url("/themes/eminent_sardar/images/search_icon.png") no-repeat scroll 5px 6px;
+  background: rgba(0, 0, 0, 0) url("/themes/eminent_sardar/images/sprite.png") no-repeat scroll -161px -447px;
   border: medium none;
   border-radius: 50%;
   display: block;
@@ -395,4 +395,16 @@ margin-bottom: 10px;
 }
 .responses {
   padding-bottom: 15px;
+}
+.navbar input::-webkit-input-placeholder {
+  color: white;
+}
+.navbar input:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+.navbar input::-moz-placeholder {  /* Firefox 19+ */
+  color: white;
+}
+.navbar input:-ms-input-placeholder {
+  color: white;
 }
