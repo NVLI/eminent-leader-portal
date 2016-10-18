@@ -2544,3 +2544,6 @@ shortcodes page css
   display: inline-block;
   margin-left: 15px;
 }
+select {
+  -moz-appearance: none;
+}
