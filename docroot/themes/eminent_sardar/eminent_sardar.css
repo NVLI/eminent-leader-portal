@@ -38,7 +38,7 @@ a {
 }
 #header .input-group-addon .button {
   margin: 0px;
-  background: rgba(0, 0, 0, 0) url("/themes/eminent_sardar/images/sprite.png") no-repeat scroll -161px -447px;
+  background: rgba(0, 0, 0, 0) url("/themes/eminent_sardar/images/search_icon.png") no-repeat scroll 5px 6px;
   border: medium none;
   border-radius: 50%;
   display: block;
