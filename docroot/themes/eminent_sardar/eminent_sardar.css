@@ -13,6 +13,14 @@ p,
 a {
   font-family: 'Mukta Vaani', sans-serif;
 }
+#main-slider .slider-item .content-holder h1 {
+ text-transform: uppercase;
+ color: #555;
+ font-size: 5em;
+}
+h1 {
+ font-weight: 200;
+}
 .slidercontent h1 {
   font-family: 'Mukta Vaani', sans-serif;
 }
