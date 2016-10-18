@@ -363,10 +363,13 @@ margin-bottom: 10px;
 .meidiablock .media_details_hold .item {
   margin-bottom: 0px;
 }
-.form-select {
+.lang-dropdown-select-element.form-select {
   background: transparent;
   border: 1px solid #FFF;
   color: #fff;
+}
+.lang-dropdown-select-element.form-select option {
+  color: #000;
 }
 #block-languagedropdownswitcher {
   float: right;
