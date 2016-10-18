@@ -70,14 +70,14 @@ Excibition page*/
 
 /* line 92, ../sass/custom.scss */
 .slick-next {
-  background-color: #e67e22 !important;
+  background-color: #CC7722 !important;
   right: 20px !important;
   border-radius: 0 !important;
 }
 
 /* line 97, ../sass/custom.scss */
 .slick-prev {
-  background-color: #e67e22 !important;
+  background-color: #CC7722 !important;
   left: 20px !important;
   border-radius: 0 !important;
 }
@@ -136,7 +136,7 @@ General styles bootstrap modal*/
 /* line 150, ../sass/custom.scss */
 .modal-header {
   border: 0;
-  background: #e67e22;
+  background: #CC7722;
   text-align: center;
   color: #fff;
 }
@@ -255,7 +255,7 @@ General styles for the Quiz block in the home page*/
 /* line 253, ../sass/custom.scss */
 .quick-quiz a.startQuiz {
   padding: 8px 20px;
-  background: #e67e22;
+  background: #CC7722;
   margin: auto;
   color: #fff;
   border: none;
@@ -485,7 +485,7 @@ General styles for the Banner image home page*/
   /* line 446, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 1.9em;
-    color: #e67e22;
+    color: #CC7722;
   }
 }
 @media (max-width: 973px) {
@@ -498,7 +498,7 @@ General styles for the Banner image home page*/
   /* line 455, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 2em;
-    color: #e67e22;
+    color: #CC7722;
   }
 }
 /* line 461, ../sass/custom.scss */
@@ -795,149 +795,43 @@ Main components
   margin: 2em 0;
 }
 /* line 740, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content {
-  border-color: #27ae60;
+.cd-timeline-block .cd-timeline-content {
+  border-color: #CC7722;
 }
 /* line 741, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content a.more {
-  color: #27ae60;
+.cd-timeline-block .cd-timeline-content a.more {
+  color: #CC7722;
 }
 /* line 743, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content a.more:after {
-  color: #27ae60;
+.cd-timeline-block .cd-timeline-content a.more:after {
+  color: #CC7722;
 }
 /* line 748, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content:before {
-  border-left-color: #27ae60;
+.cd-timeline-block .cd-timeline-content:before {
+  border-left-color: #CC7722;
 }
 @media (max-width: 973px) {
   /* line 748, ../sass/custom.scss */
-  .cd-timeline-block:nth-child(4n+1) .cd-timeline-content:before {
-    border-right-color: #27ae60;
+  .cd-timeline-block .cd-timeline-content:before {
+    border-right-color: #CC7722;
     border-left-color: transparent;
   }
 }
 /* line 755, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content:after {
-  border-bottom: 3px dotted #27ae60 !important;
+.cd-timeline-block .cd-timeline-content:after {
+  border-bottom: 3px dotted #CC7722 !important;
 }
 /* line 758, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-content h2 {
-  color: #27ae60;
+.cd-timeline-block .cd-timeline-content h2 {
+  color: #5c3f34;
 }
 /* line 762, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-timeline-img {
-  background: #27ae60;
+.cd-timeline-block .cd-timeline-img {
+  background: #5c3f34;
 }
 /* line 765, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+1) .cd-date {
-  color: #27ae60;
-  font-weight: bold;
-}
-/* line 771, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content {
-  border-color: #2980b9;
-}
-/* line 773, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content a.more {
-  color: #2980b9;
-}
-/* line 775, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content a.more:after {
-  color: #2980b9;
-}
-/* line 779, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content:before {
-  border-right-color: #2980b9 !important;
-}
-/* line 782, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content:after {
-  border-bottom: 3px dotted #2980b9 !important;
-}
-/* line 785, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-content h2 {
-  color: #2980b9;
-}
-/* line 789, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-timeline-img {
-  background: #2980b9;
-}
-/* line 792, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+2) .cd-date {
-  color: #2980b9;
-  font-weight: bold;
-}
-/* line 798, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content {
-  border-color: #873066;
-}
-/* line 800, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content a.more {
-  color: #873066;
-}
-/* line 802, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content a.more:after {
-  color: #873066;
-}
-/* line 806, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content:before {
-  border-left-color: #873066;
-}
-@media (max-width: 973px) {
-  /* line 806, ../sass/custom.scss */
-  .cd-timeline-block:nth-child(4n+3) .cd-timeline-content:before {
-    border-right-color: #873066 !important;
-    border-left-color: transparent;
-  }
-}
-/* line 813, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content:after {
-  border-bottom: 3px dotted #873066 !important;
-}
-/* line 816, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-content h2 {
-  color: #873066;
-}
-/* line 820, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-timeline-img {
-  background: #873066;
-}
-/* line 823, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+3) .cd-date {
-  color: #873066;
-  font-weight: bold;
-}
-/* line 829, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content {
-  border-color: #0d2e65;
-}
-/* line 831, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content a.more {
-  color: #0d2e65;
-}
-/* line 833, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content a.more:after {
-  color: #0d2e65;
-}
-/* line 837, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content:before {
-  border-right-color: #0d2e65 !important;
-}
-/* line 840, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content:after {
-  border-bottom: 3px dotted #0d2e65 !important;
-}
-/* line 843, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-content h2 {
-  color: #0d2e65;
-}
-/* line 847, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-timeline-img {
-  background: #0d2e65;
-}
-/* line 850, ../sass/custom.scss */
-.cd-timeline-block:nth-child(4n+4) .cd-date {
-  color: #0d2e65;
+.cd-timeline-block .cd-date {
+  color: #5c3f34;
   font-weight: bold;
 }
 
@@ -1267,7 +1161,7 @@ Main components
     left: auto;
     right: 100%;
     border-color: transparent;
-    border-right-color: #ddd;
+    border-right-color: #CC7722;
   }
 
   /* line 1123, ../sass/custom.scss */
@@ -1781,7 +1675,7 @@ login form eblock*/
 #block-eminent-sardar-local-tasks ul li {
   display: inline-block;
   padding: 10px;
-  background: #e67e22;
+  background: #CC7722;
 }
 /* line 1534, ../sass/custom.scss */
 #block-eminent-sardar-local-tasks ul li a {
@@ -2307,11 +2201,11 @@ styles for the search form in the home page*/
   user-select: none;
   padding: 8px 20px;
   background: transparent;
-  color: #e67e22;
+  color: #CC7722;
   border: none;
   margin-top: 10px;
   margin: auto;
-  border: 1px solid #e67e22;
+  border: 1px solid #CC7722;
   max-width: 190px;
 }
 /* line 1976, ../sass/custom.scss */
