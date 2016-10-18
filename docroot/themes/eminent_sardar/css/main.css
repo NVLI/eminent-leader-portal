@@ -58,7 +58,7 @@ a {
 }
 
 a:hover, a:focus {
-  color: #d43133;
+  color: #5c3f34;
 }
 
 hr {
@@ -79,7 +79,7 @@ hr {
 
 .btn-primary:hover,
 .btn-primary:focus{
-  background: #cc7722;
+  background: #5c3f34;
   outline: none;
   box-shadow: none;
 }
@@ -96,7 +96,7 @@ hr {
 
 a:hover,
 a:focus {
-  color: #111;
+  color: #5c3f34;
   text-decoration: none;
   outline: none;
 }
@@ -231,7 +231,7 @@ ul.social-share li a {
 }
 
 ul.social-share li a:hover {
-  background: #cc7722;
+  background: #5c3f34;
   color: #fff;
 }
 
@@ -264,7 +264,7 @@ input.search-form::-webkit-input-placeholder {
 }
 
 input.search-form:hover::-webkit-input-placeholder {
-  color: #fff;
+  color: #5c3f34;
 }
 
 .navbar-brand {
