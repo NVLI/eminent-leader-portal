@@ -375,3 +375,9 @@ margin-bottom: 10px;
 .responses {
   padding-bottom: 15px;
 }
+#bottom ul:not(.contextual-links) li a {
+  color: #FFF;
+}
+#bottom ul li a:hover {
+  color: #CC7722;
+}
