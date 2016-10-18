@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond');
 body {
   font-family: sans-serif;
 }
@@ -315,7 +316,11 @@ margin-bottom: 10px;
   width: auto;
 }
 #main-slider .slider-item .content-holder h1 {
-  font-family: "G-Crimson Text-n4", Arial !important;
+  font-family: 'EB Garamond', serif !important;
+}
+#main-slider .slider-item .content-holder h1 span {
+  text-transform: capitalize
+  color: #000;
 }
 .exhibition-slick-image img {
   margin: auto;
