@@ -889,14 +889,14 @@ a.accordion-toggle  i{
 
 .nav-tabs>li>a:hover{
   background: #4d423d;
-  color:#666;
+  color:#fff;
 }
 
 .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:hover,
 .nav-tabs>li.active>a:focus {
   border: 0;
-  color:#666;
+  color:#fff;
   background: #4d423d;
   position: relative;
 }
