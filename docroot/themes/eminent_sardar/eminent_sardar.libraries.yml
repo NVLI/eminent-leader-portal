@@ -6,6 +6,7 @@ global-components:
       css/animate.min.css: {}
       css/main.css: {}
       css/responsive.css: {}
+      css/prettyPhoto.css: {}
       stylesheets/custom.css: {}
       css/slick.css: {}
       eminent_sardar.css: {}
@@ -14,6 +15,7 @@ global-js:
     js/bootstrap.min.js: {}
     js/slick.min.js: {}
     js/jquery.isotope.min.js: {}
+    js/jquery.prettyPhoto.js: {}
     js/main.js: {}
     js/wow.min.js: {}
     js/timeline.js: {}
