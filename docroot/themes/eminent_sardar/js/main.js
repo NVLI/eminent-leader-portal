@@ -19,8 +19,9 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Hide video after play. */
-  $('video').on('ended',function(){
-    $(this).hide();
+  $('#bannervideo').on('ended',function(){
+    alert('Test alert');
+    $('#bannervideo').hide();
   });
 
 /***********************************************************************
