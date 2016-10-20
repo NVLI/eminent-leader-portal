@@ -419,9 +419,11 @@ input.search-form:hover::-webkit-input-placeholder {
   position: absolute;
   width: 100%;
   display: block !important;
-  height: 730px;
   background-size: cover;
-
+  -webkit-transition: opacity ease-in-out 500ms;
+  -moz-transition: opacity ease-in-out 500ms;
+  -o-transition: opacity ease-in-out 500ms;
+  transition: opacity ease-in-out 500ms;
 }
 
 #main-slider .carousel .item:first-child {
@@ -430,10 +432,30 @@ input.search-form:hover::-webkit-input-placeholder {
 }
 
 #main-slider .carousel .item.active {
-
+  opacity: 1;
+  -webkit-transition: opacity ease-in-out 500ms;
+  -moz-transition: opacity ease-in-out 500ms;
+  -o-transition: opacity ease-in-out 500ms;
+  transition: opacity ease-in-out 500ms;
+  z-index: 1;
 }
 
-
+#main-slider .prev,
+#main-slider .next {
+  position: absolute;
+  top: 50%;
+  background-color: #cc7722;
+  color: #fff;
+  display: inline-block;
+  margin-top: -25px;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 5;
+}
 
 #main-slider .prev:hover,
 #main-slider .next:hover {
