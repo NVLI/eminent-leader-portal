@@ -4,18 +4,15 @@ global-components:
       css/bootstrap.min.css: {}
       css/font-awesome.min.css: {}
       css/animate.min.css: {}
-      css/prettyPhoto.css: {}
       css/main.css: {}
       css/responsive.css: {}
       stylesheets/custom.css: {}
-      https://fonts.googleapis.com/css?family=Ek+Mukta:200,400,800: { external: true }
       css/slick.css: {}
       eminent_sardar.css: {}
 global-js:
   js:
     js/bootstrap.min.js: {}
     js/slick.min.js: {}
-    js/jquery.prettyPhoto.js: {}
     js/jquery.isotope.min.js: {}
     js/main.js: {}
     js/wow.min.js: {}
@@ -24,6 +21,3 @@ global-js:
   dependencies:
     - core/drupal
     - core/jquery
-
-
-
