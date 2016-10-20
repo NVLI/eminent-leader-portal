@@ -219,6 +219,7 @@ video,
 }
 #conatcat-info .captcha {
   padding: 15px;
+  overflow: hidden;
 }
 .navbar-collapse {
   padding: 0px;
