@@ -20,7 +20,7 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******Hide video after play. */
   $('#bannervideo').on('ended',function(){
-    $('#bannervideo').hide();
+    $("#myCarousel").carousel(1);
   });
 
 /***********************************************************************
