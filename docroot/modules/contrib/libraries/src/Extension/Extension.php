@@ -16,7 +16,10 @@ class Extension extends CoreExtension implements ExtensionInterface {
    */
   public function getLibraryDependencies() {
     // @todo Make this unit-testable.
-    $info = system_get_info($this->getType(), $this->getName());
+    $type = $this->getType();
+    // system_get_info() lists profiles as type "module"
+    $type = $type == 'profile' ? 'module' : $type;
+    $info = system_get_info($type, $this->getName());
     assert('!empty($info)');
     return isset($info['library_dependencies']) ? $info['library_dependencies'] : [];
   }

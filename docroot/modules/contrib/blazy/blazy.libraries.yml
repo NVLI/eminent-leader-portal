@@ -1,4 +1,5 @@
 blazy:
+  header: true
   remote: https://github.com/dinbror/blazy
   version: 1.x
   license:
@@ -6,7 +7,7 @@ blazy:
     url: http://opensource.org/licenses/MIT
     gpl-compatible: true
   js:
-    /libraries/blazy/blazy.min.js: {}
+    /libraries/blazy/blazy.min.js: { weight: -4, minified: true }
 
 loading:
   version: VERSION
@@ -23,7 +24,7 @@ ratio:
 load:
   version: VERSION
   js:
-    js/blazy.load.min.js: {}
+    js/blazy.load.min.js: { weight: -1, minified: true }
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -58,7 +59,7 @@ colorbox.skin:
 colorbox:
   version: VERSION
   js:
-    js/blazy.colorbox.min.js: {}
+    js/blazy.colorbox.min.js: { minified: true }
   dependencies:
     - core/drupal
     - core/drupalSettings
@@ -72,8 +73,8 @@ photobox:
     url: https://github.com/yairEO/photobox/issues/17
     gpl-compatible: true
   js:
-    /libraries/photobox/photobox/jquery.photobox.js: {}
-    js/blazy.photobox.min.js: {}
+    /libraries/photobox/photobox/jquery.photobox.js: { minified: true }
+    js/blazy.photobox.min.js: { minified: true }
   css:
     base:
       /libraries/photobox/photobox/photobox.css: {}
@@ -90,7 +91,7 @@ photobox:
 admin:
   version: VERSION
   js:
-    js/blazy.admin.min.js: {}
+    js/blazy.admin.min.js: { minified: true }
   css:
     theme:
       css/blazy.admin.css: {}

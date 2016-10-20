@@ -15,7 +15,11 @@
         var t = $(this);
         var media = t.data('media') || {};
         var runtimeOptions = {
-          rel: media.rel || null
+          rel: media.rel || null,
+          title: function () {
+            var $caption = t.next('.litebox-caption');
+            return $caption.length ? $caption.html() : '';
+          }
         };
 
         if (drupalSettings.colorbox.mobiledetect && window.matchMedia) {

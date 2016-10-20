@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\Dejavu\BlazyVideoBase.
- */
-
 namespace Drupal\blazy\Dejavu;
 
 use Drupal\Core\Field\FormatterBase;
@@ -68,7 +63,7 @@ abstract class BlazyVideoBase extends FormatterBase implements ContainerFactoryP
     $definition['_views'] = isset($form['field_api_classes']);
 
     $this->admin()->buildSettingsForm($element, $definition);
-    $element['media_switch']['#options']['media'] = t('Image to iframe');
+    $element['media_switch']['#options']['media'] = $this->t('Image to iframe');
 
     return $element;
   }
@@ -77,15 +72,22 @@ abstract class BlazyVideoBase extends FormatterBase implements ContainerFactoryP
    * Defines the scope for the form elements.
    */
   public function getScopedFormElements() {
+    $field       = $this->fieldDefinition;
+    $entity_type = $field->getTargetEntityTypeId();
+    $target_type = $this->getFieldSetting('target_type');
+
     return [
       'background'        => TRUE,
       'breakpoints'       => BlazyDefault::getConstantBreakpoints(),
       'current_view_mode' => $this->viewMode,
+      'entity_type'       => $entity_type,
       'field_name'        => $this->fieldDefinition->getName(),
       'image_style_form'  => TRUE,
       'media_switch_form' => TRUE,
       'multimedia'        => TRUE,
       'settings'          => $this->getSettings(),
+      'target_type'       => $target_type,
+      'thumb_positions'   => TRUE,
       'nav'               => TRUE,
     ];
   }

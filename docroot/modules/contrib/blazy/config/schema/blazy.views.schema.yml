@@ -1,0 +1,19 @@
+blazy_views_field:
+  type: views_field
+  label: 'Blazy'
+  mapping:
+    image_style:
+      type: string
+      label: 'Image style'
+    media_switch:
+      type: string
+      label: 'Media switch'
+    view_mode:
+      type: string
+      label: 'View mode'
+
+views.field.blazy_file:
+  type: blazy_views_field
+
+views.field.blazy_media:
+  type: blazy_views_field

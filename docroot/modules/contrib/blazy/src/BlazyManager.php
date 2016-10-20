@@ -1,13 +1,9 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\BlazyManager.
- */
-
 namespace Drupal\blazy;
 
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
 
@@ -111,15 +107,9 @@ class BlazyManager extends BlazyManagerBase {
    * Builds breakpoints suitable for top-level [data-blazy] wrapper attributes.
    */
   public function buildDataBlazy(array &$settings = [], $item = NULL) {
-    $settings['width']  = isset($settings['width'])  ? $settings['width']  : NULL;
-    $settings['height'] = isset($settings['height']) ? $settings['height'] : NULL;
-    if ($item) {
-      $settings['width']  = isset($item->width)  ? $item->width  : NULL;
-      $settings['height'] = isset($item->height) ? $item->height : NULL;
-      if (!isset($settings['uri'])) {
-        $settings['uri'] = ($entity = $item->entity) && empty($item->uri) ? $entity->getFileUri() : $item->uri;
-      }
-    }
+    // Addresses the trouble with non-mobile-first approach.
+    $settings['_dimensions_reset'] = TRUE;
+    $this->getUrlDimensions($settings, $item);
 
     $json = $sources = [];
     if (!empty($settings['breakpoints'])) {
@@ -165,10 +155,6 @@ class BlazyManager extends BlazyManagerBase {
       // Identify that Blazy can be activated only by breakpoints.
       $settings['blazy'] = TRUE;
     }
-
-    // Addresses the trouble with non-mobile-first approach.
-    $settings['_dimensions_reset'] = TRUE;
-    $this->getUrlDimensions($settings, $item);
 
     if ($sources) {
       // As of Blazy v1.6.0 applied to BG only.
@@ -217,42 +203,49 @@ class BlazyManager extends BlazyManagerBase {
    * Defines image dimensions once as it costs, unless reset for breakpoints.
    */
   public function getUrlDimensions(array &$settings = [], $item = NULL, $modifier = NULL) {
-    $settings['width']  = isset($settings['width'])  ? $settings['width']  : NULL;
-    $settings['height'] = isset($settings['height']) ? $settings['height'] : NULL;
+    $settings['width']      = isset($settings['width'])  ? $settings['width']  : NULL;
+    $settings['height']     = isset($settings['height']) ? $settings['height'] : NULL;
+    $settings['cache_tags'] = empty($settings['cache_tags']) ? [] : $settings['cache_tags'];
 
-    if ($item) {
+    // This is not always available with a VEF textfield.
+    if ($item && is_object($item)) {
       $settings['width']  = isset($item->width)  ? $item->width  : NULL;
       $settings['height'] = isset($item->height) ? $item->height : NULL;
-      $settings['image_url'] = isset($settings['image_url']) ? $settings['image_url'] : $item->entity->url();
 
       if (!isset($settings['uri'])) {
         $settings['uri'] = ($entity = $item->entity) && empty($item->uri) ? $entity->getFileUri() : $item->uri;
       }
     }
 
-    $settings['cache_tags'] = empty($settings['cache_tags']) ? [] : $settings['cache_tags'];
+    if (!empty($settings['uri'])) {
+      if (!isset($settings['image_url'])) {
+        $settings['image_url'] = file_create_url($settings['uri']);
+      }
 
-    if (empty($modifier) && isset($settings['image_style'])) {
-      $modifier = $settings['image_style'];
-    }
+      // No file API, no $item, with unmanaged VEF image without image_style.
+      $modifier = empty($modifier) ? $settings['image_style'] : $modifier;
+      if (empty($modifier) && empty($settings['width']) && !empty($settings['image_url'])) {
+        list($settings['width'], $settings['height']) = getimagesize($settings['image_url']);
+      }
 
-    if (!empty($modifier)) {
-      $style = $this->entityLoad($modifier, 'image_style');
+      if (!empty($modifier)) {
+        $style = $this->entityLoad($modifier, 'image_style');
 
-      // Image URLs are for lazyloaded images.
-      $settings['image_url']  = $style->buildUrl($settings['uri']);
-      $settings['cache_tags'] = $style->getCacheTags();
+        // Image URLs are for lazyloaded images.
+        $settings['image_url']  = $style->buildUrl($settings['uri']);
+        $settings['cache_tags'] = $style->getCacheTags();
 
-      // Unless reset for multi-styled images, set dimensions once.
-      if (empty($settings['_dimensions']) || isset($settings['_dimensions_reset'])) {
-        $dimensions = [
-          'width'  => $settings['width'],
-          'height' => $settings['height'],
-        ];
-        $style->transformDimensions($dimensions, $settings['uri']);
-        $settings['height']      = $dimensions['height'];
-        $settings['width']       = $dimensions['width'];
-        $settings['_dimensions'] = TRUE;
+        // Unless reset for multi-styled images, set dimensions once.
+        if (empty($settings['_dimensions']) || isset($settings['_dimensions_reset'])) {
+          $dimensions = [
+            'width'  => $settings['width'],
+            'height' => $settings['height'],
+          ];
+          $style->transformDimensions($dimensions, $settings['uri']);
+          $settings['height']      = $dimensions['height'];
+          $settings['width']       = $dimensions['width'];
+          $settings['_dimensions'] = TRUE;
+        }
       }
     }
   }
@@ -261,15 +254,20 @@ class BlazyManager extends BlazyManagerBase {
    * Returns the image based on the Responsive image mapping, or blazy.
    */
   public function getImage($build = []) {
+    /* @var Drupal\image\Plugin\Field\FieldType\ImageItem $item */
     $item      = $build['item'];
     $settings  = &$build['settings'];
     $namespace = $settings['namespace'] = empty($settings['namespace']) ? 'blazy' : $settings['namespace'];
     $theme     = isset($settings['theme_hook_image']) ? $settings['theme_hook_image'] : 'blazy';
 
+    if (empty($item)) {
+      return [];
+    }
+
     $image = [
       '#theme'       => $theme,
       '#item'        => [],
-      '#delta'       => $settings['delta'],
+      '#delta'       => isset($settings['delta']) ? $settings['delta'] : 0,
       '#image_style' => $settings['image_style'],
       '#pre_render'  => [[$this, 'preRenderImage']],
     ];
@@ -282,23 +280,29 @@ class BlazyManager extends BlazyManagerBase {
       $this->getUrlBreakpoints($settings);
     }
 
-    $file_tags = isset($settings['file_tags']) ? $settings['file_tags'] : [];
-    $settings['cache_tags'] = empty($settings['cache_tags']) ? $file_tags : Cache::mergeTags($settings['cache_tags'], $file_tags);
-
     $image['#build'] = $build;
-    $image['#cache'] = ['tags' => $settings['cache_tags']];
+
+    if (!isset($settings['_no_cache'])) {
+      $file_tags = isset($settings['file_tags']) ? $settings['file_tags'] : [];
+      $settings['cache_tags'] = empty($settings['cache_tags']) ? $file_tags : Cache::mergeTags($settings['cache_tags'], $file_tags);
+      $image['#cache'] = ['tags' => $settings['cache_tags']];
+
+      if (isset($settings['cache_keys'])) {
+        $image['#cache']['keys'] = $settings['cache_keys'];
+      }
+    }
 
     if (isset($settings['theme_hook_image_wrapper'])) {
       $image['#theme_wrappers'][] = $settings['theme_hook_image_wrapper'];
     }
 
     $this->getModuleHandler()->alter($namespace . '_image', $image, $settings);
-    unset($settings['cache_tags'], $settings['cache_metadata'], $settings['file_tags'], $settings['overridables']);
+
     return $image;
   }
 
   /**
-   * Builds the Slick image as a structured array ready for ::renderer().
+   * Builds the Blazy image as a structured array ready for ::renderer().
    */
   public function preRenderImage($element) {
     $build = $element['#build'];
@@ -309,8 +313,6 @@ class BlazyManager extends BlazyManagerBase {
     if (empty($item)) {
       return [];
     }
-
-    $namespace = $settings['namespace'];
 
     // Extract field item attributes for the theme function, and unset them
     // from the $item so that the field template does not re-render them.
@@ -336,26 +338,21 @@ class BlazyManager extends BlazyManagerBase {
         $element['#cache']['tags'] = $this->getResponsiveImageCacheTags($responsive_image_style);
       }
     }
-    elseif (!empty($settings['width'])) {
-      $item_attributes['height'] = $settings['height'];
-      $item_attributes['width']  = $settings['width'];
-    }
 
+    // With CSS background, IMG may be empty, so add thumbnail to the container.
     if (!empty($settings['thumbnail_style'])) {
       $settings['thumbnail_url'] = $this->entityLoad($settings['thumbnail_style'], 'image_style')->buildUrl($settings['uri']);
     }
 
-    $element['#embed_url']       = empty($settings['embed_url']) ? '' : $settings['embed_url'];
     $element['#url']             = '';
     $element['#settings']        = $settings;
-    $element['#captions']        = isset($build['captions']) ? $build['captions'] : [];
+    $element['#captions']        = isset($build['captions']) ? ['inline' => $build['captions']] : [];
     $element['#item_attributes'] = $item_attributes;
 
     if (!empty($settings['media_switch']) && ($settings['media_switch'] == 'content' || strpos($settings['media_switch'], 'box') !== FALSE)) {
       $this->getMediaSwitch($element, $settings);
     }
 
-    $this->getModuleHandler()->alter($namespace . '_image_pre_render', $element, $settings);
     return $element;
   }
 
@@ -363,10 +360,10 @@ class BlazyManager extends BlazyManagerBase {
    * Gets the media switch options: colorbox, photobox, content.
    */
   public function getMediaSwitch(array &$element = [], $settings = []) {
-    $type      = isset($settings['type']) ? $settings['type'] : 'image';
-    $uri       = $settings['uri'];
-    $switch    = $settings['media_switch'];
-    $namespace = $settings['namespace'];
+    $item   = $element['#item'];
+    $type   = isset($settings['type']) ? $settings['type'] : 'image';
+    $uri    = $settings['uri'];
+    $switch = $settings['media_switch'];
 
     // Provide relevant URL if it is a lightbox.
     if (strpos($switch, 'box') !== FALSE) {
@@ -400,10 +397,12 @@ class BlazyManager extends BlazyManagerBase {
       }
 
       // Provides lightbox media dimension if so configured.
-      if ($type != 'image' && !empty($settings['dimension'])) {
-        list($settings['width'], $settings['height']) = array_pad(array_map('trim', explode("x", $settings['dimension'], 2)), 2, NULL);
-        $json['width']  = $settings['width'];
-        $json['height'] = $settings['height'];
+      if ($type != 'image') {
+        if (!empty($settings['dimension'])) {
+          list($settings['box_width'], $settings['box_height']) = array_pad(array_map('trim', explode("x", $settings['dimension'], 2)), 2, NULL);
+        }
+        $json['width']  = empty($settings['box_width'])  ? $settings['width']  : $settings['box_width'];
+        $json['height'] = empty($settings['box_height']) ? $settings['height'] : $settings['box_height'];
       }
 
       $url_attributes['class'] = $classes;
@@ -413,12 +412,94 @@ class BlazyManager extends BlazyManagerBase {
       $element['#url'] = $url;
       $element['#url_attributes'] = $url_attributes;
       $element['#settings']['lightbox'] = $switch;
+
+      if (!empty($settings['box_caption'])) {
+        $element['#captions']['lightbox'] = self::buildCaptions($item, $settings);
+      }
     }
     elseif ($switch == 'content' && !empty($settings['absolute_path'])) {
       $element['#url'] = $settings['absolute_path'];
     }
+  }
 
-    $this->getModuleHandler()->alter($namespace . '_media_switch', $element, $settings);
+  /**
+   * Build lightbox captions.
+   */
+  public static function buildCaptions($item, $settings = []) {
+    $title   = empty($item->title) ? '' : $item->title;
+    $alt     = empty($item->alt)   ? '' : $item->alt;
+    $delta   = $settings['delta'];
+    $caption = '';
+
+    switch ($settings['box_caption']) {
+      case 'auto':
+        $caption = $alt ?: $title;
+        break;
+
+      case 'alt':
+        $caption = $alt;
+        break;
+
+      case 'title':
+        $caption = $title;
+        break;
+
+      case 'alt_title':
+      case 'title_alt':
+        $alt     = $alt ? '<p>' . $alt . '</p>' : '';
+        $title   = $title ? '<h2>' . $title . '</h2>' : '';
+        $caption = $settings['box_caption'] == 'alt_title' ? $alt . $title : $title . $alt;
+        break;
+
+      case 'entity_title':
+        $caption = ($entity = $item->getEntity()) ? $entity->label() : '';
+        break;
+
+      case 'custom':
+        $token = \Drupal::token();
+        $caption = '';
+        if ($entity = $item->getEntity()) {
+          $entity_type = $entity->getEntityTypeId();
+
+          $options = ['clear' => TRUE];
+          $caption = $token->replace($settings['box_caption_custom'], [$entity_type => $entity, 'file' => $item], $options);
+
+          // Checks for multi-value text fields, and maps its delta to image.
+          if (strpos($caption, ", <p>") !== FALSE) {
+            $caption = str_replace(", <p>", '| <p>', $caption);
+            $captions = explode("|", $caption);
+            $caption = isset($captions[$delta]) ? $captions[$delta] : '';
+          }
+        }
+        break;
+
+      default:
+        $caption = '';
+    }
+
+    return empty($caption) ? [] : ['#markup' => $caption];
+  }
+
+  /**
+   * Returns the entity view, if available.
+   */
+  public function getEntityView($entity = NULL, $settings = []) {
+    if ($entity && $entity instanceof EntityInterface) {
+      $entity_type_id = $entity->getEntityTypeId();
+      $view_hook      = $entity_type_id . '_view';
+
+      // If module implements own {entity_type}_view.
+      if (function_exists($view_hook)) {
+        return $view_hook($entity);
+      }
+      // If entity has view_builder handler.
+      elseif ($this->getEntityTypeManager()->hasHandler($entity_type_id, 'view_builder')) {
+        $view_mode = empty($settings['view_mode']) ? 'default' : $settings['view_mode'];
+        return $this->getEntityTypeManager()->getViewBuilder($entity_type_id)->view($entity, $view_mode, $entity->language()->getId());
+      }
+    }
+
+    return FALSE;
   }
 
   /**

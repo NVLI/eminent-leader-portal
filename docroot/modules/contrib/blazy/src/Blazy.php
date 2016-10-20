@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\Blazy.
- */
-
 namespace Drupal\blazy;
 
 use Drupal\Core\Template\Attribute;
@@ -27,7 +22,7 @@ class Blazy extends BlazyManager {
    */
   public static function buildAttributes(&$variables) {
     $element = $variables['element'];
-    foreach (['captions', 'embed_url', 'item', 'item_attributes', 'settings', 'url', 'url_attributes'] as $key) {
+    foreach (['attributes', 'captions', 'item', 'item_attributes', 'settings', 'url', 'url_attributes'] as $key) {
       $variables[$key] = isset($element["#$key"]) ? $element["#$key"] : [];
     }
 
@@ -36,7 +31,6 @@ class Blazy extends BlazyManager {
     $settings           = &$variables['settings'];
     $attributes         = &$variables['attributes'];
     $image_attributes   = &$variables['item_attributes'];
-    $content_attributes = [];
 
     // Modifies variables.
     foreach (['icon', 'lightbox', 'media_switch', 'player', 'scheme', 'type'] as $key) {
@@ -51,19 +45,30 @@ class Blazy extends BlazyManager {
     }
 
     // Supports non-blazy formatter, that is, responsive image theme.
-    $image = &$variables['image'];
+    $image  = &$variables['image'];
+    $iframe = [];
 
     // Media URL is stored in the settings.
-    // @todo re-check for a mix for image + video.
-    $media = !empty($variables['embed_url']) && !empty($settings['type']) && in_array($settings['type'], ['video', 'audio']);
+    $media = !empty($settings['embed_url']) && !empty($settings['type']) && in_array($settings['type'], ['video', 'audio']);
 
-    // The regular non-responsive, non-lazyloaded image.
+    // The regular non-responsive, non-lazyloaded image URI where image_url may
+    // contain image_style which is not expected by responsive_image.
     $image['#uri'] = empty($settings['image_url']) ? $settings['uri'] : $settings['image_url'];
 
+    if (!empty($settings['thumbnail_url'])) {
+      $attributes['data-thumb'] = $settings['thumbnail_url'];
+    }
+
+    $height = isset($item->height) ? $item->height : NULL;
+    $width  = isset($item->width) ? $item->width : NULL;
+    $height = isset($settings['height']) ? $settings['height'] : $height;
+    $width  = isset($settings['width']) ? $settings['width'] : $width;
+
     // Check whether we have responsive image, or lazyloaded one.
-    if (!empty($settings['responsive_image_style_id'])) {
+    if (!empty($settings['responsive_image_style_id']) && !empty($settings['uri'])) {
       $image['#type'] = 'responsive_image';
       $image['#responsive_image_style_id'] = $settings['responsive_image_style_id'];
+      $image['#uri'] = $settings['uri'];
 
       // Disable aspect ratio which is not yet supported due to complexity.
       $settings['ratio'] = FALSE;
@@ -76,30 +81,38 @@ class Blazy extends BlazyManager {
         $image['#uri'] = static::PLACEHOLDER;
 
         // Attach data-attributes to the either DIV or IMG container.
-        if (empty($settings['background'])) {
+        if (empty($settings['background']) || empty($settings['blazy'])) {
           self::buildBreakpointAttributes($image_attributes, $settings);
         }
-        else {
+
+        // Supports both Slick and Blazy CSS background lazyloading.
+        if (!empty($settings['background'])) {
           self::buildBreakpointAttributes($attributes, $settings);
           $attributes['class'][] = 'media--background';
-         $image = [];
+
+          // Blazy doesn't need IMG to lazyload CSS background. Slick does.
+          if (!empty($settings['blazy'])) {
+            $image = [];
+          }
         }
       }
 
       // Aspect ratio to fix layout reflow with lazyloaded images responsively.
-      if (!empty($settings['height']) && !empty($settings['ratio']) && in_array($settings['ratio'], ['enforced', 'fluid'])) {
-        $padding_bottom = isset($settings['padding_bottom']) ? $settings['padding_bottom'] : round((($settings['height'] / $settings['width']) * 100), 2);
+      if (!empty($height) && !empty($settings['ratio']) && in_array($settings['ratio'], ['enforced', 'fluid'])) {
+        $padding_bottom = isset($settings['padding_bottom']) ? $settings['padding_bottom'] : round((($height / $width) * 100), 2);
         $attributes['style'] = 'padding-bottom: ' . $padding_bottom . '%';
       }
     }
 
     // Image is optional for Video, and CSS background images.
     if ($image) {
-      $image['#alt'] = isset($item->alt) ? $item->alt : NULL;
+      $image_attributes['height'] = $height;
+      $image_attributes['width']  = $width;
+      $image_attributes['alt']    = isset($item->alt) ? $item->alt : NULL;
 
       // Do not output an empty 'title' attribute.
       if (isset($item->title) && (Unicode::strlen($item->title) != 0)) {
-        $image['#title'] = $item->title;
+        $image_attributes['title'] = $item->title;
       }
 
       $image_attributes['class'][] = 'media__image media__element';
@@ -111,17 +124,13 @@ class Blazy extends BlazyManager {
       // image : If iframe switch disabled, fallback to iframe, remove image.
       // player: If no colorbox/photobox, it is an image to iframe switcher.
       // data- : Gets consistent with colorbox to share JS manipulation.
-      // @todo re-check blazy 'data-src' IFRAME lazyload against blazy.media.js.
-      $image                            = empty($settings['media_switch']) ? [] : $image;
-      $settings['player']               = empty($settings['lightbox']) && $settings['media_switch'] != 'content';
-      $content_attributes['data-media'] = Json::encode(['type' => $settings['type'], 'scheme' => $settings['scheme']]);
-      $content_attributes['data-lazy']  = $variables['embed_url'];
-      $content_attributes['src']        = empty($settings['iframe_lazy']) ? $variables['embed_url'] : 'about:blank';
-    }
-
-    // With CSS background, IMG may be emptied, so add to the container.
-    if (!empty($settings['thumbnail_url'])) {
-      $attributes['data-thumb'] = $settings['thumbnail_url'];
+      $lazy                    = empty($settings['lazy_attribute']) ? 'src' : $settings['lazy_attribute'];
+      $image                   = empty($settings['media_switch']) ? [] : $image;
+      $settings['player']      = empty($settings['lightbox']) && $settings['media_switch'] != 'content';
+      $iframe['data-media']    = Json::encode(['type' => $settings['type'], 'scheme' => $settings['scheme']]);
+      $iframe['data-' . $lazy] = $settings['embed_url'];
+      $iframe['class'][]       = empty($settings['lazy_class']) ? 'b-lazy' : $settings['lazy_class'];
+      $iframe['src']           = empty($settings['iframe_lazy']) ? $settings['embed_url'] : 'about:blank';
     }
 
     if (!empty($settings['caption'])) {
@@ -130,7 +139,7 @@ class Blazy extends BlazyManager {
     }
 
     // URL can be entity or lightbox URL different from the content image URL.
-    $variables['content_attributes'] = new Attribute($content_attributes);
+    $variables['content_attributes'] = new Attribute($iframe);
     $variables['url_attributes']     = new Attribute($variables['url_attributes']);
   }
 
@@ -138,7 +147,7 @@ class Blazy extends BlazyManager {
    * Provides re-usable breakpoint data-attributes.
    *
    * $settings['breakpoints'] must contain: xs, sm, md, lg breakpoints with
-   * the expected keys: width, image_style,	url.
+   * the expected keys: width, image_style, url.
    *
    * @see self::buildAttributes()
    * @see BlazyManager::buildDataBlazy()
@@ -189,12 +198,21 @@ class Blazy extends BlazyManager {
           $mappings[$key]['label'] = Unicode::ucfirst(str_replace('_' , ' ' , $key));
         }
       }
-      foreach (BlazyDefault::getConstantBreakpoints() as $breakpoint) {
-        $mappings['breakpoints']['mapping'][$breakpoint]['type'] = 'mapping';
-        foreach (['breakpoint', 'width', 'image_style'] as $item) {
-          $mappings['breakpoints']['mapping'][$breakpoint]['mapping'][$item]['type']  = 'string';
-          $mappings['breakpoints']['mapping'][$breakpoint]['mapping'][$item]['label'] = Unicode::ucfirst(str_replace('_' , ' ' , $item));
+
+      if (isset($mappings['breakpoints'])) {
+        foreach (BlazyDefault::getConstantBreakpoints() as $breakpoint) {
+          $mappings['breakpoints']['mapping'][$breakpoint]['type'] = 'mapping';
+          foreach (['breakpoint', 'width', 'image_style'] as $item) {
+            $mappings['breakpoints']['mapping'][$breakpoint]['mapping'][$item]['type']  = 'string';
+            $mappings['breakpoints']['mapping'][$breakpoint]['mapping'][$item]['label'] = Unicode::ucfirst(str_replace('_' , ' ' , $item));
+          }
         }
+      }
+
+      if (isset($mappings['overridables'])) {
+        $mappings['overridables']['label'] = 'Overridable options';
+        $mappings['overridables']['sequence'][0]['type'] = 'string';
+        $mappings['overridables']['sequence'][0]['label'] = 'Overridable';
       }
     }
   }

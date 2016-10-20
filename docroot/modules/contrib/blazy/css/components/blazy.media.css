@@ -52,6 +52,10 @@
   pointer-events: none;
 }
 
+.media--loading .media__icon--play::before {
+  display: none;
+}
+
 .media__icon--close::before,
 .media__icon--close::after {
   background: white;

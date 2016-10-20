@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy_ui\Form\BlazySettingsForm.
- */
-
 namespace Drupal\blazy_ui\Form;
 
 use Drupal\Core\Url;

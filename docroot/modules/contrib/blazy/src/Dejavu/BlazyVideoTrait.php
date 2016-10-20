@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\Dejavu\BlazyVideoTrait.
- */
-
 namespace Drupal\blazy\Dejavu;
 
 use Drupal\Core\Url;
@@ -17,10 +12,21 @@ trait BlazyVideoTrait {
   /**
    * Builds relevant video embed field settings based on the given media url.
    */
-  public function buildVideo(array &$settings = [], $media_url) {
+  public function buildVideo(array &$settings = [], $external_url, $provider_manager = NULL) {
     /** @var \Drupal\video_embed_field\ProviderManagerInterface $provider */
-    $provider    = $this->providerManager->loadProviderFromInput($media_url);
-    $definitions = $this->providerManager->loadDefinitionFromInput($media_url);
+    if ($provider_manager) {
+      $provider    = $provider_manager->loadProviderFromInput($external_url);
+      $definitions = $provider_manager->loadDefinitionFromInput($external_url);
+    }
+    else {
+      // @todo drop for Beta > 4 so this method can be used without DI such as
+      // by Slick Browser with a combination of different entities.
+      $provider    = $this->providerManager->loadProviderFromInput($external_url);
+      $definitions = $this->providerManager->loadDefinitionFromInput($external_url);
+    }
+
+    // Ensures thumbnail is available.
+    $provider->downloadThumbnail();
 
     // @todo extract URL from the SRC of final rendered TWIG instead.
     $render  = $provider->renderEmbedCode(640, 360, '0');
@@ -31,17 +37,11 @@ trait BlazyVideoTrait {
     // Prevents complication by now.
     unset($query['autoplay'], $query['auto_play']);
 
-    $settings['video_id']  = $provider::getIdFromInput($media_url);
+    $settings['video_id']  = $provider::getIdFromInput($external_url);
     $settings['embed_url'] = Url::fromUri($url, ['query' => $query])->toString();
     $settings['scheme']    = $definitions['id'];
     $settings['uri']       = $provider->getLocalThumbnailUri();
-    $settings['image_url'] = file_create_url($settings['uri']);
     $settings['type']      = 'video';
-
-    // No file API with unmanaged VEF image without image_style.
-    if (empty($settings['image_style']) && !empty($settings['image_url'])) {
-      list($settings['width'], $settings['height']) = getimagesize($settings['image_url']);
-    }
   }
 
 }

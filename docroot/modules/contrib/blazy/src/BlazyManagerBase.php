@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\BlazyManagerBase.
- */
-
 namespace Drupal\blazy;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -160,18 +155,18 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
       $load['library'][] = 'blazy/photobox';
     }
 
-    // Core Blazy libraries.
-    if (!empty($attach['lazy']) && ($attach['lazy'] == 'blazy' || $attach['lazy'] == 'responsive')) {
-      $load['library'][] = 'blazy/load';
-      $load['drupalSettings']['blazy'] = $this->configLoad()['blazy'];
-    }
-
     if (!empty($attach['media'])) {
       $load['library'][] = 'blazy/media';
     }
 
     if (!empty($attach['ratio'])) {
       $load['library'][] = 'blazy/ratio';
+    }
+
+    // Core Blazy libraries.
+    if (!empty($attach['blazy'])) {
+      $load['library'][] = 'blazy/load';
+      $load['drupalSettings']['blazy'] = $this->configLoad()['blazy'];
     }
 
     $this->moduleHandler->alter('blazy_attach', $load, $attach);
@@ -201,7 +196,7 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
             }
             else {
               foreach ($methods as $method) {
-                $items[$method] = method_exists($skin, $method) ? $skin->$method() : [];
+                $items[$method] = method_exists($skin, $method) ? $skin->{$method}() : [];
               }
             }
           }
