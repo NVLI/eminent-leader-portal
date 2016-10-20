@@ -419,6 +419,7 @@ input.search-form:hover::-webkit-input-placeholder {
   position: absolute;
   width: 100%;
   display: block !important;
+  height: 730px;
   background-size: cover;
   -webkit-transition: opacity ease-in-out 500ms;
   -moz-transition: opacity ease-in-out 500ms;
