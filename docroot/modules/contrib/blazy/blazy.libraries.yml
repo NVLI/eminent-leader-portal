@@ -1,0 +1,101 @@
+blazy:
+  header: true
+  remote: https://github.com/dinbror/blazy
+  version: 1.x
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+    gpl-compatible: true
+  js:
+    /libraries/blazy/blazy.min.js: { weight: -4, minified: true }
+
+loading:
+  version: VERSION
+  css:
+    component:
+      css/components/blazy.loading.css: {}
+
+ratio:
+  version: VERSION
+  css:
+    component:
+      css/components/blazy.ratio.css: {}
+
+load:
+  version: VERSION
+  js:
+    js/blazy.load.min.js: { weight: -1, minified: true }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+    - blazy/blazy
+    - blazy/loading
+
+media:
+  version: VERSION
+  js:
+    js/blazy.media.min.js: {}
+  css:
+    component:
+      css/components/blazy.media.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - blazy/ratio
+
+colorbox.skin:
+  version: VERSION
+  css:
+    component:
+      css/components/blazy.colorbox.css: {}
+      css/components/blazy.lightbox.css: {}
+  dependencies:
+    - colorbox/colorbox
+
+colorbox:
+  version: VERSION
+  js:
+    js/blazy.colorbox.min.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - blazy/colorbox.skin
+
+photobox:
+  remote: https://github.com/yairEO/photobox/
+  version: 1.x
+  license:
+    name: MIT
+    url: https://github.com/yairEO/photobox/issues/17
+    gpl-compatible: true
+  js:
+    /libraries/photobox/photobox/jquery.photobox.js: { minified: true }
+    js/blazy.photobox.min.js: { minified: true }
+  css:
+    base:
+      /libraries/photobox/photobox/photobox.css: {}
+    component:
+      css/components/blazy.lightbox.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+    # use photobox when available instead.
+    # - photobox/photobox
+
+admin:
+  version: VERSION
+  js:
+    js/blazy.admin.min.js: { minified: true }
+  css:
+    theme:
+      css/blazy.admin.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
