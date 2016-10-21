@@ -64,6 +64,7 @@ h1 {
   text-align: center;
   text-indent: -999em;
   width: 29px;
+  filter: brightness(0) invert(1);
 }
 .searchresult-form .fa-search {
   display: none;
