@@ -438,3 +438,6 @@ margin-bottom: 10px;
     font-size: 1em;
   }
 }
+.slick-slider .slick-arrow {
+  bottom: -50px
+}
