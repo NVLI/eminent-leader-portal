@@ -439,5 +439,6 @@ margin-bottom: 10px;
   }
 }
 .slick-slider .slick-arrow {
+  top: auto;
   bottom: -50px
 }
