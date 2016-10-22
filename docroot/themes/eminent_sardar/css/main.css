@@ -888,16 +888,16 @@ a.accordion-toggle  i{
 }
 
 .nav-tabs>li>a:hover{
-  background: #d1dbe0;
-  color:#666;
+  background: #4d423d;
+  color:#fff;
 }
 
 .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:hover,
 .nav-tabs>li.active>a:focus {
   border: 0;
-  color:#666;
-  background: #d1dbe0;
+  color:#fff;
+  background: #4d423d;
   position: relative;
 }
 
@@ -2545,4 +2545,7 @@ shortcodes page css
 }
 select {
   -moz-appearance: none;
+}
+#feature {
+  padding : 50px;
 }
