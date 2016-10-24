@@ -1,0 +1,7 @@
+curtain_raiser.form:
+ path: '/curtain_raiser/inauguration'
+ defaults:
+   _title: 'Inauguration'
+   _form: '\Drupal\curtain_raiser\Form\InaugurationForm'
+ requirements:
+   _permission: 'access content'
