@@ -13,14 +13,12 @@ use Drupal\Component\Utility\Unicode;
 
 function eminent_custom_page_top(array &$page_top) {
   $form = \Drupal::formBuilder()->getForm('\Drupal\curtain_raiser\Form\InaugurationForm');
-
-
   $page_top['form'] = $form;
   $page_top['form']['#prefix'] = '
     <div class="container-ing">
       <div id="effect">
-        <img src="modules/custom/curtain_raiser/images/curtain.jpeg" id="curtain1">
-        <img src="modules/custom/curtain_raiser/images/curtain.jpeg" id="curtain2">
+        <img src="modules/custom/curtain_raiser/images/curtain.jpg" id="curtain1">
+        <img src="modules/custom/curtain_raiser/images/curtain.jpg" id="curtain2">
         <div class="content-ing">
           <div>
             <h1>COMING SOON</h1>

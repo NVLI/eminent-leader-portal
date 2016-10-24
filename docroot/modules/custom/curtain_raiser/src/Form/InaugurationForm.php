@@ -30,8 +30,9 @@ class InaugurationForm extends FormBase {
     '#type' => 'password',
     '#title' => t('Password:'),
     '#required' => TRUE,
+    '#prefix' => '<div id = "inagruate-pw>',
+    '#suffix' => '</div>',
   );
-  $form['actions']['#type'] = 'actions';
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => $this->t('Inaugurate'),

@@ -5,3 +5,10 @@ curtain_raiser.form:
    _form: '\Drupal\curtain_raiser\Form\InaugurationForm'
  requirements:
    _permission: 'access content'
+curtain_raiser.validate:
+ path: '/ajax/inauguration/validate/{password}'
+ defaults:
+   _title: 'Inauguration'
+   _controller: '\Drupal\curtain_raiser\Controller\CurtainRaiser::validate'
+ requirements:
+   _permission: 'access content'
