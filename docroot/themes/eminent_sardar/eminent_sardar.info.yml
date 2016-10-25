@@ -16,6 +16,7 @@ regions:
   content: 'Main Content'
   page_title: 'Title'
   home_banner: 'Home Banner'
+  home_search: 'Home Search'
   logo: 'Logo'
   search_filters: 'Search form with filters'
   search_facets: 'Search facets'
