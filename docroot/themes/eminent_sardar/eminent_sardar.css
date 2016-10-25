@@ -446,9 +446,6 @@ margin-bottom: 10px;
   top: auto;
   bottom: -50px
 }
-.banner-search #edit-keyword--2 {
-  width: 70%;
-}
-.banner-search #headersearch {
-  width: 30%;
+.home-search {
+  background-color: #f9f9f9;
 }
