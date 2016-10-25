@@ -349,18 +349,17 @@ margin-bottom: 10px;
 .search-result-nav li {
   margin: 1px;
 }
-@media only screen and (max-width: 1170px) {
+@media (max-width: 1170px) {
   /*#cd-timeline {
     margin-left: 70px;
   }*/
-  /*.cd-timeline-block .cd-timeline-content .cd-date {
+  .cd-timeline-block .cd-timeline-content .cd-date {
     position: absolute;
-    right: auto;
-    left: -135px;
     text-align: left;
-    width: 70px;
-    top: 5px;
-  }*/
+  }
+  .cd-timeline-block .cd-timeline-content h2 {
+    clear: both;
+  }
 
 }
 #main-slider .banner-image {
