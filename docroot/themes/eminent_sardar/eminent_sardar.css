@@ -448,4 +448,6 @@ margin-bottom: 10px;
 }
 .home-search {
   background-color: #f9f9f9;
+  border-bottom: 1px solid #c5c5c5;
+  border-top: 1px solid #c5c5c5;
 }
