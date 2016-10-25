@@ -356,6 +356,8 @@ margin-bottom: 10px;
   .cd-timeline-block .cd-timeline-content .cd-date {
     float: none;
     text-align: left;
+    padding: 0;
+    opacity: 1;
   }
   .cd-timeline-block .cd-timeline-content h2 {
     clear: both;
