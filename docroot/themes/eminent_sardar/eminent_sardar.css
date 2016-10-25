@@ -354,7 +354,7 @@ margin-bottom: 10px;
     margin-left: 70px;
   }*/
   .cd-timeline-block .cd-timeline-content .cd-date {
-    position: absolute;
+    float: none;
     text-align: left;
   }
   .cd-timeline-block .cd-timeline-content h2 {
