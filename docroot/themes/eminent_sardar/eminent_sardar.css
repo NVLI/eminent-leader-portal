@@ -350,17 +350,17 @@ margin-bottom: 10px;
   margin: 1px;
 }
 @media only screen and (max-width: 1170px) {
-  #cd-timeline {
+  /*#cd-timeline {
     margin-left: 70px;
-  }
-  .cd-timeline-block .cd-timeline-content .cd-date {
+  }*/
+  /*.cd-timeline-block .cd-timeline-content .cd-date {
     position: absolute;
     right: auto;
     left: -135px;
     text-align: left;
     width: 70px;
     top: 5px;
-  }
+  }*/
 
 }
 #main-slider .banner-image {
