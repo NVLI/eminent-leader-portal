@@ -15,8 +15,9 @@ function curtain_raiser_page_top(array &$page_top) {
   $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
 
   $inauguration_status = $config->get('inauguration_status');
+  $master_password = $config->get('master_password');
 
-  if (!$inauguration_status) {
+  if (!$inauguration_status && $master_password!='') {
     $form = \Drupal::formBuilder()->getForm('\Drupal\curtain_raiser\Form\InaugurationForm');
     $page_top['form'] = $form;
     $page_top['form']['#prefix'] = '
