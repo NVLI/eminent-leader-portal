@@ -28,7 +28,6 @@ class InaugurationForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
   $form['inaugurate_password'] = array(
     '#type' => 'password',
-    '#title' => t('Password:'),
     '#required' => TRUE,
     '#prefix' => '<div id = "inagruate-pw>',
     '#suffix' => '</div>',

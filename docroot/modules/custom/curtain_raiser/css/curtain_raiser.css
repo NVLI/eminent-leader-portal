@@ -57,3 +57,15 @@
 .content-ing h1 {
   font-size: 5em;
 }
+.content-ing input {
+  width: 350px;
+  padding: 10px;
+  background-color: rgba(0,0,0,.5);
+  border: none;
+}
+.open-curtain {
+  background-color: red;
+}
+.open-curtain:hover {
+  background-color: red;
+}

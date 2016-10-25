@@ -15,6 +15,8 @@ jQuery(function($) {'use strict',
         $("#curtain2").animate({width:20},6000);
         $(".container-ing").addClass('pointer-none');
         $(".content-ing").fadeOut();
+        $('.container-ing').fireworks();
+
       }
       else {
         $('.form-item-inaugurate-password').prepend("<div class = 'error'>Please enter the right password</div>");
