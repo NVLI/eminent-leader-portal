@@ -51,6 +51,7 @@ class RelatedMedia extends BlockBase {
       $query->fields('media__field_subject_classification', array('entity_id'));
       $query->condition('media__field_subject_classification.field_subject_classification_target_id', $tids, 'IN');
       $query->condition('media__field_subject_classification.entity_id', array($current_media_id), '!=');
+      $query->range(0, 12);
       $media_ids = $query->execute();
       foreach ($media_ids as $media_id) {
         $media_item = entity_load('media', $media_id->entity_id);
