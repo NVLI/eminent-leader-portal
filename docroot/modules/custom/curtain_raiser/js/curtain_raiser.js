@@ -17,7 +17,7 @@ jQuery(function($) {'use strict',
         $(".content-ing").fadeOut();
         $('.container-ing').fireworks();
         $("#myCarousel").carousel(0);
-        $('#bannervideo').play();
+        $('#bannervideo').get(0).play()
 
       }
       else {
