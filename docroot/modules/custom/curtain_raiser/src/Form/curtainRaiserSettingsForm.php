@@ -45,7 +45,7 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Test Password:'),
       '#default_value' => $config->get('test_password'),
-      '#description' => $this->t('Type the master password to inaugurate the site. Once inaugurated with the master password the curtain will not be shown again on reload.'),
+      '#description' => $this->t('This is for testing the site, inauguration status remains unchnaged.'),
     );
 
     $form['curtain_raiser_inauguration_status'] = array(
