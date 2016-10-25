@@ -446,3 +446,9 @@ margin-bottom: 10px;
   top: auto;
   bottom: -50px
 }
+.banner-search #edit-keyword--2 {
+  width: 70%;
+}
+.banner-search #headersearch {
+  width: 30%;
+}
