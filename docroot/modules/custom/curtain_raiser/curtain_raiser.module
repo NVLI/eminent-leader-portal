@@ -34,7 +34,7 @@ function curtain_raiser_page_top(array &$page_top) {
         </div>
       </div>
     </div>';
-    $page_top['form']['actions']['submit']['#attributes'] = array('class' => array('open-curtain'));
+    
     $page_top['#attached']['library'][] = 'curtain_raiser/curtain_raiser';
     return $page_top;
   }

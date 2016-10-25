@@ -41,6 +41,13 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Type the master password to inaugurate the site. Once inaugurated with the master password the curtain will not be shown again on reload.'),
     );
 
+    $form['curtain_raiser_test_password'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Test Password:'),
+      '#default_value' => $config->get('test_password'),
+      '#description' => $this->t('Type the master password to inaugurate the site. Once inaugurated with the master password the curtain will not be shown again on reload.'),
+    );
+
     $form['curtain_raiser_inauguration_status'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Inaugurated'),
@@ -58,6 +65,8 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
     $config->set('master_password', $form_state->getValue('curtain_raiser_master_password'))
+      ->save();
+    $config->set('test_password', $form_state->getValue('curtain_raiser_test_password'))
       ->save();
     $config->set('inauguration_status', $form_state->getValue('curtain_raiser_inauguration_status'))
       ->save();

@@ -19,23 +19,27 @@ class CurtainRaiser extends ControllerBase {
       $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
 
       $master_password = $config->get('master_password');
+      $test_password = $config->get('test_password');
 
 
     if ($password == $master_password) {
-
       $config->set('inauguration_status', true)
         ->save();
       $response = array(
         'success' => TRUE,
       );
-      return new JsonResponse($response);
+    }
+    elseif ($password == $test_password) {
+      $response = array(
+        'success' => TRUE,
+      );
     }
     else {
       $response = array(
         'success' => FALSE,
       );
-      return new JsonResponse($response);
     }
+    return new JsonResponse($response);
   }
 
 }

@@ -33,9 +33,9 @@ class InaugurationForm extends FormBase {
     '#suffix' => '</div>',
   );
   $form['actions']['submit'] = array(
-    '#type' => 'submit',
+    '#type' => 'image_button',
     '#value' => $this->t('Inaugurate'),
-    '#button_type' => 'primary',
+    '#src' => '/modules/custom/curtain_raiser/images/button.png'
   );
   return $form;
   }
