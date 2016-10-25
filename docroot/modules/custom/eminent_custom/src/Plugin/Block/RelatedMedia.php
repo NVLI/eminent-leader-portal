@@ -43,13 +43,14 @@ class RelatedMedia extends BlockBase {
       // Fetch the category tid.
       $subject_classification_tid = $media->field_subject_classification->target_id;
       // Fetch the media items under the subject classification tid.
-      $media_ids = \Drupal::entityQuery('media')
-       ->condition('field_subject_classification', $subject_classification_tid)
-       ->condition('status', '1')
-       ->range(0, 8)
-       ->execute();
-      $media_items = entity_load_multiple('media', $media_ids);
-      foreach ($media_items as $media_item) {
+      $db = \Drupal::database();
+      $query = $db->select('media__field_subject_classification');
+      $query->fields('media__field_subject_classification', array('entity_id'));
+      $query->condition('media__field_subject_classification.field_subject_classification_target_id', array($subject_classification_tid));
+      $query->condition('media__field_subject_classification.entity_id', array($current_media_id), '!=');
+      $media_ids = $query->execute();
+      foreach ($media_ids as $media_id) {
+        $media_item = entity_load('media', $media_id->entity_id);
         $media_id = $media_item->id();
         // Check whether the user has permission to create Time Line Collection.
         if ($user->hasPermission('create time_line_collection content')) {
@@ -103,38 +104,36 @@ class RelatedMedia extends BlockBase {
             ],
           );
         }
-        if ($media_id != $current_media_id) {
-          // Get the images to display in the block.
-          if ($media_item->bundle() == "image") {
-            $image = $media_content->field_media_image->target_id;
-            $file = File::load($image);
-            if(!empty($file)) {
-              $media_image_url = ImageStyle::load('exhibition_grid')->buildUrl($file->getFileUri());
-            }
+        // Get the images to display in the block.
+        if ($media_item->bundle() == "image") {
+          $image = $media_item->field_media_image->target_id;
+          $file = File::load($image);
+          if(!empty($file)) {
+            $media_image_url = ImageStyle::load('exhibition_grid')->buildUrl($file->getFileUri());
           }
-          elseif ($media_item->bundle() == "audio") {
-            $media_image_url = '/themes/eminent_sardar/images/audio.png';
-          }
-          elseif ($media_item->bundle() == "document") {
-            $media_image_url = '/themes/eminent_sardar/images/pdf.png';
-          }
-          elseif ($media_item->bundle() == "video") {
-            $media_image_url = '/themes/eminent_sardar/images/video.png';
-          }
-          $media_teaser_title = $media_item->get('name')->value;
-          $title = $truncated_title = $media_teaser_title;
-          if (strlen($media_teaser_title) > 30) {
-            $truncated_title = Unicode::truncate($media_teaser_title, 30) . '...';
-          }
-          $output[$media_id] = array(
-            'image' => $media_image_url,
-            'title' => $title,
-            'truncated_title' => $truncated_title,
-            'media_id' => $media_id,
-            'addtoplaylist' => $addtoplaylistlink,
-            'addtotimeline' => $addtotimelinelink,
-          );
         }
+        elseif ($media_item->bundle() == "audio") {
+          $media_image_url = '/themes/eminent_sardar/images/audio.png';
+        }
+        elseif ($media_item->bundle() == "document") {
+          $media_image_url = '/themes/eminent_sardar/images/pdf.png';
+        }
+        elseif ($media_item->bundle() == "video") {
+          $media_image_url = '/themes/eminent_sardar/images/video.png';
+        }
+        $media_teaser_title = $media_item->get('name')->value;
+        $title = $truncated_title = $media_teaser_title;
+        if (strlen($media_teaser_title) > 30) {
+          $truncated_title = Unicode::truncate($media_teaser_title, 30) . '...';
+        }
+        $output[$media_id] = array(
+          'image' => $media_image_url,
+          'title' => $title,
+          'truncated_title' => $truncated_title,
+          'media_id' => $media_id,
+          'addtoplaylist' => $addtoplaylistlink,
+          'addtotimeline' => $addtotimelinelink,
+        );
       }
     }
     return array(
