@@ -34,19 +34,22 @@ class RelatedMedia extends BlockBase {
   public function build() {
     // Get the current user.
     $user = \Drupal::currentUser();
-    $media_items = $output = array();
+    $media_ids = $output = $tids = array();
     $media_image_url = $addtotimelinelink = $addtoplaylistlink = NULL;
     // Load the current media item.
     $media = \Drupal::request()->attributes->get('media');
     if (!empty($media)) {
       $current_media_id = $media->id();
       // Fetch the category tid.
-      $subject_classification_tid = $media->field_subject_classification->target_id;
+      $subject_classification_tids = $media->field_subject_classification->getValue();
+      foreach ($subject_classification_tids as $subject_classification_tid) {
+        $tids[] = $subject_classification_tid['target_id'];
+      }
       // Fetch the media items under the subject classification tid.
       $db = \Drupal::database();
       $query = $db->select('media__field_subject_classification');
       $query->fields('media__field_subject_classification', array('entity_id'));
-      $query->condition('media__field_subject_classification.field_subject_classification_target_id', array($subject_classification_tid));
+      $query->condition('media__field_subject_classification.field_subject_classification_target_id', $tids, 'IN');
       $query->condition('media__field_subject_classification.entity_id', array($current_media_id), '!=');
       $media_ids = $query->execute();
       foreach ($media_ids as $media_id) {
