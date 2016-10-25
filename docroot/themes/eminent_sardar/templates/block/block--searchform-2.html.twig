@@ -25,15 +25,17 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes.addClass('container') }}>
-  {{ title_prefix }}
-  {% if label %}
-    <div class = "center">
-      <h2 class = "wow svp-block-content">{{ label }}</h2>
-    </div>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+<div{{ attributes.addClass('container search-filters') }}>
+  <div class="widget search searchresult-form">
+    {{ title_prefix }}
+    {% if label %}
+      <div class = "center">
+        <h2 class = "wow svp-block-content">{{ label }}</h2>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
 </div>
