@@ -1,0 +1,6 @@
+curtain_raiser.admin:
+  title: 'Curtain Raiser settings'
+  description: 'Settings for the Curtain Raiser'
+  parent: system.admin_config_development
+  route_name: curtain_raiser.settings
+  weight: 100

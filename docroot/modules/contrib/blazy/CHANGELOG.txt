@@ -1,4 +1,85 @@
 
+Blazy 8.x-1.0-dev, 2016-09-29
+-----------------------------
+- Marked it Beta4.
+- Fixed for Twig indentation.
+- Fixed for Undefined index: <No caching> in
+  Drupal\blazy\Form\BlazyAdminFormatterBase->settingsSummary() (line 296 ...
+- Moved re-usable methods from BlazyEntityReferenceBase into BlazyEntityTrait.
+- Remove Twig spaceless.
+- Added optional Views field plugins for File and Media entity.
+
+Blazy 8.x-1.0-dev, 2016-09-07
+-----------------------------
+- Marked it Beta3.
+- Added "Use CSS background" option.
+
+Blazy 8.x-1.0-dev, 2016-09-05
+-----------------------------
+- Refined form elements and summaries.
+
+Blazy 8.x-1.0-dev, 2016-08-30
+-----------------------------
+- Added video support to the main background/stage for Slick Paragraphs which
+  is normally image.
+- Fixed for BlazyAdminFormatterBase::getFieldOptions() target_type.
+
+Blazy 8.x-1.0-dev, 2016-08-29
+-----------------------------
+- Added lightbox captions and use CSS background options for Slick Media.
+- Made BlazyEntityReferenceBase::getOverlay() do something useful by default.
+- Added entity_type at BlazyEntityReferenceBase::getScopedFormElements().
+- Fixed for VEF integration with failing thumbnail downloads.
+- Changed Cache option to No caching by default.
+- A few cleanups.
+
+Blazy 8.x-1.0-dev, 2016-08-27
+-----------------------------
+- #2778615 by DuneBL: A notice is popping up without image style.
+- Allowed a few reasonable HTML tags within H2.slide__title.
+- A few cleanups.
+
+Blazy 8.x-1.0-dev, 2016-08-03
+-----------------------------
+- #2768463 by chr.fritsch: Add libraries support.
+- Fixed for lightbox custom caption form states.
+
+Blazy 8.x-1.0-dev, 2016-07-15
+-----------------------------
+- #2766665 by gausarts: Support plain iframe.
+
+Blazy 8.x-1.0-dev, 2016-07-14
+-----------------------------
+- #2750823 by royal121: Schema errors with slick.
+
+Blazy 8.x-1.0-dev, 2016-06-27
+-----------------------------
+- Removed deprecated @file docblock as per [#2665992], [#2304909].
+- Cleaned up options.
+
+Blazy 8.x-1.0-dev, 2016-06-16
+-----------------------------
+- Fixed for empty values at BlazyStylePluginBase::getFieldString().
+- #2749071 by agx: Empty image alt with Responsive image.
+
+Blazy 8.x-1.0-dev, 2016-06-13
+-----------------------------
+- Added lightbox caption option.
+
+Blazy 8.x-1.0-dev, 2016-06-09
+-----------------------------
+- Fixed for .media--loading.
+- Fixed for Slick CSS background regression.
+
+Blazy 8.x-1.0-dev, 2016-06-08
+-----------------------------
+- Fixed for broken Responsive image.
+
+Blazy 8.x-1.0-dev, 2016-06-07
+-----------------------------
+- Removed the possessive CSS background taken over by Blazy, since Slick can now
+  work with unslick CSS background.
+
 Blazy 8.x-1.0-dev, 2016-05-10
 -----------------------------
 - Added default sizes.

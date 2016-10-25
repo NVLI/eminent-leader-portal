@@ -17,6 +17,11 @@ jQuery(function($) {'use strict',
    $(this).closest('.panel-heading').toggleClass('active');
   });
 
+/***********************************************************************
+*******Hide video after play. */
+  $('#bannervideo').on('ended',function(){
+    $("#myCarousel").carousel(1);
+  });
 
 /***********************************************************************
 *******fix the top bar on scroll*/

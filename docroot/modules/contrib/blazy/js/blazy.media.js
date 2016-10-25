@@ -18,7 +18,7 @@
         var iframe = t.find('iframe');
         var newIframe = iframe.clone();
         var media = newIframe.data('media');
-        var url = newIframe.data('lazy');
+        var url = newIframe.data('lazy') || newIframe.data('src');
         var $nester = '';
 
         if ($slick.closest('.slick__slider').length) {

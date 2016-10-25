@@ -1,14 +1,10 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\Form\BlazyAdminFormatterBase.
- */
-
 namespace Drupal\blazy\Form;
 
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormState;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * A base for field formatter admin to have re-usable methods in one place.
@@ -26,54 +22,62 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       '#type'        => 'select',
       '#title'       => t('Image style'),
       '#options'     => $image_styles,
-      '#description' => t('The content image style. Ignored if Breakpoints are provided, use smaller image style here instead. Otherwise this is the only image displayed.'),
+      '#description' => t('The content image style. This will be treated as the fallback image, which is normally smaller, if Breakpoints are provided. Otherwise this is the only image displayed.'),
       '#weight'      => -100,
     ];
 
-    $form['responsive_image_style'] = [
-      '#type'        => 'select',
-      '#title'       => t('Responsive image'),
-      '#options'     => $this->getResponsiveImageOptions(),
-      '#description' => t('Responsive image style for the main stage image is more reasonable for large images. Not compatible with aspect ratio, yet. Leave empty to disable.'),
-      '#access'      => $is_responsive && $this->getResponsiveImageOptions(),
-      '#weight'      => -100,
-    ];
+    if (isset($definition['thumbnail_styles'])) {
+      $form['thumbnail_style'] = [
+        '#type'        => 'select',
+        '#title'       => t('Thumbnail style'),
+        '#options'     => $image_styles,
+        '#description' => t('Usages: Photobox thumbnail, or custom work with thumbnails. Leave empty to not use thumbnails.'),
+        '#access'      => isset($definition['thumbnail_styles']),
+        '#weight'      => -100,
+      ];
+    }
 
-    $form['thumbnail_style'] = [
-      '#type'        => 'select',
-      '#title'       => t('Thumbnail style'),
-      '#options'     => $image_styles,
-      '#description' => t('Usages: Photobox thumbnail, or custom work with thumbnails. Leave empty to not use thumbnails.'),
-      '#access'      => isset($definition['thumbnail_styles']),
-      '#weight'      => -100,
-    ];
+    if ($is_responsive && !empty($definition['responsive_images'])) {
+      $form['responsive_image_style'] = [
+        '#type'        => 'select',
+        '#title'       => t('Responsive image'),
+        '#options'     => $this->getResponsiveImageOptions(),
+        '#description' => t('Responsive image style for the main stage image is more reasonable for large images. Only expects multi-serving IMG, but not PICTURE element. Not compatible with breakpoints and aspect ratio, yet. Leave empty to disable.'),
+        '#access'      => $this->getResponsiveImageOptions(),
+        '#weight'      => -100,
+      ];
+    }
 
-    $form['thumbnail_effect'] = [
-      '#type'        => 'select',
-      '#title'       => t('Thumbnail effect'),
-      '#options'     => isset($definition['thumbnail_effects']) ? $definition['thumbnail_effects'] : [],
-      '#access'      => isset($definition['thumbnail_effects']),
-      '#weight'      => -100,
-      // '#states'      => $this->getState(static::STATE_THUMBNAIL_STYLE_ENABLED, $definition),
-    ];
+    if (isset($definition['thumbnail_effects'])) {
+      $form['thumbnail_effect'] = [
+        '#type'        => 'select',
+        '#title'       => t('Thumbnail effect'),
+        '#options'     => isset($definition['thumbnail_effects']) ? $definition['thumbnail_effects'] : [],
+        '#access'      => isset($definition['thumbnail_effects']),
+        '#weight'      => -100,
+        // '#states'      => $this->getState(static::STATE_THUMBNAIL_STYLE_ENABLED, $definition),
+      ];
+    }
 
-    if ($is_responsive) {
+    if ($is_responsive && isset($form['responsive_image_style'])) {
       $url = Url::fromRoute('entity.responsive_image_style.collection')->toString();
       $form['responsive_image_style']['#description'] .= ' ' . t('<a href=":url" target="_blank">Manage responsive image styles</a>.', [':url' => $url]);
     }
 
-    $form['background']['#states'] = $this->getState(static::STATE_RESPONSIVE_IMAGE_STYLE_DISABLED, $definition);
+    if (isset($form['background'])) {
+      $form['background']['#states'] = $this->getState(static::STATE_RESPONSIVE_IMAGE_STYLE_DISABLED, $definition);
+    }
   }
 
   /**
    * Returns re-usable media switch form elements.
    */
   public function mediaSwitchForm(array &$form, $definition = []) {
-    $is_colorbox   = function_exists('colorbox_theme');
-    $is_photobox   = function_exists('photobox_theme');
-    $is_responsive = function_exists('responsive_image_get_image_dimensions');
-    $image_styles  = image_style_options(FALSE);
-    $photobox      = \Drupal::root() . '/libraries/photobox/photobox/jquery.photobox.js';
+    $is_colorbox  = function_exists('colorbox_theme');
+    $is_photobox  = function_exists('photobox_theme');
+    $is_token     = function_exists('token_theme');
+    $image_styles = image_style_options(FALSE);
+    $photobox     = \Drupal::root() . '/libraries/photobox/photobox/jquery.photobox.js';
 
     if (is_file($photobox)) {
       $is_photobox = TRUE;
@@ -123,6 +127,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       '#description' => t('Required to grab the fields. Be sure the selected "View mode" is enabled, and the enabled fields here are not hidden there. Manage view modes on the <a href=":view_modes">View modes page</a>.', [':view_modes' => Url::fromRoute('entity.entity_view_mode.collection')->toString()]),
       '#access'      => isset($definition['fieldable_form']) && isset($definition['target_type']),
       '#weight'      => -96,
+      '#enforced'    => TRUE,
     ];
 
     // Optional lightbox integration.
@@ -147,6 +152,48 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
         $form['box_style']['#states'] = $this->getState(static::STATE_LIGHTBOX_ENABLED, $definition);
       }
 
+      $box_captions = [
+        'auto'         => t('Automatic'),
+        'alt'          => t('Alt text'),
+        'title'        => t('Title text'),
+        'alt_title'    => t('Alt and Title'),
+        'title_alt'    => t('Title and Alt'),
+        'entity_title' => t('Content title'),
+        'custom'       => t('Custom'),
+      ];
+
+      $form['box_caption'] = [
+        '#type'        => 'select',
+        '#title'       => t('Lightbox caption'),
+        '#options'     => $box_captions,
+        '#access'      => isset($definition['box_captions']),
+        '#weight'      => -99,
+        '#states'      => $this->getState(static::STATE_LIGHTBOX_ENABLED, $definition),
+        '#description' => t('Automatic will search for Alt text first, then Title text.'),
+      ];
+
+      $form['box_caption_custom'] = [
+        '#title'       => t('Lightbox custom caption'),
+        '#type'        => 'textfield',
+        '#access'      => isset($definition['box_captions']),
+        '#weight'      => -99,
+        '#states'      => $this->getState(static::STATE_LIGHTBOX_CUSTOM, $definition),
+        '#description' => t('Multi-value rich text field will be mapped to each image by its delta.'),
+      ];
+
+      if ($is_token) {
+        $types = isset($definition['entity_type']) ? [$definition['entity_type']] : [];
+        $types = isset($definition['target_type']) ? array_merge($types, [$definition['target_type']]) : $types;
+        $form['box_caption_custom']['#field_suffix'] = [
+          '#theme'       => 'token_tree_link',
+          '#text'        => t('Tokens'),
+          '#token_types' => $types,
+        ];
+      }
+      else {
+        $form['box_caption_custom']['#description'] .= ' ' . t('Install Token module to browse available tokens.');
+      }
+
       $form['dimension'] = [
         '#type'        => 'textfield',
         '#title'       => t('Lightbox media dimension'),
@@ -161,22 +208,35 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
   /**
    * Return the field formatter settings summary.
    */
-  public function settingsSummary($plugin) {
+  public function settingsSummary($plugin, $definition = []) {
     $form         = [];
+    $summary      = [];
     $form_state   = new FormState();
-    $settings     = $plugin->getSettings();
+    $settings     = isset($definition['settings']) ? $definition['settings'] : $plugin->getSettings();
     $elements     = $plugin->settingsForm($form, $form_state);
-    $definition   = $this->typedConfig->getDefinition('field.formatter.settings.' . $plugin->getPluginId());
     $image_styles = image_style_options(TRUE);
     $breakpoints  = isset($settings['breakpoints']) ? array_filter($settings['breakpoints']) : [];
+    $excludes     = empty($definition['excludes']) ? $definition : $definition['excludes'];
 
     unset($image_styles['']);
 
     foreach ($settings as $key => $setting) {
-      $access  = isset($elements[$key]['#access'])  ? $elements[$key]['#access']  : TRUE;
-      $title   = isset($elements[$key]['#title'])   ? $elements[$key]['#title']   : '';
-      $options = isset($elements[$key]['#options']) ? $elements[$key]['#options'] : [];
-      $vanilla = !empty($settings['vanilla']) && !isset($elements[$key]['#enforced']);
+      $type = isset($elements[$key]['#type']) ? $elements[$key]['#type'] : '';
+
+      if (!empty($excludes) && in_array($key, $excludes)) {
+        continue;
+      }
+
+      if (in_array($type, ['button', 'hidden', 'markup', 'item', 'submit']) || empty($type)) {
+        continue;
+      }
+
+      $access   = isset($elements[$key]['#access']) ? $elements[$key]['#access'] : TRUE;
+      $title    = !isset($elements[$key]) && isset($settings[$key]) ? Unicode::ucfirst(str_replace('_', ' ', $key)) : '';
+      $title    = isset($elements[$key]['#title']) ? $elements[$key]['#title'] : $title;
+      $options  = isset($elements[$key]['#options']) ? $elements[$key]['#options'] : [];
+      $vanilla  = !empty($settings['vanilla']) && !isset($elements[$key]['#enforced']);
+      $multiple = isset($elements[$key]['#multiple']) && $elements[$key]['#multiple'];
 
       if ($key == 'breakpoints') {
         $widths = [];
@@ -192,30 +252,54 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
         $setting = $widths ? implode(', ', $widths) : t('None');
       }
       else {
-        if (is_array($setting) || empty($title) || $vanilla || !$access) {
+        if (empty($title) || $vanilla || !$access) {
           continue;
         }
 
-        if (isset($definition['mapping']) && isset($definition['mapping'][$key])) {
-          if ($definition['mapping'][$key]['type'] == 'boolean') {
-            if (empty($setting)) {
-              continue;
-            }
-            $setting = t('Yes');
+        if ($key == 'override' && empty($setting)) {
+          unset($settings['overridables']);
+        }
+
+        if (is_bool($setting) && $setting) {
+          $setting = t('Yes');
+        }
+        elseif (is_string($setting) && $key != 'cache') {
+          // The value is based on select options.
+          if (!$multiple && $type == 'select' && isset($options[$setting])) {
+            $setting = is_object($options[$setting]) ? $options[$setting]->render() : $options[$setting];
           }
-          elseif ($definition['mapping'][$key]['type'] == 'string' && empty($setting)) {
-            continue;
+        }
+        elseif (is_array($setting)) {
+          $values = array_filter($setting);
+
+          if (!empty($values)) {
+            // Combine possible multi-value select, or checkboxes.
+            $multiple_values = array_combine($values, $values);
+
+            foreach ($multiple_values as $i => $value) {
+              if (isset($options[$i])) {
+                $multiple_values[$i] = is_object($options[$i]) ? $options[$i]->render() : $options[$i];
+              }
+            }
+
+            $setting = implode(', ', $multiple_values);
+          }
+
+          if (is_array($setting)) {
+            $setting = array_filter($setting);
+            if (!empty($setting)) {
+              $setting = implode(', ', $setting);
+            }
           }
         }
 
         if ($key == 'cache') {
           $setting = $this->getCacheOptions()[$setting];
         }
+      }
 
-        // Value is based on select options.
-        if (isset($options[$settings[$key]])) {
-          $setting = is_object($options[$settings[$key]]) ? $options[$settings[$key]]->render() : $options[$settings[$key]];
-        }
+      if (empty($setting)) {
+        continue;
       }
 
       if (isset($settings[$key])) {
@@ -231,23 +315,27 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
   /**
    * Returns available fields for select options.
    */
-  public function getFieldOptions($target_bundles = [], $allowed_field_types = [], $entity_type_id = 'media') {
+  public function getFieldOptions($target_bundles = [], $allowed_field_types = [], $entity_type = 'media', $target_type = '') {
     $options = [];
     $storage = $this->blazyManager()->getEntityTypeManager()->getStorage('field_config');
 
     // Fix for Views UI not recognizing Media bundles, unlike Formatters.
-    $bundle_service = \Drupal::service('entity_type.bundle.info');
     if (empty($target_bundles)) {
-      $target_bundles = $bundle_service->getBundleInfo($entity_type_id);
+      $bundle_service = \Drupal::service('entity_type.bundle.info');
+      $target_bundles = $bundle_service->getBundleInfo($entity_type);
     }
 
     foreach ($target_bundles as $bundle => $label) {
-      if ($fields = $storage->loadByProperties(['entity_type' => $entity_type_id, 'bundle' => $bundle])) {
+      if ($fields = $storage->loadByProperties(['entity_type' => $entity_type, 'bundle' => $bundle])) {
         foreach ((array) $fields as $field_name => $field) {
           if (empty($allowed_field_types)) {
             $options[$field->getName()] = $field->getLabel();
           }
           elseif (in_array($field->getType(), $allowed_field_types)) {
+            $options[$field->getName()] = $field->getLabel();
+          }
+
+          if (!empty($target_type) && ($field->getSetting('target_type') == $target_type)) {
             $options[$field->getName()] = $field->getLabel();
           }
         }

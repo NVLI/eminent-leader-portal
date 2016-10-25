@@ -421,10 +421,7 @@ input.search-form:hover::-webkit-input-placeholder {
   display: block !important;
   height: 730px;
   background-size: cover;
-  -webkit-transition: opacity ease-in-out 500ms;
-  -moz-transition: opacity ease-in-out 500ms;
-  -o-transition: opacity ease-in-out 500ms;
-  transition: opacity ease-in-out 500ms;
+
 }
 
 #main-slider .carousel .item:first-child {
@@ -434,11 +431,6 @@ input.search-form:hover::-webkit-input-placeholder {
 
 #main-slider .carousel .item.active {
   opacity: 1;
-  -webkit-transition: opacity ease-in-out 500ms;
-  -moz-transition: opacity ease-in-out 500ms;
-  -o-transition: opacity ease-in-out 500ms;
-  transition: opacity ease-in-out 500ms;
-  z-index: 1;
 }
 
 #main-slider .prev,

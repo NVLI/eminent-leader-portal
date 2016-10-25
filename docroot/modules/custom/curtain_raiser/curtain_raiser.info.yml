@@ -1,0 +1,6 @@
+name: Curtain Raiser
+type: module
+description: Enables the site with a password protected Inaugurate button.
+core: 8.x
+version: 8.x-1.0
+package: Custom

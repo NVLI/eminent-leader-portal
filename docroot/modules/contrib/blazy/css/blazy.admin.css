@@ -7,9 +7,6 @@ body.path-admin .form--slick,
 body.path-admin .form--slick *,
 .form--slick *::before,
 .form--slick *::after {
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box; /* Old FF */
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -136,7 +133,7 @@ body.path-admin .form--slick *,
 }
 
 /**
- * Fieldset.
+ * Details.
  */
 .form--slick details,
 .form--slick .vertical-tabs details.vertical-tabs__pane {
@@ -370,6 +367,31 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
 }
 
 /**
+ * Fieldset.
+ */
+.form--slick > div[id^="field-"] {
+  clear: both;
+  width: 100%;
+}
+
+.form--slick > div[id^="field-"] fieldset {
+  border-left: 0;
+  border-right: 0;
+  float: none;
+  padding: 20px 0 0;
+  width: 100%;
+}
+
+.form--slick > div[id^="field-"] fieldset legend {
+  padding-left: 20px;
+  z-index: 3;
+}
+
+.form--slick > div[id^="field-"] fieldset .form-item {
+  border: 0;
+}
+
+/**
  * Tooltip
  * !important declaration is to override Seven.
  */
@@ -564,7 +586,7 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
   font-size: 0.8125rem;
   line-height: 32px;
   margin: 0;
-  min-height: 68px;
+  min-height: 72px;
   padding: 20px 0 12px;
   position: relative;
   width: 100%;

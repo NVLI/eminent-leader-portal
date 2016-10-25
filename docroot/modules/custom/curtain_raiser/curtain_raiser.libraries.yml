@@ -1,0 +1,10 @@
+curtain_raiser:
+  version: 1.x
+  css:
+    theme:
+      css/curtain_raiser.css: {}
+  js:
+    js/jquery.fireworks.js: {}
+    js/curtain_raiser.js: {}
+  dependencies:
+    - core/jquery

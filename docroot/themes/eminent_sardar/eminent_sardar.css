@@ -64,6 +64,7 @@ h1 {
   text-align: center;
   text-indent: -999em;
   width: 29px;
+  filter: brightness(0) invert(1);
 }
 .searchresult-form .fa-search {
   display: none;
@@ -219,6 +220,7 @@ video,
 }
 #conatcat-info .captcha {
   padding: 15px;
+  overflow: hidden;
 }
 .navbar-collapse {
   padding: 0px;
@@ -431,4 +433,13 @@ margin-bottom: 10px;
     width: 100%;
     padding: 0;
   }
+}
+@media (max-width: 480px) {
+  .share-feedbackholder h2 {
+    font-size: 1em;
+  }
+}
+.slick-slider .slick-arrow {
+  top: auto;
+  bottom: -50px
 }

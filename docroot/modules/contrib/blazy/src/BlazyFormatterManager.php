@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\BlazyFormatterManager.
- */
-
 namespace Drupal\blazy;
 
 /**
@@ -36,7 +31,8 @@ class BlazyFormatterManager extends BlazyManager {
     $target_type    = $field->getFieldStorageDefinition()->getSetting('target_type');
     $view_mode      = empty($settings['current_view_mode']) ? '_custom' : $settings['current_view_mode'];
     $namespace      = empty($settings['namespace']) ? 'blazy' : $settings['namespace'];
-    $id             = self::getHtmlId("{$namespace}-{$entity_type_id}-{$entity_id}-{$field_clean}-{$view_mode}");
+    $id             = isset($settings['id']) ? $settings['id'] : '';
+    $id             = self::getHtmlId("{$namespace}-{$entity_type_id}-{$entity_id}-{$field_clean}-{$view_mode}", $id);
     $switch         = empty($settings['media_switch']) ? '' : empty($settings['media_switch']);
     $internal_path  = $absolute_path = NULL;
 
@@ -72,9 +68,9 @@ class BlazyFormatterManager extends BlazyManager {
     $settings['background'] = empty($settings['responsive_image_style']) && !empty($settings['background']);
 
     // @todo simplify these doors.
+    $resimage = $this->configLoad('responsive_image') && !empty($settings['responsive_image_style']);
     $blazy = isset($settings['theme_hook_image']) && $settings['theme_hook_image'] == 'blazy';
-    // @todo do not enforce blazy such as for slick media/video embed
-    $settings['blazy'] = $blazy || !empty($settings['background']) || !empty($settings['breakpoints']);
+    $settings['blazy'] = $blazy || !empty($settings['blazy']) || !empty($settings['breakpoints']) || $resimage;
 
     if (!isset($settings['blazy_data'])) {
       $settings['blazy_data'] = $field_type == 'image' ? $this->buildDataBlazy($settings, $items[0]) : [];

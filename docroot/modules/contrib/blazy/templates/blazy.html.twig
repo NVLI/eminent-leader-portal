@@ -10,12 +10,13 @@
  *
  * Available variables:
  *   - image: A collection of image data.
- *   - attributes: An array of attributes.
+ *   - attributes: An array of attributes applied to .media container.
  *   - content_attributes: An array of content attributes, including iframe SRC.
+ *   - settings: An array containing the given settings.
  *   - url: An optional URL the image can be linked to, can be any of
  *       audio/video, or entity URLs, when using Colorbox/Photobox, or Link to
  *       content.
- *   - settings: An array containing the given settings.
+ *   - url_attributes: An array of URL attributes, lightbox or content links.
  *
  * @see template_preprocess_blazy()
  *
@@ -58,20 +59,26 @@
   </div>
 {% endset %}
 
-{% spaceless %}
-  {% if url and not settings.player %}
-    <a href="{{ url }}"{{ url_attributes }}>{{ media }}</a>
-  {% else %}
-    {{ media }}
+{% if url and not settings.player %}
+  <a href="{{ url }}"{{ url_attributes }}>{{ media }}</a>
+
+  {# Allows fieldable captions with A tag, such as social share. #}
+  {% if captions and captions.lightbox is defined %}
+    <div class="litebox-caption visually-hidden">
+      {{ captions.lightbox }}
+    </div>
   {% endif %}
 
-  {% if captions %}
-    <div{{ caption_attributes }}>
-    {% for caption in captions %}
+{% else %}
+  {{ media }}
+{% endif %}
+
+{% if captions and captions.inline is defined %}
+  <div{{ caption_attributes }}>
+    {% for caption in captions.inline %}
       {% if caption.content %}
         <{{ caption.tag }} {{ caption.attributes }}>{{ caption.content }}</{{ caption.tag }}>
       {% endif %}
     {% endfor %}
-    </div>
-  {% endif %}
-{% endspaceless %}
+  </div>
+{% endif %}

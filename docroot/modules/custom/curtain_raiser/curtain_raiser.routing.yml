@@ -1,0 +1,21 @@
+curtain_raiser.form:
+ path: '/curtain_raiser/inauguration'
+ defaults:
+   _title: 'Inauguration'
+   _form: '\Drupal\curtain_raiser\Form\InaugurationForm'
+ requirements:
+   _permission: 'access content'
+curtain_raiser.validate:
+ path: '/ajax/inauguration/validate/{password}'
+ defaults:
+   _title: 'Inauguration'
+   _controller: '\Drupal\curtain_raiser\Controller\CurtainRaiser::validate'
+ requirements:
+   _permission: 'access content'
+curtain_raiser.settings:
+  path: '/admin/config/curtain_raiser/settings'
+  defaults:
+    _form: '\Drupal\curtain_raiser\Form\curtainRaiserSettingsForm'
+    _title: 'Curtain Raiser'
+  requirements:
+    _permission: 'administer site configuration'

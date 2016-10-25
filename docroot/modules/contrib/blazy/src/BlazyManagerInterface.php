@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\BlazyManagerInterface.
- */
-
 namespace Drupal\blazy;
 
 /**

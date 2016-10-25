@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blazy\Dejavu\BlazyDefault.
- */
-
 namespace Drupal\blazy\Dejavu;
 
 /**
@@ -31,7 +26,7 @@ class BlazyDefault {
    */
   public static function baseSettings() {
     return [
-      'cache'             => -1,
+      'cache'             => 0,
       'current_view_mode' => '',
       'item_id'           => '',
       'optionset'         => 'default',
@@ -45,6 +40,8 @@ class BlazyDefault {
   public static function imageSettings() {
     return [
       'background'             => FALSE,
+      'box_caption'            => '',
+      'box_caption_custom'     => '',
       'box_style'              => '',
       'breakpoints'            => [],
       'caption'                => [],
