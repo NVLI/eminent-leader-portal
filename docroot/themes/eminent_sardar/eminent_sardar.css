@@ -361,6 +361,8 @@ margin-bottom: 10px;
   }
   .cd-timeline-block .cd-timeline-content h2 {
     clear: both;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 
 }
