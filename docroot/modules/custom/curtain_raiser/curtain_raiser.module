@@ -12,23 +12,30 @@ use Drupal\Core\Url;
 use Drupal\Component\Utility\Unicode;
 
 function curtain_raiser_page_top(array &$page_top) {
-  $form = \Drupal::formBuilder()->getForm('\Drupal\curtain_raiser\Form\InaugurationForm');
-  $page_top['form'] = $form;
-  $page_top['form']['#prefix'] = '
-    <div class="container-ing">
-      <div id="effect">
-        <img src="/modules/custom/curtain_raiser/images/curtain.jpg" id="curtain1">
-        <img src="/modules/custom/curtain_raiser/images/curtain.jpg" id="curtain2">
-        <div class="content-ing">
-          <div>
-            <h1>COMING SOON</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae suscipit metus. Proin volutpat convallis orci, quis faucibus tortor rhoncus ut. Quisque non nisl sit amet augue posuere sollicitudin. Proin tortor sapien, varius efficitur consequat nec, imperdiet eget odio. In ut elit erat. Etiam suscipit lorem quis tristique vehicula. In tempus ex ac lacinia eleifend. Phasellus mollis congue eros, id consequat purus porttitor ut. Vestibulum mauris orci, porttitor tincidunt tristique ac, venenatis non est. Vestibulum hendrerit congue dignissim. Nulla facilisi.</p>
-          ';
-    $page_top['form']['#suffix'] = '</div>
+  $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
+
+  $inauguration_status = $config->get('inauguration_status');
+
+  if (!$inauguration_status) {
+    $form = \Drupal::formBuilder()->getForm('\Drupal\curtain_raiser\Form\InaugurationForm');
+    $page_top['form'] = $form;
+    $page_top['form']['#prefix'] = '
+      <div class="container-ing">
+        <div id="effect">
+          <img src="/modules/custom/curtain_raiser/images/curtain.jpg" id="curtain1">
+          <img src="/modules/custom/curtain_raiser/images/curtain.jpg" id="curtain2">
+          <div class="content-ing">
+            <div>
+              <h1>COMING SOON</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae suscipit metus. Proin volutpat convallis orci, quis faucibus tortor rhoncus ut. Quisque non nisl sit amet augue posuere sollicitudin. Proin tortor sapien, varius efficitur consequat nec, imperdiet eget odio. In ut elit erat. Etiam suscipit lorem quis tristique vehicula. In tempus ex ac lacinia eleifend. Phasellus mollis congue eros, id consequat purus porttitor ut. Vestibulum mauris orci, porttitor tincidunt tristique ac, venenatis non est. Vestibulum hendrerit congue dignissim. Nulla facilisi.</p>
+            ';
+      $page_top['form']['#suffix'] = '</div>
+        </div>
       </div>
-    </div>
-  </div>';
-  $page_top['form']['actions']['submit']['#attributes'] = array('class' => array('open-curtain'));
-  $page_top['#attached']['library'][] = 'curtain_raiser/curtain_raiser';
-  return $page_top;
+    </div>';
+    $page_top['form']['actions']['submit']['#attributes'] = array('class' => array('open-curtain'));
+    $page_top['#attached']['library'][] = 'curtain_raiser/curtain_raiser';
+    return $page_top;
+  }
+
 }
