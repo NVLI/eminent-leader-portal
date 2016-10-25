@@ -76,10 +76,15 @@ function eminent_sardar_preprocess_media(&$variables) {
   // Get the current user.
   $user = \Drupal::currentUser();
 
+
   // Fetch the media id.
   $media_id = $variables['elements']['#media']->id();
   $variables['media_id'] = $media_id;
 
+
+  $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_id));
+  $variables['media_url'] = $media_url;
+  
   if ($user->hasPermission('remove media from timeline')) {
     // Load the Media Referred Timeline View.
     $view = \Drupal\views\Views::getView('media_referred_timeline');
