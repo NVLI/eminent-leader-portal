@@ -94,12 +94,12 @@ function eminent_sardar_preprocess_media(&$variables) {
       'subject' => t('Media Feedback : "@url".', ['@url' => $media_url]),
     ));
   $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
-  $build['feedback_form'] = array(
+  $variables['feedback_form'] = array(
     '#type' => 'details',
     '#open' => TRUE,
     '#title' => t('Media Feedback'),
   );
-  $build['feedback_form']['form'] = $form;
+  $variables['feedback_form']['form'] = $form;
 
   if ($user->hasPermission('remove media from timeline')) {
     // Load the Media Referred Timeline View.
