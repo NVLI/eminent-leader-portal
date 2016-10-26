@@ -255,7 +255,7 @@ function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterf
 
   $route_name = \Drupal::routeMatch()->getRouteName();
 
-  $form_state->setRedirect($route_name, array('media_id' => $current_media_id));
+  $form_state->setRedirect($route_name, array('media' => $current_media_id));
 
 }
 /**
