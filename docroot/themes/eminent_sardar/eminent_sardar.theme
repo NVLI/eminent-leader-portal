@@ -201,6 +201,7 @@ function eminent_sardar_preprocess_media(&$variables) {
 * Implements feedback form alter.
 */
 function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
   $media = \Drupal::request()->attributes->get('media');
   if (!empty($media)) {
     $current_media_id = $media->id();
@@ -257,17 +258,18 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
     $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
     $form['actions']['preview']['#attributes']['class'][] = 'hidden';
   }
-
 }
 
 function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   $media = \Drupal::request()->attributes->get('media');
-  $current_media_id = $media->id();
+  if (!empty($media)) {
+    $current_media_id = $media->id();
 
-  $route_name = \Drupal::routeMatch()->getRouteName();
+    $route_name = \Drupal::routeMatch()->getRouteName();
 
-  $form_state->setRedirect($route_name, array('media' => $current_media_id));
+    $form_state->setRedirect($route_name, array('media' => $current_media_id));
+  }
 
 }
 /**
