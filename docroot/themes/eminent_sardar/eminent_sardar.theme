@@ -201,7 +201,48 @@ function eminent_sardar_preprocess_media(&$variables) {
   }
 
 }
+/**
+* Implements feedback form alter.
+*/
+function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
+  $form['#prefix'] = '<div id="myform-ajax-wrapper">';
+  $form['#suffix'] = '</div>';
+
+  // Name
+  $form['name']['#prefix'] = '<div class="col-sm-12">';
+  $form['name']['#suffix'] = '</div>';
+  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
+  unset($form['name']['#title']);
+
+  // Mail
+  $form['mail']['#prefix'] = '<div class="col-sm-12">';
+  $form['mail']['#suffix'] = '</div>';
+  $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+  unset($form['mail']['#title']);
+
+  // Message
+  $form['message']['#prefix'] = '<div class="col-sm-12">';
+  $form['message']['#suffix'] = '</div>';
+  $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
+  $form['message']['widget'][0]['#title'] = '';
+  unset($form['message']['widget'][0]['value']['#title']);
+
+  // Submit
+  $form['actions']['#prefix'] = '<div class="clearfix">';
+  $form['actions']['#suffix'] = '</div>';
+  $form['actions']['submit']['#attributes']['class'][] = 'btn';
+  $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
+  $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
+
+  // Preview
+  $form['actions']['#prefix'] = '<div class="clearfix">';
+  $form['actions']['#suffix'] = '</div>';
+  $form['actions']['preview']['#attributes']['class'][] = 'btn';
+  $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
+  $form['actions']['preview']['#attributes']['class'][] = 'hidden';
+
+}
 /**
 * Implements contact form alter.
 */
