@@ -251,9 +251,8 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
 function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   $current_path = \Drupal::service('path.current')->getPath();
-  $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
 
-  $form_state->setRedirectUrl($result);
+  $form_state->setRedirectUrl($current_path);
 
 }
 /**
