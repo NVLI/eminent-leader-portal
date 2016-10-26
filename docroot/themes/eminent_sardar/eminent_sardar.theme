@@ -84,7 +84,23 @@ function eminent_sardar_preprocess_media(&$variables) {
 
   $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_id));
   $variables['media_url'] = $media_url;
-  
+
+  $message = \Drupal::entityManager()->getStorage('contact_message')
+    ->create(array(
+      'contact_form' => 'media_feedback',
+      'field_node_reference' => $media_id,
+      // You can generate a default subject or even hide it completely
+      // and always use this value.
+      'subject' => t('Media Feedback : "@url".', ['@url' => $media_url]),
+    ));
+  $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
+  $build['feedback_form'] = array(
+    '#type' => 'details',
+    '#open' => TRUE,
+    '#title' => t('Media Feedback'),
+  );
+  $build['feedback_form']['form'] = $form;
+
   if ($user->hasPermission('remove media from timeline')) {
     // Load the Media Referred Timeline View.
     $view = \Drupal\views\Views::getView('media_referred_timeline');
