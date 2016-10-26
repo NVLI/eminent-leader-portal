@@ -201,61 +201,62 @@ function eminent_sardar_preprocess_media(&$variables) {
 * Implements feedback form alter.
 */
 function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
   $media = \Drupal::request()->attributes->get('media');
-  $current_media_id = $media->id();
+  if (!empty($media)) {
+    $current_media_id = $media->id();
 
-  $media_url = Url::fromRoute('entity.media.canonical', array('media' => $current_media_id));
+    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $current_media_id));
 
-  $form['#prefix'] = '<div id="myform-ajax-wrapper">';
-  $form['#suffix'] = '</div>';
+    $form['#prefix'] = '<div id="myform-ajax-wrapper">';
+    $form['#suffix'] = '</div>';
 
-  // Name
-  $form['name']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
-  $form['name']['#suffix'] = '</div></div>';
-  $form['name']['#attributes']['class'][] = 'form-control';
-  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
-  unset($form['name']['#title']);
+    // Name
+    $form['name']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
+    $form['name']['#suffix'] = '</div></div>';
+    $form['name']['#attributes']['class'][] = 'form-control';
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
+    unset($form['name']['#title']);
 
-  // Mail
-  $form['mail']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
-  $form['mail']['#suffix'] = '</div></div>';
-  $form['mail']['#attributes']['class'][] = 'form-control';
-  $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
-  unset($form['mail']['#title']);
+    // Mail
+    $form['mail']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
+    $form['mail']['#suffix'] = '</div></div>';
+    $form['mail']['#attributes']['class'][] = 'form-control';
+    $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+    unset($form['mail']['#title']);
 
-  // Subject
-  $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
-  $form['subject']['#suffix'] = '</div></div>';
-  $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
-  $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
-  $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
-  $form['subject']['widget'][0]['#title'] = '';
-  unset($form['subject']['widget'][0]['value']['#title']);
+    // Subject
+    $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
+    $form['subject']['#suffix'] = '</div></div>';
+    $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
+    $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
+    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
+    $form['subject']['widget'][0]['#title'] = '';
+    unset($form['subject']['widget'][0]['value']['#title']);
 
-  // Message
-  $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
-  $form['message']['#suffix'] = '</div></div>';
-  $form['message']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
-  $form['message']['widget'][0]['#title'] = '';
-  unset($form['message']['widget'][0]['value']['#title']);
+    // Message
+    $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
+    $form['message']['#suffix'] = '</div></div>';
+    $form['message']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
+    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
+    $form['message']['widget'][0]['#title'] = '';
+    unset($form['message']['widget'][0]['value']['#title']);
 
-  // Submit
-  $form['actions']['#prefix'] = '<div class="col-sm-12"><div class="clearfix">';
-  $form['actions']['#suffix'] = '</div></div>';
-  $form['actions']['submit']['#attributes']['class'][] = 'btn';
-  $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
-  $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
-  $form['actions']['submit']['#submit'][] = 'eminent_sardar_contact_submit';
+    // Submit
+    $form['actions']['#prefix'] = '<div class="col-sm-12"><div class="clearfix">';
+    $form['actions']['#suffix'] = '</div></div>';
+    $form['actions']['submit']['#attributes']['class'][] = 'btn';
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
+    $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
+    $form['actions']['submit']['#submit'][] = 'eminent_sardar_contact_submit';
 
-  // Preview
-  $form['actions']['#prefix'] = '<div class="clearfix">';
-  $form['actions']['#suffix'] = '</div>';
-  $form['actions']['preview']['#attributes']['class'][] = 'btn';
-  $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
-  $form['actions']['preview']['#attributes']['class'][] = 'hidden';
+    // Preview
+    $form['actions']['#prefix'] = '<div class="clearfix">';
+    $form['actions']['#suffix'] = '</div>';
+    $form['actions']['preview']['#attributes']['class'][] = 'btn';
+    $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
+    $form['actions']['preview']['#attributes']['class'][] = 'hidden';
+  }
 
 }
 
