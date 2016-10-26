@@ -202,6 +202,11 @@ function eminent_sardar_preprocess_media(&$variables) {
 */
 function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
+  $media = \Drupal::request()->attributes->get('media');
+  $current_media_id = $media->id();
+
+  $media_url = Url::fromRoute('entity.media.canonical', array('media' => $current_media_id));
+
   $form['#prefix'] = '<div id="myform-ajax-wrapper">';
   $form['#suffix'] = '</div>';
 
@@ -223,7 +228,8 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
   $form['subject']['#suffix'] = '</div></div>';
   $form['subject']['#attributes']['class'][] = 'form-control';disabled
-  $form['subject']['#attributes']['disabled'][] = 'disabled';
+  $form['subject']['#attributes']['disabled'] = TRUE;
+  $form['subject']['#attributes']['value'] = t('Media Feedback for : @url', array('@url => $media_url ));
   $form['subject']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
   unset($form['mail']['#title']);
 
