@@ -453,5 +453,6 @@ margin-bottom: 10px;
   border-top: 1px solid #c5c5c5;
 }
 .media-feedback div {
+  display: block;
   clear: both;
 }
