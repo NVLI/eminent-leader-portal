@@ -227,11 +227,12 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   // Subject
   $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
   $form['subject']['#suffix'] = '</div></div>';
-  $form['subject']['#attributes']['class'][] = 'form-control';
-  $form['subject']['#attributes']['disabled'] = TRUE;
-  $form['subject']['#attributes']['value'] = t('Media Feedback for : @url', array('@url' => $media_url));
-  $form['subject']['#attributes']['placeholder'][] = $form['subject']['#title'].'*';
-  unset($form['subject']['#title']);
+  $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+  $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for : @url', array('@url' => $media_url));
+  $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
+  $form['subject']['widget'][0]['#title'] = '';
+  unset($form['subject']['widget'][0]['value']['#title']);
 
   // Message
   $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
