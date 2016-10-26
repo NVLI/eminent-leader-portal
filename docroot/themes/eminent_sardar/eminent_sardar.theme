@@ -91,7 +91,7 @@ function eminent_sardar_preprocess_media(&$variables) {
       'field_node_reference' => $media_id,
       // You can generate a default subject or even hide it completely
       // and always use this value.
-      'subject' => t('Media Feedback : @url ', ['@url' => $media_url]),
+      'subject' => t('Media Feedback : @url ', array('@url' => $media_url)),
     ));
   $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
 
