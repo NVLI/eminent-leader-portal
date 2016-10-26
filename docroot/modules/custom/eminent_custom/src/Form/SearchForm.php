@@ -38,11 +38,12 @@ class SearchForm extends FormBase {
       '#title_display' => FALSE,
       '#type' => 'textfield',
       '#required' => TRUE,
+      '#placeholder' => 'Search',
     ];
     $form['keyword']['#default_value'] = $keyword;
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => t('Search'),
       '#prefix' => '<div><div class="input-group-addon">',
       '#suffix' => '</div></div>',
       '#attributes' => array(

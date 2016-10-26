@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Mukta+Vaani');
 body {
   font-family: 'Mukta Vaani', sans-serif;
+  font-size: 16px;
 }
 h1,
 h2,
@@ -349,17 +350,20 @@ margin-bottom: 10px;
 .search-result-nav li {
   margin: 1px;
 }
-@media only screen and (max-width: 1170px) {
-  #cd-timeline {
+@media (max-width: 1170px) {
+  /*#cd-timeline {
     margin-left: 70px;
-  }
+  }*/
   .cd-timeline-block .cd-timeline-content .cd-date {
-    position: absolute;
-    right: auto;
-    left: -135px;
+    float: none;
     text-align: left;
-    width: 70px;
-    top: 5px;
+    padding: 0;
+    opacity: 1;
+  }
+  .cd-timeline-block .cd-timeline-content h2 {
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 
 }
@@ -442,4 +446,13 @@ margin-bottom: 10px;
 .slick-slider .slick-arrow {
   top: auto;
   bottom: -50px
+}
+.home-search {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #c5c5c5;
+  border-top: 1px solid #c5c5c5;
+}
+.media-feedback div {
+  display: block !important;
+  clear: both;
 }

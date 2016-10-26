@@ -49,10 +49,11 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
         <i class="fa fa-flag" aria-hidden="true"></i>
       </div>
       <div class="cd-timeline-content">
+        <span class="cd-date">{{ content.field_time_line_date }}</span>
         <h2>{{ content.field_time_line_title }}</h2>
         <p> {{ content.field_time_line_description }} </p>
         <a href= {{ media_url }} class="more">Read more</a>
-        <span class="cd-date">{{ content.field_time_line_date }}</span>
+
       </div>
   </div>
 </div>
