@@ -249,10 +249,13 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
 }
 
 function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  $media = \Drupal::request()->attributes->get('media');
+  $current_media_id = $media->id();
+
   $route_name = \Drupal::routeMatch()->getRouteName();
 
-  $url = Url::fromRoute($route_name);
-  $form_state->setRedirectUrl($url);
+  $form_state->setRedirect($route_name, array('media_id' => $current_media_id));
 
 }
 /**
