@@ -229,7 +229,7 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['subject']['#suffix'] = '</div></div>';
   $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
   $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
-  $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for : @url', array('@url' => $media_url));
+  $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
   $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
   $form['subject']['widget'][0]['#title'] = '';
   unset($form['subject']['widget'][0]['value']['#title']);
