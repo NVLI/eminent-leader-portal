@@ -210,20 +210,23 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['#suffix'] = '</div>';
 
   // Name
-  $form['name']['#prefix'] = '<div class="col-sm-12">';
+  $form['name']['#prefix'] = '<div class="form-group">';
   $form['name']['#suffix'] = '</div>';
+  $form['name']['#attributes']['class'][] = 'form-control';
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
   unset($form['name']['#title']);
 
   // Mail
-  $form['mail']['#prefix'] = '<div class="col-sm-12">';
+  $form['mail']['#prefix'] = '<div class="form-group">';
   $form['mail']['#suffix'] = '</div>';
+  $form['mail']['#attributes']['class'][] = 'form-control';
   $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
   unset($form['mail']['#title']);
 
   // Message
-  $form['message']['#prefix'] = '<div class="col-sm-12">';
+  $form['message']['#prefix'] = '<div class="form-group">';
   $form['message']['#suffix'] = '</div>';
+  $form['message']['#attributes']['class'][] = 'form-control';
   $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
   $form['message']['widget'][0]['#title'] = '';
   unset($form['message']['widget'][0]['value']['#title']);
