@@ -226,7 +226,7 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   // Message
   $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
   $form['message']['#suffix'] = '</div></div>';
-  $form['message']['#attributes']['class'][] = 'form-control';
+  $form['message']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
   $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
   $form['message']['widget'][0]['#title'] = '';
   unset($form['message']['widget'][0]['value']['#title']);
