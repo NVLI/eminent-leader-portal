@@ -88,10 +88,6 @@ function eminent_sardar_preprocess_media(&$variables) {
   $message = \Drupal::entityManager()->getStorage('contact_message')
     ->create(array(
       'contact_form' => 'media_feedback',
-      'field_node_reference' => $media_id,
-      // You can generate a default subject or even hide it completely
-      // and always use this value.
-      'subject' => t('Media Feedback : @url ', array('@url' => $media_url)),
     ));
   $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
 
@@ -221,6 +217,14 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['mail']['#suffix'] = '</div></div>';
   $form['mail']['#attributes']['class'][] = 'form-control';
   $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+  unset($form['mail']['#title']);
+
+  // Subject
+  $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
+  $form['subject']['#suffix'] = '</div></div>';
+  $form['subject']['#attributes']['class'][] = 'form-control';disabled
+  $form['subject']['#attributes']['disabled'][] = 'disabled';
+  $form['subject']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
   unset($form['mail']['#title']);
 
   // Message
