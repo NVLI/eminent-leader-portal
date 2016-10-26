@@ -91,7 +91,7 @@ function eminent_sardar_preprocess_media(&$variables) {
       'field_node_reference' => $media_id,
       // You can generate a default subject or even hide it completely
       // and always use this value.
-      'subject' => t('Media Feedback : "@url".', ['@url' => $media_url]),
+      'subject' => t('Media Feedback : @url ', ['@url' => $media_url]),
     ));
   $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
 
@@ -237,6 +237,7 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['actions']['submit']['#attributes']['class'][] = 'btn';
   $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
   $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
+  $form['actions']['submit']['#submit'][] = 'eminent_sardar_contact_submit';
 
   // Preview
   $form['actions']['#prefix'] = '<div class="clearfix">';
@@ -244,6 +245,15 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   $form['actions']['preview']['#attributes']['class'][] = 'btn';
   $form['actions']['preview']['#attributes']['class'][] = 'btn-success';
   $form['actions']['preview']['#attributes']['class'][] = 'hidden';
+
+}
+
+function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+
+  $form_state->setRedirectUrl($result);
 
 }
 /**
