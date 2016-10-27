@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes.addClass('share-feedback') }}>
+  <h2 class = "col-md-12">{% trans %} Share your Feedback {% endtrans %}</h2>
+  {{ children }}
+</form>
