@@ -14,10 +14,11 @@
                     <img class = "img-responsive" src = "{{ media_items.image }}" />
                     <div class="text-center media-teaser-title">
                       <h2>
-                       <a href = "/media/{{ media_items.media_id }}" title = " {{ media_items.title }}">{{ {{ media_items.title }} }}</a>
+                       <a href = "/media/{{ media_items.media_id }}" title = " {{ media_items.title }}">{{ media_items.truncated_title }}</a>
                       </h2>
                     </div>
-
+                    
+                    <hr>
                     <div class = "clear-fix">
                       {{ media_items.addtotimeline }}
                       {{ media_items.addtoplaylist }}
