@@ -216,24 +216,23 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
     $form['name']['#suffix'] = '</div></div>';
     $form['name']['#attributes']['class'][] = 'form-control';
     $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
-    unset($form['name']['#title']);
+    $form['name']['#title_display'] = FALSE;
 
     // Mail
     $form['mail']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['mail']['#suffix'] = '</div></div>';
     $form['mail']['#attributes']['class'][] = 'form-control';
     $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
-    unset($form['mail']['#title']);
+    $form['mail']['#title_display'] = FALSE;
 
     // Subject
     $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['subject']['#suffix'] = '</div></div>';
     $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
     $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
-    $form['subject']['widget'][0]['value']['#attributes']['value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
+    $form['subject']['widget'][0]['value']['#default_value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
     $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
-    $form['subject']['widget'][0]['#title'] = '';
-    unset($form['subject']['widget'][0]['value']['#title']);
+    $form['subject']['widget'][0]['#title_display'] = FALSE;
 
     // Message
     $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
@@ -241,7 +240,7 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
     $form['message']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
     $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
     $form['message']['widget'][0]['#title'] = '';
-    unset($form['message']['widget'][0]['value']['#title']);
+    $form['message']['widget'][0]['value']['#title_display'] = FALSE;
 
     // Submit
     $form['actions']['#prefix'] = '<div class="col-sm-12"><div class="clearfix">';
@@ -336,6 +335,16 @@ function eminent_sardar_views_exposed_form_form_alter(&$form, \Drupal\Core\Form\
  * Implements hook_preprocess_page.
  */
 function eminent_sardar_preprocess_page(&$variables) {
+
+  //Get contact form as block.
+  $message = \Drupal::entityManager()->getStorage('contact_message')
+    ->create(array(
+      'contact_form' => 'feedback',
+    ));
+  $form = \Drupal::getContainer()->get('entity.form_builder')->getForm($message);
+
+  $variables['feedback'] = $form;
+
   $route_name = \Drupal::routeMatch()->getRouteName();
   // Display filters only in the search page.
   if ($route_name == "view.eminent_search.page_1" || $route_name == "view.eminent_search.page_2" || $route_name == "view.eminent_search.page_3" || $route_name == "view.eminent_search.page_4") {

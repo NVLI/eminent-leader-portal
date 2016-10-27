@@ -505,35 +505,35 @@ input.search-form:hover::-webkit-input-placeholder {
 }
 
 #main-slider .active .animation.animated-item-1 {
-  -webkit-animation: fadeInUp 300ms linear 300ms both;
-  -moz-animation: fadeInUp 300ms linear 300ms both;
-  -o-animation: fadeInUp 300ms linear 300ms both;
-  -ms-animation: fadeInUp 300ms linear 300ms both;
-  animation: fadeInUp 300ms linear 300ms both;
+  -webkit-animation: fadeInUp 1000ms linear 1000ms both;
+  -moz-animation: fadeInUp 1000ms linear 1000ms both;
+  -o-animation: fadeInUp 1000ms linear 1000ms both;
+  -ms-animation: fadeInUp 1000ms linear 1000ms both;
+  animation: fadeInUp 1000ms linear 1000ms both;
 }
 
 #main-slider .active .animation.animated-item-2 {
-  -webkit-animation: fadeInUp 300ms linear 600ms both;
-  -moz-animation: fadeInUp 300ms linear 600ms both;
-  -o-animation: fadeInUp 300ms linear 600ms both;
-  -ms-animation: fadeInUp 300ms linear 600ms both;
-  animation: fadeInUp 300ms linear 600ms both;
+  -webkit-animation: fadeInUp 1000ms linear 2000ms both;
+  -moz-animation: fadeInUp 1000ms linear 2000ms both;
+  -o-animation: fadeInUp 1000ms linear 2000ms both;
+  -ms-animation: fadeInUp 1000ms linear 2000ms both;
+  animation: fadeInUp 1000ms linear 2000ms both;
 }
 
 #main-slider .active .animation.animated-item-3 {
-  -webkit-animation: fadeInUp 300ms linear 900ms both;
-  -moz-animation: fadeInUp 300ms linear 900ms both;
-  -o-animation: fadeInUp 300ms linear 900ms both;
-  -ms-animation: fadeInUp 300ms linear 900ms both;
-  animation: fadeInUp 300ms linear 900ms both;
+  -webkit-animation: fadeInUp 1000ms linear 3000ms both;
+  -moz-animation: fadeInUp 1000ms linear 3000ms both;
+  -o-animation: fadeInUp 1000ms linear 3000ms both;
+  -ms-animation: fadeInUp 1000ms linear 3000ms both;
+  animation: fadeInUp 1000ms linear 3000ms both;
 }
 
 #main-slider .active .animation.animated-item-4 {
-  -webkit-animation: fadeInUp 300ms linear 1200ms both;
-  -moz-animation: fadeInUp 300ms linear 1200ms both;
-  -o-animation: fadeInUp 300ms linear 1200ms both;
-  -ms-animation: fadeInUp 300ms linear 1200ms both;
-  animation: fadeInUp 300ms linear 1200ms both;
+  -webkit-animation: fadeInUp 1000ms linear 4000ms both;
+  -moz-animation: fadeInUp 1000ms linear 4000ms both;
+  -o-animation: fadeInUp 1000ms linear 4000ms both;
+  -ms-animation: fadeInUp 1000ms linear 4000ms both;
+  animation: fadeInUp 1000ms linear 4000ms both;
 }
 
 #feature {
@@ -2540,4 +2540,8 @@ select {
 }
 #feature {
   padding : 50px;
+}
+.searchresult-form .search-filter .facet-filter {
+  max-height: 260px;
+  overflow-y: scroll;
 }
