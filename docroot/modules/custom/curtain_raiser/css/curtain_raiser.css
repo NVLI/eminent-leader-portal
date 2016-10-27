@@ -63,6 +63,7 @@
   background-color: rgba(0,0,0,.5) !important;
   border: none !important;
   color: #595959 !important;
+  border-radius: 2px !important;
 }
 .content-ing input:focus {
   border-color: #40b6ff !important;
