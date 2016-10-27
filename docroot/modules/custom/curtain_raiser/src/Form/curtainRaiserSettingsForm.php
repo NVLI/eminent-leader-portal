@@ -57,7 +57,7 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
 
     $form['curtain_raiser_content'] = array(
       '#type' => 'textarea',
-      '#title' => $this->t('Heading:'),
+      '#title' => $this->t('Content:'),
       '#default_value' => $config->get('content'),
       '#description' => $this->t('The message to show in the page.'),
     );
@@ -81,6 +81,10 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
     $config->set('master_password', $form_state->getValue('curtain_raiser_master_password'))
       ->save();
     $config->set('test_password', $form_state->getValue('curtain_raiser_test_password'))
+      ->save();
+    $config->set('heading', $form_state->getValue('curtain_raiser_heading'))
+      ->save();
+    $config->set('content', $form_state->getValue('curtain_raiser_content'))
       ->save();
     $config->set('inauguration_status', $form_state->getValue('curtain_raiser_inauguration_status'))
       ->save();
