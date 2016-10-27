@@ -2538,3 +2538,6 @@ shortcodes page css
 select {
   -moz-appearance: none;
 }
+#feature {
+  padding : 50px;
+}
