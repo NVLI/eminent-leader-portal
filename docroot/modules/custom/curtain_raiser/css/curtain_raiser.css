@@ -62,7 +62,14 @@
   padding: 10px !important;
   background-color: rgba(0,0,0,.5) !important;
   border: none !important;
+  color: #595959 !important;
 }
+.content-ing input:focus {
+  border-color: #40b6ff !important;
+  outline: 0 !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px #40b6ff !important;
+}
+
 .content-ing .image-button {
   width: auto !important;
   background: none !important;
