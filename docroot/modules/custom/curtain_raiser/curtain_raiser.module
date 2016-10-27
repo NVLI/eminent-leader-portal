@@ -16,6 +16,8 @@ function curtain_raiser_page_top(array &$page_top) {
 
   $inauguration_status = $config->get('inauguration_status');
   $master_password = $config->get('master_password');
+  $heading = $config->get('heading');
+  $content = $config->get('content');
 
   if (!$inauguration_status && $master_password!='') {
     $form = \Drupal::formBuilder()->getForm('\Drupal\curtain_raiser\Form\InaugurationForm');
@@ -27,14 +29,14 @@ function curtain_raiser_page_top(array &$page_top) {
           <img src="/modules/custom/curtain_raiser/images/curtain.jpg" id="curtain2">
           <div class="content-ing">
             <div>
-              <h1>COMING SOON</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae suscipit metus. Proin volutpat convallis orci, quis faucibus tortor rhoncus ut. Quisque non nisl sit amet augue posuere sollicitudin. Proin tortor sapien, varius efficitur consequat nec, imperdiet eget odio. In ut elit erat. Etiam suscipit lorem quis tristique vehicula. In tempus ex ac lacinia eleifend. Phasellus mollis congue eros, id consequat purus porttitor ut. Vestibulum mauris orci, porttitor tincidunt tristique ac, venenatis non est. Vestibulum hendrerit congue dignissim. Nulla facilisi.</p>
+              <h1>'.$heading.'</h1>
+              <p>'.$content.'</p>
             ';
       $page_top['form']['#suffix'] = '</div>
         </div>
       </div>
     </div>';
-    
+
     $page_top['#attached']['library'][] = 'curtain_raiser/curtain_raiser';
     return $page_top;
   }

@@ -48,6 +48,20 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
       '#description' => $this->t('This is for testing the site, inauguration status remains unchnaged.'),
     );
 
+    $form['curtain_raiser_heading'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Heading:'),
+      '#default_value' => $config->get('heading'),
+      '#description' => $this->t('This will be show as the heading. eg : Coming Soon'),
+    );
+
+    $form['curtain_raiser_content'] = array(
+      '#type' => 'textarea',
+      '#title' => $this->t('Heading:'),
+      '#default_value' => $config->get('content'),
+      '#description' => $this->t('The message to show in the page.'),
+    );
+
     $form['curtain_raiser_inauguration_status'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Inaugurated'),
