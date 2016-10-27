@@ -456,3 +456,6 @@ margin-bottom: 10px;
   display: block !important;
   clear: both;
 }
+.media-teaser img {
+  margin: auto;
+}
