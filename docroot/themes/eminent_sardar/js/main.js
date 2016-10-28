@@ -18,10 +18,19 @@ jQuery(function($) {'use strict',
   });
 
 /***********************************************************************
-*******Hide video after play. */
+*******Play video on load.. */
+  $(window).on("load", function () {
+    if ($( window ).width() <= 973) {
+      $("#myCarousel").carousel(1);
+    }
+  });
+  /***********************************************************************
+  *******Hide video after play. */
+
   $('#bannervideo').on('ended',function(){
     $("#myCarousel").carousel(1);
   });
+
 
 /***********************************************************************
 *******fix the top bar on scroll*/

@@ -463,3 +463,27 @@ margin-bottom: 10px;
   display: block !important;
   clear: both;
 }
+.media-teaser img {
+  margin: auto;
+}
+#main-slider .slider-item img:not(.mobile) {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  height: 550px !important;
+  width: auto !important;
+  max-width: none;
+}
+#main-slider .item {
+  height: auto !important;
+}
+#main-slider .item video {
+  width: auto !important;
+  height: 550px !important;
+  display: block;
+  margin: auto;
+}
+#bannervideo {
+  z-index: 9999;
+}
