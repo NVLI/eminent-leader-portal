@@ -459,3 +459,20 @@ margin-bottom: 10px;
 .media-teaser img {
   margin: auto;
 }
+#main-slider .slider-item img {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  height: 550px !important;
+  width: auto !important;
+}
+#main-slider .item {
+  height: auto;;
+}
+#main-slider .item video {
+  width: auto !important;
+  height: 550px !important;
+  display: block;
+  margin: auto;
+}
