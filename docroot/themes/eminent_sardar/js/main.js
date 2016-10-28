@@ -19,7 +19,7 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Play video on load.. */
-  $('#bannervideo').on("click", function () {
+  $('#main-slider').on("click", function () {
     alert('video play');
     $('#bannervideo').get(0).play();
   });
