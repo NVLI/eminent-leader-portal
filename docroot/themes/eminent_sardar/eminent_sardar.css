@@ -442,6 +442,7 @@ margin-bottom: 10px;
   }
   #main-slider .carousel-inner {
     height: 636px !important;
+    box-sizing: unset !important;
   }
 }
 @media (max-width: 480px) {
