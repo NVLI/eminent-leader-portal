@@ -459,7 +459,7 @@ margin-bottom: 10px;
 .media-teaser img {
   margin: auto;
 }
-#main-slider .slider-item img {
+#main-slider .slider-item img:not(.mobile) {
   position: absolute;
   top: 0;
   left: auto;
