@@ -444,6 +444,9 @@ margin-bottom: 10px;
     height: 636px !important;
     box-sizing: unset !important;
   }
+  #main-slider .carousel-inner::after, #main-slider .carousel-inner::before {
+    box-sizing: unset !important;
+  }
 }
 @media (max-width: 480px) {
   .share-feedbackholder h2 {
@@ -486,4 +489,7 @@ margin-bottom: 10px;
 }
 #bannervideo {
   z-index: 9999;
+}
+#header .navbar-collapse.in {
+  overflow: none;
 }
