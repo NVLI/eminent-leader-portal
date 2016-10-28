@@ -20,15 +20,17 @@ jQuery(function($) {'use strict',
 /***********************************************************************
 *******Play video on load.. */
   $(window).on("load", function () {
-    $('#bannervideo').get(0).play();
+    if ($( window ).width() <= 973) {
+      $("#myCarousel").carousel(1);
+    }
   });
-
   /***********************************************************************
   *******Hide video after play. */
 
   $('#bannervideo').on('ended',function(){
     $("#myCarousel").carousel(1);
   });
+
 
 /***********************************************************************
 *******fix the top bar on scroll*/
