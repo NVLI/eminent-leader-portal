@@ -476,3 +476,6 @@ margin-bottom: 10px;
   display: block;
   margin: auto;
 }
+#bannervideo {
+  z-index: 9999;
+}
