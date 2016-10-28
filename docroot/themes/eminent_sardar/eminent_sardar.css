@@ -466,6 +466,7 @@ margin-bottom: 10px;
   right: 0;
   height: 550px !important;
   width: auto !important;
+  max-width: none;
 }
 #main-slider .item {
   height: auto !important;
