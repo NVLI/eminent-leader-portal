@@ -18,7 +18,14 @@ jQuery(function($) {'use strict',
   });
 
 /***********************************************************************
-*******Hide video after play. */
+*******Play video on load.. */
+  $(window).on("load", function () {
+    $('#bannervideo').get(0).play();
+  });
+
+  /***********************************************************************
+  *******Hide video after play. */
+
   $('#bannervideo').on('ended',function(){
     $("#myCarousel").carousel(1);
   });
