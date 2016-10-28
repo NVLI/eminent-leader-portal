@@ -468,7 +468,7 @@ margin-bottom: 10px;
   width: auto !important;
 }
 #main-slider .item {
-  height: auto;;
+  height: auto !important;
 }
 #main-slider .item video {
   width: auto !important;
