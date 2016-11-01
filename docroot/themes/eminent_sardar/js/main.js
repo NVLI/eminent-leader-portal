@@ -21,7 +21,6 @@ jQuery(function($) {'use strict',
 *******Play video on load.. */
 
   $(window).on("load", function () {
-    alert('Modernizr start');
     Modernizr.on('videoautoplay', function(result) {
       if (result) {
 
