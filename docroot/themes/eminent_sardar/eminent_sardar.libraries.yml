@@ -13,6 +13,7 @@ global-components:
 global-js:
   js:
     js/bootstrap.min.js: {}
+    js/modernizr-video.js: {}
     js/slick.min.js: {}
     js/jquery.isotope.min.js: {}
     js/jquery.prettyPhoto.js: {}

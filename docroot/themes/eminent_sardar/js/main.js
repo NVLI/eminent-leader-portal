@@ -19,10 +19,16 @@ jQuery(function($) {'use strict',
 
 /***********************************************************************
 *******Play video on load.. */
+
   $(window).on("load", function () {
-    if ($( window ).width() <= 973) {
-      $("#myCarousel").carousel(1);
-    }
+    alert('Modernizr start');
+    Modernizr.on('videoautoplay', function(result) {
+      if (result) {
+
+      } else {
+        $("#myCarousel").carousel(1);
+      }
+    });
   });
   /***********************************************************************
   *******Hide video after play. */
