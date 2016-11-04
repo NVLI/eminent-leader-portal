@@ -22,6 +22,7 @@
 
   .slide--caption--center .slide__caption,
   .slide--caption--center-top .slide__caption,
+  .slide--caption--left .slide__caption,
   .slide--caption--right .slide__caption {
     width: 42%;
   }
@@ -39,6 +40,10 @@
     padding: 0;
     position: absolute;
     text-align: center;
+  }
+
+  .slide--caption--left .slide__caption {
+    position: absolute;
   }
 
   .slide--caption--right .slide__caption {
@@ -89,5 +94,50 @@
     left: 0;
     margin-left: auto;
     width: 100%;
+  }
+
+  /** Thumbnail position */
+  .slick-wrapper--tn-left .slick--thumbnail {
+    float: left;
+    left: 0;
+    width: 20%;
+  }
+
+  .slick-wrapper--tn-left .slick--main {
+    margin-left: 20%;
+  }
+
+  .slick-wrapper--tn-right .slick--thumbnail {
+    float: right;
+    right: 0;
+    width: 20%;
+  }
+
+  .slick-wrapper--tn-right .slick--main {
+    margin-right: 20%;
+  }
+
+  .slick-wrapper--tn-overlay .slick--main {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .slick-wrapper--tn-overlay .slick--thumbnail {
+    height: 100%;
+    max-height: 90%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 9;
+  }
+
+  .slick-wrapper--tn-over-top .slick--thumbnail {
+    height: auto;
+    max-height: none;
+    width: 100%;
+  }
+
+  div[class*="slick-wrapper--tn"] .slick__slider::after {
+    clear: none;
   }
 }

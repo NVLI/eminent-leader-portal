@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\Plugin\Field\FieldFormatter\SlickTextFormatter.
- */
-
 namespace Drupal\slick\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Form\FormStateInterface;

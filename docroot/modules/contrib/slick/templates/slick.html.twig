@@ -51,10 +51,9 @@
   ]
 %}
 
-{% spaceless %}
-<div id="{{ attributes.id|clean_id }}"{{ attributes.addClass(classes)|without('id') }}>
+<div{{ attributes.addClass(classes) }}>
   {% if not settings.unslick %}
-    <div id="{{ content_attributes.id|clean_id }}"{{ content_attributes.addClass('slick__slider')|without('id') }}>
+    <div{{ content_attributes.addClass('slick__slider') }}>
   {% endif %}
 
     {% for item in items %}
@@ -75,4 +74,3 @@
     </nav>
   {% endif %}
 </div>
-{% endspaceless %}

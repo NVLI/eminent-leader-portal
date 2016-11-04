@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\Plugin\Field\FieldFormatter\SlickImageFormatter.
- */
-
 namespace Drupal\slick\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Utility\Xss;
@@ -102,40 +97,55 @@ class SlickImageFormatter extends ImageFormatterBase implements ContainerFactory
    * Build the slick carousel elements.
    */
   public function buildElements(array &$build = [], $files) {
-    $settings = &$build['settings'];
+    $settings = $build['settings'];
     $item_id  = $settings['item_id'];
 
     foreach ($files as $delta => $file) {
       /* @var Drupal\image\Plugin\Field\FieldType\ImageItem $item */
-      $item = $file->_referringItem;
+      $item   = $file->_referringItem;
+      $config = $settings;
 
-      $settings['delta']     = $delta;
-      $settings['file_tags'] = $file->getCacheTags();
-      $settings['type']      = 'image';
-      $settings['uri']       = ($entity = $item->entity) && empty($item->uri) ? $entity->getFileUri() : $item->uri;
+      $config['delta']     = $delta;
+      $config['file_tags'] = $file->getCacheTags();
+      $config['type']      = 'image';
+      $config['uri']       = ($entity = $item->entity) && empty($item->uri) ? $entity->getFileUri() : $item->uri;
 
-      $element = ['item' => $item, 'settings' => $settings];
+      $element = ['item' => $item, 'settings' => $config];
 
-      if (!empty($settings['caption'])) {
-        foreach ($settings['caption'] as $caption) {
-          $element['caption'][$caption] = empty($item->$caption) ? [] : ['#markup' => Xss::filterAdmin($item->$caption)];
+      if (!empty($config['caption'])) {
+        foreach ($config['caption'] as $caption) {
+          $element['caption'][$caption] = empty($item->{$caption}) ? [] : ['#markup' => Xss::filterAdmin($item->{$caption})];
         }
       }
 
       // Image with responsive image, lazyLoad, and lightbox supports.
       $element[$item_id] = $this->formatter->getImage($element);
       $build['items'][$delta] = $element;
+      unset($element);
+    }
 
-      if ($settings['nav']) {
+    if ($settings['nav']) {
+      foreach ($files as $delta => $file) {
+        $item   = $file->_referringItem;
+        $config = $item->getValue();
+
+        $config['uri'] = ($entity = $item->entity) && empty($item->uri) ? $entity->getFileUri() : $item->uri;
+
+        foreach (['background', 'lazy', 'ratio', 'thumbnail_effect', 'thumbnail_style'] as $key) {
+          $config[$key] = isset($settings[$key]) ? $settings[$key] : NULL;
+        }
+
+        $thumb = ['settings' => $config];
+
         // Thumbnail usages: asNavFor pagers, dot, arrows, photobox thumbnails.
-        $element[$item_id] = empty($settings['thumbnail_style']) ? [] : $this->formatter->getThumbnail($element['settings']);
+        $thumb[$item_id] = empty($settings['thumbnail_style']) ? [] : $this->formatter->getThumbnail($config);
 
         $caption = $settings['thumbnail_caption'];
-        $element['caption'] = empty($item->$caption) ? [] : ['#markup' => Xss::filterAdmin($item->$caption)];
+        $thumb['caption'] = empty($item->{$caption}) ? [] : ['#markup' => Xss::filterAdmin($item->{$caption})];
 
-        $build['thumb']['items'][$delta] = $element;
+        $build['thumb']['items'][$delta] = $thumb;
+        unset($thumb);
       }
-      unset($element);
     }
   }
 
@@ -156,17 +166,25 @@ class SlickImageFormatter extends ImageFormatterBase implements ContainerFactory
    * Defines the scope for the form elements.
    */
   public function getScopedFormElements() {
-    $captions = ['title' => t('Title'), 'alt' => t('Alt')];
+    $captions    = ['title' => $this->t('Title'), 'alt' => $this->t('Alt')];
+    $field       = $this->fieldDefinition;
+    $entity_type = $field->getTargetEntityTypeId();
+    $target_type = $this->getFieldSetting('target_type');
+
     return [
       'background'        => TRUE,
+      'box_captions'      => TRUE,
       'breakpoints'       => SlickDefault::getConstantBreakpoints(),
       'current_view_mode' => $this->viewMode,
       'captions'          => $captions,
-      'field_name'        => $this->fieldDefinition->getName(),
+      'entity_type'       => $entity_type,
+      'field_name'        => $field->getName(),
       'image_style_form'  => TRUE,
       'media_switch_form' => TRUE,
       'settings'          => $this->getSettings(),
+      'target_type'       => $target_type,
       'thumb_captions'    => $captions,
+      'thumb_positions'   => TRUE,
       'nav'               => TRUE,
     ];
   }
