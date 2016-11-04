@@ -308,29 +308,27 @@ display:
           table: search_api_index_database_search_index
           field: keywords
           break_phrase: true
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      path: search-api-test-fulltext
-  block_1:
-    display_plugin: block
-    id: block_1
-    display_title: Block
-    position: 2
+  rest_export_1:
+    display_plugin: rest_export
+    id: rest_export_1
+    display_title: 'REST export'
+    position: 3
     display_options:
       display_extenders: {  }
-      defaults:
-        use_ajax: false
-      use_ajax: true
-label: 'Search API Test Fulltext search view'
+      path: facets-rest
+      style:
+        type: facets_serializer
+      row:
+        type: data_field
+label: 'Search API Test Fulltext REST search view'
 module: views
-id: search_api_test_view
+id: search_api_rest_test_view
 tag: ''
 langcode: en
 dependencies:
   module:
     - search_api
-    - facets_search_api_dependency
+    - rest_view
+    - facets
+    - rest_facets
+    - rest

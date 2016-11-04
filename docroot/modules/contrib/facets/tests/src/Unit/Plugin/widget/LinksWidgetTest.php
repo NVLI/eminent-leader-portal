@@ -236,10 +236,11 @@ class LinksWidgetTest extends UnitTestCase {
    */
   protected function buildLinkAssertion($text, $count = 0, $active = FALSE, $show_numbers = TRUE) {
     return [
-      '#theme' => $active ? 'facets_result_item_active' : 'facets_result_item',
+      '#theme' => 'facets_result_item',
       '#value' => $text,
       '#show_count' => $show_numbers && ($count !== NULL),
       '#count' => $count,
+      '#is_active' => $active,
     ];
   }
 

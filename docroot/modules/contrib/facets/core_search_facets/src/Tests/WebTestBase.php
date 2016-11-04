@@ -3,6 +3,7 @@
 namespace Drupal\core_search_facets\Tests;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\facets\Tests\TestHelperTrait;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\simpletest\WebTestBase as SimpletestWebTestBase;
@@ -13,6 +14,7 @@ use Drupal\simpletest\WebTestBase as SimpletestWebTestBase;
 abstract class WebTestBase extends SimpletestWebTestBase {
 
   use StringTranslationTrait;
+  use TestHelperTrait;
 
   /**
    * Modules to enable for this test.

@@ -228,7 +228,7 @@ interface FacetInterface extends ConfigEntityInterface {
   /**
    * Returns the plugin instance of a facet source.
    *
-   * @return \Drupal\facets\FacetSource\FacetSourcePluginInterface
+   * @return \Drupal\facets\FacetSource\FacetSourcePluginInterface|null
    *   The plugin instance for the facet source.
    */
   public function getFacetSource();

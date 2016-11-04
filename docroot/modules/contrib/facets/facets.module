@@ -12,6 +12,8 @@ use Drupal\facets\Entity\FacetSource;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\views\Entity\View;
 use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Drupal\Core\Logger\RfcLogLevel;
 
 /**
  * Implements hook_help().
@@ -34,11 +36,16 @@ function facets_help($route_name, RouteMatchInterface $route_match) {
  */
 function facets_theme($existing, $type, $theme, $path) {
   $result_item_variables = [
-    'variables' => ['value' => '', 'show_count' => FALSE, 'count' => NULL],
+    'variables' => [
+      'value' => '',
+      'show_count' => FALSE,
+      'count' => NULL,
+      'is_active' => FALSE,
+    ],
   ];
+
   return [
     'facets_result_item' => $result_item_variables,
-    'facets_result_item_active' => $result_item_variables,
   ];
 }
 
@@ -52,7 +59,7 @@ function facets_search_api_query_alter(QueryInterface &$query) {
     /** @var \Drupal\facets\FacetManager\DefaultFacetManager $facet_manager */
     $facet_manager = \Drupal::service('facets.manager');
 
-    $search_id = $query->getOption('search id');
+    $search_id = $query->getSearchId();
 
     // Add the active filters.
     $facet_manager->alterQuery($query, $search_id);
@@ -79,14 +86,15 @@ function facets_entity_presave(EntityInterface $entity) {
       $sources = [];
       foreach ($entity->original->get('display') as $k => $display) {
         // Check if the current display is also a facet source plugin and that
-        // is removed from the view.
-        $test = 'search_api_views:' . $entity->id() . ':' . $display['id'];
-        if (array_key_exists($test, $definitions) && !array_key_exists($k, $entity->get('display'))) {
-          $entity_id = str_replace(':', '__', $test);
+        // is removed from the view. We use the double underscore here to make
+        // sure that we use core convention of "plugin:derived_plugin".
+        $facets_source_plugin_id = 'views_page:' . $entity->id() . '__' . $display['id'];
+        if (array_key_exists($facets_source_plugin_id, $definitions) && !array_key_exists($k, $entity->get('display'))) {
+          $entity_id = str_replace(':', '__', $facets_source_plugin_id);
           $source_entity = FacetSource::load($entity_id);
+          $sources[] = $facets_source_plugin_id;
           if (!is_null($source_entity)) {
             $source_entity->delete();
-            $sources[] = $test;
           }
         }
       }
@@ -119,6 +127,46 @@ function facets_entity_presave(EntityInterface $entity) {
 function facets_preprocess_block(&$variables) {
   if ($variables['configuration']['provider'] == 'facets') {
     $facet = Facet::load($variables['derivative_plugin_id']);
-    $variables['attributes']['class'][] = 'block-facet-widget--' . Html::cleanCssIdentifier($facet->getWidget()['type']);
+    $variables['attributes']['class'][] = 'block-facets--' . Html::cleanCssIdentifier($facet->getWidget()['type']);
+  }
+}
+
+/**
+ * Implements hook_entity_predelete().
+ *
+ * We implement this hook to make sure that facet source plugins are cleared
+ * when a view is deleted. It also deletes facets that are created on those
+ * plugins.
+ */
+function facets_entity_predelete(EntityInterface $entity) {
+  if ($entity instanceof View) {
+    $facet_source_plugin_manager = \Drupal::getContainer()
+      ->get('plugin.manager.facets.facet_source');
+
+    $definitions = $facet_source_plugin_manager->getDefinitions();
+
+    if (!is_array($definitions)) {
+      return;
+    }
+
+    foreach ($definitions as $plugin_id => $definition) {
+      if (strpos($plugin_id, 'views_page:' . $entity->id() . '__') !== FALSE) {
+        try {
+          $facetManager = \Drupal::getContainer()->get('facets.manager');
+        } catch (ServiceNotFoundException $e) {
+          \Drupal::logger('facets')->log(RfcLogLevel::DEBUG, 'Facet manager not found on trying to delete a view.');
+          return;
+        }
+
+        $facets = $facetManager->getFacetsByFacetSourceId($plugin_id);
+        foreach ($facets as $facet) {
+          $facet->delete();
+        }
+      }
+    }
+
+    // Clear cached plugin definitions for facet source to make sure we don't
+    // show stale data.
+    $facet_source_plugin_manager->clearCachedDefinitions();
   }
 }

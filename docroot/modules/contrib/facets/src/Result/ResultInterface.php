@@ -2,7 +2,6 @@
 
 namespace Drupal\facets\Result;
 
-
 use Drupal\Core\Url;
 
 /**

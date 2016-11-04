@@ -106,7 +106,7 @@ class UrlProcessorHandlerTest extends UnitTestCase {
     $em = $this->getMockBuilder('\Drupal\Core\Entity\EntityTypeManagerInterface')
       ->disableOriginalConstructor()
       ->getMock();
-    $em->expects($this->exactly(2))
+    $em->expects($this->exactly(1))
       ->method('getStorage')
       ->willReturn($storage);
 

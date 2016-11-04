@@ -11,7 +11,7 @@ use Drupal\facets\Widget\WidgetPluginBase;
  *
  * @FacetsWidget(
  *   id = "array",
- *   label = @Translation("Array"),
+ *   label = @Translation("Array with raw results"),
  *   description = @Translation("A configurable widget that builds an array with results."),
  * )
  */

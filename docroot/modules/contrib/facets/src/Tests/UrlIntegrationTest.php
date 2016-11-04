@@ -6,6 +6,7 @@ use Drupal\Core\Url;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\Entity\Facet;
 use Drupal\facets\FacetSourceInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Tests the overall functionality of the Facets admin UI.
@@ -41,6 +42,25 @@ class UrlIntegrationTest extends WebTestBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  protected function installModulesFromClassProperty(ContainerInterface $container) {
+    // This will just set the Drupal state to include the necessary bundles for
+    // our test entity type. Otherwise, fields from those bundles won't be found
+    // and thus removed from the test index. (We can't do it in setUp(), before
+    // calling the parent method, since the container isn't set up at that
+    // point.)
+    $bundles = array(
+      'entity_test_mulrev_changed' => array('label' => 'Entity Test Bundle'),
+      'item' => array('label' => 'item'),
+      'article' => array('label' => 'article'),
+    );
+    \Drupal::state()->set('entity_test_mulrev_changed.bundles', $bundles);
+
+    parent::installModulesFromClassProperty($container);
+  }
+
+  /**
    * Tests various url integration things.
    */
   public function testUrlIntegration() {
@@ -56,7 +76,7 @@ class UrlIntegrationTest extends WebTestBase {
     $this->assertTrue($facet instanceof FacetInterface);
     $config = $facet->getFacetSourceConfig();
     $this->assertTrue($config instanceof FacetSourceInterface);
-    $this->assertEqual(NULL, $config->getFilterKey());
+    $this->assertEqual('f', $config->getFilterKey());
 
     $facet = NULL;
     $config = NULL;
@@ -130,9 +150,9 @@ class UrlIntegrationTest extends WebTestBase {
 
     // Go to the overview and test that we have the expected links.
     $this->drupalGet('search-api-test-fulltext');
-    $this->assertLink('test:colon');
-    $this->assertLink('orange');
-    $this->assertLink('banana');
+    $this->assertFacetLabel('test:colon');
+    $this->assertFacetLabel('orange');
+    $this->assertFacetLabel('banana');
 
     // Click the link with the colon.
     $this->clickLink('test:colon');
@@ -141,29 +161,9 @@ class UrlIntegrationTest extends WebTestBase {
     // Make sure 'test:colon' is active.
     $url = Url::fromUserInput('/search-api-test-fulltext', ['query' => ['f[0]' => 'water_bear:test:colon']]);
     $this->assertUrl($url);
-    $this->assertRaw('<span class="js-facet-deactivate">(-)</span> test:colon');
-    $this->assertLink('orange');
-    $this->assertLink('banana');
-  }
-
-  /**
-   * Checks that the url after clicking a facet is as expected.
-   *
-   * @param \Drupal\Core\Url $url
-   *   The expected url we end on.
-   */
-  protected function checkClickedFacetUrl(Url $url) {
-    $this->drupalGet('search-api-test-fulltext');
-    $this->assertResponse(200);
-    $this->assertLink('item');
-    $this->assertLink('article');
-
-    $this->clickLink('item');
-
-    $this->assertResponse(200);
-    $this->assertRaw('<span class="js-facet-deactivate">(-)</span> item');
-    $this->assertLink('article');
-    $this->assertUrl($url);
+    $this->checkFacetIsActive('test:colon');
+    $this->assertFacetLabel('orange');
+    $this->assertFacetLabel('banana');
   }
 
 }

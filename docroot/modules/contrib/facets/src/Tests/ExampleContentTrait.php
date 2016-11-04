@@ -2,7 +2,6 @@
 
 namespace Drupal\facets\Tests;
 
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\search_api\Entity\Index;
 
 /**
@@ -92,29 +91,6 @@ trait ExampleContentTrait {
     /** @var \Drupal\search_api\IndexInterface $index */
     $index = Index::load($index_id);
     return $index->indexItems();
-  }
-
-  /**
-   * Asserts that a string is found before another string in the source.
-   *
-   * This uses the simpletest's getRawContent method to search in the source of
-   * the page for the position of 2 strings and that the first argument is
-   * before the second argument's position.
-   *
-   * @param string $x
-   *   A string.
-   * @param string $y
-   *   Another string.
-   */
-  protected function assertStringPosition($x, $y) {
-    $this->assertRaw($x);
-    $this->assertRaw($y);
-
-    $x_position = strpos($this->getRawContent(), $x);
-    $y_position = strpos($this->getRawContent(), $y);
-
-    $message = new FormattableMarkup('Assert that %x is before %y in the source', ['%x' => $x, '%y' => $y]);
-    $this->assertTrue($x_position < $y_position, $message);
   }
 
 }

@@ -151,7 +151,6 @@ class ExcludeSpecifiedItemsProcessorTest extends UnitTestCase {
     }
   }
 
-
   /**
    * Tests filtering happens for string filter.
    */

@@ -1,6 +1,9 @@
 <?php
 
-namespace Drupal\facets\Tests;
+namespace Drupal\rest_facets\Tests;
+
+use Drupal\facets\Tests\WebTestBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Tests the integration of REST-views and facets.
@@ -12,7 +15,14 @@ class RestIntegrationTest extends WebTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['rest', 'hal', 'serialization', 'views_ui'];
+  public static $modules = [
+    'rest_view',
+    'rest_facets',
+    'rest',
+    'hal',
+    'serialization',
+    'views_ui',
+  ];
 
   /**
    * {@inheritdoc}
@@ -27,6 +37,25 @@ class RestIntegrationTest extends WebTestBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  protected function installModulesFromClassProperty(ContainerInterface $container) {
+    // This will just set the Drupal state to include the necessary bundles for
+    // our test entity type. Otherwise, fields from those bundles won't be found
+    // and thus removed from the test index. (We can't do it in setUp(), before
+    // calling the parent method, since the container isn't set up at that
+    // point.)
+    $bundles = array(
+      'entity_test_mulrev_changed' => array('label' => 'Entity Test Bundle'),
+      'item' => array('label' => 'item'),
+      'article' => array('label' => 'article'),
+    );
+    \Drupal::state()->set('entity_test_mulrev_changed.bundles', $bundles);
+
+    parent::installModulesFromClassProperty($container);
+  }
+
+  /**
    * Tests that the facet results are correct.
    */
   public function testRestResults() {
@@ -35,7 +64,7 @@ class RestIntegrationTest extends WebTestBase {
     $id = 'type';
 
     // Add a new facet to filter by content type.
-    $this->createFacet($name, $id, 'type', 'rest_export_1');
+    $this->createFacet($name, $id, 'type', 'rest_export_1', 'search_api_rest_test_view');
 
     // Use the array widget.
     $facet_edit_page = '/admin/config/search/facets/' . $id . '/edit';
@@ -58,7 +87,7 @@ class RestIntegrationTest extends WebTestBase {
     $name = 'Keywords';
     $id = 'keywords';
     // Add a new facet to filter by keywords.
-    $this->createFacet($name, $id, 'keywords', 'rest_export_1');
+    $this->createFacet($name, $id, 'keywords', 'rest_export_1', 'search_api_rest_test_view');
 
     // Use the array widget.
     $facet_edit_page = '/admin/config/search/facets/' . $id . '/edit';
