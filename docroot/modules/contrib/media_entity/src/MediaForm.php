@@ -2,7 +2,6 @@
 
 namespace Drupal\media_entity;
 
-use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\entity\Form\RevisionableContentEntityForm;
 
@@ -47,19 +46,19 @@ class MediaForm extends RevisionableContentEntityForm {
 
     // Node author information for administrators.
     if (isset($form['uid']) || isset($form['created'])) {
-      $form['author'] = array(
+      $form['author'] = [
         '#type' => 'details',
         '#title' => $this->t('Authoring information'),
         '#group' => 'advanced',
-        '#attributes' => array(
-          'class' => array('node-form-author'),
-        ),
-        '#attached' => array(
-          'library' => array('node/drupal.node'),
-        ),
+        '#attributes' => [
+          'class' => ['node-form-author'],
+        ],
+        '#attached' => [
+          'library' => ['node/drupal.node'],
+        ],
         '#weight' => 90,
         '#optional' => TRUE,
-      );
+      ];
     }
 
     if (isset($form['uid'])) {
@@ -86,7 +85,8 @@ class MediaForm extends RevisionableContentEntityForm {
 
     // Add a "Publish" button.
     $element['publish'] = $element['submit'];
-    // If the "Publish" button is clicked, we want to update the status to "published".
+    // If the "Publish" button is clicked, we want to update the status to
+    // "published".
     $element['publish']['#published_status'] = TRUE;
     $element['publish']['#dropbutton'] = 'save';
     if ($media->isNew()) {
@@ -99,7 +99,8 @@ class MediaForm extends RevisionableContentEntityForm {
 
     // Add a "Unpublish" button.
     $element['unpublish'] = $element['submit'];
-    // If the "Unpublish" button is clicked, we want to update the status to "unpublished".
+    // If the "Unpublish" button is clicked, we want to update the status to
+    // "unpublished".
     $element['unpublish']['#published_status'] = FALSE;
     $element['unpublish']['#dropbutton'] = 'save';
     if ($media->isNew()) {
@@ -143,7 +144,7 @@ class MediaForm extends RevisionableContentEntityForm {
    *
    * @see \Drupal\media\MediaForm::form()
    */
-  function updateStatus($entity_type_id, MediaInterface $media, array $form, FormStateInterface $form_state) {
+  public function updateStatus($entity_type_id, MediaInterface $media, array $form, FormStateInterface $form_state) {
     $element = $form_state->getTriggeringElement();
     if (isset($element['#published_status'])) {
       $media->setPublished($element['#published_status']);
