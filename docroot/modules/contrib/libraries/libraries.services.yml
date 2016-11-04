@@ -21,8 +21,7 @@ services:
     arguments:
       - '@http_client'
       - '@serialization.json'
-      # @todo Use a less "hidden" path, when available.
-      - 'http://cgit.drupalcode.org/sandbox-rjacobs-2761167/plain/registry'
+      - 'http://cgit.drupalcode.org/libraries_registry/plain/registry/8'
 
   plugin.manager.libraries.library_type:
     class: Drupal\libraries\ExternalLibrary\Type\LibraryTypeFactory

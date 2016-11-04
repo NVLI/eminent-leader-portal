@@ -5,5 +5,4 @@ definition:
     path: 'public://library-definitions'
   remote:
     enable: TRUE
-    # @todo Use a less "hidden" path, when available.
-    url: 'http://cgit.drupalcode.org/sandbox-rjacobs-2761167/plain/registry'
+    url: 'http://cgit.drupalcode.org/libraries_registry/plain/registry/8'
