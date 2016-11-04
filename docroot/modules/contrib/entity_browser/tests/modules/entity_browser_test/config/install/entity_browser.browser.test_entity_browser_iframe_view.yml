@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-name: test_entity_browser_iframe
-label: 'Test entity browser iframe'
+name: test_entity_browser_iframe_view
+label: 'Test entity browser iframe with view widget'
 display: iframe
 display_configuration:
   width: '650'
@@ -19,10 +19,12 @@ selection_display_configuration:
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  871dbf77-012e-41cb-b32a-ada353d2de35:
+  774798f1-5ec5-4b63-84bd-124cd51ec07d:
     settings:
-      upload_location: 'public://'
-    uuid: 871dbf77-012e-41cb-b32a-ada353d2de35
-    weight: 1
-    label: upload
-    id: upload
+      view: files_entity_browser
+      view_display: entity_browser_1
+      submit_text: 'Select entities'
+    uuid: 774798f1-5ec5-4b63-84bd-124cd51ec07d
+    weight: -10
+    label: view
+    id: view
