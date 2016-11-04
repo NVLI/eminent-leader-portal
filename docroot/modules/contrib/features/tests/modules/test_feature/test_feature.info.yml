@@ -6,8 +6,8 @@ package: Test
 dependencies:
   - features
 
-# Information added by Drupal.org packaging script on 2016-08-04
-version: '8.x-3.0-beta7'
+# Information added by Drupal.org packaging script on 2016-11-03
+version: '8.x-3.0'
 core: '8.x'
 project: 'features'
-datestamp: 1470337133
+datestamp: 1478188632
