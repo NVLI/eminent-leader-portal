@@ -82,10 +82,29 @@
       {{ title_suffix }}
 
       <div{{ content_attributes }}>
-
-            {{ content.field_resource }}
-
-        </section>
+        <div id="playlist" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner col-sm-8">
+            {{ content.field_play_list_story }}
+          </div>
+          <ul class="list-group col-sm-4">
+            {% for item in playlist %}
+              <li data-target="#playlist" data-slide-to="{{ loop.index0 }}" class="list-group-item {% if loop.index0 == 0 %} active {% endif %}">
+                <div class="exhibitions-icon">
+                {% if item.media_type == "audio" %}
+                  <img src="/themes/eminent_sardar/images/audio.png" class="img-responsive">
+                {% elseif item.media_type == "document" %}
+                  <img src="/themes/eminent_sardar/images/pdf.png" class="img-responsive">
+                {% elseif item.media_type == "video" %}
+                  <img src="/themes/eminent_sardar/images/video.png" class="img-responsive">
+                {% else %}
+                  {{ content.field_media_image }}
+                {% endif %}
+                </div>
+                <h4>{{ item.title }}</h4>
+              </li>
+            {% endfor %}
+            </ul>
+        </div>
       </div>
 
     </article>

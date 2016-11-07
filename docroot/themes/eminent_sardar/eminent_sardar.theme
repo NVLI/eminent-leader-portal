@@ -70,6 +70,28 @@ function eminent_sardar_preprocess_views_view(&$variables) {
 }
 
 /**
+* Implements hook_preprocess_node() .
+*/
+function eminent_sardar_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($node->getType() == 'play_list') {
+    $playlist = array();
+
+    foreach ($node->field_play_list_story as $item) {
+      // Access the paragraph entity like this:
+      $playlist['title'] = $item->entity->get('field_play_list_title')->value;
+      $media_entity_id = $item->entity->get('field_play_list_media_reference')->target_id;
+      $media_content = entity_load('media', $media_entity_id);
+      $playlist['media_type'] = $media_content->bundle();
+      
+      $variables['playlist'][] = $playlist;
+    }
+
+
+  }
+
+}
+/**
 * Implements hook_preprocess_node() for Media document templates.
 */
 function eminent_sardar_preprocess_media(&$variables) {
@@ -81,6 +103,7 @@ function eminent_sardar_preprocess_media(&$variables) {
   $media_id = $variables['elements']['#media']->id();
   $variables['media_id'] = $media_id;
 
+  $view_mode = $variables['elements']['#view_mode'];
 
   $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_id));
   $variables['media_url'] = $media_url;
@@ -93,52 +116,53 @@ function eminent_sardar_preprocess_media(&$variables) {
 
   $variables['feedback_form'] = $form;
 
-  if ($user->hasPermission('remove media from timeline')) {
-    // Load the Media Referred Timeline View.
-    $view = \Drupal\views\Views::getView('media_referred_timeline');
+  if($view_mode == 'default'){
+    if ($user->hasPermission('remove media from timeline')) {
+      // Load the Media Referred Timeline View.
+      $view = \Drupal\views\Views::getView('media_referred_timeline');
 
-    // Set the display machine id.
-    //$view->setDisplay('media_referred_timeline_block_1');
+      // Set the display machine id.
+      //$view->setDisplay('media_referred_timeline_block_1');
 
-    // Get the title.
-    $title = $view->getTitle();
+      // Get the title.
+      $title = $view->getTitle();
 
-    // Render.
-    $render = $view->render();
+      // Render.
+      $render = $view->render();
 
-    $the_title_render_array = [
-      '#markup' => t('@title', ['@title'=> $title]),
-      '#allowed_tags' => ['h2'],
-    ];
+      $the_title_render_array = [
+        '#markup' => t('@title', ['@title'=> $title]),
+        '#allowed_tags' => ['h2'],
+      ];
 
-    $variables['media_referred_timeline']['view_title'] = $the_title_render_array;
-    // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
-    $variables['media_referred_timeline']['view_output'] = $render;
+      $variables['media_referred_timeline']['view_title'] = $the_title_render_array;
+      // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
+      $variables['media_referred_timeline']['view_output'] = $render;
+    }
+    if ($user->hasPermission('remove media from playlist')) {
+      // Load the Media Referred Playlist View.
+      $view = \Drupal\views\Views::getView('media_referred_playlist');
+
+      // Set the display machine id.
+      //$view->setDisplay('media_referred_timeline_block_1');
+
+      // Get the title.
+      $title = $view->getTitle();
+
+      // Render.
+      $render = $view->render();
+
+      $the_title_render_array = [
+        '#markup' => t('@title', ['@title'=> $title]),
+        '#allowed_tags' => ['h2'],
+      ];
+
+      $variables['media_referred_playlist']['view_title'] = $the_title_render_array;
+      // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
+      $variables['media_referred_playlist']['view_output'] = $render;
+
+    }
   }
-  if ($user->hasPermission('remove media from playlist')) {
-    // Load the Media Referred Playlist View.
-    $view = \Drupal\views\Views::getView('media_referred_playlist');
-
-    // Set the display machine id.
-    //$view->setDisplay('media_referred_timeline_block_1');
-
-    // Get the title.
-    $title = $view->getTitle();
-
-    // Render.
-    $render = $view->render();
-
-    $the_title_render_array = [
-      '#markup' => t('@title', ['@title'=> $title]),
-      '#allowed_tags' => ['h2'],
-    ];
-
-    $variables['media_referred_playlist']['view_title'] = $the_title_render_array;
-    // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
-    $variables['media_referred_playlist']['view_output'] = $render;
-
-  }
-
   // Fetch the media type.
   $variables['media_type'] = $variables['elements']['#media']->bundle();
 
@@ -364,19 +388,22 @@ function eminent_sardar_preprocess_page(&$variables) {
  */
 function eminent_sardar_preprocess_paragraph(&$variables) {
   $paragraph = $variables['elements']['#paragraph'];
-  $media_entity_id = $paragraph->get('field_time_line_media_reference')->target_id;;
-  $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
-  $media_content = entity_load('media', $media_entity_id);
-  $media_image_url = NULL;
-  if ($media_content->bundle() == "image") {
-    $image = $media_content->field_media_image->target_id;
-    $file = File::load($image);
-    if (!empty($file)) {
-      $media_image_url = ImageStyle::load('timeline_image')->buildUrl($file->getFileUri());
+  if($paragraph->getType() == 'time_line_story'){
+    $media_entity_id = $paragraph->get('field_time_line_media_reference')->target_id;
+    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
+    $media_content = entity_load('media', $media_entity_id);
+    $media_image_url = NULL;
+    if ($media_content->bundle() == "image") {
+      $image = $media_content->field_media_image->target_id;
+      $file = File::load($image);
+      if (!empty($file)) {
+        $media_image_url = ImageStyle::load('timeline_image')->buildUrl($file->getFileUri());
+      }
     }
+    $variables['media_url'] = $media_url;
+    $variables['media_image_url'] = $media_image_url;
   }
-  $variables['media_url'] = $media_url;
-  $variables['media_image_url'] = $media_image_url;
+
 }
 
 /**

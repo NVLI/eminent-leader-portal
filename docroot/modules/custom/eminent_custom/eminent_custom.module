@@ -38,6 +38,25 @@ function eminent_custom_paragraph_presave(EntityInterface $entity) {
       $entity->field_time_line_date->setValue($date);
     }
   }
+  if ($entity_type == "play_list_story") {
+    $play_list_story = $entity->get('field_play_list_media_reference')->target_id;
+    $play_list_story_title = $entity->get('field_play_list_title')->value;
+    $play_list_story_description = $entity->get('field_play_list_description')->value;
+    $media = entity_load('media', $play_list_story);
+    $media_type = $media->getType();
+    $title = $media->get('name')->value;
+    $description = $media->get('field_dc_description')->value;
+    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $play_list_story));
+    $media_url = \Drupal::l($title, $media_url);
+    if ($play_list_story_title == '') {
+      $entity->field_play_list_title->setValue($title);
+    }
+    if ($play_list_story_description == '') {
+      $entity->field_play_list_description->setValue($description);
+    }
+    // If from media checkbox is checked for paragraph, save the data
+    // from entity, into the time line.
+  }
 }
 
 /**
