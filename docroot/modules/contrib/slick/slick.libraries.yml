@@ -7,7 +7,7 @@ slick.mousewheel:
     gpl-compatible: true
   version: 3.1.11
   js:
-    /libraries/mousewheel/jquery.mousewheel.min.js: { weight: -4 }
+    /libraries/mousewheel/jquery.mousewheel.min.js: { weight: -4, minified: true }
   dependencies:
     - core/jquery
 
@@ -19,7 +19,7 @@ slick.easing:
     gpl-compatible: true
   version: 1.3
   js:
-    /libraries/easing/jquery.easing.min.js: { weight: -4 }
+    /libraries/easing/jquery.easing.min.js: { weight: -4, minified: true }
   dependencies:
     - core/jquery
 
@@ -31,7 +31,7 @@ slick:
     url: https://github.com/kenwheeler/slick/blob/master/LICENSE
     gpl-compatible: true
   js:
-    /libraries/slick/slick/slick.min.js: { weight: -3 }
+    /libraries/slick/slick/slick.min.js: { weight: -3, minified: true }
   css:
     base:
       /libraries/slick/slick/slick.css: {}
@@ -42,7 +42,7 @@ slick:
 slick.load:
   version: VERSION
   js:
-    js/slick.load.min.js: { weight: 0 }
+    js/slick.load.min.js: { weight: 0, minified: true }
   dependencies:
     - core/drupal
     - core/drupalSettings
@@ -85,7 +85,7 @@ slick.arrow.down:
 slick.colorbox:
   version: VERSION
   js:
-    js/slick.colorbox.min.js: {}
+    js/slick.colorbox.min.js: { minified: true }
   dependencies:
     - blazy/colorbox.skin
     - slick/slick.load

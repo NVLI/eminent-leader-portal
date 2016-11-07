@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\SlickFormatter.
- */
-
 namespace Drupal\slick;
 
 use Drupal\slick\Entity\Slick;
@@ -28,23 +23,28 @@ class SlickFormatter extends BlazyFormatterManager implements SlickFormatterInte
 
     parent::buildSettings($build, $items);
 
-    $optionset_name             = $settings['optionset'] ?: 'default';
-    $build['optionset']         = Slick::load($optionset_name);
-    $settings['nav']            = !empty($settings['optionset_thumbnail']) && isset($items[1]);
+    $optionset_name     = $settings['optionset'] ?: 'default';
+    $build['optionset'] = Slick::load($optionset_name);
 
-    // Do not bother for SlickTextFormatter or when vanilla is on.
-    // @todo simplify this.
+    if (!isset($settings['nav'])) {
+      $settings['nav'] = !empty($settings['optionset_thumbnail']) && isset($items[1]);
+    }
+
+    // Do not bother for SlickTextFormatter, or when vanilla is on.
     if (empty($settings['vanilla'])) {
-      $noresimage                 = empty($settings['responsive_image_style']);
-      $lazy                       = $noresimage ? $build['optionset']->getSetting('lazyLoad') : '';
-      $blazy                      = $lazy == 'blazy' || $settings['theme_hook_image'] == 'blazy';
+      $resimage          = !empty($settings['responsive_image_style']);
+      $lazy              = $build['optionset']->getSetting('lazyLoad');
+      $lazy              = ($this->configLoad('responsive_image') && $resimage) ? 'blazy' : $lazy;
+      $settings['blazy'] = $lazy == 'blazy' || !empty($settings['blazy']);
+      $settings['lazy']  = $settings['blazy'] ? 'blazy' : $lazy;
 
-      $settings['lazy']           = !$blazy && $items->count() == 1 ? '' : $lazy;
-      $settings['blazy']          = $blazy || !empty($settings['blazy']);
-      $settings['lazy']           = $settings['blazy'] ? 'blazy' : $settings['lazy'];
-
-      $settings['lazy_attribute'] = $settings['blazy'] ? 'src' : 'lazy';
-      $settings['lazy_class']     = $settings['blazy'] ? 'b-lazy' : 'lazy';
+      if (!$settings['blazy']) {
+        $settings['lazy_class'] = $settings['lazy_attribute'] = 'lazy';
+      }
+    }
+    else {
+      // Nothings to work with Vanilla on, disable the asnavfor.
+      $settings['nav'] = FALSE;
     }
   }
 
@@ -52,17 +52,17 @@ class SlickFormatter extends BlazyFormatterManager implements SlickFormatterInte
    * Gets the thumbnail image.
    */
   public function getThumbnail($settings = []) {
-    if (empty($settings['uri'])) {
-      return [];
-    }
-    $thumbnail = [
-      '#theme'      => 'image_style',
-      '#style_name' => $settings['thumbnail_style'],
-      '#uri'        => $settings['uri'],
-    ];
+    $thumbnail = [];
+    if (!empty($settings['uri'])) {
+      $thumbnail = [
+        '#theme'      => 'image_style',
+        '#style_name' => $settings['thumbnail_style'],
+        '#uri'        => $settings['uri'],
+      ];
 
-    foreach (['height', 'width', 'alt', 'title'] as $data) {
-      $thumbnail["#$data"] = isset($settings[$data]) ? $settings[$data] : NULL;
+      foreach (['height', 'width', 'alt', 'title'] as $data) {
+        $thumbnail["#$data"] = isset($settings[$data]) ? $settings[$data] : NULL;
+      }
     }
     return $thumbnail;
   }

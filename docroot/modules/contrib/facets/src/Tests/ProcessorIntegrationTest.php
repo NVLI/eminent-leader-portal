@@ -2,6 +2,8 @@
 
 namespace Drupal\facets\Tests;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Tests the processor functionality.
  *
@@ -30,6 +32,25 @@ class ProcessorIntegrationTest extends WebTestBase {
     $this->assertEqual($this->indexItems($this->indexId), 5, '5 items were indexed.');
     $this->insertExampleContent();
     $this->assertEqual($this->indexItems($this->indexId), 5, '5 items were indexed.');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function installModulesFromClassProperty(ContainerInterface $container) {
+    // This will just set the Drupal state to include the necessary bundles for
+    // our test entity type. Otherwise, fields from those bundles won't be found
+    // and thus removed from the test index. (We can't do it in setUp(), before
+    // calling the parent method, since the container isn't set up at that
+    // point.)
+    $bundles = array(
+      'entity_test_mulrev_changed' => array('label' => 'Entity Test Bundle'),
+      'item' => array('label' => 'item'),
+      'article' => array('label' => 'article'),
+    );
+    \Drupal::state()->set('entity_test_mulrev_changed.bundles', $bundles);
+
+    parent::installModulesFromClassProperty($container);
   }
 
   /**
@@ -242,9 +263,8 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->assertText('Displaying 10 search results');
-    $this->assertRaw('grape <span class="facet-count">(6)');
-    $this->assertNoText('apple (4)');
-    $this->assertNoRaw('apple <span class="facet-count">(4)');
+    $this->assertFacetLabel('grape (6)');
+    $this->assertNoText('apple');
 
     $form = [
       'widget_config[show_numbers]' => TRUE,
@@ -256,8 +276,8 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->assertText('Displaying 10 search results');
-    $this->assertNoText('grape (6)');
-    $this->assertText('apple (4)');
+    $this->assertNoText('grape');
+    $this->assertFacetLabel('apple (4)');
 
     $form = [
       'widget_config[show_numbers]' => FALSE,
@@ -310,11 +330,11 @@ class ProcessorIntegrationTest extends WebTestBase {
   protected function checkHideNonNarrowingProcessor() {
     $this->drupalGet('search-api-test-fulltext');
     $this->assertText('Displaying 10 search results');
-    $this->assertLink('apple');
+    $this->assertFacetLabel('apple');
 
     $this->clickLink('apple');
     $this->assertText('Displaying 4 search results');
-    $this->assertLink('grape');
+    $this->assertFacetLabel('grape');
 
     $form = [
       'facet_settings[hide_non_narrowing_result_processor][status]' => TRUE,
@@ -323,7 +343,7 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->assertText('Displaying 10 search results');
-    $this->assertLink('apple');
+    $this->assertFacetLabel('apple');
 
     $this->clickLink('apple');
     $this->assertText('Displaying 4 search results');
@@ -346,13 +366,13 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->assertText('Displaying 10 search results');
-    $this->assertLink('grape');
-    $this->assertLink('banana');
+    $this->assertFacetLabel('grape');
+    $this->assertFacetLabel('banana');
 
     $this->clickLink('grape');
     $this->assertText('Displaying 6 search results');
     $this->assertNoLink('grape');
-    $this->assertLink('banana');
+    $this->assertFacetLabel('banana');
 
     $form = [
       'facet_settings[hide_active_items_processor][status]' => FALSE,
@@ -373,7 +393,7 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->clickLink('strawberry');
-    $this->assertStringPosition('<span class="js-facet-deactivate">(-)</span> strawberry', 'grape');
+    $this->assertStringPosition('strawberry', 'grape');
 
     $form = [
       'facet_sorting[active_widget_order][status]' => TRUE,
@@ -383,7 +403,7 @@ class ProcessorIntegrationTest extends WebTestBase {
 
     $this->drupalGet('search-api-test-fulltext');
     $this->clickLink('strawberry');
-    $this->assertStringPosition('grape', '<span class="js-facet-deactivate">(-)</span> strawberry');
+    $this->assertStringPosition('grape', 'strawberry');
 
     $form = [
       'facet_sorting[active_widget_order][status]' => FALSE,

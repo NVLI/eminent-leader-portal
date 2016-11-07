@@ -20,11 +20,9 @@
   ]
 %}
 
-{% spaceless %}
 <div{{ attributes.addClass(classes) }}>
   {{ item.slide }}
   {% if item.caption is not empty %}
     <div class="slide__caption">{{ item.caption }}</div>
   {% endif %}
 </div>
-{% endspaceless %}

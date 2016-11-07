@@ -1,4 +1,4 @@
-name: Slick views
+name: Slick Views
 type: module
 description: 'Provides Slick carousel integration with Views.'
 # version: VERSION
@@ -9,8 +9,8 @@ dependencies:
   - slick
   - views
 
-# Information added by Drupal.org packaging script on 2016-05-09
-version: '8.x-1.0-beta2'
+# Information added by Drupal.org packaging script on 2016-09-29
+version: '8.x-1.0-beta4'
 core: '8.x'
 project: 'slick_views'
-datestamp: 1462832048
+datestamp: 1475150084

@@ -5,10 +5,10 @@ description: "Slick carousel, the last carousel you'll ever need."
 # core: 8.x
 package: Slick
 dependencies:
-  - blazy
+  - blazy:blazy
 
-# Information added by Drupal.org packaging script on 2016-05-09
-version: '8.x-1.0-beta2'
+# Information added by Drupal.org packaging script on 2016-09-29
+version: '8.x-1.0-beta4'
 core: '8.x'
 project: 'slick'
-datestamp: 1462831456
+datestamp: 1475149626

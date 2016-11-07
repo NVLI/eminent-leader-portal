@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick_ui\Controller\SlickListBuilder.
- */
-
 namespace Drupal\slick_ui\Controller;
 
 use Drupal\Component\Utility\Html;
@@ -70,6 +65,7 @@ class SlickListBuilder extends DraggableListBuilder {
       'label'       => t('Optionset'),
       'breakpoints' => t('Breakpoints'),
       'group'       => t('Group'),
+      'lazyload'    => t('Lazyload'),
       'skin'        => t('Skin'),
     );
 
@@ -85,7 +81,8 @@ class SlickListBuilder extends DraggableListBuilder {
 
     $row['label'] = Html::escape($this->getLabel($entity));
     $row['breakpoints']['#markup'] = $entity->getBreakpoints();
-    $row['group']['#markup'] = $entity->getGroup()?: t('all');
+    $row['group']['#markup'] = $entity->getGroup() ?: t('All');
+    $row['lazyload']['#markup'] = $entity->getSetting('lazyLoad') ?: t('None');
     $row['skin']['#markup'] = Html::escape($skin);
 
     // Has to do this separately as concat with HTML tag is no joy.

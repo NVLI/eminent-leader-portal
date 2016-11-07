@@ -21,11 +21,11 @@
 {%
   set item_classes = [
     not settings.unslick ? 'slide__grid',
-    'grid'
+    'grid',
+    settings.type ? 'grid--' ~ settings.type|clean_class,
   ]
 %}
-{{ kint(settings) }}
-{% spaceless %}
+
 <ul{{ attributes.addClass(classes) }}>
   {% for delta, item in items %}
     <li{{ item.attributes.addClass(item_classes, 'grid--' ~ delta) }}>
@@ -35,4 +35,4 @@
     </li>
   {% endfor %}
 </ul>
-{% endspaceless %}
+

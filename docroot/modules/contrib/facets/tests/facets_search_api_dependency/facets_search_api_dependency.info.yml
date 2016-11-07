@@ -5,13 +5,12 @@ package: 'Search'
 # core: 8.x
 hidden: true
 dependencies:
-  - rest
   - search_api:search_api
   - search_api:search_api_test_db
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2016-08-24
-version: '8.x-1.0-alpha4+11-dev'
+# Information added by Drupal.org packaging script on 2016-10-07
+version: '8.x-1.0-alpha6'
 core: '8.x'
 project: 'facets'
-datestamp: 1472060341
+datestamp: 1475863440

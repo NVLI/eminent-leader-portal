@@ -210,6 +210,7 @@ class FacetSettingsForm extends EntityForm {
         'exists' => [$this->facetStorage, 'load'],
         'source' => ['name'],
       ],
+      '#disabled' => !$facet->isNew(),
     ];
   }
 

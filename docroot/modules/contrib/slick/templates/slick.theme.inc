@@ -19,16 +19,18 @@ function template_preprocess_slick(&$variables) {
   $customs   = isset($element['#options']) ? $element['#options'] : [];
   $optionset = isset($element['#optionset']) ? $element['#optionset'] : Slick::load($settings['optionset']);
   $js        = $customs ? array_merge($optionset->getSettings(), $customs) : $optionset->getSettings();
-  $display   = $variables['display'] = $settings['display'];
+
+  if (isset($variables['settings'])) {
+    $settings = array_merge($settings, $variables['settings']);
+  }
 
   // Prepare attributes.
   $attributes = &$variables['attributes'];
   $content_attributes = new Attribute();
+  $display = $variables['display'] = $settings['display'];
 
-  if (!isset($attributes['id'])) {
-    $id = empty($settings['id']) ? Slick::getHtmlId('slick') : $settings['id'];
-    $attributes['id'] = $display == 'thumbnail' ? $id . '-thumbnail' : $id;
-  }
+  $id = empty($settings['id']) ? Slick::getHtmlId('slick') : $settings['id'];
+  $attributes['id'] = $display == 'thumbnail' ? $id . '-thumbnail' : $id;
 
   // Sniffs for Views to allow block__no_wrapper, views__no_wrapper, etc.
   if ($settings['view_name'] && $settings['current_view_mode']) {
@@ -47,7 +49,7 @@ function template_preprocess_slick(&$variables) {
   $settings['lazy'] = isset($settings['lazy']) ? $settings['lazy'] : $js['lazyLoad'];
 
   // Blazy can still lazyload an unslick.
-  if ($display != 'thumbnail' && $settings['lazy'] == 'blazy') {
+  if ($display != 'thumbnail' && ($settings['lazy'] == 'blazy' || !empty($settings['blazy']))) {
     $js['lazyLoad'] = 'blazy';
     $blazy = empty($settings['blazy_data']) ? [] : $settings['blazy_data'];
     $blazy['ratio'] = $settings['ratio'];
@@ -72,7 +74,7 @@ function template_preprocess_slick(&$variables) {
     }
 
     if ($js['rtl']) {
-      $content_attributes->setAttribute('dir', 'rtl');
+      $attributes['dir'] = 'rtl';
     }
 
     // Add the configuration as JSON object into the slick container.
@@ -90,15 +92,17 @@ function template_preprocess_slick(&$variables) {
   foreach ($element['#items'] as $delta => $item) {
     $settings['current_item'] = $display;
     $settings = isset($item['settings']) ? array_merge($settings, $item['settings']) : $settings;
-    unset($item['settings']);
+    $item_attributes = isset($item['attributes']) ? $item['attributes'] : [];
+    unset($item['settings'], $item['attributes']);
 
     $theme = $settings['vanilla'] ? 'vanilla' : ($display == 'thumbnail' ? 'thumbnail' : 'slide');
 
     $slide = [
-      '#theme'    => 'slick_' . $theme,
-      '#item'     => $item,
-      '#delta'    => $delta,
-      '#settings' => $settings,
+      '#theme'      => 'slick_' . $theme,
+      '#item'       => $item,
+      '#delta'      => $delta,
+      '#settings'   => $settings,
+      '#attributes' => $item_attributes,
     ];
     $variables['items'][$delta] = $slide;
     unset($slide);
@@ -158,7 +162,7 @@ function template_preprocess_slick_slide(&$variables) {
   // wrapper: Don't add divities for a single item to have clean markups.
   $item['slide']         = isset($item['slide']) ? $item['slide'] : [];
   $item['caption']       = array_filter($item['caption']);
-  $settings['split']     = !empty($item) && $settings['caption'];
+  $settings['split']     = !empty($item) && !empty($settings['caption']);
   $settings['data']      = !empty($item['caption']['alt']) || !empty($item['caption']['title']) || !empty($item['caption']['data']);
   $settings['fullwidth'] = !empty($settings['skin']) && strpos($settings['skin'], 'full') !== FALSE;
   $settings['detroy']    = $settings['current_item'] == 'main' && !empty($settings['grid']) && !empty($settings['unslick']);

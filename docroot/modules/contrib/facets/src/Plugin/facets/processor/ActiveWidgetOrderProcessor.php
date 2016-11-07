@@ -2,7 +2,6 @@
 
 namespace Drupal\facets\Plugin\facets\processor;
 
-
 use Drupal\facets\Processor\SortProcessorPluginBase;
 use Drupal\facets\Processor\SortProcessorInterface;
 use Drupal\facets\Result\Result;

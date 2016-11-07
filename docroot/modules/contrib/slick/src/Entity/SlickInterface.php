@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\Entity\SlickInterface.
- */
-
 namespace Drupal\slick\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;

@@ -28,6 +28,7 @@
       var $default_option = $('<option />')
         .attr('value', '')
         .text(default_option_label);
+      $dropdown.append($default_option);
 
       var has_active = false;
       $links.each(function () {
@@ -56,7 +57,6 @@
       if (!has_active) {
         $default_option.attr('selected', 'selected');
       }
-      $dropdown.prepend($default_option);
 
       // Append dropdown.
       $(this).html($dropdown);

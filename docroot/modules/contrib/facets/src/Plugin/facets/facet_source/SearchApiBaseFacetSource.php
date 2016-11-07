@@ -64,7 +64,7 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
       '#type' => 'select',
       '#options' => $this->getFields(),
       '#title' => $this->t('Field'),
-      '#description' => $this->t('The field from the selected facet source which contains the data to build a facet for.'),
+      '#description' => $this->t('The field from the selected facet source which contains the data to build a facet for.<br> The field types supported are <strong>boolean</strong>, <strong>date</strong>, <strong>decimal</strong>, <strong>integer</strong> and <strong>string</strong>.'),
       '#required' => TRUE,
       '#default_value' => $this->facet->getFieldIdentifier(),
     ];
@@ -78,11 +78,19 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
   public function getFields() {
     $indexed_fields = [];
     $fields = $this->index->getFields();
+    // Get the Search API Server.
+    $server = $this->index->getServerInstance();
+    // Get the Search API Backend.
+    $backend = $server->getBackend();
     foreach ($fields as $field) {
-      $indexed_fields[$field->getFieldIdentifier()] = $field->getLabel() . ' (' . $field->getPropertyPath() . ')';
+      $query_types = $this->getQueryTypesForDataType($backend, $field->getDataTypePlugin()->getPluginId());
+      if (!empty($query_types)) {
+        $indexed_fields[$field->getFieldIdentifier()] = $field->getLabel() . ' (' . $field->getPropertyPath() . ')';
+      }
     }
     return $indexed_fields;
   }
+
 
   /**
    * {@inheritdoc}
@@ -133,7 +141,6 @@ abstract class SearchApiBaseFacetSource extends FacetSourcePluginBase {
       case 'decimal':
       case 'integer':
       case 'string':
-      case 'text':
         $query_types['string'] = 'search_api_string';
         break;
     }

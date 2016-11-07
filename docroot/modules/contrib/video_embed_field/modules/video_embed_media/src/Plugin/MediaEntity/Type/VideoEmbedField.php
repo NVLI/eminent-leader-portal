@@ -47,9 +47,11 @@ class VideoEmbedField extends MediaTypeBase {
    * {@inheritdoc}
    */
   public function thumbnail(MediaInterface $media) {
-    $provider = $this->loadProvider($media);
-    $provider->downloadThumbnail();
-    return $provider->getLocalThumbnailUri();
+    if ($provider = $this->loadProvider($media)) {
+      $provider->downloadThumbnail();
+      return $provider->getLocalThumbnailUri();
+    }
+    return $this->getDefaultThumbnail();
   }
 
   /**
@@ -121,7 +123,10 @@ class VideoEmbedField extends MediaTypeBase {
    * {@inheritdoc}
    */
   public function getDefaultName(MediaInterface $media) {
-    return $this->loadProvider($media)->getName();
+    if ($provider = $this->loadProvider($media)) {
+      return $this->loadProvider($media)->getName();
+    }
+    return parent::getDefaultThumbnail();
   }
 
   /**

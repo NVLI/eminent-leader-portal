@@ -29,14 +29,29 @@ class UidToUserNameCallbackProcessorTest extends UnitTestCase {
     parent::setUp();
 
     $this->processor = new UidToUserNameCallbackProcessor([], 'uid_to_username_callback', []);
-
-    $this->createMocks();
   }
 
   /**
    * Tests that results were correctly changed.
    */
   public function testResultsChanged() {
+    $user_storage = $this->getMock('\Drupal\Core\Entity\EntityStorageInterface');
+    $entity_manager = $this->getMock('\Drupal\Core\Entity\EntityManagerInterface');
+    $entity_manager->expects($this->any())
+      ->method('getStorage')
+      ->willReturn($user_storage);
+
+    $user1 = $this->getMock('\Drupal\Core\Session\AccountInterface');
+    $user1->method('getDisplayName')
+      ->willReturn('Admin');
+
+    $user_storage->method('load')
+      ->willReturn($user1);
+
+    $container = new ContainerBuilder();
+    $container->set('entity.manager', $entity_manager);
+    \Drupal::setContainer($container);
+
     $original_results = [
       new Result(1, 1, 5),
     ];
@@ -62,25 +77,32 @@ class UidToUserNameCallbackProcessorTest extends UnitTestCase {
   }
 
   /**
-   * Creates and sets up the container to be used in tests.
+   * Tests that deleted entity results were correctly handled.
    */
-  protected function createMocks() {
+  public function testDeletedEntityResults() {
     $user_storage = $this->getMock('\Drupal\Core\Entity\EntityStorageInterface');
     $entity_manager = $this->getMock('\Drupal\Core\Entity\EntityManagerInterface');
     $entity_manager->expects($this->any())
       ->method('getStorage')
       ->willReturn($user_storage);
 
-    $user1 = $this->getMock('\Drupal\Core\Session\AccountInterface');
-    $user1->method('getDisplayName')
-      ->willReturn('Admin');
-
     $user_storage->method('load')
-      ->willReturn($user1);
+      ->willReturn(NULL);
 
     $container = new ContainerBuilder();
     $container->set('entity.manager', $entity_manager);
     \Drupal::setContainer($container);
+
+    $original_results = [
+      new Result(1, 1, 5),
+    ];
+
+    $facet = new Facet([], 'facets_facet');
+    $facet->setResults($original_results);
+
+    $filtered_results = $this->processor->build($facet, $original_results);
+
+    $this->assertEmpty($filtered_results);
   }
 
   /**

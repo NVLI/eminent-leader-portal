@@ -39,7 +39,6 @@
   {% endif %}
 {% endset %}
 
-{% spaceless %}
 {% if settings.wrapper %}
   <div{{ attributes.addClass(classes) }}>
   {% if settings.grid is empty %}<div{{ content_attributes.addClass(content_classes) }}>{% endif %}
@@ -80,4 +79,3 @@
   {% if settings.grid is empty %}</div>{% endif %}
   </div>
 {% endif %}
-{% endspaceless %}

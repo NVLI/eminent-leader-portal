@@ -82,8 +82,8 @@ class TranslateEntityProcessor extends ProcessorPluginBase implements BuildProce
     $ids = [];
 
     /** @var \Drupal\facets\Result\ResultInterface $result */
-    foreach ($results as $result) {
-      $ids[] = $result->getRawValue();
+    foreach ($results as $delta => $result) {
+      $ids[$delta] = $result->getRawValue();
     }
 
     // Default to nodes.

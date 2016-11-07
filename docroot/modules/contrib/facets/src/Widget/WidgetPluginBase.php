@@ -207,7 +207,8 @@ abstract class WidgetPluginBase extends PluginBase implements WidgetPluginInterf
   protected function buildResultItem(ResultInterface $result) {
     $count = $result->getCount();
     return [
-      '#theme' => $result->isActive() ? 'facets_result_item_active' : 'facets_result_item',
+      '#theme' => 'facets_result_item',
+      '#is_active' => $result->isActive(),
       '#value' => $result->getDisplayValue(),
       '#show_count' => $this->getConfiguration()['show_numbers'] && ($count !== NULL),
       '#count' => $count,

@@ -2,11 +2,11 @@
 
 namespace Drupal\facets\FacetSource;
 
-
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\search_api\Display\DisplayPluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -31,18 +31,31 @@ abstract class FacetSourceDeriverBase implements ContainerDeriverInterface {
   protected $entityTypeManager;
 
   /**
+   * The search api display plugin manager.
+   *
+   * @var \Drupal\search_api\Display\DisplayPluginManager
+   */
+  protected $searchApiDisplayPluginManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, $base_plugin_id) {
     $deriver = new static();
 
-    /** @var \Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
+    $module_list = $container->get('module_handler')->getModuleList();
+    if (!in_array('search_api', array_keys($module_list))) {
+      return;
+    }
+
     $entity_type_manager = $container->get('entity_type.manager');
     $deriver->setEntityTypeManager($entity_type_manager);
 
-    /** @var \Drupal\Core\StringTranslation\TranslationInterface $translation */
     $translation = $container->get('string_translation');
     $deriver->setStringTranslation($translation);
+
+    $search_api_display_plugin_manager = $container->get('plugin.manager.search_api.display');
+    $deriver->setSearchApiDisplayPluginManager($search_api_display_plugin_manager);
 
     return $deriver;
   }
@@ -93,6 +106,26 @@ abstract class FacetSourceDeriverBase implements ContainerDeriverInterface {
    */
   public function compareDerivatives(array $a, array $b) {
     return strnatcasecmp($a['label'], $b['label']);
+  }
+
+  /**
+   * Sets search api's display plugin manager.
+   *
+   * @param \Drupal\search_api\Display\DisplayPluginManager $search_api_display_plugin_manager
+   *   The plugin manager.
+   */
+  public function setSearchApiDisplayPluginManager(DisplayPluginManager $search_api_display_plugin_manager) {
+    $this->searchApiDisplayPluginManager = $search_api_display_plugin_manager;
+  }
+
+  /**
+   * Returns the display plugin manager.
+   *
+   * @return \Drupal\search_api\Display\DisplayPluginManager
+   *   The plugin manager.
+   */
+  public function getSearchApiDisplayPluginManager() {
+    return $this->searchApiDisplayPluginManager;
   }
 
 }

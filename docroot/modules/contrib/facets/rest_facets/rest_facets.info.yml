@@ -1,0 +1,16 @@
+name: 'Rest Facets'
+type: module
+description: 'Adds facets to rest views based on a Search API index'
+# core: 8.x
+package: Search
+test_dependencies:
+  - search_api:search_api
+  - facets:facets
+  - drupal:views
+  - drupal:rest
+
+# Information added by Drupal.org packaging script on 2016-10-07
+version: '8.x-1.0-alpha6'
+core: '8.x'
+project: 'facets'
+datestamp: 1475863440

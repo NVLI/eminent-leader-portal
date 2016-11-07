@@ -135,7 +135,7 @@ class FacetBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public function calculateDependencies() {
     // The ID saved in the configuration is of the format
     // 'base_plugin:facet_id'. We're splitting that to get to the facet ID.
-    $facet_mapping = $this->configuration['id'];
+    $facet_mapping = $this->getPluginId();
     $facet_id = explode(PluginBase::DERIVATIVE_SEPARATOR, $facet_mapping)[1];
 
     /** @var \Drupal\facets\FacetInterface $facet */

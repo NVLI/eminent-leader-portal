@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\features\FeaturesManagerInterface.
- */
-
 namespace Drupal\features;
 
 use Drupal\Core\Extension\Extension;
@@ -37,6 +32,14 @@ interface FeaturesManagerInterface {
    */
   const STATE_DEFAULT = 0;
   const STATE_OVERRIDDEN = 1;
+
+  /**
+   * Set the app.root.
+   *
+   * Should only be used by tests.
+   * @param string $root
+   */
+  public function setRoot($root);
 
   /**
    * Returns the active config store.
@@ -175,6 +178,21 @@ interface FeaturesManagerInterface {
   public function setPackage(Package $package);
 
   /**
+   * Load a specific package.
+   *
+   * Similar to getPackage but can also load modules that are not Features.
+   *
+   * @param string $module_name
+   *   Full machine name of module.
+   * @param bool $any
+   *   If TRUE then check for any module, not just a Features module.
+   *
+   * @return \Drupal\features\Package
+   *   Package data.
+   */
+  public function loadPackage($module_name, $any = FALSE);
+
+  /**
    * Filters the supplied package list by the given namespace.
    *
    * @param \Drupal\features\Package[] $packages
@@ -273,7 +291,7 @@ interface FeaturesManagerInterface {
    *   (optional) Bundle to use to add profile directories to the scan.
    * @param \Drupal\Core\Extension\Extension $extension
    *   (optional) An Extension object.
-   * @return array
+   * @return \Drupal\features\Package
    *   The created package array.
    */
   public function initPackage($machine_name, $name = NULL, $description = '', $type = 'module', FeaturesBundleInterface $bundle = NULL, Extension $extension = NULL);
@@ -512,7 +530,7 @@ interface FeaturesManagerInterface {
   public function getExportInfo(Package $package, FeaturesBundleInterface $bundle = NULL);
 
   /**
-   * Determines if the module is a Features package, optinally testing by
+   * Determines if the module is a Features package, optionally testing by
    * bundle.
    *
    * @param \Drupal\Core\Extension\Extension $module
@@ -602,5 +620,14 @@ interface FeaturesManagerInterface {
    * @return array
    */
   public function getFeaturesInfo(Extension $extension);
+
+  /**
+   * @param array $modules
+   *   An array of module names to import (revert)
+   * @return array
+   *   'new' array of new config names added
+   *   'updated' array of updated config names
+   */
+  public function import($modules);
 
 }

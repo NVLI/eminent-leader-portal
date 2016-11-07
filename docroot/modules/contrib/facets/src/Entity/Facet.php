@@ -484,11 +484,14 @@ class Facet extends ConfigEntityBase implements FacetInterface {
    * {@inheritdoc}
    */
   public function getFacetSource() {
-
     if (!$this->facet_source_instance && $this->facet_source_id) {
       /* @var $facet_source_plugin_manager \Drupal\facets\FacetSource\FacetSourcePluginManager */
       $facet_source_plugin_manager = \Drupal::service('plugin.manager.facets.facet_source');
-      $this->facet_source_instance = $facet_source_plugin_manager->createInstance($this->facet_source_id, ['facet' => $this]);
+      if (!$facet_source_plugin_manager->hasDefinition($this->facet_source_id)) {
+        return;
+      }
+      $this->facet_source_instance = $facet_source_plugin_manager
+        ->createInstance($this->facet_source_id, ['facet' => $this]);
     }
 
     return $this->facet_source_instance;
@@ -540,13 +543,13 @@ class Facet extends ConfigEntityBase implements FacetInterface {
       [
         'id' => $source_id,
         'name' => $this->facet_source_id,
+        'filter_key' => 'f',
+        'url_processor' => 'query_string',
       ],
       'facets_facet_source'
     );
-    $facet_source->save();
 
-    $this->facetSourceConfig = $facet_source;
-    return $this->facetSourceConfig;
+    return $facet_source;
   }
 
   /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\SlickManagerInterface.
- */
-
 namespace Drupal\slick;
 
 /**

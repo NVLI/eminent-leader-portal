@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\Form\SlickAdminInterface.
- */
-
 namespace Drupal\slick\Form;
 
 /**

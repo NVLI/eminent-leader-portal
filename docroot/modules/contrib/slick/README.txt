@@ -20,7 +20,7 @@ samples from slick_example [3] only if trouble to build slicks. Be sure to read
 its README.txt. Spending 5 minutes or so will save you hours in building more
 complex slideshows.
 
-The module supports Slick 1.5 above.
+The module supports Slick 1.6 above.
 Slick 2.x is just out 9/21/15, and hasn't been officially supported now, 9/27.
 
 [1] https://groups.drupal.org/node/20384
@@ -31,7 +31,7 @@ Slick 2.x is just out 9/21/15, and hasn't been officially supported now, 9/27.
 REQUIREMENTS
 --------------------------------------------------------------------------------
 - Slick library:
-  o Download Slick archive >= 1.5 from https://github.com/kenwheeler/slick/
+  o Download Slick archive >= 1.6 from https://github.com/kenwheeler/slick/
   o Extract it as is, rename "slick-master" to "slick", so the assets are at:
 
     /libraries/slick/slick/slick.css
@@ -49,7 +49,7 @@ REQUIREMENTS
   ahead for smoother UX.
 
   Important! Be sure to enable Blazy first before updating Slick Alphas,
-  otherwise a requirements error.
+  otherwise a requirement error.
 
 FEATURES
 --------------------------------------------------------------------------------
@@ -88,17 +88,20 @@ The Slick module has several sub-modules:
 
 - slick_video [2], to get video carousels using Video Embed Field.
 
-- slick_views [3], to get more complex slides.
+- slick_paragraphs [3], to get more complex slides at field level.
+
+- slick_views [4], to get more complex slides.
 
 - slick_devel, if you want to help testing and developing the Slick.
 - slick_example, to get up and running quickly.
-  Both are included in slick_extras [4].
+  Both are included in slick_extras [5].
 
 
 [1] http://dgo.to/slick_media
 [2] http://dgo.to/slick_media
-[3] http://dgo.to/slick_views
-[4] http://dgo.to/slick_extras
+[3] http://dgo.to/slick_paragraphs
+[4] http://dgo.to/slick_views
+[5] http://dgo.to/slick_extras
 
 
 
@@ -124,7 +127,7 @@ To create optionsets, go to:
   admin/config/media/slick
 
 Be sure to enable Slick UI sub-module first, otherwise regular "Access denied".
-These will be available at field formatter "Manage display", and Views UI.
+They will be available at field formatter "Manage display", and Views UI.
 
 
 VIEWS AND FIELDS
@@ -145,8 +148,8 @@ Nested slick is a parent Slick containing slides which contain individual child
 slick per slide. The child slicks are basically regular slide overlays like
 a single video over the large background image, only with nested slicks it can
 be many videos displayed as a slideshow as well.
-Use Views to build one.
-Supported multi-value fields for nested slicks: Image, Text, Media entity.
+Use Slick Paragraphs or Views to build one.
+Supported multi-value fields for nested slicks: Image, Text, VEF, Media entity.
 
 
 SKINS
@@ -182,17 +185,19 @@ Optional skins:
 - Full screen
   Works best with 1 slidesToShow. Use z-index layering > 8 to position elements
   over the slides, and place it at large regions. Currently only works with
-  Slick fields, use Views to make it a block. Use block_reference inside FC to
+  Slick fields, use Views to make it a block. Use Slick Paragraphs to
   have more complex contents inside individual slide, and assign it to Slide
   caption fields.
 
 - Full width
   Adds additional wrapper to wrap overlay video and captions properly.
   This is designated for large slider in the header or spanning width to window
-  edges at least 1170px width for large monitor.
+  edges at least 1170px width for large monitor. To have a custom full width
+  skin, simply prefix your skin with "full", e.g.: fullstage, fullwindow, etc.
 
 - Split
-  Caption and image/media are split half, and placed side by side.
+  Caption and image/media are split half, and placed side by side. This requires
+  any layout containing "split", otherwise useless.
 
 - Grid
   Only reasonable if you have considerable amount of slides.
@@ -213,6 +218,7 @@ normally < 0 (slick.load.min.js) is the one.
 
 Use hook_slick_skins_info() and implement \Drupal\slick\SlickSkinInterface
 to register ones. Clear the cache once.
+
 See slick.api.php for more info on skins.
 See \Drupal\slick\SlickSkinInterface.
 
@@ -241,6 +247,7 @@ To create Slick grid or multiple rows carousel, there are 3 options:
 
 The first 2 are supported by core library using pure JS approach.
 The last is the Module feature using pure CSS Foundation block-grid.
+
 The key is:
 The total amount of Views results must be bigger than Visible slides, otherwise
 broken Grid, see skin Grid above for more details.
@@ -282,7 +289,7 @@ For the Slick library bug, please report it to the actual library:
 You can create a fiddle to isolate the bug if reproduceable outside the module:
   http://jsfiddle.net/
 
-For the support requests, a screenshot of the output and Slick form is helpful.
+For the support requests, a screenshot of the output and Slick form are helpful.
 Shortly, you should kindly help the maintainers with detailed info to help you.
 Thanks.
 
@@ -349,10 +356,11 @@ some code cleanup, and optimization where needed. Patches are very much welcome.
 
 Alpha and Beta releases are for developers only. Be aware of possible breakage.
 
-Be sure to first update Blazy.
 However if it is broken, unless an update is explicitly required, clearing cache
-should fix most issues durig DEV phases. Prior to any update, always visit:
+should fix most issues during DEV phases. Prior to any update, always visit:
 /admin/config/development/performance
+
+Be sure to first update Blazy.
 
 
 ROADMAP

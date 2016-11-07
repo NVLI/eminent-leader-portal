@@ -249,6 +249,9 @@ class QueryStringTest extends UnitTestCase {
       ->getMock();
     $manager->method('createInstance')
       ->willReturn($fsi);
+    $manager->method('hasDefinition')
+      ->with('facet_source__dummy')
+      ->willReturn(TRUE);
 
     $storage = $this->getMock('\Drupal\Core\Entity\EntityStorageInterface');
     $em = $this->getMockBuilder('\Drupal\Core\Entity\EntityTypeManagerInterface')

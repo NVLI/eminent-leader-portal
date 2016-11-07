@@ -2,7 +2,6 @@
 
 namespace Drupal\facets\Processor;
 
-
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\facets\FacetInterface;

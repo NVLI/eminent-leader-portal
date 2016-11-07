@@ -7,8 +7,15 @@
  * - value: The item value.
  * - show_count: If this facet provides count.
  * - count: The amount of results.
+ * - is_active: The item is active.
  *
  * @ingroup themeable
  */
 #}
-{{ value }} {% if show_count %}<span class="facet-count">({{ count }})</span>{% endif %}
+{% if is_active %}
+  <span class="facet-item__status js-facet-deactivate">(-)</span>
+{% endif %}
+<span class="facet-item__value">{{ value }}</span>
+{% if show_count %}
+  <span class="facet-item__count">({{ count }})</span>
+{% endif %}

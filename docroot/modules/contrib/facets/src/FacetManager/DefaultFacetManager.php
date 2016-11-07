@@ -268,7 +268,7 @@ class DefaultFacetManager {
       // is not available on the page. Returning an empty array here is enough
       // to halt all further processing.
       $facet_source = $facet->getFacetSource();
-      if (!$facet_source->isRenderedInCurrentRequest()) {
+      if (is_null($facet_source) || !$facet_source->isRenderedInCurrentRequest()) {
         return [];
       }
     }
@@ -317,7 +317,18 @@ class DefaultFacetManager {
     if (empty($facet->getResults())) {
       $empty_behavior = $facet->getEmptyBehavior();
       if ($empty_behavior['behavior'] == 'text') {
-        return [['#markup' => $empty_behavior['text']]];
+        return [
+          [
+            '#type' => 'container',
+            '#attributes' => [
+              'data-drupal-facet-id' => $facet->id(),
+              'class' => 'facet-empty',
+            ],
+            'empty_text' => [
+              '#markup' => t($empty_behavior['text']),
+            ],
+          ],
+        ];
       }
       else {
         return [];

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick_ui\Form\SlickFormBase.
- */
-
 namespace Drupal\slick_ui\Form;
 
 use Drupal\Core\Url;
@@ -117,7 +112,7 @@ abstract class SlickFormBase extends EntityForm {
 
     $form['breakpoints'] = [
       '#title'         => $this->t('Breakpoints'),
-      '#type'          => 'number',
+      '#type'          => 'textfield',
       '#default_value' => $form_state->hasValue('breakpoints') ? $form_state->getValue('breakpoints') : $slick->getBreakpoints(),
       '#description'   => $this->t('The number of breakpoints added to Responsive display, max 9. This is not Breakpoint Width (480px, etc).'),
       '#suffix'        => '</div>',

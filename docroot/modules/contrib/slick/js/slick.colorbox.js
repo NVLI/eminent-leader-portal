@@ -40,6 +40,10 @@
         var empty = [];
         var curr;
         var runtimeOptions = {
+          title: function () {
+            var $caption = t.next('.litebox-caption');
+            return $caption.length ? $caption.html() : '';
+          },
           iframe: isMedia,
           rel: media.rel || null,
           onOpen: function () {
@@ -100,9 +104,9 @@
         Drupal.slickColorbox.resize();
       });
 
-      $(context).on('cbox_complete', function () {
-        Drupal.attachBehaviors('#cboxLoadedContent');
-      });
+      // $(context).on('cbox_complete', function () {
+      // Drupal.attachBehaviors('#cboxLoadedContent');
+      // });
     }
   };
 

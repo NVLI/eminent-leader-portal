@@ -6,6 +6,12 @@ common:
     - core/underscore
     - core/drupal.dialog.ajax
 
+entity_browser:
+  version: VERSION
+  css:
+    theme:
+      css/entity_browser.entity_browser.css: {}
+
 entity_list:
   version: VERSION
   css:
@@ -14,6 +20,9 @@ entity_list:
 
 iframe:
   version: VERSION
+  css:
+    theme:
+      css/entity_browser.iframe.css: {}
   js:
     js/entity_browser.iframe.js: {}
   dependencies:
@@ -27,6 +36,7 @@ iframe_selection:
     js/entity_browser.iframe_selection.js: {}
   dependencies:
     - core/drupalSettings
+    - core/jquery
 
 entity_reference:
   version: VERSION
@@ -36,6 +46,12 @@ entity_reference:
     - entity_browser/common
     - entity_browser/entity_list
     - core/jquery.ui.sortable
+
+file_browser:
+  version: VERSION
+  css:
+    component:
+      css/entity_browser.file_browser.css: {}
 
 modal:
   version: VERSION

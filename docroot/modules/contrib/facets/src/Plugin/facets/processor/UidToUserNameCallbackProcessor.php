@@ -25,16 +25,18 @@ class UidToUserNameCallbackProcessor extends ProcessorPluginBase implements Buil
    * {@inheritdoc}
    */
   public function build(FacetInterface $facet, array $results) {
+    $usernames = [];
 
     /** @var \Drupal\facets\Result\ResultInterface $result */
-    foreach ($results as &$result) {
+    foreach ($results as $result) {
       /** @var \Drupal\user\Entity\User $user */
-      $user = User::load($result->getRawValue());
-
-      $result->setDisplayValue($user->getDisplayName());
+      if (($user = User::load($result->getRawValue())) !== NULL) {
+        $result->setDisplayValue($user->getDisplayName());
+        $usernames[] = $result;
+      }
     }
 
-    return $results;
+    return $usernames;
   }
 
 }

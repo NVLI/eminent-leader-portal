@@ -80,3 +80,23 @@
   pointer-events: none;
   opacity: 0;
 }
+
+/**
+ * Thumnails layout.
+ */
+.slick-wrapper--tn-top .slick--thumbnail.slick--skin--asnavfor .slick__slide.slick-current::before {
+  top: auto;
+  bottom: -6px;
+  border-top: 8px solid #fff;
+  border-bottom: 0;
+}
+
+.slick-wrapper--tn-top .slick--thumbnail.slick--skin--asnavfor {
+  margin-bottom: 0;
+  z-index: 9;
+}
+
+.slick-wrapper--tn-top .slick--thumbnail.slick--skin--asnavfor .slick-list {
+  padding-bottom: 18px;
+}
+

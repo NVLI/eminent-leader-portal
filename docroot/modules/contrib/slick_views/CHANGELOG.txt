@@ -1,4 +1,21 @@
 
+Slick views 8.x-1.0-dev, 2016-09-29
+-----------------------------------
+- #2807881 by chaitanya17: Unused Class added in SlickViews.php.
+- Added Thumbnail position option.
+
+Slick views 8.x-1.0-dev, 2016-09-07
+-----------------------------------
+- #2793041 by DuneBL: Choosing Content (rendered entity) not working.
+
+Slick views 8.x-1.0-dev, 2016-08-29
+-----------------------------------
+- A few cleanups.
+
+Slick views 8.x-1.0-dev, 2016-07-15
+-----------------------------------
+- A few cleanups.
+
 Slick views 8.x-1.0-dev, 2016-05-05
 -----------------------------------
 - Changed description to the Main image option to reflect the latest features.

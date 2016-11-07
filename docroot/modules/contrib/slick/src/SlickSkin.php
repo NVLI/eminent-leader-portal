@@ -1,16 +1,14 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\SlickSkin.
- */
-
 namespace Drupal\slick;
+
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Implements SlickSkinInterface.
  */
 class SlickSkin implements SlickSkinInterface {
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -18,7 +16,7 @@ class SlickSkin implements SlickSkinInterface {
   public function skins() {
     $skins = [
       'default' => [
-        'name' => t('Default'),
+        'name' => 'Default',
         'css' => [
           'theme' => [
             'css/theme/slick.theme--default.css' => [],
@@ -26,17 +24,17 @@ class SlickSkin implements SlickSkinInterface {
         ],
       ],
       'asnavfor' => [
-        'name' => t('Thumbnail: asNavFor'),
+        'name' => 'Thumbnail: asNavFor',
         'css' => [
           'theme' => [
             'css/theme/slick.theme--asnavfor.css' => [],
           ],
         ],
-        'description' => t('Affected thumbnail navigation only.'),
+        'description' => $this->t('Affected thumbnail navigation only.'),
       ],
       'classic' => [
-        'name' => t('Classic'),
-        'description' => t('Adds dark background color over white caption, only good for slider (single slide visible), not carousel (multiple slides visible), where small captions are placed over images.'),
+        'name' => 'Classic',
+        'description' => $this->t('Adds dark background color over white caption, only good for slider (single slide visible), not carousel (multiple slides visible), where small captions are placed over images.'),
         'css' => [
           'theme' => [
             'css/theme/slick.theme--classic.css' => [],
@@ -44,8 +42,8 @@ class SlickSkin implements SlickSkinInterface {
         ],
       ],
       'fullscreen' => [
-        'name' => t('Full screen'),
-        'description' => t('Adds full screen display, works best with 1 slidesToShow.'),
+        'name' => 'Full screen',
+        'description' => $this->t('Adds full screen display, works best with 1 slidesToShow.'),
         'css' => [
           'theme' => [
             'css/theme/slick.theme--full.css' => [],
@@ -54,8 +52,8 @@ class SlickSkin implements SlickSkinInterface {
         ],
       ],
       'fullwidth' => [
-        'name' => t('Full width'),
-        'description' => t('Adds .slide__constrained wrapper to hold caption overlay within the max-container.'),
+        'name' => 'Full width',
+        'description' => $this->t('Adds .slide__constrained wrapper to hold caption overlay within the max-container.'),
         'css' => [
           'theme' => [
             'css/theme/slick.theme--full.css' => [],
@@ -64,8 +62,8 @@ class SlickSkin implements SlickSkinInterface {
         ],
       ],
       'grid' => [
-        'name' => t('Grid Foundation'),
-        'description' => t('Use slidesToShow > 1 to have more grid combination, only if you have considerable amount of grids, otherwise 1.'),
+        'name' => 'Grid Foundation',
+        'description' => $this->t('Use slidesToShow > 1 to have more grid combination, only if you have considerable amount of grids, otherwise 1.'),
         'css' => [
           'theme' => [
             'css/theme/slick.theme--grid.css' => [],
@@ -73,8 +71,8 @@ class SlickSkin implements SlickSkinInterface {
         ],
       ],
       'split' => [
-        'name' => t('Split'),
-        'description' => t('Puts image and caption side by side, related to slide layout options.'),
+        'name' => 'Split',
+        'description' => $this->t('Puts image and caption side by side, requires any split layout option.'),
         'css' => [
           'theme' => [
             'css/theme/slick.theme--split.css' => [],

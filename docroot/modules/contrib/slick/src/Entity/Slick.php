@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick\Entity\Slick.
- */
-
 namespace Drupal\slick\Entity;
 
 use Drupal\Component\Utility\Html;
@@ -250,7 +245,7 @@ class Slick extends ConfigEntityBase implements SlickInterface {
    * Removes wasted dependent options, even if not empty.
    */
   public function removeWastedDependentOptions(array &$js) {
-    foreach ($this->getDependentOptions() as $key => $option) {
+    foreach (self::getDependentOptions() as $key => $option) {
       if (isset($js[$key]) && empty($js[$key])) {
         foreach ($option as $dependent) {
           unset($js[$dependent]);
@@ -296,17 +291,21 @@ class Slick extends ConfigEntityBase implements SlickInterface {
    */
   public static function htmlSettings() {
     return [
-      'cache'             => -1,
+      'cache'             => 0,
       'current_view_mode' => '',
       'display'           => 'main',
       'grid'              => '',
       'id'                => '',
       'nav'               => FALSE,
+      'navpos'            => FALSE,
       'media_switch'      => '',
       'optionset'         => 'default',
+      'ratio'             => '',
       'skin'              => '',
       'unslick'           => FALSE,
       'vanilla'           => FALSE,
+      'vertical'          => FALSE,
+      'vertical_tn'       => FALSE,
       'view_name'         => '',
     ];
   }

@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick_views\Plugin\views\style\SlickViews.
- */
-
 namespace Drupal\slick_views\Plugin\views\style;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\slick\SlickDefault;
@@ -84,6 +78,7 @@ class SlickViews extends BlazyStylePluginBase {
       'overlays',
       'thumbnails',
       'thumb_captions',
+      'thumb_positions',
       'titles',
     ];
 
@@ -95,11 +90,11 @@ class SlickViews extends BlazyStylePluginBase {
     $this->admin()->buildSettingsForm($form, $definition);
 
     $title = '<p class="form__header form__title">';
-    $title .= $this->t('Check Vanilla slick for custom markups. <small>Otherwise slick markups are added. Add the supported fields to appear here.</small>');
+    $title .= $this->t('Check Vanilla slick if using content, not fields. <small>See it under <strong>Format > Show</strong> section. Otherwise slick markups apply which require some fields added below.</small>');
     $title .= '</p>';
     $form['opening']['#markup'] = '<div class="form--slick form--views form--half form--vanilla has-tooltip">' . $title;
-    $form['image']['#description'] .= ' ' . t('Use Blazy formatter to have it lazyloaded. Other supported Formatters: Colorbox, Intense, Responsive image, Video Embed Field, Youtube Field.');
-    $form['overlay']['#description'] .= ' ' . t('Be sure to CHECK "<strong>Style settings > Use field template</strong>" _only if using Slick formatter for nested sliders, otherwise keep it UNCHECKED!');
+    $form['image']['#description'] .= ' ' . $this->t('Use Blazy formatter to have it lazyloaded. Other supported Formatters: Colorbox, Intense, Responsive image, Video Embed Field, Youtube Field.');
+    $form['overlay']['#description'] .= ' ' . $this->t('Be sure to CHECK "<strong>Style settings > Use field template</strong>" _only if using Slick formatter for nested sliders, otherwise keep it UNCHECKED!');
   }
 
   /**

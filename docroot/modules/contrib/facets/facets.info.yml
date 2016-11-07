@@ -5,11 +5,11 @@ description: 'Faceted search interfaces that can be used on Search API searchers
 package: Search
 configure: facets.overview
 test_dependencies:
-  - search_api:search_api
+  - search_api:search_api (1.x-dev)
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2016-08-24
-version: '8.x-1.0-alpha4+11-dev'
+# Information added by Drupal.org packaging script on 2016-10-07
+version: '8.x-1.0-alpha6'
 core: '8.x'
 project: 'facets'
-datestamp: 1472060341
+datestamp: 1475863440

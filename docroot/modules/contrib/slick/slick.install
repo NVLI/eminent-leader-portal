@@ -11,10 +11,17 @@
 function slick_requirements($phase) {
   $requirements = [];
 
+  if (function_exists('libraries_get_path')) {
+    $path = libraries_get_path('slick') . '/slick/slick.min.js';
+  }
+  else {
+    $path = DRUPAL_ROOT . '/libraries/slick/slick/slick.min.js';
+  }
+
   if ($phase == 'runtime') {
-    if (!is_file('libraries/slick/slick/slick.min.js')) {
+    if (!is_file($path)) {
       $requirements['slick_library'] = [
-        'description' => t('The <a href=":url">Slick library</a> should be installed at <strong>/libraries/slick/slick/slick.min.js.</strong>', [':url' => 'https://github.com/kenwheeler/slick/']),
+        'description' => t('The <a href=":url">Slick library</a> should be installed at <strong>/libraries/slick/slick/slick.min.js</strong>, or any path supported by libraries.module if installed.', [':url' => 'https://github.com/kenwheeler/slick/']),
         'severity' => REQUIREMENT_ERROR,
         'value' => t('Not installed.'),
         'title' => t('Slick library'),

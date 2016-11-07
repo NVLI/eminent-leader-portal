@@ -135,17 +135,23 @@ function features_drush_command() {
  * Applies global options for Features drush commands.
  *
  * The option --name="bundle_name" sets the bundle namespace.
- */
+ *
+ * @return \Drupal\features\FeaturesAssignerInterface
+*/
 function _drush_features_options() {
   /** @var \Drupal\features\FeaturesAssignerInterface $assigner */
   $assigner = \Drupal::service('features_assigner');
   $bundle_name = drush_get_option('bundle');
   if (!empty($bundle_name)) {
-    $assigner->applyBundle($bundle_name);
+    $bundle = $assigner->applyBundle($bundle_name);
+    if ($bundle->getMachineName() != $bundle_name) {
+      drush_log(dt('Bundle @name not found. Using default.', array('@name' => $bundle_name)), 'warning');
+    }
   }
   else {
     $assigner->assignConfigPackages();
   }
+  return $assigner;
 }
 
 /**
@@ -153,13 +159,11 @@ function _drush_features_options() {
  */
 function drush_features_status() {
   $args = func_get_args();
-  _drush_features_options();
+  $assigner = _drush_features_options();
 
 
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
-  /** @var \Drupal\features\FeaturesAssignerInterface $assigner */
-  $assigner = \Drupal::service('features_assigner');
   $current_bundle = $assigner->getBundle();
   $export_settings = $manager->getExportSettings();
   $methods = $assigner->getEnabledAssigners();
@@ -198,12 +202,15 @@ function drush_features_status() {
  * @return array|bool
  */
 function drush_features_list_packages($package_name = '') {
-  _drush_features_options();
+  $assigner = _drush_features_options();
+  $current_bundle = $assigner->getBundle();
+  $namespace = $current_bundle->isDefault() ? '' : $current_bundle->getMachineName();
+
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   $packages = $manager->getPackages();
 
-  $packages = $manager->filterPackages($packages);
+  $packages = $manager->filterPackages($packages, $namespace);
   $result = array();
 
   // If no package was specified, list all packages.
@@ -260,11 +267,14 @@ function drush_features_list_packages($package_name = '') {
  *
  */
 function drush_features_import_all() {
-  _drush_features_options();
+  $assigner = _drush_features_options();
+  $current_bundle = $assigner->getBundle();
+  $namespace = $current_bundle->isDefault() ? '' : $current_bundle->getMachineName();
+
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   $packages = $manager->getPackages();
-  $packages = $manager->filterPackages($packages);
+  $packages = $manager->filterPackages($packages, $namespace);
   $overridden = array();
 
   foreach ($packages as $package) {
@@ -288,12 +298,10 @@ function drush_features_import_all() {
  */
 function drush_features_export($packages = NULL) {
   $packages = func_get_args();
-  _drush_features_options();
+  $assigner = _drush_features_options();
 
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
-  /** @var \Drupal\features\FeaturesAssignerInterface $assigner */
-  $assigner = \Drupal::service('features_assigner');
   /** @var \Drupal\features\FeaturesGeneratorInterface $generator */
   $generator = \Drupal::service('features_generator');
 
@@ -357,12 +365,10 @@ function drush_features_export($packages = NULL) {
  */
 function drush_features_add() {
   if ($args = func_get_args()) {
-    _drush_features_options();
+    $assigner = _drush_features_options();
 
     /** @var \Drupal\features\FeaturesManagerInterface $manager */
     $manager = \Drupal::service('features.manager');
-    /** @var \Drupal\features\FeaturesAssignerInterface $assigner */
-    $assigner = \Drupal::service('features_assigner');
     /** @var \Drupal\features\FeaturesGeneratorInterface $generator */
     $generator = \Drupal::service('features_generator');
 
@@ -488,7 +494,7 @@ function drush_features_diff() {
     $filter_ctypes = explode(',', $filter_ctypes);
   }
 
-  $feature = _drush_features_load_feature($module, TRUE);
+  $feature = $manager->loadPackage($module, TRUE);
   if (empty($feature)) {
     drush_log(dt('No such feature is available: @module', array('@module' => $module)), 'error');
     return;
@@ -610,7 +616,7 @@ function drush_features_import() {
 
       $dt_args['@module'] = $module;
       /** @var \Drupal\features\Package $feature */
-      $feature = _drush_features_load_feature($module, TRUE);
+      $feature = $manager->loadPackage($module, TRUE);
       if (empty($feature)) {
         drush_log(dt('No such feature is available: @module', $dt_args), 'error');
         return;
@@ -674,35 +680,6 @@ function drush_features_import() {
     drush_print_table(drush_features_list_packages());
     return;
   }
-}
-
-/**
- * Loads a Features package.
- *
- * @param string $module
- *   The machine name of a module.
- * @param bool $any
- *   If TRUE then check for any module, not just a Features module.
- *
- * @return array
- */
-function _drush_features_load_feature($module, $any = FALSE) {
-  /** @var \Drupal\features\FeaturesManagerInterface $manager */
-  $manager = \Drupal::service('features.manager');
-  $feature = $manager->getPackage($module);
-  if ($any && !isset($feature)) {
-    // See if this is a non-features module.
-    $module_handler = \Drupal::moduleHandler();
-    $modules = $module_handler->getModuleList();
-    if (!empty($modules[$module])) {
-      $extension = $modules[$module];
-      $feature = $manager->initPackageFromExtension($extension);
-      $config = $manager->listExtensionConfig($extension);
-      $feature->setConfig($config);
-      $feature->setStatus(FeaturesManagerInterface::STATUS_INSTALLED);
-    }
-  }
-  return $feature;
 }
 
 /**

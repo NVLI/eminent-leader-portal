@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\slick_media\Plugin\Field\FieldFormatter\SlickMediaFormatter.
- */
-
 namespace Drupal\slick_media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldDefinitionInterface;
@@ -24,7 +19,7 @@ use Drupal\blazy\Dejavu\BlazyVideoTrait;
  *
  * @FieldFormatter(
  *   id = "slick_media",
- *   label = @Translation("Slick media"),
+ *   label = @Translation("Slick Media"),
  *   description = @Translation("Display the referenced entities as a Slick carousel."),
  *   field_types = {
  *     "entity_reference"
@@ -93,8 +88,9 @@ class SlickMediaFormatter extends SlickEntityReferenceFormatterBase {
     // Collects specific settings to this formatter.
     $settings = $this->getSettings();
 
-    // Overrides slick_image to use slick_media template.
+    // Overrides slick_image to use blazy template.
     $settings['theme_hook_image'] = 'blazy';
+    $settings['blazy'] = TRUE;
     $build = ['settings' => $settings];
 
     $this->formatter->buildSettings($build, $items);
@@ -111,15 +107,21 @@ class SlickMediaFormatter extends SlickEntityReferenceFormatterBase {
   public function buildMedia(array &$settings = [], $entity, $langcode) {
     parent::buildMedia($settings, $entity, $langcode);
 
-    $source_field[$entity->bundle()] = $entity->getType()->getConfiguration()['source_field'];
+    if ($this->getPluginId() == 'slick_media') {
+      $bundle = $settings['bundle'];
+      $source_field[$bundle] = $entity->getType()->getConfiguration()['source_field'];
 
-    $settings['source_field'] = $source_field[$entity->bundle()];
-    if (!empty($settings['source_field'])) {
-      $media_url = $this->getFieldString($entity, $settings['source_field'], $langcode);
+      $settings['source_field'] = $source_field[$bundle];
+      $settings['media_url']    = $entity->url();
+      $settings['media_id']     = $entity->id();
 
-      /** @var \Drupal\video_embed_field\ProviderManagerInterface $provider */
-      if ($media_url && $provider = $this->providerManager->loadProviderFromInput($media_url)) {
-        $this->buildVideo($settings, $media_url);
+      if (!empty($settings['source_field'])) {
+        $external_url = $this->getFieldString($entity, $settings['source_field'], $langcode);
+
+        /** @var \Drupal\video_embed_field\ProviderManagerInterface $provider */
+        if ($external_url && $provider = $this->providerManager->loadProviderFromInput($external_url)) {
+          $this->buildVideo($settings, $external_url);
+        }
       }
     }
   }

@@ -322,18 +322,9 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-  rest_export_1:
-    display_plugin: rest_export
-    id: rest_export_1
-    display_title: 'REST export'
-    position: 3
-    display_options:
-      display_extenders: {  }
-      path: facets-rest
-      style:
-        type: facets_serializer
-      row:
-        type: data_field
+      defaults:
+        use_ajax: false
+      use_ajax: true
 label: 'Search API Test Fulltext search view'
 module: views
 id: search_api_test_view

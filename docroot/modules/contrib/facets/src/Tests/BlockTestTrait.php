@@ -25,19 +25,22 @@ trait BlockTestTrait {
    *   The facet field.
    * @param string $display_id
    *   The display id.
+   * @param string $source
+   *   Facet source.
    */
-  protected function createFacet($name, $id, $field = 'type', $display_id = 'page_1') {
+  protected function createFacet($name, $id, $field = 'type', $display_id = 'page_1', $source = 'search_api_test_view') {
     $facet_add_page = 'admin/config/search/facets/add-facet';
 
     $this->drupalGet($facet_add_page);
 
+    $facet_source = "views_page:{$source}__{$display_id}";
     $form_values = [
       'id' => $id,
       'name' => $name,
-      'facet_source_id' => "search_api_views:search_api_test_view:{$display_id}",
-      "facet_source_configs[search_api_views:search_api_test_view:{$display_id}][field_identifier]" => $field,
+      'facet_source_id' => $facet_source,
+      "facet_source_configs[views_page:{$source}__{$display_id}][field_identifier]" => $field,
     ];
-    $this->drupalPostForm(NULL, ['facet_source_id' => "search_api_views:search_api_test_view:{$display_id}"], $this->t('Configure facet source'));
+    $this->drupalPostForm(NULL, ['facet_source_id' => $facet_source], $this->t('Configure facet source'));
     $this->drupalPostForm(NULL, $form_values, $this->t('Save'));
 
     $this->blocks[$id] = $this->createBlock($id);
@@ -58,24 +61,6 @@ trait BlockTestTrait {
       'id' => str_replace('_', '-', $id),
     ];
     return $this->drupalPlaceBlock('facet_block:' . $id, $block);
-  }
-
-  /**
-   * Asserts that a facet block does not appear.
-   */
-  protected function assertNoFacetBlocksAppear() {
-    foreach ($this->blocks as $block) {
-      $this->assertNoBlockAppears($block);
-    }
-  }
-
-  /**
-   * Asserts that a facet block appears.
-   */
-  protected function assertFacetBlocksAppear() {
-    foreach ($this->blocks as $block) {
-      $this->assertBlockAppears($block);
-    }
   }
 
   /**

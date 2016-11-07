@@ -2,7 +2,6 @@
 
 namespace Drupal\facets\QueryType;
 
-
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
