@@ -508,7 +508,7 @@ margin-bottom: 10px;
 #playlist .carousel-inner {
   width: 66.66666666666666%;
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   #playlist .carousel-inner {
     width: 100%;
   }
