@@ -11,8 +11,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * Play list form class.
@@ -76,9 +78,30 @@ class AddPlayListForm extends FormBase {
     $play_list = $form_state->getValue('play_list');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
-    $node = Node::load($play_list);
-    $node->field_resource->appendItem($media_id);
-    $node->save();
+    $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+
+    $description = $media_content->get('field_dc_description')->value;
+
+    $media_paragraph = Paragraph::create([
+      'type' => 'play_list_story',
+      'field_play_list_description' => [
+        'value' => $description,
+      ],
+      'field_play_list_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_play_list_title' => [
+        'value' => $media_content->get('name')->value,
+      ],
+    ]);
+
+    $media_paragraph->save();
+    $paragraph_id = $media_paragraph->id();
+
+    $playlist_node = Node::load($play_list);
+    $playlist_node->field_play_list_story->appendItem($media_paragraph);
+    $playlist_node->save();
     drupal_set_message(t('Successfully added media to playlist.'));
     $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
@@ -90,9 +113,31 @@ class AddPlayListForm extends FormBase {
     $play_list = $form_state->getValue('play_list');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
-    $node = Node::load($play_list);
-    $node->field_resource->appendItem($media_id);
-    $node->save();
+    $media_content = entity_load('media', $media_id);
+    $bundle = $media_content->bundle();
+
+    $description = $media_content->get('field_dc_description')->value;
+
+    $media_paragraph = Paragraph::create([
+      'type' => 'play_list_story',
+      'field_play_list_description' => [
+        'value' => $description,
+      ],
+      'field_play_list_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_play_list_title' => [
+        'value' => $media_content->get('name')->value,
+      ],
+    ]);
+
+    $media_paragraph->save();
+    $paragraph_id = $media_paragraph->id();
+
+    $playlist_node = Node::load($play_list);
+    $playlist_node->field_play_list_story->appendItem($media_paragraph);
+    $playlist_node->save();
+
     $title = t('Success');
     $response = new AjaxResponse();
     $message = t('Successfully Added media to the selected playlist');
@@ -126,19 +171,22 @@ class AddPlayListForm extends FormBase {
     $options = array();
     // Database query for fetching timelines.
     $db = \Drupal::database();
-    $query = $db->select('node__field_resource');
+    $query = $db->select('paragraph__field_play_list_media_reference');
 
+    // Joins.
+    $query->leftjoin('node__field_play_list_story', 'play_list_story',
+      'play_list_story.field_play_list_story_target_id = paragraph__field_play_list_media_reference.entity_id');
     $query->leftjoin('node_field_data', 'node',
-      'node.nid = node__field_resource.entity_id');
+      'node.nid = play_list_story.entity_id');
 
-    // Fields.
-    $query->fields('node', array('title', 'nid'));
-    $query->fields('node__field_resource', array('field_resource_target_id'));
+      // Fields.
+      $query->fields('node', array('title', 'nid'));
+      $query->fields('paragraph__field_play_list_media_reference', array('field_play_list_media_reference_target_id'));
 
     $playlists = $query->execute();
     foreach ($playlists as $playlist) {
       if (!empty($playlist->nid)) {
-        if ($playlist->field_resource_target_id == $media_id) {
+        if ($playlist->field_play_list_media_reference_target_id == $media_id) {
           $playlist_node_id = $playlist->nid;
         }
         $options[$playlist->nid] = $playlist->title;

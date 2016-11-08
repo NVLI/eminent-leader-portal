@@ -13,6 +13,7 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use \Drupal\node\Entity\Node;
 use Drupal\taxonomy;
 use Drupal\taxonomy\TermStorage;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Create playlist form.
@@ -117,8 +118,26 @@ class CreatePlaylistForm extends FormBase {
     }
 
     $node->save();
+
+    $description = $media_content->get('field_dc_description')->value;
+
+    $media_paragraph = Paragraph::create([
+      'type' => 'play_list_story',
+      'field_play_list_description' => [
+        'value' => $description,
+      ],
+      'field_play_list_media_reference' => [
+        ['target_id' => $media_id],
+      ],
+      'field_play_list_title' => [
+        'value' => $media_content->get('name')->value,
+      ],
+    ]);
+
+    $media_paragraph->save();
+    $paragraph_id = $media_paragraph->id();
     // Add the media item to the created node.
-    $node->field_resource->appendItem($media_id);
+    $node->field_play_list_story->appendItem($media_paragraph);
     $node->save();
     drupal_set_message(t('Successfully created playlist and added the media item.'));
     $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
