@@ -83,7 +83,7 @@ function eminent_sardar_preprocess_node(&$variables) {
       $media_entity_id = $item->entity->get('field_play_list_media_reference')->target_id;
       $media_content = entity_load('media', $media_entity_id);
       $playlist['media_type'] = $media_content->bundle();
-      
+
       $variables['playlist'][] = $playlist;
     }
 
@@ -402,6 +402,13 @@ function eminent_sardar_preprocess_paragraph(&$variables) {
     }
     $variables['media_url'] = $media_url;
     $variables['media_image_url'] = $media_image_url;
+  }
+  if($paragraph->getType() == 'play_list_story'){
+    $media_entity_id = $paragraph->get('field_play_list_media_reference')->target_id;
+    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
+
+    $variables['media_url'] = $media_url;
+
   }
 
 }
