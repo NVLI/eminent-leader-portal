@@ -96,7 +96,7 @@ class AddTimeLineForm extends FormBase {
     $media_paragraph = Paragraph::create([
       'type' => 'time_line_story',
       'field_time_line_description' => [
-        'value' => Unicode::truncate($description, 70),
+        'value' => $description,
       ],
       'field_time_line_image->' => [
         ['target_id' => $image],
