@@ -77,14 +77,17 @@ class RemoveMediaFromPlaylist extends FormBase {
 
     // Load the playlist.
     $playlist_content = entity_load('node', $playlist_id);
-    $playlist_media = $playlist_content->field_resource->getValue();
+    $playlist_paragraph = $playlist_content->field_play_list_story->getValue();
     // Loop through the media items and remove the selected media item.
-    foreach ($playlist_media as $key => $media) {
-      if ($media['target_id'] == $media_id) {
-        unset($playlist_media[$key]);
+    foreach ($playlist_paragraph as $key => $paragraph) {
+      $paragraph_id = $paragraph['target_id'];
+      $paragraph_entity = entity_load('paragraph', $paragraph_id);
+      $playlist_media_id = $paragraph_entity->get('field_play_list_reference')->target_id;
+      if ($playlist_media_id == $media_id) {
+        unset($playlist_paragraph[$key]);
       }
     }
-    $playlist_content->field_resource->setValue($playlist_media);
+    $playlist_content->field_play_list_collection_story->setValue($playlist_paragraph);
     $playlist_content->save();
     $form_state->setRedirect('entity.media.canonical', ['media' => $media_id]);
   }
@@ -99,14 +102,17 @@ class RemoveMediaFromPlaylist extends FormBase {
 
     // Load the playlist.
     $playlist_content = entity_load('node', $playlist_id);
-    $playlist_media = $playlist_content->field_resource->getValue();
+    $playlist_paragraph = $playlist_content->field_play_list_story->getValue();
     // Loop through the media items and remove the selected media item.
-    foreach ($playlist_media as $key => $media) {
-      if ($media['target_id'] == $media_id) {
-        unset($playlist_media[$key]);
+    foreach ($playlist_paragraph as $key => $paragraph) {
+      $paragraph_id = $paragraph['target_id'];
+      $paragraph_entity = entity_load('paragraph', $paragraph_id);
+      $playlist_media_id = $paragraph_entity->get('field_play_list_reference')->target_id;
+      if ($playlist_media_id == $media_id) {
+        unset($playlist_paragraph[$key]);
       }
     }
-    $playlist_content->field_resource->setValue($playlist_media);
+    $playlist_content->field_play_list_story->setValue($playlist_paragraph);
     $playlist_content->save();
     // Display success message to the user.
     $title = t('Success');
