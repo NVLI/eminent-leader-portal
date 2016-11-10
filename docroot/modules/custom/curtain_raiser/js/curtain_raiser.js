@@ -1,6 +1,11 @@
-jQuery(function($) {'use strict',
+/**
+ * @file
+ * Jquery for the curtain raiser inauguration effect.
+ */
 
-  $('#curtain-raiser-inauguration-form').on('submit', function(e){
+ jQuery(function ($) {'use strict',
+
+  $('#curtain-raiser-inauguration-form').on('submit', function (e) {
     e.preventDefault();
     var pwd = $('#edit-inaugurate-password').val();
     var path = "ajax/inauguration/validate/" + pwd;
@@ -9,7 +14,7 @@ jQuery(function($) {'use strict',
         url : '/' + path,
         encode : true
     })
-    .done(function(data) {
+    .done(function (data) {
       if (data.success) {
         $("#curtain1").animate({width:20},6000);
         $("#curtain2").animate({width:20},6000);

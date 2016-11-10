@@ -1,17 +1,15 @@
 <?php
-/**
- * @file
- * Contains \Drupal\curtain_raiser\Form\curtainRaiserSettingsForm
- */
+
 namespace Drupal\curtain_raiser\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure example settings for this site.
+ * Configure curtain raiser settings for this site.
  */
-class curtainRaiserSettingsForm extends ConfigFormBase {
+class CurtainRaiserSettingsForm extends ConfigFormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -69,7 +67,6 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Check if the site is already inaugurated, the curtain will not show anymore.'),
     );
 
-
     return parent::buildForm($form, $form_state);
   }
 
@@ -91,4 +88,5 @@ class curtainRaiserSettingsForm extends ConfigFormBase {
 
     parent::submitForm($form, $form_state);
   }
+
 }

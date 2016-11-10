@@ -1,29 +1,27 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\curtain_raiser\Controller\CurtainRaiser.
- */
-
 namespace Drupal\curtain_raiser\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Drupal\Core\Form\ConfigFormBase;
-use Drupal\Core\Form\FormStateInterface;
 
+/**
+ * Configure curtain raiser for this site.
+ */
 class CurtainRaiser extends ControllerBase {
 
+  /**
+   * {@inheritdoc}
+   */
   public function validate($password) {
 
-      $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
+    $config = \Drupal::service('config.factory')->getEditable('curtain_raiser.settings');
 
-      $master_password = $config->get('master_password');
-      $test_password = $config->get('test_password');
-
+    $master_password = $config->get('master_password');
+    $test_password = $config->get('test_password');
 
     if ($password == $master_password) {
-      $config->set('inauguration_status', true)
+      $config->set('inauguration_status', TRUE)
         ->save();
       $response = array(
         'success' => TRUE,
@@ -39,6 +37,7 @@ class CurtainRaiser extends ControllerBase {
         'success' => FALSE,
       );
     }
+
     return new JsonResponse($response);
   }
 
