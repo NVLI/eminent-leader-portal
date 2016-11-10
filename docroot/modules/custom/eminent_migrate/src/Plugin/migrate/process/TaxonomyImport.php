@@ -1,13 +1,10 @@
 <?php
-/**
- * @file
- * Contain \Drupal\eminent_migrate\migrate\process
- */
+
 namespace Drupal\eminent_migrate\Plugin\migrate\process;
+
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use \Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -18,11 +15,13 @@ use Drupal\taxonomy\Entity\Term;
  * )
  */
 class TaxonomyImport extends ProcessPluginBase {
+
   /**
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $vocabulary = "subject";
+
     if (empty($value)) {
       $value = "sardar";
     }
@@ -37,6 +36,8 @@ class TaxonomyImport extends ProcessPluginBase {
       ]);
       $term->save();
     }
+
     return $term->id();
   }
+
 }
