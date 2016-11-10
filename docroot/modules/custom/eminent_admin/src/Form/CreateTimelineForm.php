@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\CreateTimelineForm.
- */
 
 namespace Drupal\eminent_admin\Form;
 
@@ -12,12 +8,12 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use \Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * Play list form class.
  */
 class CreateTimelineForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -74,7 +70,7 @@ class CreateTimelineForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');
@@ -121,7 +117,6 @@ class CreateTimelineForm extends FormBase {
       ]);
     }
 
-
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
       'type' => 'time_line_story',
@@ -152,7 +147,7 @@ class CreateTimelineForm extends FormBase {
   /**
    * Callback for Create timeline form.
    */
-  public function createTimeline(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function createTimeline(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');

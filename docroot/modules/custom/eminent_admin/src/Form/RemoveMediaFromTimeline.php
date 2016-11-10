@@ -1,25 +1,18 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\RemoveMediaFromTimeline.
- */
 
 namespace Drupal\eminent_admin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\Entity\Node;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * Remove media item from Timeline.
  */
 class RemoveMediaFromTimeline extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -42,7 +35,7 @@ class RemoveMediaFromTimeline extends FormBase {
     $confirm_text = t('Do you really want to remove this item from timeline @playlist?', array('@playlist' => $timeline_title));
     $form['time_line'] = [
       '#type' => 'markup',
-      '#markup' => '<h2>' . $confirm_text .'</h2>',
+      '#markup' => '<h2>' . $confirm_text . '</h2>',
     ];
     $form['continue'] = [
       '#type' => 'submit',
@@ -57,6 +50,7 @@ class RemoveMediaFromTimeline extends FormBase {
     ];
     return $form;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -67,7 +61,7 @@ class RemoveMediaFromTimeline extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
     $timeline_id = $storage['timeline_id'];
@@ -91,7 +85,7 @@ class RemoveMediaFromTimeline extends FormBase {
   /**
    * Callback for remove media.
    */
-  public function removeMedia(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function removeMedia(array &$form, FormStateInterface $form_state) {
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
     $timeline_id = $storage['timeline_id'];
@@ -126,12 +120,13 @@ class RemoveMediaFromTimeline extends FormBase {
   /**
    * Callback for remove media.
    */
-  public function cancelAction(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function cancelAction(array &$form, FormStateInterface $form_state) {
     $command = new CloseModalDialogCommand();
     $response = new AjaxResponse();
     $response->addCommand($command);
     return $response;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -140,6 +135,5 @@ class RemoveMediaFromTimeline extends FormBase {
       'eminent_admine.settings',
     ];
   }
-
 
 }

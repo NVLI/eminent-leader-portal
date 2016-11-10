@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\eminent_admin\Plugin\Block\MediaAddtoTimeline.
- */
-
 namespace Drupal\eminent_admin\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;

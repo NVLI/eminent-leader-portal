@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\AddPlayListForm.
- */
 
 namespace Drupal\eminent_admin\Form;
 
@@ -14,12 +10,12 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * Play list form class.
  */
 class AddPlayListForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -74,7 +70,7 @@ class AddPlayListForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $play_list = $form_state->getValue('play_list');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
@@ -109,7 +105,7 @@ class AddPlayListForm extends FormBase {
   /**
    * Callback for play list form.
    */
-  public function addToPlaylist(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function addToPlaylist(array &$form, FormStateInterface $form_state) {
     $play_list = $form_state->getValue('play_list');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
@@ -179,9 +175,9 @@ class AddPlayListForm extends FormBase {
     $query->leftjoin('node_field_data', 'node',
       'node.nid = play_list_story.entity_id');
 
-      // Fields.
-      $query->fields('node', array('title', 'nid'));
-      $query->fields('paragraph__field_play_list_media_reference', array('field_play_list_media_reference_target_id'));
+    // Fields.
+    $query->fields('node', array('title', 'nid'));
+    $query->fields('paragraph__field_play_list_media_reference', array('field_play_list_media_reference_target_id'));
 
     $playlists = $query->execute();
     foreach ($playlists as $playlist) {

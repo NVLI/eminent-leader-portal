@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\eminent_admin\Plugin\Block\MediaAddtoPlaylist.
- */
-
 namespace Drupal\eminent_admin\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;

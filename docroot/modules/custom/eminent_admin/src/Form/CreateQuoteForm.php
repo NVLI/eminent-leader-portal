@@ -1,15 +1,9 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\CreateQuoteForm.
- */
 
 namespace Drupal\eminent_admin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\OpenModalDialogCommand;
 use \Drupal\node\Entity\Node;
 use Drupal\Component\Utility\Unicode;
 
@@ -17,6 +11,7 @@ use Drupal\Component\Utility\Unicode;
  * Create quote form.
  */
 class CreateQuoteForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -60,7 +55,7 @@ class CreateQuoteForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $description = $form_state->getValue('description');
     // Set node title.
     $title = Unicode::truncate($description, 10);

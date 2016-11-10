@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\CreatePlaylistForm.
- */
 
 namespace Drupal\eminent_admin\Form;
 
@@ -10,15 +6,14 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
-use \Drupal\node\Entity\Node;
-use Drupal\taxonomy;
-use Drupal\taxonomy\TermStorage;
+use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Create playlist form.
  */
 class CreatePlaylistForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -74,7 +69,7 @@ class CreatePlaylistForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');
@@ -146,7 +141,7 @@ class CreatePlaylistForm extends FormBase {
   /**
    * Callback for create play list form.
    */
-  public function createPlaylist(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function createPlaylist(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
     $featured = $form_state->getValue('featured');

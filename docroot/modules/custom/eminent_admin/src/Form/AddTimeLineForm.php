@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\eminent_admin\Form\AddTimeLineForm.
- */
 
 namespace Drupal\eminent_admin\Form;
 
@@ -20,6 +16,7 @@ use Drupal\Component\Utility\Unicode;
  * Add media item to Timeline form.
  */
 class AddTimeLineForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -69,6 +66,7 @@ class AddTimeLineForm extends FormBase {
     ];
     return $form;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -79,18 +77,21 @@ class AddTimeLineForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+
     $time_line = $form_state->getValue('time_line');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];
     $media_content = entity_load('media', $media_id);
     $bundle = $media_content->bundle();
+
     if ($bundle == "image") {
       $image = $media_content->field_media_image->target_id;
     }
     else {
       $image = $media_content->thumbnail->target_id;
     }
+
     $description = $media_content->get('field_dc_description')->value;
     // Create paragraph entity.
     $media_paragraph = Paragraph::create([
@@ -125,7 +126,7 @@ class AddTimeLineForm extends FormBase {
   /**
    * Callback for add to timeline form.
    */
-  public function addToTimeline(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function addToTimeline(array &$form, FormStateInterface $form_state) {
     $time_line = $form_state->getValue('time_line');
     $storage = $form_state->getStorage();
     $media_id = $storage['media_id'];

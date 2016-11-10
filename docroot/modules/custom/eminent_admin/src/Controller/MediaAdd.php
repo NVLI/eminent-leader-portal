@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\eminent_admin\Controller\MediaAdd.
- */
-
 namespace Drupal\eminent_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
