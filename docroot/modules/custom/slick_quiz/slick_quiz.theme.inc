@@ -1,13 +1,18 @@
 <?php
-use Drupal\field_collection\Entity\FieldCollectionItem;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * @file
  * Theme for Slick Quiz views.
  */
+
+use Drupal\field_collection\Entity\FieldCollectionItem;
+
+/**
+ * Preprocess for the slick quiz view.
+ */
 function template_preprocess_views_view_slick_quiz(&$variables) {
   $slick_quiz = array();
-  $correct = true;
+  $correct = TRUE;
   // View options set by user.
   $options = $variables['view']->style_plugin->options;
 
@@ -39,12 +44,12 @@ function template_preprocess_views_view_slick_quiz(&$variables) {
     $slick_quiz['questions'][$id]["q"] = $title['0']['value'];
 
     foreach ($quiz_options as $option_item) {
-      $correct = true;
-      $option =FieldCollectionItem::load($option_item['value']);
+      $correct = TRUE;
+      $option = FieldCollectionItem::load($option_item['value']);
       $option_val = $option->get($quiz_field_option)->getValue();
       $option_correct = $option->get($quiz_field_option_correct)->getValue();
       if ($option_correct['0']['value'] == 0) {
-        $correct = false;
+        $correct = FALSE;
       }
       $slick_quiz['questions'][$id]["a"][] = array(
         'option' => $option_val['0']['value'],

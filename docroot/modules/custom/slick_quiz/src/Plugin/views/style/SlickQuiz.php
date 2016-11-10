@@ -1,33 +1,27 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\slick_quiz\Plugin\views\style\SlicQuiz.
- */
-
 namespace Drupal\slick_quiz\Plugin\views\style;
 
 use Drupal\core\form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
 /**
- * Style plugin to render a list of years and months
- * in reverse chronological order linked to content.
+ * Style plugin to render slick quiz.
  *
  * @ingroup views_style_plugins
  *
  * @ViewsStyle(
  *   id = "slick_quiz",
  *   title = @Translation("Slick Quiz"),
- *   help = @Translation("Render a list of years and months in reverse chronological order linked to content."),
+ *   help = @Translation("Render a quiz items."),
  *   theme = "views_view_slick_quiz",
  *   display_types = { "normal" }
  * )
- *
  */
 class SlickQuiz extends StylePluginBase {
+
   /**
-   * Set default options
+   * Set default options.
    */
   protected function defineOptions() {
     $options = parent::defineOptions();

@@ -1,4 +1,8 @@
-// Put all your page JS here
+/**
+ * @file
+ * Slick quiz js.
+ */
+
 (function ($, Drupal) {
 
   Drupal.behaviors.Mirador = {
