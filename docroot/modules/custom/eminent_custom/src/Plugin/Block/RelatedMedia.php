@@ -1,20 +1,13 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\eminent_custom\Plugin\Block\RelatedMedia.
- */
-
 namespace Drupal\eminent_custom\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
-use \Drupal\user\Entity\User;
 use Drupal\Component\Utility\Unicode;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\user\Entity;
 use Drupal\Core\Render\Markup;
 
 /**
@@ -57,7 +50,8 @@ class RelatedMedia extends BlockBase {
         foreach ($media_ids as $media_id) {
           $media_item = entity_load('media', $media_id->entity_id);
           $media_id = $media_item->id();
-          // Check whether the user has permission to create Time Line Collection.
+          // Check whether the user has permission to create Time Line
+          // Collection.
           if ($user->hasPermission('create time_line_collection content')) {
 
             // Generate the add link.
@@ -66,7 +60,13 @@ class RelatedMedia extends BlockBase {
             // We will be displaying the link content in a popup.
             $add_playlist_url->setOptions([
               'attributes' => [
-                'class' => ['use-ajax', 'button', 'button--small', 'btn', 'btn-default'],
+                'class' => [
+                  'use-ajax',
+                  'button',
+                  'button--small',
+                  'btn',
+                  'btn-default',
+                ],
                 'data-dialog-type' => 'modal',
                 'data-dialog-options' => '{"width": "30%"}',
                 'data-toggle' => "tooltip",
@@ -74,7 +74,7 @@ class RelatedMedia extends BlockBase {
               ],
             ]);
 
-            $addtotimelinelink =  array(
+            $addtotimelinelink = array(
               '#type' => 'markup',
               '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-flag" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
               '#attached' => ['library' => ['core/drupal.dialog.ajax']],
@@ -83,7 +83,8 @@ class RelatedMedia extends BlockBase {
               ],
             );
           }
-          // Check whether the user has permission to create Time Line Collection.
+          // Check whether the user has permission to create Time Line
+          // Collection.
           if ($user->hasPermission('create play_list content')) {
 
             // Generate the add link.
@@ -92,7 +93,13 @@ class RelatedMedia extends BlockBase {
             // We will be displaying the link content in a popup.
             $add_playlist_url->setOptions([
               'attributes' => [
-                'class' => ['use-ajax', 'button', 'button--small', 'btn', 'btn-default'],
+                'class' => [
+                  'use-ajax',
+                  'button',
+                  'button--small',
+                  'btn',
+                  'btn-default',
+                ],
                 'data-dialog-type' => 'modal',
                 'data-dialog-options' => '{"width": "30%"}',
                 'data-toggle' => "tooltip",
@@ -100,7 +107,7 @@ class RelatedMedia extends BlockBase {
               ],
             ]);
 
-            $addtoplaylistlink =  array(
+            $addtoplaylistlink = array(
               '#type' => 'markup',
               '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-list" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
               '#attached' => ['library' => ['core/drupal.dialog.ajax']],
@@ -113,7 +120,7 @@ class RelatedMedia extends BlockBase {
           if ($media_item->bundle() == "image") {
             $image = $media_item->field_media_image->target_id;
             $file = File::load($image);
-            if(!empty($file)) {
+            if (!empty($file)) {
               $media_image_url = ImageStyle::load('exhibition_grid')->buildUrl($file->getFileUri());
             }
           }

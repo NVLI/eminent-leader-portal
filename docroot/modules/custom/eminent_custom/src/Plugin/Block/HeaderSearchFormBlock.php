@@ -1,14 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\eminent_custom\Plugin\Block\RelatedMedia.
- */
-
 namespace Drupal\eminent_custom\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormInterface;
 
 /**
  * Provides a 'Header Search' block.
@@ -28,9 +22,9 @@ class HeaderSearchFormBlock extends BlockBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\eminent_custom\Form\HeaderSearchForm');
     return [
       $form,
-       '#cache' => [
-         'max-age' => 0,
-       ],
+      '#cache' => [
+        'max-age' => 0,
+      ],
     ];
   }
 
