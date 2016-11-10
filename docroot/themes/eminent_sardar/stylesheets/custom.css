@@ -9,7 +9,8 @@ video {
 /******************************************************
 Customization styles for Responsive banner*/
 /* line 39, ../sass/custom.scss */
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
   position: absolute;
   top: 0;
 }
@@ -50,19 +51,22 @@ Excibition page*/
 }
 @media (max-width: 973px) {
   /* line 75, ../sass/custom.scss */
-  #exibition_details .col-md-8, #exibition_details .col-md-4 {
+  #exibition_details .col-md-8,
+  #exibition_details .col-md-4 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
 /* line 83, ../sass/custom.scss */
-.exibition_slider, .exibition_pager {
+.exibition_slider,
+.exibition_pager {
   background: #eceff7;
   padding: 20px;
 }
 /* line 86, ../sass/custom.scss */
-.exibition_slider .deails_holder, .exibition_pager .deails_holder {
+.exibition_slider .deails_holder,
+.exibition_pager .deails_holder {
   padding: 10px;
   background: #fff;
   border-radius: 3px;
@@ -70,14 +74,14 @@ Excibition page*/
 
 /* line 92, ../sass/custom.scss */
 .slick-next {
-  background-color: #CC7722 !important;
+  background-color: #cc7722 !important;
   right: 20px !important;
   border-radius: 0 !important;
 }
 
 /* line 97, ../sass/custom.scss */
 .slick-prev {
-  background-color: #CC7722 !important;
+  background-color: #cc7722 !important;
   left: 20px !important;
   border-radius: 0 !important;
 }
@@ -87,12 +91,18 @@ Excibition page*/
   cursor: pointer;
 }
 /* line 105, ../sass/custom.scss */
-.exibition_pager .excibition_thumb.audio, .exibition_pager .excibition_thumb.video, .exibition_pager .excibition_thumb.pdf, .exibition_pager .excibition_thumb.img {
+.exibition_pager .excibition_thumb.audio,
+.exibition_pager .excibition_thumb.video,
+.exibition_pager .excibition_thumb.pdf,
+.exibition_pager .excibition_thumb.img {
   position: relative;
   box-shadow: 1px 1px 3px #999;
 }
 /* line 110, ../sass/custom.scss */
-.exibition_pager .excibition_thumb.audio i, .exibition_pager .excibition_thumb.video i, .exibition_pager .excibition_thumb.pdf i, .exibition_pager .excibition_thumb.img i {
+.exibition_pager .excibition_thumb.audio i,
+.exibition_pager .excibition_thumb.video i,
+.exibition_pager .excibition_thumb.pdf i,
+.exibition_pager .excibition_thumb.img i {
   top: 45%;
   left: 0;
   right: 0;
@@ -136,7 +146,7 @@ General styles bootstrap modal*/
 /* line 150, ../sass/custom.scss */
 .modal-header {
   border: 0;
-  background: #CC7722;
+  background: #cc7722;
   text-align: center;
   color: #fff;
 }
@@ -217,7 +227,7 @@ General styles for the Quiz block in the home page*/
 }
 /* line 227, ../sass/custom.scss */
 .quoteslider .quoteslider-inner .pull-left {
-  border-right: 1px solid #ADADAD;
+  border-right: 1px solid #adadad;
   padding-right: 15px;
   position: relative;
 }
@@ -229,25 +239,14 @@ General styles for the Quiz block in the home page*/
   height: 9px;
   top: 50%;
   margin-top: -5px;
-  background: #F2F2F2;
+  background: #f2f2f2;
   -webkit-transform: rotate(45deg);
-  border: 1px solid #ADADAD;
+  border: 1px solid #adadad;
   right: -5px;
   border-left: 0 none;
   border-bottom: 0 none;
 }
 
-/******************************************************
-General styles for the Quiz block in the home page*/
-/* line 249, ../sass/custom.scss */
-.quick-quiz {
-  /* BASE QUIZ STYLES */
-  /* These styles ensure that the necessary elements are hidden for toggling */
-  /* DO NOT EDIT UNLESS YOU KNOW WHAT YOU ARE DOING!! */
-  /* If response messages are disabled or only shown on quiz completion,
-     nextQuestion button IS checkAnswer button - so it must be displayed */
-  /* Accessibility */
-}
 /* line 250, ../sass/custom.scss */
 .quick-quiz h2 {
   margin-bottom: 25px;
@@ -255,7 +254,7 @@ General styles for the Quiz block in the home page*/
 /* line 253, ../sass/custom.scss */
 .quick-quiz a.startQuiz {
   padding: 8px 20px;
-  background: #CC7722;
+  background: #cc7722;
   margin: auto;
   color: #fff;
   border: none;
@@ -281,7 +280,7 @@ General styles for the Quiz block in the home page*/
 /* line 276, ../sass/custom.scss */
 .quick-quiz a.button {
   padding: 8px 20px;
-  background: #CC7722;
+  background: #cc7722;
   color: #fff;
   border: none;
   margin-top: 10px;
@@ -296,12 +295,14 @@ General styles for the Quiz block in the home page*/
   box-shadow: none;
 }
 /* line 292, ../sass/custom.scss */
-.quick-quiz .quizDescription, .quick-quiz .answers, .quick-quiz .responses {
+.quick-quiz .quizDescription,
+.quick-quiz .answers,
+.quick-quiz .responses {
   margin-bottom: 20px;
 }
 /* line 296, ../sass/custom.scss */
 .quick-quiz .correct {
-  color: #27AE60;
+  color: #27ae60;
 }
 /* line 299, ../sass/custom.scss */
 .quick-quiz .incorrect {
@@ -468,12 +469,11 @@ General styles for the Banner image home page*/
 #main-slider .slider-item .content-holder h1 {
   color: #555;
   font-size: 5em;
-
 }
 /* line 440, ../sass/custom.scss */
 #main-slider .slider-item .content-holder h1 span {
   font-size: 1.6em;
-  color: #CC7722;
+  color: #cc7722;
   font-weight: normal;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -484,7 +484,7 @@ General styles for the Banner image home page*/
   /* line 446, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 1.9em;
-    color: #CC7722;
+    color: #cc7722;
   }
 }
 @media (max-width: 973px) {
@@ -496,7 +496,7 @@ General styles for the Banner image home page*/
   /* line 455, ../sass/custom.scss */
   #main-slider .slider-item .content-holder h1 span {
     font-size: 2em;
-    color: #CC7722;
+    color: #cc7722;
   }
 }
 /* line 461, ../sass/custom.scss */
@@ -519,7 +519,7 @@ General styles for the Banner image home page*/
 }
 /* line 475, ../sass/custom.scss */
 #main-slider .slider-item .content-holder a.btn-primary {
-  background: #FF530D;
+  background: #ff530d;
   border-radius: 0;
   font-size: 1.3em;
 }
@@ -621,7 +621,7 @@ General styles for the Media page*/
 }
 /* line 577, ../sass/custom.scss */
 .media_details .media-item .entry-meta > span {
-  color: #CC7722;
+  color: #cc7722;
 }
 /* line 580, ../sass/custom.scss */
 .media_details .media-item .entry-meta span {
@@ -642,7 +642,7 @@ General styles for the Media page*/
 }
 /* line 595, ../sass/custom.scss */
 .media_details .media-item .entry-meta #publish_date {
-  background: #CC7722;
+  background: #cc7722;
   border-bottom: 5px solid #4e4e4e;
   color: #fff;
   padding: 5px 0;
@@ -650,14 +650,16 @@ General styles for the Media page*/
 }
 
 /* line 606, ../sass/custom.scss */
-.meidiablock .media-preview, .meidiablock .media-preview-description {
+.meidiablock .media-preview,
+.meidiablock .media-preview-description {
   padding: 10px;
   border: 1px solid #bdc3c7;
   margin-bottom: 70px;
 }
 @media (max-width: 973px) {
   /* line 606, ../sass/custom.scss */
-  .meidiablock .media-preview, .meidiablock .media-preview-description {
+  .meidiablock .media-preview,
+  .meidiablock .media-preview-description {
     margin-bottom: 20px;
   }
 }
@@ -698,8 +700,9 @@ General styles for the Media page*/
 /******************************************************
 General styles for the Quaote listinng*/
 /* line 650, ../sass/custom.scss */
-.quotelisting .widget.search .search_quote, .quotelisting .widget.search .search_results {
-  border-color: #DEDEDE;
+.quotelisting .widget.search .search_quote,
+.quotelisting .widget.search .search_results {
+  border-color: #dedede;
   height: 48px;
   outline: medium none;
   box-shadow: none;
@@ -707,7 +710,7 @@ General styles for the Quaote listinng*/
 /* line 656, ../sass/custom.scss */
 .quotelisting .widget.search input[type="button"] {
   padding: 8px 20px;
-  background: #CC7722;
+  background: #cc7722;
   color: #fff;
   border-radius: 4px;
   border: none;
@@ -793,30 +796,30 @@ Main components
 }
 /* line 740, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content {
-  border-color: #CC7722;
+  border-color: #cc7722;
 }
 /* line 741, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content a.more {
-  color: #CC7722;
+  color: #cc7722;
 }
 /* line 743, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content a.more:after {
-  color: #CC7722;
+  color: #cc7722;
 }
 /* line 748, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content:before {
-  border-left-color: #CC7722;
+  border-left-color: #cc7722;
 }
 @media (max-width: 973px) {
   /* line 748, ../sass/custom.scss */
   .cd-timeline-block .cd-timeline-content:before {
-    border-right-color: #CC7722;
+    border-right-color: #cc7722;
     border-left-color: transparent;
   }
 }
 /* line 755, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content:after {
-  border-bottom: 3px dotted #CC7722 !important;
+  border-bottom: 3px dotted #cc7722 !important;
 }
 /* line 758, ../sass/custom.scss */
 .cd-timeline-block .cd-timeline-content h2 {
@@ -1029,12 +1032,15 @@ Main components
 }
 
 /* line 1021, ../sass/custom.scss */
-.cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+.cd-timeline-content p,
+.cd-timeline-content .cd-read-more,
+.cd-timeline-content .cd-date {
   font-size: 16px;
 }
 
 /* line 1024, ../sass/custom.scss */
-.cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+.cd-timeline-content .cd-read-more,
+.cd-timeline-content .cd-date {
   display: inline-block;
 }
 
@@ -1090,7 +1096,8 @@ Main components
   }
 
   /* line 1067, ../sass/custom.scss */
-  .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+  .cd-timeline-content .cd-read-more,
+  .cd-timeline-content .cd-date {
     font-size: 14px;
     font-size: 0.875rem;
   }
@@ -1158,7 +1165,7 @@ Main components
     left: auto;
     right: 100%;
     border-color: transparent;
-    border-right-color: #CC7722;
+    border-right-color: #cc7722;
   }
 
   /* line 1123, ../sass/custom.scss */
@@ -1328,7 +1335,9 @@ quotes by sardar homepag eblock*/
   margin: auto;
 }
 /* line 1288, ../sass/custom.scss */
-.share-feedbackholder form input[type="text"], .share-feedbackholder form input[type="email"], .share-feedbackholder form textarea {
+.share-feedbackholder form input[type="text"],
+.share-feedbackholder form input[type="email"],
+.share-feedbackholder form textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -1672,7 +1681,7 @@ login form eblock*/
 #block-eminent-sardar-local-tasks ul li {
   display: inline-block;
   padding: 10px;
-  background: #CC7722;
+  background: #cc7722;
 }
 /* line 1534, ../sass/custom.scss */
 #block-eminent-sardar-local-tasks ul li a {
@@ -1742,7 +1751,8 @@ quotes by sardar homepag eblock*/
   color: #fff;
 }
 /* line 1595, ../sass/custom.scss */
-.quotes-by-sardar .quoteslideritem h2:before, .quotes-by-sardar .quoteslideritem h2:after,
+.quotes-by-sardar .quoteslideritem h2:before,
+.quotes-by-sardar .quoteslideritem h2:after,
 .quotes-by-sardar .quoteslideritem p:before,
 .quotes-by-sardar .quoteslideritem p:after {
   color: #fff;
@@ -1780,11 +1790,11 @@ quotes by sardar homepag eblock*/
   border-radius: 25px;
   border: 0;
   font-size: 0;
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 /* line 1629, ../sass/custom.scss */
 .quotes-by-sardar .slick-dots li.slick-active button {
-  background: #7F8C8D;
+  background: #7f8c8d;
 }
 
 /* line 1636, ../sass/custom.scss */
@@ -1808,7 +1818,8 @@ helper styles*/
   }
 
   /* line 1651, ../sass/custom.scss */
-  .navbar-left, .navbar-right {
+  .navbar-left,
+  .navbar-right {
     float: none !important;
   }
 
@@ -1994,7 +2005,7 @@ styles for the header*/
 /* line 1796, ../sass/custom.scss */
 .navbar-fixed-top {
   background: #fff;
-  border-bottom: 1px solid #C8C8C8;
+  border-bottom: 1px solid #c8c8c8;
 }
 
 /* line 1802, ../sass/custom.scss */
@@ -2046,7 +2057,7 @@ styles for the search form in the header*/
 /* line 1838, ../sass/custom.scss */
 #header .search i {
   cursor: pointer;
-  color: #7E7E7E;
+  color: #7e7e7e;
   margin-right: 8px;
 }
 
@@ -2196,11 +2207,11 @@ styles for the search form in the home page*/
   user-select: none;
   padding: 8px 20px;
   background: transparent;
-  color: #CC7722;
+  color: #cc7722;
   border: none;
   margin-top: 10px;
   margin: auto;
-  border: 1px solid #CC7722;
+  border: 1px solid #cc7722;
   max-width: 190px;
 }
 /* line 1976, ../sass/custom.scss */
@@ -2266,6 +2277,7 @@ Mobile styles for the header*/
   }
 }
 /* line 2028, ../sass/custom.scss */
-#header .navbar .navbar-inverse .navbar-toggle, #header .navbar .navbar-toggle {
+#header .navbar .navbar-inverse .navbar-toggle,
+#header .navbar .navbar-toggle {
   background: #333;
 }

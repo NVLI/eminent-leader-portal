@@ -1,9 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=EB+Garamond');
-@import url('https://fonts.googleapis.com/css?family=Mukta+Vaani');
-body {
-  font-family: 'Mukta Vaani', sans-serif;
-  font-size: 16px;
-}
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond');@import url('https://fonts.googleapis.com/css?family=Mukta+Vaani'); body,
 h1,
 h2,
 h3,
@@ -14,16 +9,18 @@ p,
 a {
   font-family: 'Mukta Vaani', sans-serif;
 }
+body {
+  font-size: 16px;
+}
 
 h1 {
- font-weight: 200;
+  font-weight: 200;
 }
 .slidercontent h1 {
   font-family: 'Mukta Vaani', sans-serif;
 }
 #bottom .navbar-brand img {
   width: 100%;
-
 }
 #header {
   background-color: #cc7722;
@@ -241,7 +238,7 @@ video,
   background-color: rgba(241, 241, 241, 1);
 }
 .a {
-  color: #D35400 !important;
+  color: #d35400 !important;
 }
 .a:hover {
   color: #111;
@@ -276,7 +273,7 @@ body {
 }
 .navbar-inverse .navbar-nav > li > a:focus {
   background-color: transparent;
-  color: #66686F;
+  color: #66686f;
 }
 .thumbnail {
   margin-bottom: 0;
@@ -301,7 +298,7 @@ body {
   margin: auto;
 }
 .responses {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 @media (min-width: 768px) {
   #header .search {
@@ -379,7 +376,7 @@ margin-bottom: 10px;
 }
 .lang-dropdown-select-element.form-select {
   background: transparent;
-  border: 1px solid #FFF;
+  border: 1px solid #fff;
   color: #fff;
 }
 .lang-dropdown-select-element.form-select option {
@@ -444,7 +441,8 @@ margin-bottom: 10px;
     height: 636px !important;
     box-sizing: unset !important;
   }
-  #main-slider .carousel-inner::after, #main-slider .carousel-inner::before {
+  #main-slider .carousel-inner::after,
+  #main-slider .carousel-inner::before {
     box-sizing: unset !important;
   }
 }
@@ -455,7 +453,7 @@ margin-bottom: 10px;
 }
 .slick-slider .slick-arrow {
   top: auto;
-  bottom: -50px
+  bottom: -50px;
 }
 .home-search {
   background-color: #f9f9f9;
@@ -498,12 +496,12 @@ margin-bottom: 10px;
 }
 
 #playlist .list-group-item {
-	border-radius:0px;
-	cursor:pointer;
+  border-radius: 0px;
+  cursor: pointer;
   min-height: 70px;
 }
 #playlist .list-group .active {
-	background-color:#eee;
+  background-color: #eee;
 }
 #playlist .carousel-inner {
   width: 66.66666666666666%;

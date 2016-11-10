@@ -1,16 +1,18 @@
 <?php
 
+/**
+ * @file
+ * Eminent sardar theme modifications.
+ */
+
 use Drupal\Core\Url;
-use Drupal\Core\Template\Attribute;
-use Drupal\block\Entity\Block;
 use Drupal\user\Entity;
 use Drupal\Core\Link;
-use Drupal\views\Views;
-use Drupal\views\ViewEntityInterface;
 use Drupal\Core\Render\Markup;
-use Drupal\Component\Utility\Unicode;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\views\Views;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements template_preprocess_field.
@@ -26,13 +28,12 @@ function eminent_sardar_preprocess_field(&$variables, $hook) {
 }
 
 /**
- * Implements hook_theme_suggestions_alter.
+ * Implements eminent_sardar_theme_suggestions_alter.
  */
-
 function eminent_sardar_theme_suggestions_alter(array &$suggestions, array $variables) {
   if (isset($variables['element']) && isset($variables['element']['#type']) && isset($variables['element']['#id'])) {
-      $original_theme_hook = $variables['theme_hook_original'];
-      $suggestions[] = $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']);
+    $original_theme_hook = $variables['theme_hook_original'];
+    $suggestions[] = $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']);
   }
   return $suggestions;
 }
@@ -70,8 +71,8 @@ function eminent_sardar_preprocess_views_view(&$variables) {
 }
 
 /**
-* Implements hook_preprocess_node() .
-*/
+ * Implements hook_preprocess_node().
+ */
 function eminent_sardar_preprocess_node(&$variables) {
   $node = $variables['node'];
   if ($node->getType() == 'play_list') {
@@ -87,17 +88,16 @@ function eminent_sardar_preprocess_node(&$variables) {
       $variables['playlist'][] = $playlist;
     }
 
-
   }
 
 }
+
 /**
-* Implements hook_preprocess_node() for Media document templates.
-*/
+ * Implements eminent_sardar_preprocess_media() for Media document templates.
+ */
 function eminent_sardar_preprocess_media(&$variables) {
   // Get the current user.
   $user = \Drupal::currentUser();
-
 
   // Fetch the media id.
   $media_id = $variables['elements']['#media']->id();
@@ -116,52 +116,43 @@ function eminent_sardar_preprocess_media(&$variables) {
 
   $variables['feedback_form'] = $form;
 
-  
-    if ($user->hasPermission('remove media from timeline')) {
-      // Load the Media Referred Timeline View.
-      $view = \Drupal\views\Views::getView('media_referred_timeline');
+  if ($user->hasPermission('remove media from timeline')) {
+    // Load the Media Referred Timeline View.
+    $view = Views::getView('media_referred_timeline');
 
-      // Set the display machine id.
-      //$view->setDisplay('media_referred_timeline_block_1');
+    // Get the title.
+    $title = $view->getTitle();
 
-      // Get the title.
-      $title = $view->getTitle();
+    // Render.
+    $render = $view->render();
 
-      // Render.
-      $render = $view->render();
+    $the_title_render_array = [
+      '#markup' => t('@title', ['@title' => $title]),
+      '#allowed_tags' => ['h2'],
+    ];
 
-      $the_title_render_array = [
-        '#markup' => t('@title', ['@title'=> $title]),
-        '#allowed_tags' => ['h2'],
-      ];
+    $variables['media_referred_timeline']['view_title'] = $the_title_render_array;
+    $variables['media_referred_timeline']['view_output'] = $render;
+  }
+  if ($user->hasPermission('remove media from playlist')) {
+    // Load the Media Referred Playlist View.
+    $view = Views::getView('media_referred_playlist');
 
-      $variables['media_referred_timeline']['view_title'] = $the_title_render_array;
-      // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
-      $variables['media_referred_timeline']['view_output'] = $render;
-    }
-    if ($user->hasPermission('remove media from playlist')) {
-      // Load the Media Referred Playlist View.
-      $view = \Drupal\views\Views::getView('media_referred_playlist');
+    // Get the title.
+    $title = $view->getTitle();
 
-      // Set the display machine id.
-      //$view->setDisplay('media_referred_timeline_block_1');
+    // Render.
+    $render = $view->render();
 
-      // Get the title.
-      $title = $view->getTitle();
+    $the_title_render_array = [
+      '#markup' => t('@title', ['@title' => $title]),
+      '#allowed_tags' => ['h2'],
+    ];
 
-      // Render.
-      $render = $view->render();
+    $variables['media_referred_playlist']['view_title'] = $the_title_render_array;
+    $variables['media_referred_playlist']['view_output'] = $render;
 
-      $the_title_render_array = [
-        '#markup' => t('@title', ['@title'=> $title]),
-        '#allowed_tags' => ['h2'],
-      ];
-
-      $variables['media_referred_playlist']['view_title'] = $the_title_render_array;
-      // Or $variables['media_related_timeline']['view_title']['#prefix'] = $title;.
-      $variables['media_referred_playlist']['view_output'] = $render;
-
-    }
+  }
 
   // Fetch the media type.
   $variables['media_type'] = $variables['elements']['#media']->bundle();
@@ -183,7 +174,7 @@ function eminent_sardar_preprocess_media(&$variables) {
       ],
     ]);
 
-    $variables['addtotimeline'] =  array(
+    $variables['addtotimeline'] = array(
       '#type' => 'markup',
       '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-flag" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
@@ -193,7 +184,7 @@ function eminent_sardar_preprocess_media(&$variables) {
     );
   }
 
-    // Check whether the user has permission to create Time Line Collection.
+  // Check whether the user has permission to create Time Line Collection.
   if ($user->hasPermission('create play_list content')) {
 
     // Generate the add link.
@@ -210,7 +201,7 @@ function eminent_sardar_preprocess_media(&$variables) {
       ],
     ]);
 
-    $variables['addtoplaylist'] =  array(
+    $variables['addtoplaylist'] = array(
       '#type' => 'markup',
       '#markup' => Link::fromTextAndUrl(Markup::create('<i class="fa fa-list" aria-hidden="true"></i>'), $add_playlist_url)->toString(),
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
@@ -219,12 +210,12 @@ function eminent_sardar_preprocess_media(&$variables) {
       ],
     );
   }
-
 }
+
 /**
-* Implements feedback form alter.
-*/
-function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+ * Implements feedback form alter.
+ */
+function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   $media = \Drupal::request()->attributes->get('media');
   if (!empty($media)) {
@@ -235,38 +226,38 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
     $form['#prefix'] = '<div id="myform-ajax-wrapper">';
     $form['#suffix'] = '</div>';
 
-    // Name
+    // Name.
     $form['name']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['name']['#suffix'] = '</div></div>';
     $form['name']['#attributes']['class'][] = 'form-control';
-    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . '*';
     $form['name']['#title_display'] = FALSE;
 
-    // Mail
+    // Mail.
     $form['mail']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['mail']['#suffix'] = '</div></div>';
     $form['mail']['#attributes']['class'][] = 'form-control';
-    $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+    $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'] . '*';
     $form['mail']['#title_display'] = FALSE;
 
-    // Subject
+    // Subject.
     $form['subject']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['subject']['#suffix'] = '</div></div>';
     $form['subject']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
     $form['subject']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
-    $form['subject']['widget'][0]['value']['#default_value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id ));
-    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
+    $form['subject']['widget'][0]['value']['#default_value'] = t('Media Feedback for: @url', array('@url' => 'media/' . $current_media_id));
+    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'] . '*';
     $form['subject']['widget'][0]['#title_display'] = FALSE;
 
-    // Message
+    // Message.
     $form['message']['#prefix'] = '<div class="col-sm-12"><div class="form-group">';
     $form['message']['#suffix'] = '</div></div>';
     $form['message']['widget'][0]['value']['#attributes']['class'][] = 'form-control';
-    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
+    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'] . '*';
     $form['message']['widget'][0]['#title'] = '';
     $form['message']['widget'][0]['value']['#title_display'] = FALSE;
 
-    // Submit
+    // Submit.
     $form['actions']['#prefix'] = '<div class="col-sm-12"><div class="clearfix">';
     $form['actions']['#suffix'] = '</div></div>';
     $form['actions']['submit']['#attributes']['class'][] = 'btn';
@@ -274,7 +265,7 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
     $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
     $form['actions']['submit']['#submit'][] = 'eminent_sardar_contact_submit';
 
-    // Preview
+    // Preview.
     $form['actions']['#prefix'] = '<div class="clearfix">';
     $form['actions']['#suffix'] = '</div>';
     $form['actions']['preview']['#attributes']['class'][] = 'btn';
@@ -283,7 +274,10 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, \
   }
 }
 
-function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+/**
+ * Implements feedback form submit.
+ */
+function eminent_sardar_contact_submit(&$form, FormStateInterface $form_state) {
 
   $media = \Drupal::request()->attributes->get('media');
   if (!empty($media)) {
@@ -295,49 +289,49 @@ function eminent_sardar_contact_submit(&$form, \Drupal\Core\Form\FormStateInterf
   }
 
 }
+
 /**
-* Implements contact form alter.
-*/
-function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+ * Implements contact form alter.
+ */
+function eminent_sardar_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   $form['#prefix'] = '<div id="myform-ajax-wrapper">';
   $form['#suffix'] = '</div>';
 
-  // Name
+  // Name.
   $form['name']['#prefix'] = '<div class="col-sm-6">';
   $form['name']['#suffix'] = '</div>';
-  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'].'*';
+  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . '*';
   unset($form['name']['#title']);
 
-  // Mail
+  // Mail.
   $form['mail']['#prefix'] = '<div class="col-sm-6">';
   $form['mail']['#suffix'] = '</div>';
-  $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'].'*';
+  $form['mail']['#attributes']['placeholder'][] = $form['mail']['#title'] . '*';
   unset($form['mail']['#title']);
 
-
-  // Subject
+  // Subject.
   $form['subject']['#prefix'] = '<div class="col-sm-12">';
   $form['subject']['#suffix'] = '</div>';
-  $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'].'*';
+  $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'] . '*';
   $form['subject']['widget'][0]['#title'] = '';
   unset($form['subject']['widget'][0]['value']['#title']);
 
-  // Message
+  // Message.
   $form['message']['#prefix'] = '<div class="col-sm-12">';
   $form['message']['#suffix'] = '</div>';
-  $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'].'*';
+  $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = $form['message']['widget'][0]['#title'] . '*';
   $form['message']['widget'][0]['#title'] = '';
   unset($form['message']['widget'][0]['value']['#title']);
 
-  // Submit
+  // Submit.
   $form['actions']['#prefix'] = '<div class="clearfix">';
   $form['actions']['#suffix'] = '</div>';
   $form['actions']['submit']['#attributes']['class'][] = 'btn';
   $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
   $form['actions']['submit']['#attributes']['class'][] = 'pull-right';
 
-  // Preview
+  // Preview.
   $form['actions']['#prefix'] = '<div class="clearfix">';
   $form['actions']['#suffix'] = '</div>';
   $form['actions']['preview']['#attributes']['class'][] = 'btn';
@@ -347,20 +341,20 @@ function eminent_sardar_form_contact_message_feedback_form_alter(&$form, \Drupal
 }
 
 /**
-* Implements hook_form_alter.
-*/
-function eminent_sardar_views_exposed_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+ * Implements exposed form alter.
+ */
+function eminent_sardar_views_exposed_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if (isset($_GET['keyword'])) {
     $form['keyword']['#default_value'] = $_GET['keyword'];
   }
 }
 
 /**
- * Implements hook_preprocess_page.
+ * Implements eminent_sardar_preprocess_page.
  */
 function eminent_sardar_preprocess_page(&$variables) {
 
-  //Get contact form as block.
+  // Get contact form as block.
   $message = \Drupal::entityManager()->getStorage('contact_message')
     ->create(array(
       'contact_form' => 'feedback',
@@ -384,11 +378,11 @@ function eminent_sardar_preprocess_page(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_page.
+ * Implements eminent_sardar_preprocess_paragraph.
  */
 function eminent_sardar_preprocess_paragraph(&$variables) {
   $paragraph = $variables['elements']['#paragraph'];
-  if($paragraph->getType() == 'time_line_story'){
+  if ($paragraph->getType() == 'time_line_story') {
     $media_entity_id = $paragraph->get('field_time_line_media_reference')->target_id;
     $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
     $media_content = entity_load('media', $media_entity_id);
@@ -403,7 +397,7 @@ function eminent_sardar_preprocess_paragraph(&$variables) {
     $variables['media_url'] = $media_url;
     $variables['media_image_url'] = $media_image_url;
   }
-  if($paragraph->getType() == 'play_list_story'){
+  if ($paragraph->getType() == 'play_list_story') {
     $media_entity_id = $paragraph->get('field_play_list_media_reference')->target_id;
     $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_entity_id));
 
@@ -425,15 +419,15 @@ function eminent_sardar_preprocess_views_view_unformatted(&$variables) {
     foreach ($rows as $row) {
       $node = $row['content']['#node'];
       $nid = $node->Id();
-      // Generate id from title
-      $id = $node->getTitle(). $node->Id();
-      //Lower case everything
+      // Generate id from title.
+      $id = $node->getTitle() . $node->Id();
+      // Lower case everything.
       $id = strtolower($id);
-      //Make alphanumeric (removes all other characters)
+      // Make alphanumeric (removes all other characters).
       $id = preg_replace("/[^a-z0-9_\s-]/", "", $id);
-      //Clean up multiple dashes or whitespaces
+      // Clean up multiple dashes or whitespaces.
       $id = preg_replace("/[\s-]+/", " ", $id);
-      //Convert whitespaces and underscore to dash
+      // Convert whitespaces and underscore to dash.
       $id = preg_replace("/[\s_]/", "-", $id);
       $tab_id = '#' . $id;
       $tabs[$nid]['title'] = $node->getTitle();
