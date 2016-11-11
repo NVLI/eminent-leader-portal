@@ -43,8 +43,6 @@ function eminent_sardar_theme_suggestions_alter(array &$suggestions, array $vari
  */
 function eminent_sardar_preprocess_views_view(&$variables) {
   $keyword = NULL;
-  $view = $variables['view'];
-  $view_title = $view->storage;
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (isset($_GET['keyword'])) {
     $keyword = $variables['search_keyword'] = $_GET['keyword'];
@@ -102,8 +100,6 @@ function eminent_sardar_preprocess_media(&$variables) {
   // Fetch the media id.
   $media_id = $variables['elements']['#media']->id();
   $variables['media_id'] = $media_id;
-
-  $view_mode = $variables['elements']['#view_mode'];
 
   $media_url = Url::fromRoute('entity.media.canonical', array('media' => $media_id));
   $variables['media_url'] = $media_url;
@@ -220,8 +216,6 @@ function eminent_sardar_form_contact_message_media_feedback_form_alter(&$form, F
   $media = \Drupal::request()->attributes->get('media');
   if (!empty($media)) {
     $current_media_id = $media->id();
-
-    $media_url = Url::fromRoute('entity.media.canonical', array('media' => $current_media_id));
 
     $form['#prefix'] = '<div id="myform-ajax-wrapper">';
     $form['#suffix'] = '</div>';
