@@ -73,7 +73,7 @@
 <section id="exibition_details">
   <div class="container">
     <div class="wow fadeInDown">
-        <p class="lead"> {{ content.field_description }}</p>
+      <p class="lead"> {{ content.field_description }}</p>
     </div>
     <article{{ attributes }}>
 
@@ -103,7 +103,16 @@
                 <h4>{{ item.title }}</h4>
               </li>
             {% endfor %}
-            </ul>
+          </ul>
+          <!-- Controls -->
+          <div class="carousel-controls">
+            <a class="left carousel-control" href="#playlist" data-slide="prev">
+              Previous
+            </a>
+            <a class="right carousel-control" href="#playlist" data-slide="next">
+              Next
+            </a>
+          </div>
         </div>
       </div>
 

@@ -520,3 +520,23 @@ body {
 .exhibitions-icon > img {
   float: left;
 }
+.carousel-control {
+  top: auto;
+  bottom: -10px;
+}
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+  background: none;
+  color: #cc7722;
+}
+@media (min-width: 992px) {
+  #playlist .carousel-controls {
+    display:none;
+  }
+}
+@media (max-width: 991px) {
+	#playlist .list-group {
+    display:none;
+  }
+}
