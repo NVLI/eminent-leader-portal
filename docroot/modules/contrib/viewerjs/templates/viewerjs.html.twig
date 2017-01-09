@@ -18,14 +18,6 @@
 #}
 <div class="viewerjs-field-item">
     <div {{ attributes }}>
-      {{ description }}
-      <span class="size">{{ size }}</span>
-      <a href="{{ download_link }}" target="_blank" class="download">{{ 'Download'|t }}</a>
-      {% if(preview_link) %}
-        <a class="{{ preview_link.class }}" href="{{ preview_link.path }}"
-            data-viewerjs-overlay-width="{{ preview_link.width }}"
-            data-viewerjs-overlay-height="{{ preview_link.height }}"
-            data-viewerjs-overlay-id="{{ preview_link.id }}" >{{ 'Preview'|t }}</a>
-      {% endif %}
+      <iframe src = "{{ preview_link.path }}" width="{{ preview_link.width }}" height="{{ preview_link.height }}" allowfullscreen webkitallowfullscreen></iframe>
     </div>
 </div>
