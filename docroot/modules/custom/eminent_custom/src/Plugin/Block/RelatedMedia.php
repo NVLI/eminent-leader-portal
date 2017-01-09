@@ -152,6 +152,9 @@ class RelatedMedia extends BlockBase {
     return array(
       '#theme' => 'related_media',
       '#media_items' => $output,
+      '#cache' => [
+        'max-age' => 0,
+      ],
     );
   }
 
