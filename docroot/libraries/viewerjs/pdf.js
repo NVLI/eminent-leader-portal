@@ -3876,7 +3876,10 @@ PDFJS.getDocument = function getDocument(source,
   var params = {};
   for (var key in source) {
     if (key === 'url' && typeof window !== 'undefined') {
-      params[key] = combineUrl(window.location.href, source[key]);
+      var fullUrl = window.location.href;
+      var res = fullUrl.split("#");
+      var documentUrl = res[0] + '#' + atob(res[1]);
+      params[key] = combineUrl(documentUrl, source[key]);
       continue;
     }
     params[key] = source[key];
