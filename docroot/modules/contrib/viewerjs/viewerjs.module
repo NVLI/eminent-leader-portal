@@ -73,6 +73,7 @@ function viewerjs_theme() {
         'size' => NULL,
         'thumbnail' => NULL,
         'download_link' => NULL,
+        'base_url' => NULL,
         'preview_link' => array(),
         'attributes' => array(),
       ),
