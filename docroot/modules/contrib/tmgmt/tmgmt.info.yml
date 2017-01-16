@@ -1,0 +1,22 @@
+name: 'Translation Management Core'
+description: 'Core functionality for the Translation Management Suite.'
+package: 'Translation Management'
+# core: 8.x
+type: module
+configure: tmgmt.settings
+
+dependencies:
+ - language
+ - views
+ - block
+ - options
+
+simplytest_dependencies:
+ - tmgmt_demo
+
+
+# Information added by Drupal.org packaging script on 2016-07-01
+version: '8.x-1.0-rc2'
+core: '8.x'
+project: 'tmgmt'
+datestamp: 1467358142
