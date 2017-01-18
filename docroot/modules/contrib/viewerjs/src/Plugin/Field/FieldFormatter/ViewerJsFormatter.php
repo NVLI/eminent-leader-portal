@@ -158,7 +158,8 @@ class ViewerJsFormatter extends FormatterBase {
           '#file' => $item->entity,
           '#description' => $item->description,
           '#size' => $size,
-          '#download_link' => $download_url,
+          '#download_link' => base64_encode($download_url),
+          '#base_url' => $base_url,
           '#preview_link' => $preview_link,
           '#attributes' => array(),
         );

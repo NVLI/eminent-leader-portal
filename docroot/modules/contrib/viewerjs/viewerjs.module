@@ -4,7 +4,7 @@
  * File previewer using ViewerJS Library.
  */
 
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Extension;
@@ -73,6 +73,7 @@ function viewerjs_theme() {
         'size' => NULL,
         'thumbnail' => NULL,
         'download_link' => NULL,
+        'base_url' => NULL,
         'preview_link' => array(),
         'attributes' => array(),
       ),
@@ -89,10 +90,10 @@ function template_preprocess_viewerjs(&$variables) {
   $preview_link = $variables['preview_link'];
 
   if (!empty($variables['description'])) {
-    $variables['description'] = String::checkPlain($variables['description']);
+    $variables['description'] = SafeMarkup::checkPlain($variables['description']);
   }
   else {
-    $variables['description'] = $file->getFilename();
+    $variables['description'] = SafeMarkup::checkPlain($file->getFilename());
   }
 
   // Classes to add to the file field for icons.

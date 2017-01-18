@@ -14,7 +14,7 @@
 #}
 <article{{ attributes }}>
   <section class="media_details" id="media_details">
-    <div class="meidiablock">
+    <div class="mediablock">
       <div class="row">
         <div class="col-md-7">
           <div class="media-preview ">
@@ -35,11 +35,6 @@
               <section class="image">
                 {{ content.field_media_image }}
               </section>
-            {% endif %}
-            {% if media_type == "document" %}
-            <div class="resize-btn btn btn-default pull-right">
-              <span class="glyphicon glyphicon-resize-full" title="View full screen."></span>
-            </div>
             {% endif %}
             <div class="clearfix"></div>
           </div>
