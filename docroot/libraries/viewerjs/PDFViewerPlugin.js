@@ -216,6 +216,7 @@ function PDFViewerPlugin() {
                     pdfDocument.getPage(i + 1).then(createPage);
                 }
 
+                document.getElementById("canvasLoading").style.display = 'none';
                 initialized = true;
             });
         });
