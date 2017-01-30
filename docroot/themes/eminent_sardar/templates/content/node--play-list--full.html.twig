@@ -86,6 +86,11 @@
           <div class="carousel-inner col-sm-8">
             {{ content.field_play_list_story }}
           </div>
+          <div class="list-group-header">
+            <span class="list-group-title">
+              Collection of Related contents.
+            </span>
+          </div>
           <ul class="list-group col-sm-4">
             {% for item in playlist %}
               <li data-target="#playlist" data-slide-to="{{ loop.index0 }}" class="list-group-item {% if loop.index0 == 0 %} active {% endif %}">

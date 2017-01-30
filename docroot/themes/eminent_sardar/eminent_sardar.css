@@ -548,3 +548,12 @@ body {
     overflow-y: scroll;
   }
 }
+
+#exibition_details .list-group-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+#exibition_details .list-group-title {
+  font-size: 18px;
+  font-weight: bold;
+}
