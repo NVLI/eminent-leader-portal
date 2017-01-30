@@ -536,7 +536,15 @@ body {
   }
 }
 @media (max-width: 991px) {
-	#playlist .list-group {
+  #playlist .list-group {
     display:none;
+  }
+}
+
+/* Fixed height for Thematic collection list.*/
+@media (min-width: 992px) {
+  #exibition_details #playlist ul {
+    max-height: 500px;
+    overflow-y: scroll;
   }
 }
