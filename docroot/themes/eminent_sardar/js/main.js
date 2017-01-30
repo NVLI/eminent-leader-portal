@@ -352,4 +352,10 @@ jQuery(function ($) {'use strict',
   $("a[rel^='prettyPhoto']").prettyPhoto({
     social_tools: false
   });
+
+  // Stop sliding bootstrap carousel.
+  $('#exibition_details #playlist').carousel({
+    interval: false
+  });
+
 });
