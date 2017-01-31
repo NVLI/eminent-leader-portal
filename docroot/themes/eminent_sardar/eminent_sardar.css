@@ -500,9 +500,6 @@ body {
   cursor: pointer;
   min-height: 70px;
 }
-#playlist .list-group .active {
-  background-color: #eee;
-}
 #playlist .carousel-inner {
   width: 66.66666666666666%;
 }
@@ -556,4 +553,14 @@ body {
 #exibition_details .list-group-title {
   font-size: 18px;
   font-weight: bold;
+}
+
+#exibition_details #playlist .list-group li:hover {
+  background-color: #868B8F;
+  color: #fff;
+}
+
+#exibition_details #playlist .list-group li.active {
+  background-color: #6b6f72;
+  color: #fff;
 }
