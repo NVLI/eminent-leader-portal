@@ -564,3 +564,7 @@ body {
   background-color: #6b6f72;
   color: #fff;
 }
+
+.dc-owner div {
+  display: inline-block;
+}
