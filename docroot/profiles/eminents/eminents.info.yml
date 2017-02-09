@@ -1,0 +1,84 @@
+name: Eminents
+type: profile
+description: 'Eminents profile provides a virtual library for eminent personalities.'
+# version: VERSION
+# core: 8.x
+
+# Optional: Declare your installation profile as a distribution
+# This will make the installer auto-select this installation profile.
+# The distribution_name property is used in the installer and other places as
+# a label for the software being installed.
+distribution:
+  name: Eminents
+
+# Required modules
+dependencies:
+  - node
+  - history
+  - block
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - help
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - tour
+  - automated_cron
+  - audiofield
+  - captcha
+  - composer_manager
+  - ctools
+  - entity
+  - entity_browser
+  - entity_embed
+  - entityqueue
+  - entity_reference_revisions
+  - facets
+  - features
+  - field_collection
+  - file_browser
+  - google_analytics
+  - language_switcher_dropdown
+  - libraries
+  - media_entity
+  - media_entity_audio
+  - media_entity_browser
+  - media_entity_document
+  - media_entity_image
+  - paragraphs
+  - pathauto
+  - recaptcha
+  - search_api
+  - search_api_solr
+  - search_api_attachments
+  - slick
+  - slick_media
+  - slick_views
+  - tmgmt
+  - token
+  - viewerjs
+  themes:
+  - eminent

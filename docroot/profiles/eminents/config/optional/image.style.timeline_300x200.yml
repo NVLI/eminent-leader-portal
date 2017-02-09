@@ -1,0 +1,16 @@
+name: timeline_300×200
+label: 'Timeline 300×200'
+dependencies: {  }
+effects:
+  d2b9840c-d428-4e5e-962a-74d9b0f07de1:
+    uuid: d2b9840c-d428-4e5e-962a-74d9b0f07de1
+    id: image_scale
+    weight: 2
+    data:
+      width: 300
+      height: 200
+      upscale: false
+langcode: en
+status: true
+
+
