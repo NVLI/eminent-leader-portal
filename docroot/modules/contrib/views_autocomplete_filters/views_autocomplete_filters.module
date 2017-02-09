@@ -1,6 +1,0 @@
-<?php
-
-/**
- * @file
- * Extend the Views StringFilter and Combine filter with autocomplete.
- */
