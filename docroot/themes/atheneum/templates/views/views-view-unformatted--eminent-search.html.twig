@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="exhibition">
+    <div id="recent-works" class="exibition-listing">
+      <div class = "row">
+        {% for row in rows %}
+          <div class="col-xs-12 col-md-3">
+            {{ row.content }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

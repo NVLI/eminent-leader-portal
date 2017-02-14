@@ -1,0 +1,49 @@
+{#
+/**
+ * Default theme implementation for Views to output a TARDIS archive.
+ *
+ * Available variables:
+ * - options: View plugin style options:
+ *   - classes: CSS classes.
+ *   - nesting: Whether months should be nested inside years.
+ *   - path: Link path. Eg.: example.com/TARDIS/2016/03
+ *   - time_pool: Two-dimension array containing years and months with content.
+ *
+ * @see template_preprocess_views_view_tardis()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    options.classes
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div id="slickQuiz">
+    <h3 class="quizName"><!-- where the quiz name goes --></h3>
+    <div class="quizArea">
+      <div class="quizHeader">
+        <!-- where the quiz main copy goes -->
+          <a class="startQuiz" href="#">Get Started!</a>
+      </div>
+      <!-- where the quiz gets built -->
+    </div>
+    <div class="quizResults">
+      <div class="quizResultsCopy center">
+        <!-- where the quiz result copy goes -->
+      </div>
+      <h3 class="quizScore">
+        {% trans %}
+          You Scored
+        {% endtrans %}
+        :
+        <span><!-- where the quiz score goes --></span></h3>
+      <h3 class="quizLevel"><strong>
+        {% trans %}
+          Ranking
+        {% endtrans %}
+        :</strong> <span><!-- where the quiz ranking level goes --></span></h3>
+    </div>
+  </div>
+</div>

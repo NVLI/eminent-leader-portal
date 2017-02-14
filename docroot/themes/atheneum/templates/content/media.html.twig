@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present a media entity.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  <section class="media_details" id="media_details">
+    <div class="mediablock">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="media-preview ">
+            {% if media_type == "audio" %}
+              <div>
+                {{ content.field_media_audio }}
+              </div>
+            {% elseif media_type == "document" %}
+              <div class="pdf-holder-ex">
+                {{ content.field_media_document }}
+              </div>
+            {% elseif media_type == "video" %}
+              <div>
+                {{ content.field_media_video }}
+                {{ content.field_media_video_embed_field }}
+              </div>
+            {% else %}
+              <section class="image">
+                {{ content.field_media_image }}
+              </section>
+            {% endif %}
+            <div class="clearfix"></div>
+            <div class="dc-owner">
+              <span>{{ content.field_dc_owner }}</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="media-preview-description ">
+            <p>{{ content.field_dc_description }}</p>
+            <div class="panel-group" id="metadata" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#metadata" href="#col-metadata" aria-expanded="true" aria-controls="collapseOne">
+                      View Meta Data
+                    </a>
+                  </h4>
+                </div>
+                <div id="col-metadata" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    {{ content|without('name', 'field_dc_description', 'field_media_video', 'field_media_audio', 'field_media_document', 'field_media_image', 'field_media_video_embed_field', 'field_dc_owner')}}
+                    <div class="media-feedback">
+                      <h3>Feedback Form</h3>
+                      {{ feedback_form }}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{ addtoplaylist }}
+            {{ addtotimeline }}
+            <div class="clearfix">
+              <h2>{{ media_referred_timeline.view_title }}</h2>
+              {{ media_referred_timeline.view_output }}
+            </div>
+            <div class="clearfix">
+              <h2>{{ media_referred_playlist.view_title }}</h2>
+              {{ media_referred_playlist.view_output }}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

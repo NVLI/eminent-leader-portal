@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - atheneum
+id: atheneum_help
+theme: atheneum
+region: '-1'
+weight: -18
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

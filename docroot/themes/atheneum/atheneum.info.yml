@@ -1,0 +1,32 @@
+name: Atheneum theme.
+description: A complete light weight theme with bootstrap framework for eminent portal.
+type: theme
+core: 8.x
+
+# Defines the base theme
+base theme: stable
+
+# Defines libraries group in which we can add css/js.
+libraries:
+  - atheneum/global-components
+  - atheneum/global-js
+
+# Defines the regions for the theme
+regions:
+  content: 'Main Content'
+  page_title: 'Title'
+  home_banner: 'Home Banner'
+  home_search: 'Home Search'
+  logo: 'Logo'
+  search_filters: 'Search form with filters'
+  search_facets: 'Search facets'
+  content_bottom: 'Content Bottom'
+  content_middle: 'Content Middle'
+  footer_first_column: 'Footer first column'
+  footer_second_column: 'Footer second column'
+  footer_third_column: 'Footer third column'
+  bottom_footer_first: 'Bottom footer first'
+  home_quiz: 'Home Quiz'
+  home_exhibitions: 'Home Exhibitions'
+  home_timelines: 'Home Time Lines'
+  header: 'Header'

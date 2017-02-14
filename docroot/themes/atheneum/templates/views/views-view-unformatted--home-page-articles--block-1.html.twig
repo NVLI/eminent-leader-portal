@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+<div class="parrent pull-left">
+  <ul class="nav nav-tabs nav-stacked">
+    {% for tab in tabs %}
+      <li class = {% if loop.first %} active {% endif %}><a href="{{tab.id}}" data-toggle="tab"><i class="fa  fa-dot-circle-o" aria-hidden="true"></i> {{tab.title}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="parrent media-body">
+  <div class="tab-content">
+    {% for nid, row in rows %}
+      <div class="tab-pane fade {% if loop.first %} active in {% endif %} " id="{{ row.tab_id }}">
+        {{ row.content }}
+      </div>
+    {% endfor %}
+  </div>
+</div>

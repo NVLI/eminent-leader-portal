@@ -1,0 +1,114 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the Slick carousel template.
+ *
+ * This template holds 3 displays: main, thumbnail and overlay slicks in one.
+ * Arrows are enforced, but toggled by JS accordingly. This allows responsive
+ * object to enable and disable it as needed without losing context.
+ *
+ * Available variables:
+ * - items: The array of items containing main image/video/audio, optional
+ *     image/video/audio overlay and captions, and optional thumbnail
+ *     texts/images.
+ * - settings: A cherry-picked settings that mostly defines the slide HTML or
+ *     layout, and none of JS settings/options which are defined at data-slick.
+ * - attributes: The array of attributes to hold the main container classes, id.
+ * - content_attributes: The array of attributes to hold optional RTL, id and
+ *     data-slick containing JSON object aka JS settings the Slick expects to
+ *     override default options. We don't store these JS settings in the normal
+ *     <head>, but inline within data-slick attribute instead.
+ *
+ * Debug:
+ * @see https://www.drupal.org/node/1906780
+ * @see https://www.drupal.org/node/1903374
+ * Use Kint: {{ kint(variable) }}
+ * Dump all available variables and their contents: {{ dump() }}
+ * Dump only the available variable keys: {{ dump(_context|keys) }}
+ */
+#}
+{%
+  set classes = [
+    'slick',
+    settings.unslick ? 'unslick',
+    settings.blazy ? 'blazy',
+    settings.attributes.class ? settings.attributes.class|join(' '),
+    settings.skin ? 'slick--skin--' ~ settings.skin|clean_class,
+    'boxed' in settings.skin ? 'slick--skin--boxed',
+    'split' in settings.skin ? 'slick--skin--split',
+    settings.optionset ? 'slick--optionset--' ~ settings.optionset|clean_class,
+    settings.downArrow ? 'slick--has-arrow-down',
+    settings.asNavFor ? 'slick--' ~ display|clean_class,
+    settings.slidesToShow > 1 ? 'slick--multiple-view',
+    display == 'main' and settings.media_switch ? 'slick--' ~ settings.media_switch|clean_class,
+    display == 'thumbnail' and settings.thumbnail_caption ? 'slick--has-caption'
+  ]
+%}
+{%
+  set arrow_classes = [
+    'slick__arrow',
+    settings.skin_arrows ? 'slick__arrow--' ~ settings.skin_arrows|clean_class
+  ]
+%}
+{% if display == "main" %}
+  <div class = "row">
+  <div class = "exibition_slider">
+    {% spaceless %}
+    <div id="{{ attributes.id|clean_id }}"{{ attributes.addClass(classes)|without('id') }}>
+      {% if not settings.unslick %}
+        <div id="{{ content_attributes.id|clean_id }}"{{ content_attributes.addClass('slick__slider')|without('id') }}>
+      {% endif %}
+
+        {% for item in items %}
+          {{ item }}
+        {% endfor %}
+
+      {% if not settings.unslick %}
+        </div>
+        <nav{{ settings.arrow.attributes.addClass(arrow_classes) }}>
+          {{ settings.prevArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+          {% if settings.downArrow.attributes is defined %}
+            <button{{ settings.downArrow.attributes.addClass('slick-down')
+              .setAttribute('type', 'button')
+              .setAttribute('data-target', settings.downArrowTarget)
+              .setAttribute('data-offset', settings.downArrowOffset) }}></button>
+          {% endif %}
+          {{ settings.nextArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+        </nav>
+      {% endif %}
+    </div>
+    {% endspaceless %}
+  </div> </div>
+{% endif %}
+
+
+{% if display == "thumbnail" %}
+  <div class = "row">
+  <div class = "exibition_pager col-md-12">
+    {% spaceless %}
+    <div id="{{ attributes.id|clean_id }}"{{ attributes.addClass(classes)|without('id') }}>
+      {% if not settings.unslick %}
+        <div id="{{ content_attributes.id|clean_id }}"{{ content_attributes.addClass('slick__slider')|without('id') }}>
+      {% endif %}
+
+        {% for item in items %}
+          {{ item }}
+        {% endfor %}
+
+      {% if not settings.unslick %}
+        </div>
+        <nav{{ settings.arrow.attributes.addClass(arrow_classes) }}>
+          {{ settings.prevArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+          {% if settings.downArrow.attributes is defined %}
+            <button{{ settings.downArrow.attributes.addClass('slick-down')
+              .setAttribute('type', 'button')
+              .setAttribute('data-target', settings.downArrowTarget)
+              .setAttribute('data-offset', settings.downArrowOffset) }}></button>
+          {% endif %}
+          {{ settings.nextArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+        </nav>
+      {% endif %}
+    </div>
+    {% endspaceless %}
+  </div></div>
+{% endif %}

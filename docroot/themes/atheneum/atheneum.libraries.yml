@@ -1,0 +1,26 @@
+global-components:
+  css:
+    theme:
+      css/bootstrap.min.css: {}
+      css/font-awesome.min.css: {}
+      css/animate.min.css: {}
+      css/main.css: {}
+      css/responsive.css: {}
+      css/prettyPhoto.css: {}
+      stylesheets/custom.css: {}
+      css/slick.css: {}
+      atheneum.css: {}
+global-js:
+  js:
+    js/bootstrap.min.js: {}
+    js/modernizr-video.js: {}
+    js/slick.min.js: {}
+    js/jquery.isotope.min.js: {}
+    js/jquery.prettyPhoto.js: {}
+    js/main.js: {}
+    js/wow.min.js: {}
+    js/timeline.js: {}
+    js/jquery.matchHeight.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

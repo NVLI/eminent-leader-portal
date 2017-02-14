@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present a media entity.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+<div class = "media-teaser ">
+  <div class = "item">
+    <div class = "thumbnail equal_height">
+      <section class = "item-body">
+        <article{{ attributes }}>
+          {% if media_type == "audio" %}
+            <a href="{{ media_url }}"><img src="/themes/atheneum/images/audio.png" class="img-responsive"></a>
+          {% elseif media_type == "document" %}
+            <a href="{{ media_url }}"><img src="/themes/atheneum/images/pdf.png" class="img-responsive"></a>
+          {% elseif media_type == "video" %}
+            <a href="{{ media_url }}"><img src="/themes/atheneum/images/video.png" class="img-responsive"></a>
+          {% else %}
+            {{ content.field_media_image }}
+          {% endif %}
+          <div class="text-center">
+            <h2>
+              {{ content.name }}
+            </h2>
+          </div>
+
+
+        </article>
+      </section>
+    </div>
+    <div class = "clearfix">
+      {{ addtotimeline }}
+      {{ addtoplaylist }}
+    </div>
+  </div>
+</div>
