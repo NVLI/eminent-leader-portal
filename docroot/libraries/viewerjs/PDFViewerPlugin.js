@@ -224,7 +224,8 @@ function PDFViewerPlugin() {
 
     this.isSlideshow = function () {
         // A very simple but generally true guess - if the width is greater than the height, treat it as a slideshow
-        return pageWidth > pageHeight;
+        //return pageWidth > pageHeight;
+        return false;
     };
 
     this.onLoad = function () {};
