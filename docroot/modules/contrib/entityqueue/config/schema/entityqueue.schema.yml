@@ -41,3 +41,6 @@ entityqueue.entity_queue.*:
         act_as_queue:
           type: boolean
           label: 'Act as queue'
+        reverse_in_admin:
+          type: boolean
+          label: 'Reverse order in admin view'

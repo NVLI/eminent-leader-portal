@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\Tests\tmgmt_config\Kernel\ConfigSourceUnitTest.
- */
-
 namespace Drupal\Tests\tmgmt_config\Kernel;
 
 use Drupal\language\Entity\ConfigurableLanguage;

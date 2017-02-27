@@ -8,17 +8,24 @@ data usage if they don't browse the whole page.
 FEATURES
 o Supports core Image.
 o Supports core Responsive image.
-o Supports Colorbox/Photobox.
+o Supports Colorbox/Photobox, also multimedia lightboxes.
 o Supports Retina display.
 o Multi-serving images for configurable XS, SM and MD breakpoints, almost
   similar to core Responsive image, only less complex.
-o CSS background lazyloading, see Mason, GridStack, and future Slick carousel.
-o IFRAME urls via custom coded.
+o CSS background lazyloading, see Mason, GridStack, and Slick carousel.
+o IFRAME urls via via custom coded, Blazy Image with Media entity via Video
+  Embed Media, or see Slick Video, Slick Media.
 o Delay loading for below-fold images until 100px (configurable) before they are
   visible at viewport.
 o A simple effortless CSS loading indicator.
 o It doesn't take over all images, so it can be enabled as needed via Blazy
   formatter, or its supporting modules.
+
+
+OPTIONAL FEATURES
+o Views fields for File ER and Media Entity integration.
+o Views style plugin Blazy Grid.
+o Field formatters: Blazy, and Blazy Image with Media integration.
 
 
 REQUIREMENTS
@@ -49,17 +56,25 @@ referring to an expected image or iframe URL, or to any supported element:
 IMG, IFRAME or DIV/BODY, etc.
 Non-media element, DIV/BODY/etc., will have background image lazyloaded instead.
 
-Wrap the parent container with [data-blazy] attribute containing the expected
-options to limit the scope.
+Wrap the parent container with [data-blazy attribute containing the expected
+options to limit the scope, or for simple need without aspect ratio. Add extra
+class .blazy to support aspect ratio with multi-serving images.
 And load the blazy library accordingly.
 
 
 MODULES THAT INTEGRATE WITH OR REQUIRE BLAZY
+o Blazy PhotoSwipe
 o GridStack
+o Intense
 o Mason
 o Slick (D8 only by now)
 o Slick Views (D8 only by now)
-Most duplication efforts from the above modules will be merged into Blazy.
+o Slick Media
+o Slick Video
+o Slick Browser
+
+Most duplication efforts from the above modules will be merged into
+\Drupal\blazy\Dejavu namespace.
 
 
 SIMILAR MODULES
@@ -68,43 +83,41 @@ https://www.drupal.org/project/lazyloader
 
 
 TROUBLESHOOTING
-Resing is not supported. Just reload the page.
+Resizing is not supported. Just reload the page.
 
 VIEWS INTEGRATION
-Be sure to check "Use field template" under "Style settings" when using Views,
-  if trouble with Blazy Formatter as stand alone Views output.
-  On the contrary, be sure to uncheck "Use field template", when Blazy formatter
+Blazy provides two simple Views fields for File ER, and Media Entity.
+
+When using Blazy formatter within Views, check "Use field template" under
+  "Style settings", if trouble with Blazy Formatter as stand alone Views output.
+  On the contrary, uncheck "Use field template", when Blazy formatter
   is embedded inside another module such as GridStack so to pass the renderable
   array accordingly.
   This is a Views common gotcha with field formatter, so be aware of it.
   This confusion should be solved later when Blazy formatter is aware of Views.
 
 MIN-WIDTH
-If the images appear to be shrinked within a floating container, be sure to add
+If the images appear to be shrinked within a floating container, add
   some expected width or min-width to the parent container via CSS accordingly.
   Non-floating image parent containers aren't affected.
 
 MIN-HEIGHT
-Be sure to add a min-height CSS to individual element to avoid layout reflow
-  if not using Aspect ratio or when Aspect ratio is not supported such as with
-  Responsive image. Otherwise some collapsed images containers will defeat
-  the purpose of lazyloading. When using CSS background, the container may also
-  be collapse.
-  Both layout reflow and lazyloading delay issues are actually tacken care of
-  if having Aspect ratio enabled in the first place.
+Add a min-height CSS to individual element to avoid layout reflow if not using
+  Aspect ratio or when Aspect ratio is not supported such as with Responsive
+  image. Otherwise some collapsed images containers will defeat the purpose of
+  lazyloading. When using CSS background, the container may also be collapsed.
+  Both layout reflow and lazyloading delay issues are actually taken care of
+  if Aspect ratio is enabled in the first place.
 
-The blazy.ratio.css adds this by default to prevent collapsing field container:
-  .blazy--ratio {
-    min-width: 50%;
-  }
-
-Adjust, and override it accordingly.
+Adjust, and override blazy CSS files accordingly.
 
 
 ROADMAP/TODO
 [x] Adds a basic configuration to load the library, probably an image formatter.
     2/24/2016
-o Media entity image/video, and Video embed field lazyloading, if any.
+[x] Media entity image/video, and Video embed field lazyloading, if any.
+    10/25/2016
+    Added both simple Blazy Media formatter and Views field Media Entity.
 o Makes a solid lazyloading solution for IMG, DIV, IFRAME tags.
 
 
@@ -114,13 +127,35 @@ some code cleanup, and optimization where needed. Patches are very much welcome.
 
 Alpha and Beta releases are for developers only. Be aware of possible breakage.
 
-However if it is broken, unless an update is explicitly required, clearing cache
-should fix most issues durig DEV phases. Always visit prior to any update:
-/admin/config/development/performance
+
+UPDATE SOP:
+Visit any of the following URLs when updating Blazy, or its related modules.
+
+1. /admin/config/development/performance
+  Unless an update is required, clearing cache should fix most issues.
+
+  o Hit "Clear all caches" button once the new Blazy in place.
+  o Regenerate CSS and JS as the latest fixes may contain changes to the assets.
+
+2. /admin/reports/status
+  Check for any pending update, and run /update.php from the brower address bar.
+
+3. If Twig templates are customized, compare against the latest.
+
+
+PERFORMANCE TIPS:
+o If breakpoints provided with tons of images, using image styles with ANY crop
+  is recommended to avoid image dimension calculation with individual images.
+  The image dimensions will be set once, and inherited by all images as long as
+  they contain word crop. If using scaled image styles, regular calculation
+  applies.
 
 
 AUTHOR/MAINTAINER/CREDITS
 gausarts
+
+Contributors:
+https://www.drupal.org/node/2663268/committers
 
 
 READ MORE

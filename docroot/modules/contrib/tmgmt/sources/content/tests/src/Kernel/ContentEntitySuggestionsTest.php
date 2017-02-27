@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\tmgmt_content\Kernel\ContentEntitySuggestionsTest.
- */
-
 namespace Drupal\Tests\tmgmt_content\Kernel;
 
 use Drupal\field\Entity\FieldConfig;

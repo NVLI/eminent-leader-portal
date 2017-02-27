@@ -20,13 +20,13 @@
   font-size: 0;
   height: 48px;
   left: 50%;
-  margin-left: -24px;  
+  margin-left: -24px;
   pointer-events: auto;
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  width: 48px;  
+  width: 48px;
 }
 
 .slick-initialized ~ .slick__arrow .slick-down {

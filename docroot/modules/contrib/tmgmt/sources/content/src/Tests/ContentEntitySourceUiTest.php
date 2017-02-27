@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_content\Tests\ContentEntitySourceUiTest.
- */
-
 namespace Drupal\tmgmt_content\Tests;
 
 use Drupal\comment\Entity\Comment;
@@ -180,8 +175,16 @@ class ContentEntitySourceUiTest extends EntityTestBase {
     $this->assertNoText($node_german->getTitle());
     $this->assertText($node_not_translated->getTitle());
     // Check that is set to outdated.
-    $xpath = $this->xpath('//*[@id="edit-items"]/tbody/tr[2]/td[6]/img');
+    $xpath = $this->xpath('//*[@id="edit-items"]/tbody/tr[2]/td[6]/a/img');
     $this->assertEqual($xpath[0]->attributes()->title, t('Translation Outdated'));
+
+    // Check that the icons link to the appropriate translations.
+    $xpath_source = $this->xpath('//*[@id="edit-items"]/tbody/tr[2]/td[4]/*[1]');
+    $xpath_not_translated = $this->xpath('//*[@id="edit-items"]/tbody/tr[2]/td[5]/*[1]');
+    $xpath_outdated = $this->xpath('//*[@id="edit-items"]/tbody/tr[2]/td[6]/*[1]');
+    $this->assertTrue(strpos($xpath_source[0]->attributes()->href, '/node/1') !== FALSE);
+    $this->assertNotEqual($xpath_not_translated[0]->getName(), 'a');
+    $this->assertTrue(strpos($xpath_outdated[0]->attributes()->href, '/de/node/1') !== FALSE);
 
     // Test that a job can not be accepted if the entity does not exist.
     $deleted_node = $this->createTranslatableNode('page', 'en');

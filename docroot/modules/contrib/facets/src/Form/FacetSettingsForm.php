@@ -50,7 +50,7 @@ class FacetSettingsForm extends EntityForm {
   /**
    * The block manager.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
@@ -90,25 +90,14 @@ class FacetSettingsForm extends EntityForm {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
-    $entity_type_manager = $container->get('entity_type.manager');
-
-    /** @var \Drupal\facets\FacetSource\FacetSourcePluginManager $facet_source_plugin_manager */
-    $facet_source_plugin_manager = $container->get('plugin.manager.facets.facet_source');
-
-    /** @var \Drupal\facets\Processor\ProcessorPluginManager $processor_plugin_manager */
-    $processor_plugin_manager = $container->get('plugin.manager.facets.processor');
-
-    /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
-    $module_handler = $container->get('module_handler');
-
-    /** @var \Drupal\Core\Block\BlockManagerInterface $block_manager */
-    $block_manager = $container->get('plugin.manager.block');
-
-    /** @var \Drupal\Core\Routing\UrlGeneratorInterface $url_generator */
-    $url_generator = $container->get('url_generator');
-
-    return new static($entity_type_manager, $facet_source_plugin_manager, $processor_plugin_manager, $module_handler, $block_manager, $url_generator);
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('plugin.manager.facets.facet_source'),
+      $container->get('plugin.manager.facets.processor'),
+      $container->get('module_handler'),
+      $container->get('plugin.manager.block'),
+      $container->get('url_generator')
+    );
   }
 
   /**

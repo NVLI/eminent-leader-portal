@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\Controller\JobItemAccessControlHandler.
- */
 
 namespace Drupal\tmgmt\Entity\Controller;
 

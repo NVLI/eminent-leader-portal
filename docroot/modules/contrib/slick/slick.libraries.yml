@@ -87,5 +87,5 @@ slick.colorbox:
   js:
     js/slick.colorbox.min.js: { minified: true }
   dependencies:
-    - blazy/colorbox.skin
+    - blazy/colorbox
     - slick/slick.load

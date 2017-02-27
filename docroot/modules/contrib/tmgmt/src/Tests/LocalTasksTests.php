@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\Tests\LocalTasksTest.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 /**

@@ -16,6 +16,6 @@
     }
   ],
   "require": {
-    "drupal/blazy": "8.*"
+    "drupal/blazy": "~1.0"
   }
 }

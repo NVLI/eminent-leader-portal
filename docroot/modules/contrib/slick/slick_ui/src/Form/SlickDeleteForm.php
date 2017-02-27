@@ -15,7 +15,7 @@ class SlickDeleteForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete the Slick optionset %label?', array('%label' => $this->entity->label()));
+    return $this->t('Are you sure you want to delete the Slick optionset %label?', ['%label' => $this->entity->label()]);
   }
 
   /**
@@ -38,8 +38,8 @@ class SlickDeleteForm extends EntityConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->entity->delete();
 
-    drupal_set_message($this->t('Optionset %label was deleted', array('%label' => $this->entity->label())));
-    $this->logger('user')->notice('Deleted optionset %oid (%label)', array('%oid' => $this->entity->id(), '%label' => $this->entity->label()));
+    drupal_set_message($this->t('The Slick optionset %label has been deleted.', ['%label' => $this->entity->label()]));
+    $this->logger('user')->notice('Deleted optionset %oid (%label)', ['%oid' => $this->entity->id(), '%label' => $this->entity->label()]);
 
     $form_state->setRedirectUrl($this->getCancelUrl());
   }

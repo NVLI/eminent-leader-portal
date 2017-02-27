@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_file\Tests\FileTranslatorTest.
- */
-
 namespace Drupal\tmgmt_file\Tests;
 
 use Drupal\Component\Utility\Html;

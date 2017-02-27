@@ -4,6 +4,7 @@ namespace Drupal\Tests\video_embed_field\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\Tests\video_embed_field\Kernel\MockHttpClient;
+use Drupal\video_embed_field\Plugin\video_embed_field\Provider\Vimeo;
 use Drupal\video_embed_field\Plugin\video_embed_field\Provider\YouTube;
 
 /**
@@ -170,6 +171,11 @@ class ProviderUrlParseTest extends UnitTestCase {
         'https://vimeo.com/173101914/aab5894fec',
         '173101914',
       ],
+      'Vimeo: with timeindex' => [
+        'Drupal\video_embed_field\Plugin\video_embed_field\Provider\Vimeo',
+        'https://vimeo.com/193517656#t=160s',
+        '193517656',
+      ],
       // Vimeo failing cases.
       'Vimeo: Malformed String' => [
         'Drupal\video_embed_field\Plugin\video_embed_field\Provider\Vimeo',
@@ -228,7 +234,7 @@ class ProviderUrlParseTest extends UnitTestCase {
   /**
    * Test the YouTube time index parsing.
    *
-   * @dataProvider timeIndexParseTestCases
+   * @dataProvider youTubeTimeIndexTestCases
    */
   public function testYouTubeTimeIndex($url, $expected) {
     $provider = new YouTube([
@@ -244,7 +250,7 @@ class ProviderUrlParseTest extends UnitTestCase {
    * @return array
    *   An array of test cases.
    */
-  public function timeIndexParseTestCases() {
+  public function youTubeTimeIndexTestCases() {
     return [
       'Simple Timeindex' => [
         'https://www.youtube.com/watch?v=fdbFVWupSsw&t=15',
@@ -257,6 +263,71 @@ class ProviderUrlParseTest extends UnitTestCase {
       'Invalid Timeindex' => [
         'https://www.youtube.com/watch?v=fdbFVWupSsw&t=time',
         '0',
+      ],
+    ];
+  }
+
+  /**
+   * Test the Vimeo time index integration.
+   *
+   * @dataProvider vimeoTimeIndexTestCases
+   */
+  public function testVimeoTimeIndex($url, $expected, $exception_expected = FALSE) {
+    $exception_triggered = FALSE;
+    try {
+      $provider = new Vimeo([
+        'input' => $url,
+      ], '', [], new MockHttpClient());
+    }
+    catch (\Exception $e) {
+      $exception_triggered = TRUE;
+    }
+
+    $this->assertEquals($exception_expected, $exception_triggered);
+
+    if (!$exception_triggered) {
+      $embed = $provider->renderEmbedCode(100, 100, TRUE);
+      $this->assertEquals($expected, isset($embed['#fragment']) ? $embed['#fragment'] : FALSE);
+    }
+  }
+
+  /**
+   * A data provider for testVimeoTimeIndex.
+   *
+   * @return array
+   *   An array of test cases.
+   */
+  public function vimeoTimeIndexTestCases() {
+    return [
+      'Standard time index' => [
+        'https://vimeo.com/193517656#t=150s',
+        't=150s',
+        FALSE,
+      ],
+      'Empty start time' => [
+        'https://vimeo.com/193517656#t=',
+        NULL,
+        TRUE,
+      ],
+      'Empty start time (with seconds)' => [
+        'https://vimeo.com/193517656#t=s',
+        NULL,
+        TRUE,
+      ],
+      'Non numeric start time' => [
+        'https://vimeo.com/193517656#t=STARTs',
+        NULL,
+        TRUE,
+      ],
+      'Non t fragment' => [
+        'https://vimeo.com/193517656#o=150s',
+        NULL,
+        TRUE,
+      ],
+      'No seconds' => [
+        'https://vimeo.com/193517656#t=15',
+        NULL,
+        TRUE,
       ],
     ];
   }

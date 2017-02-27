@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\field\TaskStatus.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\field;
 
 use Drupal\tmgmt_local\LocalTaskInterface;

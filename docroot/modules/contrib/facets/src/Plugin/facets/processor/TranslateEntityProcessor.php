@@ -5,6 +5,7 @@ namespace Drupal\facets\Plugin\facets\processor;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\TypedData\TranslatableInterface;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\FacetSource\SearchApiFacetSourceInterface;
 use Drupal\facets\Processor\BuildProcessorInterface;
@@ -16,8 +17,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @FacetsProcessor(
  *   id = "translate_entity",
- *   label = @Translation("Translate entity label"),
- *   description = @Translation("Translate entity label"),
+ *   label = @Translation("Transform entity id into label"),
+ *   description = @Translation("Show entity label instead of entity id. E.g. for a taxonomy term id, show the term name instead"),
  *   stages = {
  *     "build" = 5
  *   }
@@ -127,7 +128,7 @@ class TranslateEntityProcessor extends ProcessorPluginBase implements BuildProce
 
       // Check for a translation of the entity and load that instead if one's
       // found.
-      if ($entity->hasTranslation($language_interface->getId())) {
+      if ($entity instanceof TranslatableInterface && $entity->hasTranslation($language_interface->getId())) {
         $entity = $entity->getTranslation($language_interface->getId());
       }
 

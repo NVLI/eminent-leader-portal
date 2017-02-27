@@ -102,9 +102,23 @@ function tmgmt_cron() {
     }
 
     // Then submit all items in a group per job.
-    foreach ($job_items_by_job as $items) {
-      $translator = reset($items)->getTranslatorPlugin();
-      $translator->requestJobItemsTranslation($items);
+    foreach ($job_items_by_job as $all_items) {
+      $translator = reset($all_items)->getTranslatorPlugin();
+      // Call the hook before requesting the translation.
+      // @see hook_tmgmt_job_before_request_translation()
+      \Drupal::moduleHandler()->invokeAll('tmgmt_job_before_request_translation', [$all_items]);
+
+      // We do not want to translate the items that are already translated,
+      // so we filter them.
+      $items = array_filter($all_items, function (JobItemInterface $item) {
+        return $item->getCountPending() > 0;
+      });
+      if (!empty($items)) {
+        $translator->requestJobItemsTranslation($items);
+      }
+      // Reset it again so getData returns again all the values.
+      // @see hook_tmgmt_job_after_request_translation()
+      \Drupal::moduleHandler()->invokeAll('tmgmt_job_after_request_translation', [$all_items]);
     }
   }
 }
@@ -608,7 +622,10 @@ function tmgmt_job_checkout_multiple(array $jobs) {
       // Normally I would expect this to catch all failed requests and
       // afterwards send the user through a multistep form which contains the
       // failed elements.
-      // No manual checkout required. Request translations now.
+      // No manual checkout required. Request translations now, save the job
+      // in case someone excepts to be able to load the job and have the
+      // translator available.
+      $job->save();
       tmgmt_job_request_translation($job);
     }
   }
@@ -679,15 +696,15 @@ function tmgmt_job_request_translation(JobInterface $job) {
 /**
  * Print all messages that occurred since our request to the screen.
  *
- * @param \Drupal\tmgmt\JobInterface $job
- *    The translation job for which the message should be written.
+ * @param \Drupal\tmgmt\JobInterface|\Drupal\tmgmt\JobItemInterface $entity
+ *    The translation job or job item for which the message should be written.
  *
  * @return bool
  *    FALSE if there are message with severity error, TRUE otherwise.
  */
-function tmgmt_write_request_messages(JobInterface $job) {
+function tmgmt_write_request_messages($entity) {
   $errors = FALSE;
-  foreach ($job->getMessagesSince() as $message) {
+  foreach ($entity->getMessagesSince() as $message) {
     // Ignore debug messages.
     if ($message->getType() == 'debug') {
       continue;
@@ -799,7 +816,7 @@ function tmgmt_translation_review_form_update_state(array $form, FormStateInterf
     }
   }
   $job_item->save();
-  tmgmt_write_request_messages($job_item->getJob());
+  tmgmt_write_request_messages($job_item);
 }
 
 /**

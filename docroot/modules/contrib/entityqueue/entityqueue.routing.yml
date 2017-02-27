@@ -54,7 +54,7 @@ entity.entity_queue.subqueue_list:
     _controller: '\Drupal\entityqueue\Controller\EntityQueueUIController::subqueueList'
     _title: 'Subqueues'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer entityqueue+manipulate entityqueues+manipulate all entityqueues'
 
 entity.entity_subqueue.add_form:
   path: '/admin/structure/entityqueue/{entity_queue}/add'

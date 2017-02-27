@@ -6,6 +6,12 @@ common:
     - core/underscore
     - core/drupal.dialog.ajax
 
+pager:
+  version: VERSION
+  css:
+    theme:
+      css/entity_browser.pager.css: {}
+
 entity_browser:
   version: VERSION
   css:
@@ -63,6 +69,9 @@ modal:
 
 modal_selection:
   version: VERSION
+  css:
+    component:
+      css/entity_browser.modal_selection.css: {}
   js:
     js/entity_browser.modal_selection.js: {}
   dependencies:
@@ -89,6 +98,7 @@ view:
 multi_step_display:
   version: VERSION
   js:
+    js/entity_browser.command_queue.js: {}
     js/entity_browser.multi_step_display.js: {}
   dependencies:
     - entity_browser/entity_list

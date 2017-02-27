@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_locale\Plugin\tmgmt\Source\LocaleSource.
- */
-
-
 namespace Drupal\tmgmt_locale\Plugin\tmgmt\Source;
 
 use Drupal\Component\Utility\Unicode;

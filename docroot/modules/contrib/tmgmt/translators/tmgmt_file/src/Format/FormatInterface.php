@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\Format\FormatInterface.
- */
-
 namespace Drupal\tmgmt_file\Format;
 
 use Drupal\tmgmt\Entity\Job;

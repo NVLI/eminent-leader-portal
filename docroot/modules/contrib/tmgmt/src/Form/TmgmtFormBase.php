@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\Formr\TmgmtFormBase.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;

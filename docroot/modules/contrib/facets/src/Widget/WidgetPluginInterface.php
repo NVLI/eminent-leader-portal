@@ -31,7 +31,7 @@ interface WidgetPluginInterface extends ConfigurablePluginInterface {
    * @return string
    *   The query type plugin class to load.
    */
-  public function getQueryType($query_types);
+  public function getQueryType(array $query_types);
 
   /**
    * Provides a configuration form for this widget.

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\StatisticsBase.
- */
-
 namespace Drupal\tmgmt\Plugin\views\field;
 
 use Drupal\views\Plugin\views\field\FieldPluginBase;

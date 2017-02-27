@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\Plugin\tmgmt\Translator\FileTranslator.
- */
-
 namespace Drupal\tmgmt_file\Plugin\tmgmt\Translator;
 
 use Drupal\tmgmt\JobInterface;

@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt_content\Tests\ContentEntitySourceNoCanonicalLinkTest.
- */
 
 namespace Drupal\tmgmt_content\Tests;
 

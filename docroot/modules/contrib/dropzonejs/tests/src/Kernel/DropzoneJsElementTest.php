@@ -18,7 +18,13 @@ class DropzoneJsElementTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'file', 'user', 'dropzonejs', 'dropzonejs_test'];
+  public static $modules = [
+    'system',
+    'file',
+    'user',
+    'dropzonejs',
+    'dropzonejs_test',
+  ];
 
   /**
    * {@inheritdoc}
@@ -54,6 +60,7 @@ class DropzoneJsElementTest extends KernelTestBase {
     $this->assertTrue($this->xpath("$xpath_base/input[contains(@data-upload-path, '/dropzonejs/upload?token=')]"));
     // Js is attached.
     $this->assertTrue($this->xpath("/html/body/script[contains(@src, 'libraries/dropzone/dist/min/dropzone.min.js')]"));
-    $this->assertTrue($this->xpath("/html/body/script[contains(@src, 'modules/dropzonejs/js/dropzone.integration.js')]"));
+    $this->assertTrue($this->xpath("/html/body/script[contains(@src, 'dropzonejs/js/dropzone.integration.js')]"));
   }
+
 }

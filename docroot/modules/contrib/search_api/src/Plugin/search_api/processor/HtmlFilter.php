@@ -23,8 +23,8 @@ use Symfony\Component\Yaml\Parser;
  *   description = @Translation("Strips HTML tags from fulltext fields and decodes HTML entities. Use this processor when indexing HTML data – for example, node bodies for certain text formats. The processor also allows to boost (or ignore) the contents of specific elements."),
  *   stages = {
  *     "pre_index_save" = 0,
- *     "preprocess_index" = -10,
- *     "preprocess_query" = -10
+ *     "preprocess_index" = -15,
+ *     "preprocess_query" = -15,
  *   }
  * )
  */
@@ -211,14 +211,21 @@ class HtmlFilter extends FieldsProcessorPluginBase {
   protected function parseHtml(&$text, $active_tag = NULL, $boost = 1.0) {
     $ret = array();
     while (($pos = strpos($text, '<')) !== FALSE) {
+      $text_before = substr($text, 0, $pos);
+      $text_after = substr($text, $pos + 1);
+      // Attempt some small error tolerance when literal "<" characters aren't
+      // escaped properly (and are free-standing).
+      if (!preg_match('#^(/?)([-:_a-zA-Z0-9]+)#', $text_after, $m)) {
+        $text = $text_before . '&lt;' . $text_after;
+        continue;
+      }
       if ($boost && $pos > 0) {
-        $value = $this->normalizeText(substr($text, 0, $pos));
+        $value = $this->normalizeText($text_before);
         if ($value !== '') {
           $ret[] = Utility::createTextToken($value, $boost);
         }
       }
-      $text = substr($text, $pos + 1);
-      preg_match('#^(/?)([-:_a-zA-Z0-9]+)#', $text, $m);
+      $text = $text_after;
       $pos = strpos($text, '>');
       $empty_tag = $text[$pos - 1] == '/';
       $text = substr($text, $pos + 1);

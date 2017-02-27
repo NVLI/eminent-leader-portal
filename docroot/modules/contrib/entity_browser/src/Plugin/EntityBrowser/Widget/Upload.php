@@ -19,7 +19,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * @EntityBrowserWidget(
  *   id = "upload",
  *   label = @Translation("Upload"),
- *   description = @Translation("Adds an upload field browser's widget.")
+ *   description = @Translation("Adds an upload field browser's widget."),
+ *   auto_select = FALSE
  * )
  */
 class Upload extends WidgetBase {
@@ -86,7 +87,9 @@ class Upload extends WidgetBase {
   public function defaultConfiguration() {
     return [
       'upload_location' => 'public://',
+      'multiple' => TRUE,
       'submit_text' => $this->t('Select files'),
+      'extensions' => 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp',
     ] + parent::defaultConfiguration();
   }
 
@@ -95,12 +98,18 @@ class Upload extends WidgetBase {
    */
   public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
     $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
+    $field_cardinality = $form_state->get(['entity_browser', 'validators', 'cardinality', 'cardinality']);
     $form['upload'] = [
       '#type' => 'managed_file',
       '#title' => $this->t('Choose a file'),
       '#title_display' => 'invisible',
       '#upload_location' => $this->token->replace($this->configuration['upload_location']),
-      '#multiple' => TRUE,
+      // Multiple uploads will only be accepted if the source field allows
+      // more than one value.
+      '#multiple' => $field_cardinality != 1 && $this->configuration['multiple'],
+      '#upload_validators' => [
+        'file_validate_extensions' => [$this->configuration['extensions']],
+      ],
     ];
 
     return $form;
@@ -154,16 +163,26 @@ class Upload extends WidgetBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+
     $form['upload_location'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Upload location'),
       '#default_value' => $this->configuration['upload_location'],
     ];
-
-    $form['submit_text'] = [
+    $form['multiple'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Accept multiple files'),
+      '#default_value' => $this->configuration['multiple'],
+      '#description' => $this->t('Multiple uploads will only be accepted if the source field allows more than one value.'),
+    ];
+    $form['extensions'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Submit button text'),
-      '#default_value' => $this->configuration['submit_text'],
+      '#title' => $this->t('Allowed file extensions'),
+      '#description' => $this->t('Separate extensions with a space or comma and do not include the leading dot.'),
+      '#default_value' => $this->configuration['extensions'],
+      '#element_validate' => [[static::class, 'validateExtensions']],
+      '#required' => TRUE,
     ];
 
     if ($this->moduleHandler->moduleExists('token')) {
@@ -175,6 +194,25 @@ class Upload extends WidgetBase {
     }
 
     return $form;
+  }
+
+  /**
+   * Validates a list of file extensions.
+   *
+   * @See \Drupal\file\Plugin\Field\FieldType\FileItem::validateExtensions
+   */
+  public static function validateExtensions($element, FormStateInterface $form_state) {
+    if (!empty($element['#value'])) {
+      $extensions = preg_replace('/([, ]+\.?)/', ' ', trim(strtolower($element['#value'])));
+      $extensions = array_filter(explode(' ', $extensions));
+      $extensions = implode(' ', array_unique($extensions));
+      if (!preg_match('/^([a-z0-9]+([.][a-z0-9])* ?)+$/', $extensions)) {
+        $form_state->setError($element, t('The list of allowed extensions is not valid, be sure to exclude leading dots and to separate extensions with a comma or space.'));
+      }
+      else {
+        $form_state->setValueForElement($element, $extensions);
+      }
+    }
   }
 
 }

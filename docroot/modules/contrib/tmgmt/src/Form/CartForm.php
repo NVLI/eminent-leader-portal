@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Controller\SourceOverviewForm.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -19,7 +14,7 @@ class Cartform extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'tmgmt_cart_form';
   }
 

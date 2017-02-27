@@ -6,6 +6,10 @@
   padding: 20px;
 }
 
+.view-media-entity-browser .view-content {
+  overflow: hidden;
+}
+
 .view-media-entity-browser .views-row {
   box-sizing: border-box;
   position: relative;

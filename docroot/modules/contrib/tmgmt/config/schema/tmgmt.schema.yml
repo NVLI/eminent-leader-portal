@@ -14,6 +14,12 @@ tmgmt.settings:
     respect_text_format:
       type: boolean
       label: 'Respect text format'
+    allowed_formats:
+      type: sequence
+      label: 'Allowed formats'
+      sequence:
+        type: string
+        label: Format ID
     word_count_exclude_tags:
       type: boolean
       label: 'Exclude tags from word count'

@@ -199,6 +199,9 @@ slick.optionset.*:
     breakpoints:
       type: integer
       label: 'Breakpoints'
+    optimized:
+      type: boolean
+      label: 'Optimized'
     options:
       type: mapping
       label: 'Options'
@@ -259,3 +262,8 @@ field.formatter.settings.slick_text:
 field.formatter.settings.slick_image:
   type: slick_image
   label: 'Slick image display format settings'
+
+# The Slick file formatter settings.
+field.formatter.settings.slick_file:
+  type: slick_image
+  label: 'Slick image with ME display format settings'

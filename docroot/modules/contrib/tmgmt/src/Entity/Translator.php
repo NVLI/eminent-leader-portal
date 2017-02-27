@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\Plugin\Core\Entity\Translator.
- */
-
 namespace Drupal\tmgmt\Entity;
 
 use Drupal\Component\Utility\NestedArray;

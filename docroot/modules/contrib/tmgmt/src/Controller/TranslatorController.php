@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Controller\TranslatorController.
- */
-
 namespace Drupal\tmgmt\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

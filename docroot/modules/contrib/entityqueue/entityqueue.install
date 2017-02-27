@@ -42,5 +42,26 @@ function entityqueue_update_8001() {
 }
 
 /**
+ * Clear views data cache.
+ */
+function entityqueue_update_8002() {
+  // Empty update function that rebuilds the views data in order to account for
+  // the updated entityqueue relationship definition.
+}
+
+/**
+ * Update the definition of the Entity Subqueue entity type.
+ */
+function entityqueue_update_8003() {
+  /** @var \Drupal\Core\Entity\EntityLastInstalledSchemaRepositoryInterface $entity_repository */
+  $entity_repository = \Drupal::service('entity.last_installed_schema.repository');
+
+  $entity_type = $entity_repository->getLastInstalledDefinition('entity_subqueue');
+  $entity_type->setHandlerClass('views_data', 'Drupal\views\EntityViewsData');
+  $entity_type->set('data_table', NULL);
+  $entity_repository->setLastInstalledDefinition($entity_type);
+}
+
+/**
  * @} End of "addtogroup updates-8.x-1.0-alpha".
  */

@@ -19,10 +19,11 @@
     'slide--' ~ delta
   ]
 %}
-
-<div{{ attributes.addClass(classes) }}>
-  {{ item.slide }}
-  {% if item.caption is not empty %}
-    <div class="slide__caption">{{ item.caption }}</div>
-  {% endif %}
-</div>
+{% block slick_thumbnail %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ item.slide }}
+    {% if item.caption is not empty %}
+      <div class="slide__caption">{{ item.caption }}</div>
+    {% endif %}
+  </div>
+{% endblock %}

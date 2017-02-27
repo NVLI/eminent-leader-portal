@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\FormatManager.
- */
-
 namespace Drupal\tmgmt_file\Format;
 
 use Drupal\Core\Cache\CacheBackendInterface;

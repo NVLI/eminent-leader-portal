@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\Validation\Constraint\QueueSizeConstraintValidator.
- */
-
 namespace Drupal\entityqueue\Plugin\Validation\Constraint;
 
 use Symfony\Component\Validator\Constraint;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_content\Controller\ContentTranslationPreviewController.
- */
-
 namespace Drupal\tmgmt_content\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -114,7 +109,7 @@ class ContentTranslationPreviewController extends ControllerBase {
    * @param string $target_langcode
    *   The target language.
    *
-   * @return \Drupal\Core\Entity\ContentEntityInterface $translation
+   * @return \Drupal\Core\Entity\ContentEntityInterface
    *   Translation data.
    */
   protected function makePreview(ContentEntityInterface $entity, array $data, $target_langcode) {

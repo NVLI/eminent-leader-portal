@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_content\EntitySourcePluginController.
- */
-
 namespace Drupal\tmgmt_content\Plugin\tmgmt\Source;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -188,11 +183,24 @@ class ContentEntitySource extends SourcePluginBase implements SourcePreviewInter
             $format = $property->getValue();
           }
         }
-        // Add the format to the translatable properties.
         if (!empty($format)) {
-          foreach ($data[$key][$index] as $name => $value) {
-            if (is_array($value) && isset($value['#translate']) && $value['#translate'] == TRUE) {
-              $data[$key][$index][$name]['#format'] = $format;
+          $allowed_formats = (array) \Drupal::config('tmgmt.settings')->get('allowed_formats');
+
+          if ($allowed_formats && array_search($format, $allowed_formats) === FALSE) {
+            // There are allowed formats and this one is not part of them,
+            // explicitly mark all data as untranslatable.
+            foreach ($data[$key][$index] as $name => $value) {
+              if (is_array($value) && isset($value['#translate'])) {
+                $data[$key][$index][$name]['#translate'] = FALSE;
+              }
+            }
+          }
+          else {
+            // Add the format to the translatable properties.
+            foreach ($data[$key][$index] as $name => $value) {
+              if (is_array($value) && isset($value['#translate']) && $value['#translate'] == TRUE) {
+                $data[$key][$index][$name]['#format'] = $format;
+              }
             }
           }
         }
@@ -373,7 +381,7 @@ class ContentEntitySource extends SourcePluginBase implements SourcePreviewInter
       $entity->addTranslation($target_langcode, $entity->toArray());
     }
 
-    $embeded_fields = \Drupal::config('tmgmt_content.settings')->get('embedded_fields');
+    $embeded_fields = $this->getEmbeddableFields($entity);
 
     $translation = $entity->getTranslation($target_langcode);
     $manager = \Drupal::service('content_translation.manager');
@@ -392,7 +400,7 @@ class ContentEntitySource extends SourcePluginBase implements SourcePreviewInter
           }
           // If the field is an embeddable reference, we assume that the
           // property is a field reference.
-          elseif (isset($embeded_fields[$entity->getEntityTypeId()][$name])) {
+          elseif (isset($embeded_fields[$name])) {
             $this->doSaveTranslations($translation->get($name)->offsetGet($delta)->$property, $property_data, $target_langcode);
           }
         }

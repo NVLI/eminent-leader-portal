@@ -5,7 +5,6 @@ type: module
 dependencies:
   - entity_browser
   - entity_embed
-  - entity_reference
   - dropzonejs
   - dropzonejs_eb_widget
   - field
@@ -17,8 +16,8 @@ dependencies:
   - text
   - views
 
-# Information added by Drupal.org packaging script on 2016-08-03
-version: '8.x-1.0-alpha1'
+# Information added by Drupal.org packaging script on 2017-01-31
+version: '8.x-1.0-alpha4'
 core: '8.x'
 project: 'file_browser'
-datestamp: 1470191044
+datestamp: 1485822185

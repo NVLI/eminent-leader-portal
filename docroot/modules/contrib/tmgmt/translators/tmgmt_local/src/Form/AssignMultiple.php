@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Form\AssignMultiple.
- */
-
 namespace Drupal\tmgmt_local\Form;
 
 use Drupal\Core\Entity\EntityManagerInterface;

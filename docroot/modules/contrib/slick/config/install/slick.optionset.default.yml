@@ -11,6 +11,7 @@ label: Default
 skin: default
 breakpoints: 0
 group: ''
+optimized: false
 options:
   options__active_tab: ''
   settings:

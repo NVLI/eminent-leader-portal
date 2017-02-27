@@ -13,6 +13,7 @@ use Drupal\entityqueue\Entity\EntityQueue;
  */
 function entityqueue_views_data_alter(array &$data) {
   $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_subqueue = $entity_type_manager->getDefinition('entity_subqueue');
 
   // Find all entity types that need an 'entityqueue' relationship.
   $target_entity_type_ids = [];
@@ -48,10 +49,12 @@ function entityqueue_views_data_alter(array &$data) {
       'label' => t('@target_label queue', ['@target_label' => $entity_type->getLabel()]),
       'group' => t('Entityqueue'),
       'help' => t('Create a relationship from @target_label to an entityqueue.', ['@target_label' => $entity_type->getLabel()]),
-      'base' => $subqueue_items_table_name,
+      'base' => $entity_subqueue->getDataTable() ?: $entity_subqueue->getBaseTable(),
       'entity_type' => 'entity_subqueue',
-      'base field' => $columns['target_id'],
-      'relationship field' => $entity_type->getKey('id'),
+      'base field' => $entity_subqueue->getKey('id'),
+      'field_name' => $field_storage->getName(),
+      'field table' => $subqueue_items_table_name,
+      'field field' => $columns['target_id'],
     ];
 
     $data[$target_base_table]['entityqueue_relationship']['sort'] = array(

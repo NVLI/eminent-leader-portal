@@ -163,7 +163,7 @@ class FilesExtrator extends ProcessorPluginBase {
         $property_path = static::SAA_PREFIX . $field_name;
 
         // A way to load $field.
-        foreach ($this->filterForPropertyPath($item->getFields(), $property_path) as $field) {
+        foreach ($this->getFieldsHelper()->filterForPropertyPath($item->getFields(), NULL, $property_path) as $field) {
           if ($entity->hasField($field_name)) {
             $filefield_values = $entity->get($field_name)->getValue();
 

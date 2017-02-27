@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_composite_test\Entity\EntityTestComposite.
- */
-
 namespace Drupal\tmgmt_composite_test\Entity;
 
 use Drupal\Core\Entity\EntityTypeInterface;

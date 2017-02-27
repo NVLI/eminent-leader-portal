@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_test\Plugin\tmgmt\Source\TestHtmlSource.
- */
-
 namespace Drupal\tmgmt_test\Plugin\tmgmt\Source;
 
 use Drupal\tmgmt\JobItemInterface;

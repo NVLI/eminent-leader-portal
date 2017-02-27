@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\Message.
- */
-
 namespace Drupal\tmgmt\Plugin\views\field;
 
 use Drupal\Component\Utility\SafeMarkup;

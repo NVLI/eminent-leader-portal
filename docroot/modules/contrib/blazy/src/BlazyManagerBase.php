@@ -20,7 +20,7 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
   /**
    * The entity type manager service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface;
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
@@ -53,7 +53,7 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
   protected $cache;
 
   /**
-   * Constructs a BlazyManager object
+   * Constructs a BlazyManager object.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, RendererInterface $renderer, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache) {
     $this->entityTypeManager = $entity_type_manager;
@@ -133,34 +133,33 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
    */
   public function attach($attach = []) {
     $load   = [];
-    $attach += ['blazy_colorbox' => TRUE, 'blazy_photobox' => TRUE];
+    $dummy  = [];
     $switch = empty($attach['media_switch']) ? '' : $attach['media_switch'];
 
     if ($switch && $switch != 'content') {
       $attach[$switch] = $switch;
-    }
 
-    // @todo redo this when colorbox has JS loader again, or just array.
-    if (!empty($attach['colorbox'])) {
-      $dummy = [];
-      \Drupal::service('colorbox.attachment')->attach($dummy);
-      $load = NestedArray::mergeDeep($load, $dummy['#attached']);
-      $load['library'][] = 'colorbox/colorbox';
-      if (!empty($attach['blazy_colorbox'])) {
-        $load['library'][] = 'blazy/colorbox';
+      if (in_array($switch, $this->getLightboxes())) {
+        $load['library'][] = 'blazy/lightbox';
       }
     }
 
-    if (!empty($attach['photobox']) && !empty($attach['blazy_photobox'])) {
-      $load['library'][] = 'blazy/photobox';
+    if (!empty($attach['colorbox'])) {
+      \Drupal::service('colorbox.attachment')->attach($dummy);
+      $load = isset($dummy['#attached']) ? NestedArray::mergeDeep($load, $dummy['#attached']) : $load;
+      $load['library'][] = 'blazy/colorbox';
+      unset($dummy);
     }
 
-    if (!empty($attach['media'])) {
-      $load['library'][] = 'blazy/media';
+    // Only load grid xor column, but not both.
+    $attach['column'] = !empty($attach['style']) && $attach['style'] == 'column';
+    if (!empty($attach['column'])) {
+      $attach['grid'] = FALSE;
     }
-
-    if (!empty($attach['ratio'])) {
-      $load['library'][] = 'blazy/ratio';
+    foreach (['column', 'grid', 'media', 'photobox', 'ratio'] as $component) {
+      if (!empty($attach[$component])) {
+        $load['library'][] = 'blazy/' . $component;
+      }
     }
 
     // Core Blazy libraries.
@@ -190,7 +189,7 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
         if (class_exists($class)) {
           $reflection = new \ReflectionClass($class);
           if ($reflection->implementsInterface($skin_class . 'Interface')) {
-            $skin = new $class;
+            $skin = new $class();
             if (empty($methods) && method_exists($skin, 'skins')) {
               $items = $skin->skins();
             }
@@ -213,7 +212,33 @@ abstract class BlazyManagerBase implements BlazyManagerInterface {
   }
 
   /**
+   * Gets the supported lightboxes.
+   *
+   * @return array
+   *   The supported lightboxes.
+   */
+  public function getLightboxes() {
+    $photobox = \Drupal::root() . '/libraries/photobox/photobox/jquery.photobox.js';
+
+    $lightboxes = [];
+    foreach (['colorbox', 'photobox'] as $lightbox) {
+      $supported = function_exists($lightbox . '_theme');
+      if ($lightbox == 'photobox' && is_file($photobox)) {
+        $supported = TRUE;
+      }
+      if ($supported) {
+        $lightboxes[] = $lightbox;
+      }
+    }
+
+    $this->moduleHandler->alter('blazy_lightboxes', $lightboxes);
+    return $lightboxes;
+  }
+
+  /**
    * Returns the trusted HTML ID common for Blazy, GridStack, Mason, Slick.
+   *
+   * @deprecated: Removed prior to release for Blazy::getHtmlId().
    */
   public static function getHtmlId($string = 'blazy', $id = '') {
     $blazy_id = &drupal_static('blazy_id', 0);

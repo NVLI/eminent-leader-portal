@@ -14,7 +14,7 @@ class BlazySettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'blazy_settings';
   }
 
@@ -49,7 +49,7 @@ class BlazySettingsForm extends ConfigFormBase {
       '#type'          => 'checkbox',
       '#title'         => $this->t('One pixel placeholder'),
       '#default_value' => $config->get('one_pixel'),
-      '#description'   => $this->t('By default a one pixel image is the placeholder for lazyloaded Responsive image. Useful to perform a lot better. Uncheck to disable, and use Drupal-managed smallest/fallback image style instead. Be sure to add proper dimensions or at least min-height/min-width via CSS accordingly to avoid layout reflow since Aspect ratio is not supported with Responsive image yet.'),
+      '#description'   => $this->t('By default a one pixel image is the placeholder for lazyloaded Responsive image. Useful to perform a lot better. Uncheck to disable, and use Drupal-managed smallest/fallback image style instead. Be sure to add proper dimensions or at least min-height/min-width via CSS accordingly to avoid layout reflow since Aspect ratio is not supported with Responsive image yet. Disabling this will result in downloading fallback image as well for non-PICTURE element (double downloads).'),
     ];
 
     $form['blazy'] = [

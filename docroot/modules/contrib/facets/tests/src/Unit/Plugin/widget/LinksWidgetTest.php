@@ -179,7 +179,7 @@ class LinksWidgetTest extends UnitTestCase {
 
     $child = new Result('snake', 'Snake', 5);
     $original_results[1]->setActiveState(TRUE);
-    $original_results[1]->setChildren($child);
+    $original_results[1]->setChildren([$child]);
 
     $facet = new Facet([], 'facets_facet');
     $facet->setResults($original_results);
@@ -201,8 +201,8 @@ class LinksWidgetTest extends UnitTestCase {
       $this->assertEquals($value, $output['#items'][$index]['#title']);
       $this->assertEquals('link', $output['#items'][$index]['#type']);
       if ($index === 1) {
-        $this->assertEquals('active-trail', $output['#items'][$index]['#attributes']['class']);
-        $this->assertEquals(['facet-item', 'expanded'], $output['#items'][$index]['#wrapper_attributes']['class']);
+        $this->assertEquals('is-active', $output['#items'][$index]['#attributes']['class']);
+        $this->assertEquals(['facet-item', 'facet-item--expanded'], $output['#items'][$index]['#wrapper_attributes']['class']);
       }
       else {
         $this->assertEquals(['facet-item'], $output['#items'][$index]['#wrapper_attributes']['class']);

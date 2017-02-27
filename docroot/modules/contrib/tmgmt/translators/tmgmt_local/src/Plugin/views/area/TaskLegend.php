@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\area\TaskLegend.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\area;
 
 use Drupal\views\Plugin\views\area\AreaPluginBase;

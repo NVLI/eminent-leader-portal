@@ -62,7 +62,6 @@ o Built-in lazyLoad, and multiple breakpoint options.
 o Random, autoplay, pagers, arrows, dots/text/tabs/thumbnail pagers etc...
 o Supports pure text, responsive image, iframe, video carousels with
   aspect ratio. No extra jQuery plugin FitVids is required. Just CSS.
-o Exportable via CTools.
 o Works with Views, core and contrib fields: Image, Media Entity.
 o Optional and modular skins, e.g.: Carousel, Classic, Fullscreen, Fullwidth,
   Split, Grid or a multi row carousel.
@@ -98,7 +97,7 @@ The Slick module has several sub-modules:
 
 
 [1] http://dgo.to/slick_media
-[2] http://dgo.to/slick_media
+[2] http://dgo.to/slick_video
 [3] http://dgo.to/slick_paragraphs
 [4] http://dgo.to/slick_views
 [5] http://dgo.to/slick_extras
@@ -114,6 +113,10 @@ Slick supports enhancements and more complex layouts.
 - Responsive image, in core, to get truly responsive image.
 - Media Entity, to have richer contents: image, video, or a mix of em.
   http://dgo.to/media_entity
+- Video Embed Media, idem ditto.
+  http://dgo.to/video_embed_field
+- Paragraphs, to get more complex slides at field level.
+  http://dgo.to/paragraphs
 - Mousewheel, download from https://github.com/brandonaaron/jquery-mousewheel,
   so it is available at:
   /libraries/mousewheel/jquery.mousewheel.min.js
@@ -257,7 +260,7 @@ HTML STRUCTURE
 --------------------------------------------------------------------------------
 Note, non-BEM classes are added by JS.
 
-<div class="slick slick-processed">
+<div class="slick">
   <div class="slick__slider slick-initialized slick-slider">
     <div class="slick__slide"></div>
   </div>
@@ -319,7 +322,7 @@ KNOWN ISSUES
 --------------------------------------------------------------------------------
 - Slick admin CSS may not be compatible with private or contrib admin
   themes. Only if trouble with admin display, please disable it at:
-  admin/config/media/slick/ui
+  admin/config/media/blazy
 
 - The Slick lazyLoad is not supported with Responsive image. Slick only
   facilitates Responsive image to get in. The image formatting is taken over by
@@ -342,11 +345,16 @@ KNOWN ISSUES
     Otherwise disable Aspect ratio for multi-serving images.
   o If the total < slidesToShow, Slick behaves. Previously added a workaround to
     fix this, but later dropped and handed over to the core instead.
+    Brought back the temp fix for 1.6+ as per 10/18/16:
+    See https://github.com/kenwheeler/slick/issues/262
   o Fade option with slideToShow > 1 will screw up.
   o variableWidth ignores slidesToShow.
   o Too much centerPadding at small device affects slidesToShow.
   o Infinite option will create duplicates or clone slides which look more
     obvious if slidesToShow > 1. Simply disable it if not desired.
+  o If thumbnail display is Infinite, the main one must be infinite too, else
+    incorrect syncing.
+  o adaptiveHeight is no good for vertical.
 
 
 CURRENT DEVELOPMENT STATUS
@@ -360,7 +368,9 @@ However if it is broken, unless an update is explicitly required, clearing cache
 should fix most issues during DEV phases. Prior to any update, always visit:
 /admin/config/development/performance
 
-Be sure to first update Blazy.
+And hit "Clear all caches" button once the new Slick is in place. Regenerate CSS
+and JS as the latest fixes may contain changes to the assets.
+Have the latest or similar release Blazy to avoid trouble in the first place.
 
 
 ROADMAP

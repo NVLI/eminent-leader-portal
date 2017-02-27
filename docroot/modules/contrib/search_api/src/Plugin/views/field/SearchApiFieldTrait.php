@@ -9,6 +9,8 @@ use Drupal\Core\TypedData\ComplexDataInterface;
 use Drupal\Core\TypedData\DataReferenceInterface;
 use Drupal\Core\TypedData\ListInterface;
 use Drupal\search_api\Plugin\views\SearchApiHandlerTrait;
+use Drupal\search_api\Processor\ProcessorInterface;
+use Drupal\search_api\Processor\ProcessorPropertyInterface;
 use Drupal\search_api\Utility\Utility;
 use Drupal\views\Plugin\views\field\MultiItemsFieldHandlerInterface;
 use Drupal\views\ResultRow;
@@ -67,6 +69,24 @@ trait SearchApiFieldTrait {
    * @see SearchApiFieldTrait::getEntity()
    */
   protected $valueIndex = 0;
+
+  /**
+   * The account to use for access checks for this search.
+   *
+   * @var \Drupal\Core\Session\AccountInterface|false|null
+   *
+   * @see \Drupal\search_api\Plugin\views\field\SearchApiFieldTrait::checkEntityAccess()
+   */
+  protected $accessAccount;
+
+  /**
+   * Associative array keyed by property paths for which to skip access checks.
+   *
+   * Values are all TRUE.
+   *
+   * @var bool[]
+   */
+  protected $skipAccessChecks = array();
 
   /**
    * Determines whether this field can have multiple values.
@@ -167,18 +187,30 @@ trait SearchApiFieldTrait {
   }
 
   /**
+   * Adds an ORDER BY clause to the query for click sort columns.
+   *
+   * @param string $order
+   *   Either "ASC" or "DESC".
+   *
+   * @see \Drupal\views\Plugin\views\field\FieldHandlerInterface::clickSort()
+   */
+  public function clickSort($order) {
+    $this->getQuery()->sort($this->definition['search_api field'], $order);
+  }
+
+  /**
    * Determines if this field is click sortable.
    *
+   * This is the case if this Views field is linked to a certain Search API
+   * field.
+   *
    * @return bool
-   *   The value of "click sortable" from the plugin definition, this defaults
-   *   to FALSE if not set.
+   *   TRUE if this field is available for click-sorting, FALSE otherwise.
    *
    * @see \Drupal\views\Plugin\views\field\FieldHandlerInterface::clickSortable()
    */
   public function clickSortable() {
-    // Almost the same logic as in the parent class, but we want to default to
-    // FALSE.
-    return !empty($this->definition['click sortable']);
+    return !empty($this->definition['search_api field']);
   }
 
   /**
@@ -221,7 +253,7 @@ trait SearchApiFieldTrait {
    * @return \Drupal\Core\Entity\EntityInterface
    *   Returns the entity matching the values.
    *
-   * @see \Drupal\views\Plugin\views\field\FieldHandlerInterface::getEntity
+   * @see \Drupal\views\Plugin\views\field\FieldHandlerInterface::getEntity()
    */
   public function getEntity(ResultRow $values) {
     list($datasource_id, $property_path) = Utility::splitCombinedId($this->getCombinedPropertyPath());
@@ -230,12 +262,14 @@ trait SearchApiFieldTrait {
       return NULL;
     }
 
-    // @todo This will work in most cases, but might fail for multi-valued
-    //   fields.
-    while (TRUE) {
-      if (!empty($values->_relationship_objects[$property_path][$this->valueIndex])) {
+    $value_index = $this->valueIndex;
+    // Only try two levels. Otherwise, we might end up at an entirely different
+    // entity, cause we go too far up.
+    $levels = 2;
+    while ($levels--) {
+      if (!empty($values->_relationship_objects[$property_path][$value_index])) {
         /** @var \Drupal\Core\TypedData\TypedDataInterface $object */
-        $object = $values->_relationship_objects[$property_path][$this->valueIndex];
+        $object = $values->_relationship_objects[$property_path][$value_index];
         $value = $object->getValue();
         if ($value instanceof EntityInterface) {
           return $value;
@@ -246,6 +280,11 @@ trait SearchApiFieldTrait {
         break;
       }
       list($property_path) = Utility::splitPropertyPath($property_path);
+      // For multi-valued fields, the parent's index is not the same as the
+      // field value's index.
+      if (!empty($values->_relationship_parent_indices[$value_index])) {
+        $value_index = $values->_relationship_parent_indices[$value_index];
+      }
     }
 
     return NULL;
@@ -287,6 +326,7 @@ trait SearchApiFieldTrait {
    * @see \Drupal\views\Plugin\views\field\FieldHandlerInterface::preRender()
    */
   public function preRender(&$values) {
+    $index = $this->getIndex();
     // We deal with the properties one by one, always loading the necessary
     // values for any nested properties coming afterwards.
     // @todo This works quite well, but will load each item/entity individually.
@@ -298,6 +338,9 @@ trait SearchApiFieldTrait {
     //   expandRequiredProperties() would have to provide more information, or
     //   provide a separate properties list for each row.
     foreach ($this->expandRequiredProperties() as $datasource_id => $properties) {
+      if ($datasource_id === '') {
+        $datasource_id = NULL;
+      }
       foreach ($properties as $property_path => $combined_property_path) {
         // Determine the path of the parent property, and the property key to
         // take from it for this property. If the name is "_object", we just
@@ -311,10 +354,8 @@ trait SearchApiFieldTrait {
 
         // Now go through all rows and add the property to them, if necessary.
         foreach ($values as $i => $row) {
-          // Bail for rows with the wrong datasource for this property, or for
-          // which this field doesn't even apply (which will usually be the
-          // same, though).
-          if ($datasource_id != $row->search_api_datasource || !$this->isActiveForRow($row)) {
+          // Check whether this field even exists for this row.
+          if (!$this->isActiveForRow($row)) {
             continue;
           }
           // Check whether there are parent objects present. If no, either load
@@ -343,7 +384,7 @@ trait SearchApiFieldTrait {
             // Iterate over all parent objects to get their typed data for this
             // property and to extract their values.
             $row->_relationship_objects[$property_path] = array();
-            foreach ($row->_relationship_objects[$parent_path] as $parent) {
+            foreach ($row->_relationship_objects[$parent_path] as $j => $parent) {
               // Follow references.
               while ($parent instanceof DataReferenceInterface) {
                 $parent = $parent->getTarget();
@@ -353,6 +394,59 @@ trait SearchApiFieldTrait {
               // can't be present).
               if (!($parent instanceof ComplexDataInterface)) {
                 continue;
+              }
+              // Check whether this is a processor-generated property and use
+              // special code to retrieve it in this case.
+              $definitions = $index->getPropertyDefinitions($datasource_id);
+              if (!$parent_path && isset($definitions[$name])) {
+                $definition = $definitions[$name];
+                if ($definition instanceof ProcessorPropertyInterface) {
+                  $processor = $index->getProcessor($definition->getProcessorId());
+                  if (!$processor) {
+                    continue;
+                  }
+                  // We need to call the processor's addFieldValues() method in
+                  // order to get the field value. We do this using a clone of
+                  // the search item so as to preserve the original state of the
+                  // item. We also use a dummy field object – either a clone of
+                  // a fitting indexed field (to get its configuration), or a
+                  // newly created one.
+                  $property_fields = \Drupal::getContainer()
+                    ->get('search_api.fields_helper')
+                    ->filterForPropertyPath($index->getFields(), $datasource_id, $property_path);
+                  if ($property_fields) {
+                    $dummy_field = clone reset($property_fields);
+                  }
+                  else {
+                    $dummy_field = Utility::createFieldFromProperty($index, $definition, $datasource_id, $property_path, 'tmp', 'string');
+                  }
+                  /** @var \Drupal\search_api\Item\ItemInterface $dummy_item */
+                  $dummy_item = clone $row->_item;
+                  $dummy_item->setFields(array(
+                    'tmp' => $dummy_field,
+                  ));
+                  $dummy_item->setFieldsExtracted(TRUE);
+
+                  $processor->addFieldValues($dummy_item);
+
+                  if ($set_values) {
+                    $row->{$combined_property_path} = array();
+                  }
+                  foreach ($dummy_field->getValues() as $value) {
+                    if (!$this->checkEntityAccess($value, $combined_property_path)) {
+                      continue;
+                    }
+                    if ($set_values) {
+                      $row->{$combined_property_path}[] = $value;
+                    }
+                    $typed_data = \Drupal::service('typed_data_manager')
+                      ->create($definition, $value);
+                    $row->_relationship_objects[$property_path][] = $typed_data;
+                    $row->_relationship_parent_indices[$property_path][] = $j;
+                  }
+
+                  continue;
+                }
               }
               // Add the typed data for the property to our relationship objects
               // for this property path. To treat list properties correctly
@@ -365,10 +459,7 @@ trait SearchApiFieldTrait {
                 // user can access it.
                 $value = $typed_data->getValue();
                 if ($value instanceof EntityInterface) {
-                  if (!isset($account)) {
-                    $account = $this->getQuery()->getAccessAccount();
-                  }
-                  if (!$value->access('view', $account)) {
+                  if (!$this->checkEntityAccess($value, $combined_property_path)) {
                     continue;
                   }
                   if ($value instanceof ContentEntityInterface && $value->hasTranslation($row->search_api_language)) {
@@ -379,10 +470,12 @@ trait SearchApiFieldTrait {
                 if ($typed_data instanceof ListInterface) {
                   foreach ($typed_data as $item) {
                     $row->_relationship_objects[$property_path][] = $item;
+                    $row->_relationship_parent_indices[$property_path][] = $j;
                   }
                 }
                 else {
                   $row->_relationship_objects[$property_path][] = $typed_data;
+                  $row->_relationship_parent_indices[$property_path][] = $j;
                 }
               }
               catch (\InvalidArgumentException $e) {
@@ -434,6 +527,9 @@ trait SearchApiFieldTrait {
   protected function expandRequiredProperties() {
     $required_properties = array();
     foreach ($this->retrievedProperties as $datasource_id => $properties) {
+      if ($datasource_id === '') {
+        $datasource_id = NULL;
+      }
       foreach (array_keys($properties) as $property_path) {
         $path_to_add = '';
         foreach (explode(':', $property_path) as $component) {
@@ -460,8 +556,35 @@ trait SearchApiFieldTrait {
    *   otherwise.
    */
   protected function isActiveForRow(ResultRow $row) {
-    $datasource_id = $this->getDatasourceId();
-    return !$datasource_id || $row->search_api_datasource === $datasource_id;
+    $datasource_ids = array(NULL, $row->search_api_datasource);
+    return in_array($this->getDatasourceId(), $datasource_ids, TRUE);
+  }
+
+  /**
+   * Checks whether the searching user has access to the given value.
+   *
+   * If the value is not an entity, this will always return TRUE.
+   *
+   * @param mixed $value
+   *   The value to check.
+   * @param string $property_path
+   *   The property path of the value.
+   *
+   * @return bool
+   *   TRUE if the value is not an entity, or the searching user has access to
+   *   it; FALSE otherwise.
+   */
+  protected function checkEntityAccess($value, $property_path) {
+    if (!($value instanceof EntityInterface)) {
+      return TRUE;
+    }
+    if (!empty($this->skipAccessChecks[$property_path])) {
+      return TRUE;
+    }
+    if (!isset($this->accessAccount)) {
+      $this->accessAccount = $this->getQuery()->getAccessAccount() ?: FALSE;
+    }
+    return $value->access('view', $this->accessAccount ?: NULL);
   }
 
   /**
@@ -477,17 +600,29 @@ trait SearchApiFieldTrait {
       $path = $this->realField;
       $relationships = $this->view->relationship;
       $relationship = $this;
+      // While doing this, also note which relationships are configured to skip
+      // access checks.
+      $skip_access = array();
       while (!empty($relationship->options['relationship'])) {
         if (empty($relationships[$relationship->options['relationship']])) {
           break;
         }
         $relationship = $relationships[$relationship->options['relationship']];
         $path = $relationship->realField . ':' . $path;
+
+        foreach ($skip_access as $i => $temp_path) {
+          $skip_access[$i] = $relationship->realField . ':' . $temp_path;
+        }
+        if (!empty($relationship->options['skip_access'])) {
+          $skip_access[] = $relationship->realField;
+        }
       }
       $this->combinedPropertyPath = $path;
       // Set the field alias to the combined property path so that Views' code
       // can find the raw values, if necessary.
       $this->field_alias = $path;
+      // Set the property paths that should skip access checks.
+      $this->skipAccessChecks = array_fill_keys($skip_access, TRUE);
     }
     return $this->combinedPropertyPath;
   }
@@ -635,7 +770,7 @@ trait SearchApiFieldTrait {
    * @return \Drupal\Core\Render\RendererInterface
    *   The renderer.
    *
-   * @see \Drupal\views\Plugin\views\field\FieldPluginBase::getRenderer
+   * @see \Drupal\views\Plugin\views\field\FieldPluginBase::getRenderer()
    */
   abstract protected function getRenderer();
 

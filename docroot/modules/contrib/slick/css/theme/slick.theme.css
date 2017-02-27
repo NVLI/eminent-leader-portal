@@ -10,15 +10,21 @@
   box-sizing: border-box;
 }
 
+.slick img {
+  height: auto;
+}
+
+.slick img,
 .slick iframe {
   border: 0;
-  height: auto;
   max-width: 100%;
 }
 
+/* Prevents overflowing nested slides. */
+.slick,
 .slick-wrapper {
+  max-width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
 /**
@@ -26,12 +32,6 @@
  */
 .slick-initialized {
   overflow: visible;
-}
-
-/* Prevents overflowing nested slides. */
-.slick {
-  max-width: 100%;
-  position: relative;
 }
 
 .slick__slider::before,
@@ -44,15 +44,49 @@
   clear: both;
 }
 
-.slick__slide {
-  max-width: 100%;
-  position: relative;
-  vertical-align: top;
+/** Draggable. */
+.draggable {
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
-/* Prevent stacking oversized thumbnails/slides when/before JS is on. */
-.slick--multiple-view .slick__slide {
-  float: left;
+.draggable:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.draggable:active a,
+.draggable:active .slide__caption {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/** Visibility fix for stacking slides during initialization. */
+.slick__slide {
+  max-width: 100%;
+  position: absolute;
+  visibility: hidden;
+}
+
+/** Prevents collapsing container during initialization. */
+.slick__slide.slide--0 {
+  position: relative;
+}
+
+.unslick .slick__slide,
+.slick-initialized .slick__slide {
+  position: relative;
+  visibility: visible;
+}
+
+/* Fix for Chrome blue outline */
+.slick__slide:focus {
+  outline: 0;
 }
 
 /* Prevents collapsing slick when unslick like one item. */
@@ -62,36 +96,6 @@
 
 .slick-current {
   z-index: 4;
-}
-
-.slick-loading {
-  cursor: wait;
-}
-
-.draggable {
-  cursor: grab;
-  cursor: -webkit-grab;
-}
-
-.draggable:active {
-  cursor: grabbing;
-  cursor: -webkit-grabbing;
-}
-
-/* Fix for Chrome blue outline */
-.slick-slide:focus {
-  outline: 0;
-}
-
-.draggable:active a,
-.draggable:active .slide__caption {
-  cursor: grabbing;
-  cursor: -webkit-grabbing;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 /**
@@ -125,8 +129,18 @@
   -o-user-select: text;
   -webkit-user-select: text;
   user-select: text;
-  visibility: hidden;
   width: 100%;
+}
+
+/* Only display when JS is ready. */
+.slick__arrow,
+.is-loading .slide__caption {
+  visibility: hidden;
+}
+
+/** Arrows are outside slick-initialized. */
+.slick--initialized .slick__arrow {
+  visibility: visible;
 }
 
 .slick--main .slide__caption {
@@ -161,15 +175,10 @@
   position: absolute;
   top: 50%;
   width: 100%;
-  visibility: hidden;
   z-index: 2;
 }
 
-.slick__arrow li,
-.slick__arrow button {
-  pointer-events: auto;
-}
-
+/** Keeps decent fallback for when slick-theme.css is disabled, even if dup. */
 .slick-arrow {
   border: 0;
   border-radius: 50%;
@@ -204,30 +213,24 @@
   color: #37465b;
 }
 
-/* Only display when JS is ready. */
-.slick-slide .slide__caption,
-.block-grid .slide__caption,
-.js .slick__arrow {
-  visibility: visible;
-}
-
-.slick__arrow button {
-  display: none;
-}
-
-.slick__arrow .slick-arrow {
-  display: block;
-}
-
 /**
  * Bullets.
  */
 /* Makes the pointer work when bullets placed over the slide. */
-.slick-dots li button {
+/* Overrides core > 1.3.11, otherwise thumbnails are non-clickable */
+.slick button,
+.slick--thumbnail .slick__slide img {
   pointer-events: auto;
 }
 
-/* Overrides too tiny bullets from core slick.css */
+/* Provides decent dots if core slick-theme.css is disabled. */
+.slick-dots li {
+  margin-bottom: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Overrides too tiny bullets from core slick.css.*/
 .slick-dots li button::before {
   font-size: 12px;
   font-size: 0.75rem;
@@ -251,11 +254,20 @@ img[data-lazy] {
   margin: 0 auto;
 }
 
-/* Overrides core > 1.3.11, otherwise thumbnails are non-clickable */
-.slick--thumbnail .slick__slide img {
-  pointer-events: auto;
+/** @todo: Remove temp fix for when total <= slidesToShow at 1.6.1+. */
+/** @see https://github.com/kenwheeler/slick/issues/262 */
+.slick--less .slick-track {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-.slide--loading .slide__caption {
-  visibility: hidden;
+.slick--less .slick-slide {
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.slick--less .draggable {
+  cursor: default;
 }

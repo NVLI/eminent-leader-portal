@@ -11,16 +11,15 @@ use Drupal\Core\Routing\RouteMatchInterface;
  * Implements hook_help().
  */
 function dropzonejs_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
   switch ($route_name) {
     // Main module help for the dropzonejs module.
     case 'help.page.dropzonejs':
-      $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('DropzoneJS') . '</p>';
-      return $output;
-
     default:
   }
+  return $output;
 }
 
 /**
@@ -43,7 +42,7 @@ function dropzonejs_theme() {
  *   An associative array containing:
  *   - element: A render element representing the file.
  */
-function template_preprocess_dropzonejs(&$variables) {
+function template_preprocess_dropzonejs(array &$variables) {
   $element = $variables['element'];
 
   $variables['attributes'] = [];
@@ -54,6 +53,9 @@ function template_preprocess_dropzonejs(&$variables) {
     $variables['attributes']['class'] = (array) $element['#attributes']['class'];
   }
 
+  $variables['dropzone_description'] = $element['#dropzone_description'];
+  $variables['or_text'] = t('or');
+  $variables['select_files_button_text'] = t('Select files');
   $variables['uploaded_files'] = $element['uploaded_files'];
 }
 

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\Action\AssignToMeTask.
- */
-
 namespace Drupal\tmgmt_local\Plugin\Action;
 
 use Drupal\Core\Access\AccessResult;

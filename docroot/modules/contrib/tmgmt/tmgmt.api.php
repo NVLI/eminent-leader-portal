@@ -5,6 +5,8 @@
  * Hooks provided by the Translation Management module.
  */
 
+use Drupal\tmgmt\JobInterface;
+
 /**
  * @addtogroup tmgmt_source
  * @{
@@ -256,3 +258,73 @@ function hook_tmgmt_job_checkout_after_alter(&$redirects, &$jobs) {
   }
 }
 
+/**
+ * Allows to alter job checkout workflow before the default behavior.
+ *
+ * @param \Drupal\tmgmt\JobInterface $job
+ *   The Job being submitted.
+ */
+function hook_tmgmt_job_before_request_translation(JobInterface $job) {
+  /** @var \Drupal\tmgmt\Data $data_service */
+  $data_service = \Drupal::service('tmgmt.data');
+
+  // Do changes to the data for example.
+  foreach ($job->getItems() as $job_item) {
+    $unfiltered_data = $job_item->getData();
+    $data_items = $data_service->filterTranslatable($unfiltered_data);
+    foreach ($data_items as $data_item) {
+      $data_item['property'] = 'new value';
+    }
+  }
+}
+
+/**
+ * Allows to alter job checkout workflow after the default behavior.
+ *
+ * @param \Drupal\tmgmt\JobInterface $job
+ *   The Job being submitted.
+ */
+function hook_tmgmt_job_after_request_translation(JobInterface $job) {
+  /** @var \Drupal\tmgmt\Data $data_service */
+  $data_service = \Drupal::service('tmgmt.data');
+
+  // Reset the previous done changes to the data for example.
+  foreach ($job->getItems() as $job_item) {
+    $unfiltered_data = $job_item->getData();
+    $data_items = $data_service->filterTranslatable($unfiltered_data);
+    foreach ($data_items as $data_item) {
+      $data_item['property'] = 'old value';
+    }
+  }
+}
+
+/**
+ * Allows to alter a text's segment masking the HTML tags from a tmgmt-tag.
+ *
+ * @param string $source_text
+ *   The source's text segment to alter.
+ * @param string $translation_text
+ *   The translation's text segment to alter.
+ * @param array $context
+ *   An associative array containing:
+ *   - data_item: The data item.
+ *   - job_item: The job item context.
+ */
+function hook_tmgmt_data_item_text_output_alter(&$source_text, &$translation_text, array $context) {
+  $source_text = str_replace('First', 'Second', $source_text);
+  $translation_text = str_replace('First', 'Second', $translation_text);
+}
+
+/**
+ * Allows to alter a text's segment unmasking the HTML tags into a tmgmt-tag.
+ *
+ * @param string $translation_text
+ *   The translation's text segment to alter.
+ * @param array $context
+ *   An associative array containing:
+ *   - data_item: The data item.
+ *   - job_item: The job item context.
+ */
+function hook_tmgmt_data_item_text_input_alter(&$translation_text, array $context) {
+  $translation_text = str_replace('Second', 'First', $translation_text);
+}

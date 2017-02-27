@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\access\ViewJobAccess.
- */
-
 namespace Drupal\tmgmt\Plugin\views\access;
 
 use Drupal\Core\Session\AccountInterface;

@@ -7,7 +7,7 @@ use Drupal\migrate\Row;
 use Drupal\migrate_drupal\Plugin\migrate\cckfield\CckFieldPluginBase;
 
 /**
- * Plugin to migrate from the Drupal 6 emfield module.
+ * Plugin to migrate from the Drupal 7 video_embed_field module.
  *
  * @MigrateCckField(
  *   id = "video_embed_field",

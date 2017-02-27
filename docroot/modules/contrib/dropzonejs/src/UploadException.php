@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dropzonejs\UploadException.
- */
-
 namespace Drupal\dropzonejs;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class UploadException.
+ */
 class UploadException extends \Exception {
 
   /**
@@ -44,7 +42,7 @@ class UploadException extends \Exception {
   /**
    * Code to error message mapping.
    *
-   * @param array $code
+   * @var array
    */
   public $errorMessages = array(
     self::INPUT_ERROR => 'Failed to open input stream.',

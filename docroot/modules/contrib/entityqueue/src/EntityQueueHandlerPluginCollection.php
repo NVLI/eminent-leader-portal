@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntityQueueHandlerPluginCollection.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\Component\Plugin\PluginManagerInterface;

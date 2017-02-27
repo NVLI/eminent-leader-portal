@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\TranslatorResult.
- */
-
 namespace Drupal\tmgmt\Translator;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;

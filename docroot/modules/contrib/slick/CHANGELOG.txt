@@ -1,4 +1,112 @@
 
+Slick 8.x-1.0-dev, 2017-02-10
+-----------------------------
+- Fixed for regression with Overridables option not being respected.
+
+Slick 8.x-1.0-dev, 2017-01-24
+-----------------------------
+- #2843870 by ruslan_03492: Requirements could not be resolved to an installable
+  set of packages drupal/blazy 8.*.
+- Arranged the form item weights for better visibility.
+
+Slick 8.x-1.0-dev, 2017-01-16
+-----------------------------
+- Moved slick_library_info_build() content into SlickManager to declutter
+  module file.
+- Removed unused params from slick.load.js.
+- Removed deprecated SafeMarkup::format() for Html::escape().
+
+Slick 8.x-1.0-dev, 2016-12-27
+-----------------------------
+- Marked it Beta6.
+
+Slick 8.x-1.0-dev, 2016-12-24
+-----------------------------
+- Simplified slick.load.js to reduce dup variables.
+- Moved slick related media player from Blazy into Slick.
+
+Slick 8.x-1.0-dev, 2016-12-20
+-----------------------------
+- #2837939 by gausarts, toncic: Missing schema error for edgeFriction option,
+  creating new slick optionset. Resaving optionset and clearing cache fix it.
+
+Slick 8.x-1.0-dev, 2016-12-18
+-----------------------------
+- Added SlickEntityFormatterBase.php for base ER without field details.
+- A few cleanups: TWIG indentation, descriptions, default settings.
+
+Slick 8.x-1.0-dev, 2016-12-09
+-----------------------------
+- Fixed for the new Optimized option consequences.
+- Fixed for edgeFriction when it is integer, no longer double.
+- Improved message for slick_requirements().
+- Deprecated theme_slick_image() for theme_blazy() to reduce function calls.
+
+Slick 8.x-1.0-dev, 2016-12-06
+-----------------------------
+- Converted the rest of Simpletest methods into PHPUnit's.
+- Fixed for coding standards.
+- Ported Optimized option to clean out defaults from the stored settings.
+- Added tests.
+
+Slick 8.x-1.0-dev, 2016-11-29
+-----------------------------
+- Marked it Beta5.
+- A few cleanups.
+
+Slick 8.x-1.0-dev, 2016-11-26
+-----------------------------
+- Fixed for broken iframes when Aspect ratio is not provided.
+
+Slick 8.x-1.0-dev, 2016-11-21
+-----------------------------
+- Split lightbox gallery identifier into Grid wrapper, if provided.
+
+Slick 8.x-1.0-dev, 2016-11-17
+-----------------------------
+- Removed the no-longer needed SlickFormatter::getMediaSwitch() overrides as
+  slick colorbox is using blazy colorbox.
+
+Slick 8.x-1.0-dev, 2016-11-14
+-----------------------------
+- Fixed for colorbox regression with the recent JS move into Blazy.
+
+Slick 8.x-1.0-dev, 2016-11-09
+-----------------------------
+- A few cleanups.
+- Fixed for the new Grid and CSS3 Columns at field formatter settings not saved.
+
+Slick 8.x-1.0-dev, 2016-11-01
+-----------------------------
+- Simplified settings.arrow.attributes to arrow_attributes.
+- Simplified settings.downArrow.attributes to arrow_down_attributes.
+
+Slick 8.x-1.0-dev, 2016-10-31
+-----------------------------
+- Added support for Blazy new CSS3 Columns along with Grid Foundation.
+- Moved "the failsafe for deleted optionset while being used" outside Slick.php
+  since it was breaking Add/Duplicate operations, till proper fix.
+- Updated Slick colorbox JS file to re-use blazy.colorbox because Blazy now
+  also supports Media Entity for colorbox videos.
+
+Slick 8.x-1.0-dev, 2016-10-25
+-----------------------------
+- Minified please. Never commit anything when you are tired.
+- Added optional "Slick Image with Media" formatter to retain VEM/ME within
+  image/file ER environment if VEM/ME is installed.
+- Moved Slick grid CSS foundation into Blazy for reusability outside slick, such
+  as with core Views HTML list, or even Unformatted format.
+- Respected "Vanilla slick" option when using grid items.
+- Cleaned up and refined slick.theme.css for better UX.
+- Brought back the slide offset temp fix for when count <= slidesTosShow as no
+  resolution, by now. To be removed when the actual fix is available.
+- Ported the failsafe for deleted optionset while being used.
+- Added Twig block section for easy partial extensions, and reduce dups.
+
+Slick 8.x-1.0-dev, 2016-10-03
+-----------------------------
+- Fixed for nested slicks with a full screen skin.
+
 Slick 8.x-1.0-dev, 2016-09-29
 -----------------------------
 - Marked it Beta4.

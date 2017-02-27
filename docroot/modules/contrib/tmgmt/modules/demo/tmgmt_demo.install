@@ -68,12 +68,6 @@ function tmgmt_demo_install() {
   ));
   $node->save();
 
-  if (\Drupal::moduleHandler()->moduleExists('paragraphs_demo')) {
-    \Drupal::configFactory()->getEditable('tmgmt_content.settings')
-      ->set('embedded_fields.node.field_paragraphs_demo', TRUE)
-      ->save();
-  }
-
   // Allow translation to all authenticated users.
   /** @var Role $role */
   $role = Role::load(RoleInterface::AUTHENTICATED_ID);

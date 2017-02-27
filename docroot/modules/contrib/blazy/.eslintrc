@@ -4,7 +4,8 @@
   // eslint . -o ../../eslint/blazy.html -f html
   "extends": "../../../.eslintrc",
   "globals": {
-    "Blazy": true
+    "Blazy": true,
+    "dBlazy": true
   },
   "rules": {
     "consistent-this": [0, "me"],

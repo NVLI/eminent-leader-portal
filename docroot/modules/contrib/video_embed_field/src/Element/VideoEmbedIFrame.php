@@ -22,6 +22,7 @@ class VideoEmbedIFrame extends RenderElement {
       '#url' => '',
       '#query' => [],
       '#attributes' => [],
+      '#fragment' => [],
       '#pre_render' => [
         [static::class, 'preRenderInlineFrameEmbed'],
       ],

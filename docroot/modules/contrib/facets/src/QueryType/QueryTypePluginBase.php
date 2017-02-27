@@ -26,7 +26,7 @@ abstract class QueryTypePluginBase extends PluginBase implements QueryTypeInterf
   /**
    * The backend native query object.
    *
-   * @var \Drupal\search_api\Query\Query $query
+   * @var \Drupal\search_api\Query\Query
    */
   protected $query;
 

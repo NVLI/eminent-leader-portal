@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Entity\ViewsData\LocalTaskItemViewsData.
- */
 
 namespace Drupal\tmgmt_local\Entity\ViewsData;
 

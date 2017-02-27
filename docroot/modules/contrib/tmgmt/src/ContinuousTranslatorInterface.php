@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\ContinuousTranslatorInterface.
- */
-
 namespace Drupal\tmgmt;
 
 /**

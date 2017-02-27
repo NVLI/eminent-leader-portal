@@ -1,10 +1,5 @@
 <?php
 
-/*
- * @file
- * Contains Drupal\tmgmt\Tests\EntityTestBase.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 use Drupal\comment\Tests\CommentTestTrait;

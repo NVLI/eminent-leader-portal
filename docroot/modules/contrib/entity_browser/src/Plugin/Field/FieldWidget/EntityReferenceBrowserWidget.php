@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * Plugin implementation of the 'entity_reference' widget for entity browser.
@@ -61,6 +62,13 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
   protected static $deleteDepth = 4;
 
   /**
+   * The module handler interface.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructs widget plugin.
    *
    * @param string $plugin_id
@@ -79,11 +87,14 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
    *   Event dispatcher.
    * @param \Drupal\entity_browser\FieldWidgetDisplayManager $field_display_manager
    *   Field widget display plugin manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
    */
-  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, EntityTypeManagerInterface $entity_type_manager, EventDispatcherInterface $event_dispatcher, FieldWidgetDisplayManager $field_display_manager) {
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, EntityTypeManagerInterface $entity_type_manager, EventDispatcherInterface $event_dispatcher, FieldWidgetDisplayManager $field_display_manager, ModuleHandlerInterface $module_handler) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
     $this->entityTypeManager = $entity_type_manager;
     $this->fieldDisplayManager = $field_display_manager;
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -98,7 +109,8 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
       $configuration['third_party_settings'],
       $container->get('entity_type.manager'),
       $container->get('event_dispatcher'),
-      $container->get('plugin.manager.entity_browser.field_widget_display')
+      $container->get('plugin.manager.entity_browser.field_widget_display'),
+      $container->get('module_handler')
     );
   }
 
@@ -109,7 +121,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     return array(
       'entity_browser' => NULL,
       'open' => FALSE,
-      'field_widget_display' => NULL,
+      'field_widget_display' => 'label',
       'field_widget_edit' => TRUE,
       'field_widget_remove' => TRUE,
       'field_widget_display_settings' => [],
@@ -158,10 +170,17 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
       ],
     ];
 
+    $edit_button_access = TRUE;
+    if ($entity_type->id() == 'file') {
+      // For entities of type "file", it only makes sense to have the edit
+      // button if the module "file_entity" is present.
+      $edit_button_access = $this->moduleHandler->moduleExists('file_entity');
+    }
     $element['field_widget_edit'] = [
       '#title' => $this->t('Display Edit button'),
       '#type' => 'checkbox',
       '#default_value' => $this->getSetting('field_widget_edit'),
+      '#access' => $edit_button_access,
     ];
 
     $element['field_widget_remove'] = [
@@ -349,8 +368,8 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
         ],
       ];
 
-      $element['#attached']['library'][] = 'entity_browser/entity_reference';
     }
+    $element['#attached']['library'][] = 'entity_browser/entity_reference';
 
     $field_parents = $element['#field_parents'];
 
@@ -471,6 +490,13 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
       'items' => array_map(
         function (ContentEntityInterface $entity, $row_id) use ($field_widget_display, $details_id, $field_parents) {
           $display = $field_widget_display->view($entity);
+          $edit_button_access = $this->getSetting('field_widget_edit');
+          if ($entity->getEntityTypeId() == 'file') {
+            // On file entities, the "edit" button shouldn't be visible unless
+            // the module "file_entity" is present, which will allow them to be
+            // edited on their own form.
+            $edit_button_access &= $this->moduleHandler->moduleExists('file_entity');
+          }
           if (is_string($display)) {
             $display = ['#markup' => $display];
           }
@@ -490,7 +516,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
                 'wrapper' => $details_id,
               ],
               '#submit' => [[get_class($this), 'removeItemSubmit']],
-              '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $row_id,
+              '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $row_id . '_' . md5(json_encode($field_parents)),
               '#limit_validation_errors' => [array_merge($field_parents, [$this->fieldDefinition->getName()])],
               '#attributes' => [
                 'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
@@ -514,7 +540,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
                   ],
                 ],
               ],
-              '#access' => (bool) $this->getSetting('field_widget_edit'),
+              '#access' => $edit_button_access,
             ],
           ];
         },
@@ -601,6 +627,12 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     $entity_type = $this->fieldDefinition->getFieldStorageDefinition()->getSetting('target_type');
     $entity_storage = $this->entityTypeManager->getStorage($entity_type);
 
+    // Find IDs from target_id element (it stores selected entities in form).
+    // This was added to help solve a really edge casey bug in IEF.
+    if (($target_id_entities = $this->getEntitiesByTargetId($element, $form_state)) !== FALSE) {
+      return $target_id_entities;
+    }
+
     // Determine if we're submitting and if submit came from this widget.
     $is_relevant_submit = FALSE;
     if (($trigger = $form_state->getTriggeringElement())) {
@@ -638,12 +670,12 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     // IDs from a previous request might be saved in the form state.
     elseif ($form_state->has([
       'entity_browser_widget',
-      $this->getFormStateKey($items)
+      $this->getFormStateKey($items),
     ])
     ) {
       $stored_ids = $form_state->get([
         'entity_browser_widget',
-        $this->getFormStateKey($items)
+        $this->getFormStateKey($items),
       ]);
       $indexed_entities = $entity_storage->loadMultiple($stored_ids);
 
@@ -686,6 +718,37 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     }
 
     return $dependencies;
+  }
+
+  /**
+   * Get selected elements from target_id element on form.
+   *
+   * @param array $element
+   *   The form element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface[]|false
+   *   Return list of entities if they are available or false.
+   */
+  protected function getEntitiesByTargetId(array $element, FormStateInterface $form_state) {
+    $target_id_element_path = array_merge(
+      $element['#field_parents'],
+      [$this->fieldDefinition->getName(), 'target_id']
+    );
+
+    if (!NestedArray::keyExists($form_state->getUserInput(), $target_id_element_path)) {
+      return FALSE;
+    }
+
+    // TODO Figure out how to avoid using raw user input.
+    $current_user_input = NestedArray::getValue($form_state->getUserInput(), $target_id_element_path);
+    if (!is_array($current_user_input)) {
+      $entities = EntityBrowserElement::processEntityIds($current_user_input);
+      return $entities;
+    }
+
+    return FALSE;
   }
 
 }

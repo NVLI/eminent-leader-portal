@@ -48,52 +48,70 @@ class VideoEmbedWysiwyg extends FilterBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   public function process($text, $langcode) {
+
     $response = new FilterProcessResult($text);
 
-    // Use a look ahead to match the capture groups in any order.
-    if (preg_match_all('/(<p>)?(?<json>{(?=.*preview_thumbnail\b)(?=.*settings\b)(?=.*video_url\b)(?=.*settings_summary)(.*)})(<\/p>)?/', $text, $matches)) {
-      foreach ($matches['json'] as $delta => $match) {
-        // Ensure the JSON string is valid.
-        $embed_data = json_decode($match, TRUE);
-        if (!is_array($embed_data)) {
-          continue;
-        }
-
-        // If the URL can't matched to a provider or the settings are invalid,
-        // ignore it.
-        $provider = $this->providerManager->loadProviderFromInput($embed_data['video_url']);
-        if (!$provider || !$this->validSettings($embed_data['settings'])) {
-          continue;
-        }
-
-        $autoplay = $this->currentUser->hasPermission('never autoplay videos') ? FALSE : $embed_data['settings']['autoplay'];
-        $embed_code = $provider->renderEmbedCode($embed_data['settings']['width'], $embed_data['settings']['height'], $autoplay);
-
-        // Add the container to make the video responsive if it's been
-        // configured as such. This usually is attached to field output in the
-        // case of a formatter, but a custom container must be used where one is
-        // not present.
-        if ($embed_data['settings']['responsive']) {
-          $embed_code = [
-            '#type' => 'container',
-            '#attributes' => [
-              'class' => ['video-embed-field-responsive-video'],
-            ],
-            'children' => $embed_code,
-          ];
-        }
-
-        // Replace the JSON settings with a video.
-        $text = str_replace($matches[0][$delta], $this->renderer->render($embed_code), $text);
+    foreach ($this->getValidMatches($text) as $source_text => $embed_data) {
+      if (!$provider = $this->providerManager->loadProviderFromInput($embed_data['video_url'])) {
+        continue;
       }
+
+      $autoplay = $this->currentUser->hasPermission('never autoplay videos') ? FALSE : $embed_data['settings']['autoplay'];
+      $embed_code = $provider->renderEmbedCode($embed_data['settings']['width'], $embed_data['settings']['height'], $autoplay);
+
+      // Add the container to make the video responsive if it's been
+      // configured as such. This usually is attached to field output in the
+      // case of a formatter, but a custom container must be used where one is
+      // not present.
+      if ($embed_data['settings']['responsive']) {
+        $embed_code = [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => ['video-embed-field-responsive-video'],
+          ],
+          'children' => $embed_code,
+        ];
+      }
+
+      // Replace the JSON settings with a video.
+      $text = str_replace($source_text, $this->renderer->render($embed_code), $text);
+
+      // Add the required responsive video library only when at least one match
+      // is present.
+      $response->setAttachments(['library' => ['video_embed_field/responsive-video']]);
+      $response->setCacheContexts(['user.permissions']);
     }
 
-    // Add the required responsive video library and update the response text.
     $response->setProcessedText($text);
-    $response->addAttachments(['library' => ['video_embed_field/responsive-video']]);
-    $response->setCacheContexts(['user.permissions']);
-
     return $response;
+  }
+
+  /**
+   * Get all valid matches in the WYSIWYG.
+   *
+   * @param string $text
+   *   The text to check for WYSIWYG matches.
+   *
+   * @return array
+   *   An array of data from the text keyed by the text content.
+   */
+  protected function getValidMatches($text) {
+    // Use a look ahead to match the capture groups in any order.
+    if (!preg_match_all('/(<p>)?(?<json>{(?=.*preview_thumbnail\b)(?=.*settings\b)(?=.*video_url\b)(?=.*settings_summary)(.*)})(<\/p>)?/', $text, $matches)) {
+      return [];
+    }
+    $valid_matches = [];
+    foreach ($matches['json'] as $delta => $match) {
+      // Ensure the JSON string is valid.
+      $embed_data = json_decode($match, TRUE);
+      if (!$embed_data || !is_array($embed_data)) {
+        continue;
+      }
+      if ($this->isValidSettings($embed_data['settings'])) {
+        $valid_matches[$matches[0][$delta]] = $embed_data;
+      }
+    }
+    return $valid_matches;
   }
 
   /**
@@ -105,7 +123,7 @@ class VideoEmbedWysiwyg extends FilterBase implements ContainerFactoryPluginInte
    * @return bool
    *   If the required settings are present.
    */
-  protected function validSettings($settings) {
+  protected function isValidSettings($settings) {
     foreach (Video::defaultSettings() as $setting => $default) {
       if (!isset($settings[$setting])) {
         return FALSE;

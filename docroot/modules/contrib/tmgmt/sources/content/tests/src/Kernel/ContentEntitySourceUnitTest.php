@@ -1,16 +1,12 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\Tests\tmgmt_content\Kernel\ContentEntitySourceUnitTest.php
- */
-
 namespace Drupal\Tests\tmgmt_content\Kernel;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\Entity\Node;
@@ -49,6 +45,13 @@ class ContentEntitySourceUnitTest extends EntityKernelTestBase {
     ConfigurableLanguage::createFromLangcode('de')->save();
     ConfigurableLanguage::createFromLangcode('cs')->save();
 
+    $filter = FilterFormat::create(['format' => 'unallowed_format']);
+    $filter->save();
+
+    $this->config('tmgmt.settings')
+      ->set('allowed_formats', ['text_plain'])
+      ->save();
+
     $this->installEntitySchema('tmgmt_job');
     $this->installEntitySchema('tmgmt_job_item');
     $this->installEntitySchema('tmgmt_remote');
@@ -64,7 +67,7 @@ class ContentEntitySourceUnitTest extends EntityKernelTestBase {
 
     // Make the test field translatable.
     $field_storage = FieldStorageConfig::loadByName('entity_test_mul', 'field_test_text');
-    $field_storage->setCardinality(2);
+    $field_storage->setCardinality(3);
     $field_storage->save();
     $field = FieldConfig::loadByName('entity_test_mul', 'entity_test_mul', 'field_test_text');
     $field->setTranslatable(TRUE);
@@ -110,12 +113,18 @@ class ContentEntitySourceUnitTest extends EntityKernelTestBase {
     $entity_test = entity_create($this->entityTypeId, $values);
     $translation = $entity_test->getTranslation('en');
     $translation->name->value = $this->randomMachineName();
-    $values = array(
+    $translation->field_test_text->appendItem([
       'value' => $this->randomMachineName(),
-      'format' => 'text_plain'
-    );
-    $translation->field_test_text->appendItem($values);
-    $translation->field_test_text->appendItem($values);
+      'format' => 'text_plain',
+    ]);
+    $translation->field_test_text->appendItem([
+      'value' => $this->randomMachineName(),
+      'format' => 'text_plain',
+    ]);
+    $translation->field_test_text->appendItem([
+      'value' => $this->randomMachineName(),
+      'format' => 'unallowed_format',
+    ]);
 
     $values = array(
       'target_id' => $this->image->id(),
@@ -162,6 +171,15 @@ class ContentEntitySourceUnitTest extends EntityKernelTestBase {
     $this->assertEqual($data['field_test_text'][1]['format']['#text'], $entity_test->field_test_text[1]->format);
     $this->assertEqual($data['field_test_text'][1]['format']['#translate'], FALSE);
     $this->assertFalse(isset($data['field_test_text'][1]['processed']));
+
+    $this->assertEqual($data['field_test_text'][2]['#label'], 'Delta #2');
+    $this->assertFalse(isset($data['field_test_text'][2]['value']['#label']));
+    $this->assertEqual($data['field_test_text'][2]['value']['#text'], $entity_test->field_test_text[2]->value);
+    $this->assertEqual($data['field_test_text'][2]['value']['#translate'], FALSE);
+    $this->assertFalse(isset($data['field_test_text'][2]['format']['#label']));
+    $this->assertEqual($data['field_test_text'][2]['format']['#text'], $entity_test->field_test_text[2]->format);
+    $this->assertEqual($data['field_test_text'][2]['format']['#translate'], FALSE);
+    $this->assertFalse(isset($data['field_test_text'][2]['processed']));
 
     // Test the image field.
     $image_item = $data['image_test'][0];

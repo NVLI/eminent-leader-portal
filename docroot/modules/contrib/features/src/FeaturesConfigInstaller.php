@@ -53,7 +53,15 @@ class FeaturesConfigInstaller extends ConfigInstaller {
   public function __construct(ConfigInstallerInterface $config_installer, FeaturesManagerInterface $features_manager, ConfigFactoryInterface $config_factory, StorageInterface $active_storage, TypedConfigManagerInterface $typed_config, ConfigManagerInterface $config_manager, EventDispatcherInterface $event_dispatcher) {
     $this->configInstaller = $config_installer;
     $this->featuresManager = $features_manager;
-    parent::__construct($config_factory, $active_storage, $typed_config, $config_manager, $event_dispatcher);
+
+    // In order to be compatible with both core 8.2.x and 8.3.x, this
+    // constructor cannot require being passed the install profile from its
+    // service definition because the %install_profile% parameter does not
+    // exist before 8.3, so it has to request it.
+    // @link https://www.drupal.org/node/2851035
+    $install_profile = drupal_get_profile();
+
+    parent::__construct($config_factory, $active_storage, $typed_config, $config_manager, $event_dispatcher, $install_profile);
   }
 
   /**
@@ -83,6 +91,18 @@ class FeaturesConfigInstaller extends ConfigInstaller {
       }
     }
     return $existing_configuration;
+  }
+
+  /**
+   * Creates configuration in a collection based on the provided list.
+   *
+   * @param string $collection
+   *   The configuration collection.
+   * @param array $config_to_create
+   *   An array of configuration data to create, keyed by name.
+   */
+  public function createConfiguration($collection, array $config_to_create) {
+    return parent::createConfiguration($collection, $config_to_create);
   }
 
 }

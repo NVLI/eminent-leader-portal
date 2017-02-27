@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Entity\LocalTask.
- */
-
 namespace Drupal\tmgmt_local\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;

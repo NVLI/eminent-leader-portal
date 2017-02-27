@@ -4,7 +4,6 @@ namespace Drupal\facets\Form;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityForm;
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\facets\Processor\ProcessorInterface;
@@ -13,6 +12,8 @@ use Drupal\facets\UrlProcessor\UrlProcessorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\facets\Widget\WidgetPluginManager;
 use Drupal\facets\Processor\SortProcessorInterface;
+use Drupal\Core\Form\SubformState;
+use Drupal\Core\Url;
 
 /**
  * Provides a form for configuring the processors of a facet.
@@ -67,16 +68,11 @@ class FacetForm extends EntityForm {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var \Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
-    $entity_type_manager = $container->get('entity_type.manager');
-
-    /** @var \Drupal\facets\Processor\ProcessorPluginManager $processor_plugin_manager */
-    $processor_plugin_manager = $container->get('plugin.manager.facets.processor');
-
-    /** @var \Drupal\facets\Widget\WidgetPluginManager $widget_plugin_manager */
-    $widget_plugin_manager = $container->get('plugin.manager.facets.widget');
-
-    return new static($entity_type_manager, $processor_plugin_manager, $widget_plugin_manager);
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('plugin.manager.facets.processor'),
+      $container->get('plugin.manager.facets.widget')
+    );
   }
 
   /**
@@ -234,10 +230,8 @@ class FacetForm extends EntityForm {
           '#access' => !$processor->isHidden(),
         );
 
-        $processor_form_state = new SubFormState(
-          $form_state,
-          ['facet_settings', $processor_id, 'settings']
-        );
+        $form['facet_settings'][$processor_id]['settings'] = [];
+        $processor_form_state = SubformState::createForSubform($form['facet_settings'][$processor_id]['settings'], $form, $form_state);
         $processor_form = $processor->buildConfigurationForm($form, $processor_form_state, $facet);
         if ($processor_form) {
           $form['facet_settings'][$processor_id]['settings'] = array(
@@ -290,10 +284,8 @@ class FacetForm extends EntityForm {
           '#access' => !$processor->isHidden(),
         );
 
-        $processor_form_state = new SubFormState(
-          $form_state,
-          array('facet_sorting', $processor_id, 'settings')
-        );
+        $form['facet_sorting'][$processor_id]['settings'] = [];
+        $processor_form_state = SubformState::createForSubform($form['facet_sorting'][$processor_id]['settings'], $form, $form_state);
         $processor_form = $processor->buildConfigurationForm($form, $processor_form_state, $facet);
         if ($processor_form) {
           $form['facet_sorting'][$processor_id]['settings'] = array(
@@ -373,12 +365,85 @@ class FacetForm extends EntityForm {
       '#default_value' => $facet->getQueryOperator(),
     ];
 
+    $hard_limit_options = [3, 5, 10, 15, 20, 30, 40, 50, 75, 100, 250, 500];
+    $form['facet_settings']['hard_limit'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Hard limit'),
+      '#default_value' => $facet->getHardLimit(),
+      '#options' => [0 => $this->t('No limit')] + array_combine($hard_limit_options, $hard_limit_options),
+      '#description' => $this->t('Display no more than this number of facet items.'),
+    ];
+    if (strpos($facet->getFacetSourceId(), 'views_') === FALSE) {
+      $form['facet_settings']['hard_limit']['#disabled'] = TRUE;
+      $form['facet_settings']['hard_limit']['#description'] .= '<br />';
+      $form['facet_settings']['hard_limit']['#description'] .= $this->t('This setting only works with Search API based facets.');
+    }
+
     $form['facet_settings']['exclude'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Exclude'),
       '#description' => $this->t('Make the search exclude selected facets, instead of restricting it to them.'),
       '#default_value' => $facet->getExclude(),
     ];
+
+    $form['facet_settings']['use_hierarchy'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use hierarchy'),
+      '#default_value' => $facet->getUseHierarchy(),
+    ];
+    if (strpos($facet->getFacetSourceId(), 'views_') === FALSE) {
+      $form['facet_settings']['use_hierarchy']['#disabled'] = TRUE;
+      $form['facet_settings']['use_hierarchy']['#description'] = $this->t('This setting only works with Search API based facets.');
+    }
+    else {
+      $processor_url = Url::fromRoute('entity.search_api_index.processors', [
+        'search_api_index' => $facet->getFacetSource()->getIndex()->id(),
+      ]);
+      $description = $this->t('Renders the items using hierarchy. Make sure to enable the hierarchy processor on the <a href=":processor-url">Search api index processor configuration</a> for this to work as expected. If disabled all items will be flatten.', [
+        ':processor-url' => $processor_url->toString(),
+      ]);
+      $form['facet_settings']['use_hierarchy']['#description'] = $description;
+      $form['facet_settings']['use_hierarchy']['#description'] .= '<br />';
+      $form['facet_settings']['use_hierarchy']['#description'] .= '<strong>At this moment only hierarchical taxonomy terms are supported.</strong>';
+    }
+
+    $form['facet_settings']['expand_hierarchy'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Always expand hierarchy'),
+      '#description' => $this->t('Render entire tree, regardless of whether the parents are active or not.'),
+      '#default_value' => $facet->getExpandHierarchy(),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="facet_settings[use_hierarchy]"]' => array('checked' => TRUE),
+        ),
+      ),
+    ];
+
+    $form['facet_settings']['enable_parent_when_child_gets_disabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable parent when child gets disabled'),
+      '#description' => $this->t('Uncheck this if you want to allow de-activating an entire hierarchical trail by clicking an active child.'),
+      '#default_value' => $facet->getEnableParentWhenChildGetsDisabled(),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="facet_settings[use_hierarchy]"]' => array('checked' => TRUE),
+        ),
+      ),
+    ];
+
+    $form['facet_settings']['min_count'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Minimum count'),
+      '#default_value' => $facet->getMinCount(),
+      '#description' => $this->t('The minimum amount a result needs to have for it to show up in the results.'),
+      '#maxlength' => 4,
+      '#required' => TRUE,
+    ];
+    if (strpos($facet->getFacetSourceId(), 'views_') === FALSE) {
+      $form['facet_settings']['min_count']['#disabled'] = TRUE;
+      $form['facet_settings']['min_count']['#description'] .= '<br />';
+      $form['facet_settings']['min_count']['#description'] .= $this->t('This setting only works with Search API based facets.');
+    }
 
     $form['facet_settings']['weight'] = [
       '#type' => 'number',
@@ -484,20 +549,16 @@ class FacetForm extends EntityForm {
     // Iterate over all processors that have a form and are enabled.
     foreach ($form['facet_settings'] as $processor_id => $processor_form) {
       if (!empty($values['processors'][$processor_id])) {
-        $processor_form_state = new SubFormState(
-          $form_state,
-          array('facet_settings', $processor_id, 'settings')
-        );
+
+        $processor_form_state = SubformState::createForSubform($form['facet_settings'][$processor_id]['settings'], $form, $form_state);
         $processors[$processor_id]->validateConfigurationForm($form['facet_settings'][$processor_id], $processor_form_state, $facet);
       }
     }
     // Iterate over all sorting processors that have a form and are enabled.
     foreach ($form['facet_sorting'] as $processor_id => $processor_form) {
       if (!empty($values['processors'][$processor_id])) {
-        $processor_form_state = new SubFormState(
-          $form_state,
-          array('facet_sorting', $processor_id, 'settings')
-        );
+
+        $processor_form_state = SubformState::createForSubform($form['facet_sorting'][$processor_id]['settings'], $form, $form_state);
         $processors[$processor_id]->validateConfigurationForm($form['facet_sorting'][$processor_id], $processor_form_state, $facet);
       }
     }
@@ -543,10 +604,7 @@ class FacetForm extends EntityForm {
         $new_settings['weights'] = $values['processors'][$processor_id]['weights'];
       }
       if (isset($form[$form_container_key][$processor_id]['settings'])) {
-        $processor_form_state = new SubFormState(
-          $form_state,
-          array($form_container_key, $processor_id, 'settings')
-        );
+        $processor_form_state = SubformState::createForSubform($form[$form_container_key][$processor_id]['settings'], $form, $form_state);
         $processor->submitConfigurationForm($form[$form_container_key][$processor_id]['settings'], $processor_form_state, $facet);
         $new_settings['settings'] = $processor->getConfiguration();
       }
@@ -556,6 +614,7 @@ class FacetForm extends EntityForm {
     $facet->setWidget($form_state->getValue('widget'), $form_state->getValue('widget_config'));
     $facet->setUrlAlias($form_state->getValue(['facet_settings', 'url_alias']));
     $facet->setWeight((int) $form_state->getValue(['facet_settings', 'weight']));
+    $facet->setMinCount((int) $form_state->getValue(['facet_settings', 'min_count']));
     $facet->setOnlyVisibleWhenFacetSourceIsVisible($form_state->getValue(['facet_settings', 'only_visible_when_facet_source_is_visible']));
     $facet->setShowOnlyOneResult($form_state->getValue(['facet_settings', 'show_only_one_result']));
 
@@ -580,7 +639,12 @@ class FacetForm extends EntityForm {
 
     $facet->setQueryOperator($form_state->getValue(['facet_settings', 'query_operator']));
 
+    $facet->setHardLimit($form_state->getValue(['facet_settings', 'hard_limit']));
+
     $facet->setExclude($form_state->getValue(['facet_settings', 'exclude']));
+    $facet->setUseHierarchy($form_state->getValue(['facet_settings', 'use_hierarchy']));
+    $facet->setExpandHierarchy($form_state->getValue(['facet_settings', 'expand_hierarchy']));
+    $facet->setEnableParentWhenChildGetsDisabled($form_state->getValue(['facet_settings', 'enable_parent_when_child_gets_disabled']));
 
     $facet->save();
     drupal_set_message(t('Facet %name has been updated.', ['%name' => $facet->getName()]));

@@ -125,3 +125,78 @@ function search_api_requirements($phase) {
   }
   return array();
 }
+
+/**
+ * Adapts index config schema to remove an unnecessary layer for plugins.
+ */
+function search_api_update_8101() {
+  // This update function updates search indexes for the change from
+  // https://www.drupal.org/node/2656052.
+  $config_factory = \Drupal::configFactory();
+  $plugin_types = [
+    'processor',
+    'datasource',
+    'tracker',
+  ];
+
+  foreach ($config_factory->listAll('search_api.index.') as $index_id) {
+    $index = $config_factory->getEditable($index_id);
+    $changed = FALSE;
+
+    foreach ($plugin_types as $plugin_type) {
+      $property = $plugin_type . '_settings';
+      $plugins = $index->get($property);
+      foreach ($plugins as $id => $config) {
+        if (isset($config['plugin_id']) && isset($config['settings'])) {
+          $changed = TRUE;
+          $plugins[$id] = $config['settings'];
+        }
+      }
+      $index->set($property, $plugins);
+    }
+
+    if ($changed) {
+      // Mark the resulting configuration as trusted data. This avoids issues
+      // with future schema changes.
+      $index->save(TRUE);
+    }
+  }
+
+  return t('Index config schema updated.');
+}
+
+/**
+ * Removes unsupported cache plugins from Search API views.
+ */
+function search_api_update_8102() {
+  $config_factory = \Drupal::configFactory();
+  $changed = [];
+
+  foreach ($config_factory->listAll('views.view.') as $view_config_name) {
+    $view = $config_factory->getEditable($view_config_name);
+    $displays = $view->get('display');
+
+    if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+      $change = FALSE;
+      foreach ($displays as $id => $display) {
+        if (!empty($display['display_options']['cache']['type']) && in_array($display['display_options']['cache']['type'], ['tag', 'time'])
+        ) {
+          $displays[$id]['display_options']['cache']['type'] = 'none';
+          $change = TRUE;
+        }
+      }
+
+      if ($change) {
+        $view->set('display', $displays);
+        $view->save(TRUE);
+        $changed[] = $view->get('id');
+      }
+    }
+  }
+
+  if (!empty($changed)) {
+    return \Drupal::translation()->translate('Removed incompatible cache options for the following Search API-based views: @ids', ['@ids' => implode(', ', array_unique($changed))]);
+  }
+
+  return NULL;
+}

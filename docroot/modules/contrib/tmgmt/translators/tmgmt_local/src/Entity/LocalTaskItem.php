@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Entity\LocalTaskItem.
- */
-
 namespace Drupal\tmgmt_local\Entity;
 
 use Drupal\Component\Utility\NestedArray;

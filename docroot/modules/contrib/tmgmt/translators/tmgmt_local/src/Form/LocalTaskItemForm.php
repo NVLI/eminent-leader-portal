@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Form\LocalTaskItemForm.
- */
-
 namespace Drupal\tmgmt_local\Form;
 
 use Drupal\Component\Utility\Html;
@@ -452,12 +447,12 @@ class LocalTaskItemForm extends ContentEntityForm {
   protected function prepareData(array $data) {
     if (isset($data['#text'])) {
       if (isset($data['#translation']['#text'])) {
-        $data['#text'] = $data['#translation']['#text'];
+        $result['#text'] = $data['#translation']['#text'];
       }
       else {
-        $data['#text'] = '';
+        $result['#text'] = '';
       }
-      return $data;
+      return $result;
     }
     foreach (Element::children($data) as $key) {
       $data[$key] = $this->prepareData($data[$key]);

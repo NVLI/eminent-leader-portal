@@ -2,15 +2,14 @@
 
 namespace Drupal\slick_ui\Controller;
 
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Config\Entity\DraggableListBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Component\Utility\Html;
 use Drupal\slick\SlickManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a listing of Slick optionsets.
@@ -62,11 +61,11 @@ class SlickListBuilder extends DraggableListBuilder {
    */
   public function buildHeader() {
     $header = array(
-      'label'       => t('Optionset'),
-      'breakpoints' => t('Breakpoints'),
-      'group'       => t('Group'),
-      'lazyload'    => t('Lazyload'),
-      'skin'        => t('Skin'),
+      'label'       => $this->t('Optionset'),
+      'breakpoints' => $this->t('Breakpoints'),
+      'group'       => $this->t('Group'),
+      'lazyload'    => $this->t('Lazyload'),
+      'skin'        => $this->t('Skin'),
     );
 
     return $header + parent::buildHeader();
@@ -81,14 +80,16 @@ class SlickListBuilder extends DraggableListBuilder {
 
     $row['label'] = Html::escape($this->getLabel($entity));
     $row['breakpoints']['#markup'] = $entity->getBreakpoints();
-    $row['group']['#markup'] = $entity->getGroup() ?: t('All');
-    $row['lazyload']['#markup'] = $entity->getSetting('lazyLoad') ?: t('None');
-    $row['skin']['#markup'] = Html::escape($skin);
+    $row['group']['#markup'] = $entity->getGroup() ?: $this->t('All');
+    $row['lazyload']['#markup'] = $entity->getSetting('lazyLoad') ?: $this->t('None');
 
-    // Has to do this separately as concat with HTML tag is no joy.
+    $markup = $skin;
     if (isset($skins[$skin]['description'])) {
-      $row['skin']['#markup'] = SafeMarkup::format('@skin:<p class="description">@description</p>', ['@skin' => $skin, '@description' => $skins[$skin]['description']]);
+      // No need to re-translate, as already translated at SlickSkin.php.
+      $markup .= '<br />' . Html::escape($skins[$skin]['description']);
     }
+
+    $row['skin']['#markup'] = $markup;
 
     return $row + parent::buildRow($entity);
   }
@@ -100,7 +101,7 @@ class SlickListBuilder extends DraggableListBuilder {
     $operations = parent::getDefaultOperations($entity);
 
     if (isset($operations['edit'])) {
-      $operations['edit']['title'] = t('Configure');
+      $operations['edit']['title'] = $this->t('Configure');
     }
 
     $operations['duplicate'] = array(
@@ -124,7 +125,7 @@ class SlickListBuilder extends DraggableListBuilder {
    */
   public function render() {
     $build['description'] = array(
-      '#markup' => $this->t("<p>Manage the Slick optionsets. Optionsets are Config Entities.</p><p>By default, when this module is enabled, a single optionset is created from configuration. Install Slick example module to speed up by cloning them. Use the Operations column to edit, clone and delete optionsets.<br /><strong>Important!</strong> Avoid overriding Default optionset as it is meant for Default -- checking and cleaning. Use Duplicate instead. Otherwise messes are yours.</p>"),
+      '#markup' => $this->t("<p>Manage the Slick optionsets. Optionsets are Config Entities.</p><p>By default, when this module is enabled, a single optionset is created from configuration. Install Slick example module to speed up by cloning them. Use the Operations column to edit, clone and delete optionsets.<br /><strong>Important!</strong> Avoid overriding Default optionset as it is meant for Default -- checking and cleaning. Use Duplicate instead. Otherwise messes are yours.<br />Slick doesn't need Slick UI to run. It is always safe to uninstall Slick UI once done with optionsets.</p>"),
     );
 
     $build[] = parent::render();

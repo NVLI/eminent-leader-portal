@@ -7,6 +7,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Facets\FacetInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\facets\QueryType\QueryTypePluginManager;
 
 /**
  * Defines a base class from which other facet sources may extend.
@@ -46,9 +47,18 @@ abstract class FacetSourcePluginBase extends PluginBase implements FacetSourcePl
   protected $facet;
 
   /**
-   * {@inheritdoc}
+   * Constructs a FacetSourcePluginBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\facets\QueryType\QueryTypePluginManager $query_type_plugin_manager
+   *   The query type plugin manager.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, $query_type_plugin_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, QueryTypePluginManager $query_type_plugin_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->queryTypePluginManager = $query_type_plugin_manager;
 
@@ -62,10 +72,12 @@ abstract class FacetSourcePluginBase extends PluginBase implements FacetSourcePl
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Insert the plugin manager for query types.
-    /** @var \Drupal\facets\QueryType\QueryTypePluginManager $query_type_plugin_manager */
-    $query_type_plugin_manager = $container->get('plugin.manager.facets.query_type');
-
-    return new static($configuration, $plugin_id, $plugin_definition, $query_type_plugin_manager);
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('plugin.manager.facets.query_type')
+    );
   }
 
   /**
@@ -102,6 +114,20 @@ abstract class FacetSourcePluginBase extends PluginBase implements FacetSourcePl
    */
   public function getSearchKeys() {
     return $this->keys;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCount() {
+    global $pager_total_items;
+    // Exposing a global here. This is pretty ugly but the only way to get the
+    // actual results for any kind of query that was done and gets back results.
+    // @see core/includes/pager.inc for more information how this works.
+    // Rounding as some backend plugins could not give accurate information on
+    // the results found.
+    // @todo Figure out when it can not be the first one in the list.
+    return round($pager_total_items[0]);
   }
 
   /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Form\LocalTaskAssignForm.
- */
-
 namespace Drupal\tmgmt_local\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;

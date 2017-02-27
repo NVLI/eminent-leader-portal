@@ -14,6 +14,14 @@ plugin.plugin_configuration.facets_processor.display_value_widget_order:
       type: string
       label: sort order
 
+plugin.plugin_configuration.facets_processor.translate_entity:
+  type: mapping
+  label: 'Translate entity'
+  mapping:
+    sort:
+      type: boolean
+      label: translate entity
+
 plugin.plugin_configuration.facets_processor.exclude_specified_items:
   type: mapping
   label: 'Exclude specified items'

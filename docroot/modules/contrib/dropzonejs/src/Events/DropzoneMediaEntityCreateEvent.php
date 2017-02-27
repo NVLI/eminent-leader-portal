@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dropzonejs\Events\DropzoneMediaEntityCreateEvent.
- */
-
 namespace Drupal\dropzonejs\Events;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -59,14 +54,14 @@ class DropzoneMediaEntityCreateEvent extends Event {
    *   The media entity being created.
    * @param \Drupal\file\FileInterface $file
    *   The file that will be used for the media entity.
-   * @param $form
+   * @param array $form
    *   The form that contains the Dropzone element.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state.
-   * @param $element
+   * @param array $element
    *   The Dropzone form element.
    */
-  public function __construct(MediaInterface $media_entity, FileInterface $file, $form, FormStateInterface $form_state, $element) {
+  public function __construct(MediaInterface $media_entity, FileInterface $file, array $form, FormStateInterface $form_state, array $element) {
     $this->mediaEntity = $media_entity;
     $this->file = $file;
     $this->form = $form;
@@ -78,6 +73,7 @@ class DropzoneMediaEntityCreateEvent extends Event {
    * Get the media entity.
    *
    * @return \Drupal\media_entity\MediaInterface
+   *   A media entity.
    */
   public function getMediaEntity() {
     return $this->mediaEntity;
@@ -97,6 +93,7 @@ class DropzoneMediaEntityCreateEvent extends Event {
    * Get the file for the media entity.
    *
    * @return \Drupal\file\FileInterface
+   *   The file that will be used for the media entity.
    */
   public function getFile() {
     return $this->file;
@@ -106,6 +103,7 @@ class DropzoneMediaEntityCreateEvent extends Event {
    * Get the form that contains the Dropzone element.
    *
    * @return array
+   *    The form that contains the Dropzone element.
    */
   public function getForm() {
     return $this->form;
@@ -115,6 +113,7 @@ class DropzoneMediaEntityCreateEvent extends Event {
    * Get the form state.
    *
    * @return \Drupal\Core\Form\FormStateInterface
+   *    The current formstate.
    */
   public function getFormState() {
     return $this->formState;
@@ -134,6 +133,7 @@ class DropzoneMediaEntityCreateEvent extends Event {
    * Get the Dropzone form element.
    *
    * @return array
+   *    The dropzone element.
    */
   public function getElement() {
     return $this->element;
@@ -142,10 +142,10 @@ class DropzoneMediaEntityCreateEvent extends Event {
   /**
    * Set the Dropzone form element.
    *
-   * @param $element
+   * @param array $element
    *   The updated form element.
    */
-  public function setElement($element) {
+  public function setElement(array $element) {
     $this->element = $element;
   }
 

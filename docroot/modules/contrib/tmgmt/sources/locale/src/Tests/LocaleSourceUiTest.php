@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @file Contains \Drupal\tmgmt_locale\Tests\.
- */
-
 namespace Drupal\tmgmt_locale\Tests;
 
 use Drupal\locale\Gettext;

@@ -8,8 +8,8 @@ dependencies:
   - file
 configure: entity.tmgmt_translator.collection
 
-# Information added by Drupal.org packaging script on 2016-07-01
-version: '8.x-1.0-rc2'
+# Information added by Drupal.org packaging script on 2017-01-24
+version: '8.x-1.1'
 core: '8.x'
 project: 'tmgmt'
-datestamp: 1467358142
+datestamp: 1485289087

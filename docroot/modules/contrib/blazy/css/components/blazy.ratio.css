@@ -22,7 +22,7 @@
   display: block;
   height: 0;
   overflow: hidden;
-  /* padding-top: 30px; IE7 fix */
+  width: 100%;
 }
 
 /* Allows to fix broken images with hidden elements, see slick.load.js. */
@@ -67,6 +67,6 @@
 }
 
 /* Be sure to add width to the container accordingly, otherwise collapsed. */
-.blazy--ratio.field {
+.field[data-blazy] {
   min-width: 50%;
 }

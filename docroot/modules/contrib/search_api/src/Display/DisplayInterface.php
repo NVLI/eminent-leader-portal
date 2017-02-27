@@ -5,6 +5,7 @@ namespace Drupal\search_api\Display;
 use Drupal\Component\Plugin\DerivativeInspectionInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Component\Plugin\DependentPluginInterface;
 
 /**
  * Defines an interface for display plugins.
@@ -14,7 +15,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
  * @see \Drupal\search_api\Display\DisplayPluginBase
  * @see plugin_api
  */
-interface DisplayInterface extends PluginInspectionInterface, DerivativeInspectionInterface, ContainerFactoryPluginInterface {
+interface DisplayInterface extends PluginInspectionInterface, DerivativeInspectionInterface, ContainerFactoryPluginInterface, DependentPluginInterface {
 
   /**
    * Returns the display label.
@@ -47,16 +48,6 @@ interface DisplayInterface extends PluginInspectionInterface, DerivativeInspecti
    *   The URL of the display, or NULL if there is no specific URL for it.
    */
   public function getUrl();
-
-  /**
-   * Returns the URL of this display.
-   *
-   * @return \Drupal\Core\Url|null
-   *   The URL of the display, or NULL if there is no specific URL for it.
-   *
-   * @deprecated Renamed to getUrl().
-   */
-  public function getPath();
 
   /**
    * Returns true if the display is being rendered in the current request.

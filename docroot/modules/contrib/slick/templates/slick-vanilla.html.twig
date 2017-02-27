@@ -22,7 +22,8 @@
     'slide--' ~ delta
   ]
 %}
-
-<div{{ attributes.addClass(classes) }}>
-  {{ item }}
-</div>
+{% block slick_vanilla %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ item }}
+  </div>
+{% endblock %}

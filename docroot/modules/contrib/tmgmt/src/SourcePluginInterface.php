@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\SourcePluginInterface.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

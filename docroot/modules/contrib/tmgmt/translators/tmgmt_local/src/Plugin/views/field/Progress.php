@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\field\Progress.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\field;
 
 use Drupal\tmgmt\Plugin\views\field\StatisticsBase;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\Tests\TMGMTUiReviewTest.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 use Drupal\field\Entity\FieldConfig;
@@ -472,7 +467,7 @@ class TMGMTUiReviewTest extends EntityTestBase {
 
     // Create the node.
     $settings = array(
-      'title' => $this->randomMachineName(),
+      'title' => 'First node',
       'type' => 'test_bundle',
       'body_test' => array(
         $this->randomMachineName(),
@@ -492,7 +487,11 @@ class TMGMTUiReviewTest extends EntityTestBase {
     $job_item->save();
 
     // Access to the review form.
-    $this->drupalGet('admin/tmgmt/items/1');
+    $this->drupalGet('admin/tmgmt/items/'. $job_item->id());
+    // Check that 'hook_tmgmt_data_item_text_output_alter' has been called.
+    $data = $job_item->getData();
+    $this->assertEqual($data['title'][0]['value']['#text'], 'First node');
+    $this->assertFieldByName('title|0|value[source]', 'Second node');
 
     // Test that all the items are being displayed.
     $this->assertRaw('name="title|0|value[source]"');
@@ -535,6 +534,21 @@ class TMGMTUiReviewTest extends EntityTestBase {
     $this->assertEqual($label[0], 'Alternative text');
     $label = $this->xpath('//*[@id="tmgmt-ui-element-image-test-single-wrapper"]/table/tbody/tr[3]/td[1]/div[1]/label');
     $this->assertEqual($label[0], 'Title');
+
+    // Check 'hook_tmgmt_data_item_text_input_alter' has been called on saving.
+    $this->drupalPostForm(NULL, ['title|0|value[translation]' => 'Second node translation'], 'Save');
+    // Clean the storage and get the updated job item data.
+    \Drupal::entityTypeManager()->getStorage('tmgmt_job_item')->resetCache();
+    $job_item = JobItem::load($job_item->id());
+    $data = $job_item->getData();
+    $this->assertEqual($data['title'][0]['value']['#text'], 'First node');
+    $this->assertEqual($data['title'][0]['value']['#translation']['#text'], 'First node translation');
+
+    // Access to the review form.
+    $this->drupalGet('admin/tmgmt/items/'. $job_item->id());
+    // Check that 'hook_tmgmt_data_item_text_output_alter' has been called.
+    $this->assertFieldByName('title|0|value[source]', 'Second node');
+    $this->assertFieldByName('title|0|value[translation]', 'Second node translation');
   }
 
   /**

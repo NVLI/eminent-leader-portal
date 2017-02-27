@@ -26,10 +26,18 @@
   ]
 %}
 
-{% spaceless %}
-{% if settings.nav %}<div{{ attributes.addClass(classes)|without('id') }}>{% endif %}
+{% set content %}
   {% for item in items %}
     {{ item }}
   {% endfor %}
-{% if settings.nav %}</div>{% endif %}
+{% endset %}
+
+{% spaceless %}
+  {% if settings.nav %}
+    <div{{ attributes.addClass(classes)|without('id') }}>
+      {{ content }}
+    </div>
+  {% else %}
+    {{ content }}
+  {% endif %}
 {% endspaceless %}

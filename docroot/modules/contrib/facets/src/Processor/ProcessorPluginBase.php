@@ -3,6 +3,8 @@
 namespace Drupal\facets\Processor;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\DependencyTrait;
+use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\facets\FacetInterface;
 
@@ -10,6 +12,8 @@ use Drupal\facets\FacetInterface;
  * A base class for plugins that implements most of the boilerplate.
  */
 class ProcessorPluginBase extends PluginBase implements ProcessorInterface {
+
+  use DependencyTrait;
 
   /**
    * {@inheritdoc}
@@ -28,6 +32,10 @@ class ProcessorPluginBase extends PluginBase implements ProcessorInterface {
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array $form, FormStateInterface $form_state, FacetInterface $facet) {
+    if (!($form_state instanceof SubformStateInterface)) {
+      $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+      trigger_error(sprintf('%s::%s() SHOULD receive %s on line %d, but %s was given. More information is available at https://www.drupal.org/node/2774077.', $trace[1]['class'], $trace[1]['function'], SubformStateInterface::class, $trace[1]['line'], get_class($form_state)), E_USER_DEPRECATED);
+    }
     $this->setConfiguration($form_state->getValues());
   }
 

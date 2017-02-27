@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_test\Plugin\tmgmt\Source\TestSource.
- */
-
 namespace Drupal\tmgmt_test\Plugin\tmgmt\Source;
 
 use Drupal\Component\Render\FormattableMarkup;

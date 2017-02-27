@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Form\ContinuousJobForm.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Core\Access\AccessResult;

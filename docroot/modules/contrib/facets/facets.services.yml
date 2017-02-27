@@ -14,6 +14,9 @@ services:
   plugin.manager.facets.url_processor:
     class: Drupal\facets\UrlProcessor\UrlProcessorPluginManager
     parent: default_plugin_manager
+  plugin.manager.facets.hierarchy:
+    class: Drupal\facets\Hierarchy\HierarchyPluginManager
+    parent: default_plugin_manager
   facets.manager:
     class: Drupal\facets\FacetManager\DefaultFacetManager
     arguments:

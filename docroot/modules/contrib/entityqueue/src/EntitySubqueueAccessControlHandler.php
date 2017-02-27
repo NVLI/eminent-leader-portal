@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntitySubqueueAccessControlHandler.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\Core\Access\AccessResult;

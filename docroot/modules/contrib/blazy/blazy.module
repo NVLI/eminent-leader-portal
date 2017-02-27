@@ -27,11 +27,6 @@ function template_preprocess_blazy(&$variables) {
  * Overrides variables for responsive-image.html.twig templates.
  */
 function blazy_preprocess_responsive_image(&$variables) {
-  // Do not proceed if picture element.
-  if (!$variables['output_image_tag']) {
-    return;
-  }
-
   $config = Blazy::getConfig();
 
   // Do not proceed if disabled globally, or not a Blazy formatter.
@@ -40,20 +35,55 @@ function blazy_preprocess_responsive_image(&$variables) {
   }
 
   // We are here either using Blazy, or core Responsive image formatters.
-  $srcset = $variables['attributes']['srcset'];
-  $srcset_values = $srcset->value();
+  // Is picture element.
+  if (!$variables['output_image_tag']) {
+    // Prepare all <picture> [data-srcset] attributes on <source> elements.
+    _blazy_preprocess_responsive_image_picture_sources($variables);
 
-  $variables['attributes']['data-srcset'] = $srcset_values;
+    // Fetches the picture element fallback URI, and empty it later.
+    $fallback_uri = $variables['img_element']['#srcset'][0]['uri'];
+
+    // Cleans up the no-longer relevant attributes for controlling element.
+    unset($variables['attributes']['data-srcset'], $variables['img_element']['#attributes']['data-srcset']);
+    $variables['img_element']['#srcset'] = '';
+    // Prevents invalid IMG tag when one pixel placeholder is disabled.
+    $variables['img_element']['#uri'] = Blazy::PLACEHOLDER;
+  }
+  else {
+    $srcset = $variables['attributes']['srcset'];
+    $srcset_values = $srcset->value();
+    $fallback_uri = $variables['img_element']['#uri'];
+
+    $variables['attributes']['data-srcset'] = $srcset_values;
+    $variables['img_element']['#attributes']['data-srcset'] = $srcset_values;
+    $variables['img_element']['#attributes']['srcset'] = '';
+  }
+
+  // Blazy needs controlling element to have a fallback [data-src], else error.
+  $variables['img_element']['#attributes']['data-src'] = $fallback_uri;
   $variables['img_element']['#attributes']['class'][] = 'b-lazy b-responsive';
-  $variables['img_element']['#attributes']['data-srcset'] = $srcset_values;
-  $variables['img_element']['#attributes']['srcset'] = '';
 
-  $variables['img_element']['#attributes']['data-src'] = $variables['img_element']['#uri'];
+  // Only replace fallback image URI with 1px placeholder, if so configured.
+  // This will prevent downloading the fallback image.
   if ($config['one_pixel']) {
     $variables['img_element']['#uri'] = Blazy::PLACEHOLDER;
   }
 
   $variables['img_element']['#attached']['drupalSettings']['blazy'] = $config['blazy'];
+}
+
+/**
+ * Adds [data-srcset] attribute to picture source element to support lazyload.
+ */
+function _blazy_preprocess_responsive_image_picture_sources(&$variables) {
+  /** @var \Drupal\Core\Template\Attribute $source */
+  foreach ($variables['sources'] as &$source) {
+    $srcset = $source['srcset'];
+    $srcset_values = $srcset->value();
+
+    $source->setAttribute('data-srcset', $srcset_values);
+    $source->removeAttribute('srcset');
+  }
 }
 
 /**
@@ -69,13 +99,40 @@ function blazy_preprocess_field(array &$variables) {
 
   // Defines [data-blazy] attribute as required by the Blazy loader.
   $settings = $element['#blazy'];
-  if (!empty($settings['responsive_image_style'])) {
-    $settings['ratio'] = FALSE;
-  }
-
-  $settings['blazy_data']['ratio'] = !empty($settings['ratio']);
   $variables['attributes']['class'][] = 'blazy';
-  $variables['attributes']['data-blazy'] = Json::encode($settings['blazy_data']);
+  $variables['attributes']['data-blazy'] = empty($settings['blazy_data']) ? '' : Json::encode($settings['blazy_data']);
+  if (!empty($settings['media_switch'])) {
+    $switch = str_replace('_', '-', $settings['media_switch']);
+    $variables['attributes']['data-' . $switch . '-gallery'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function blazy_views_pre_render($view) {
+  if (!isset($view)) {
+    return;
+  }
+  \Drupal\blazy\BlazyViews::viewsPreRender($view);
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function blazy_field_formatter_info_alter(array &$info) {
+  // Supports optional Media Entity via VEM within VEF if available.
+  if (function_exists('video_embed_media_media_bundle_insert')) {
+    $info['blazy_file'] = [
+      'id'          => 'blazy_file',
+      'label'       => t('Blazy Image with Media'),
+      'description' => t('Display the images associated to VEM/ME as videos.'),
+      'class'       => 'Drupal\blazy\Plugin\Field\FieldFormatter\BlazyFileFormatter',
+      'field_types' => ['entity_reference', 'image'],
+      'quickedit'   => ['editor' => 'disabled'],
+      'provider'    => 'blazy',
+    ];
+  }
 }
 
 /**

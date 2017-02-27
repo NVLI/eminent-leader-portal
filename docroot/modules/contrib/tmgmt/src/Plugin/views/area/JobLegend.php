@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\area\JobLegend.
- */
-
 namespace Drupal\tmgmt\Plugin\views\area;
 
 use Drupal\views\Plugin\views\area\AreaPluginBase;

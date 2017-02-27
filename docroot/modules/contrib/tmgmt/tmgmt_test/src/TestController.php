@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt_test\TestController.
- */
 
 namespace Drupal\tmgmt_test;
 

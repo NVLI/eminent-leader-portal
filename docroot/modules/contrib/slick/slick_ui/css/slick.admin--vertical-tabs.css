@@ -61,6 +61,10 @@
   padding-top: 0 !important;
 }
 
+.form--slick .details--responsive .details--settings .form-item:first-child {
+  clear: left;
+}
+
 @media screen and (min-width: 1280px) {
   .form--slick .vertical-tabs__menu {
     float: left;

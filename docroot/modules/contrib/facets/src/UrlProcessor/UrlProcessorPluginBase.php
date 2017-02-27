@@ -47,6 +47,8 @@ abstract class UrlProcessorPluginBase extends ProcessorPluginBase implements Url
    *   The plugin implementation definition.
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   A request object for the current request.
+   *
+   * @throws \Drupal\facets\Exception\InvalidProcessorException
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, Request $request) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -69,9 +71,12 @@ abstract class UrlProcessorPluginBase extends ProcessorPluginBase implements Url
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    /** @var \Symfony\Component\HttpFoundation\Request $request */
-    $request = $container->get('request_stack')->getMasterRequest();
-    return new static($configuration, $plugin_id, $plugin_definition, $request);
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('request_stack')->getMasterRequest()
+    );
   }
 
 }

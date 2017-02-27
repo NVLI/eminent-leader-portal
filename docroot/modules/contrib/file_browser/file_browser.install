@@ -14,11 +14,13 @@ function file_browser_install() {
   // Add an icon for File Browser if we aren't installing from configuration.
   if (!\Drupal::isConfigSyncing()) {
     $data = file_get_contents(dirname(__FILE__) . '/file_browser_icon.png');
+    /** @var \Drupal\file\FileInterface $file */
     $file = file_save_data($data, 'public://file_browser_icon.png', FILE_EXISTS_REPLACE);
     // Set file uuid same as default config.
     $uuid = (new ExtensionInstallStorage(\Drupal::service('config.storage')))->read('embed.button.file_browser')['icon_uuid'];
     $file->set('uuid', $uuid);
     $file->save();
+    \Drupal::service('file.usage')->add($file, 'embed', 'embed_button', 'file_browser');
   }
 }
 
@@ -26,6 +28,7 @@ function file_browser_install() {
  * Implements hook_uninstall().
  */
 function file_browser_uninstall() {
+  Drupal::configFactory()->getEditable('image.style.file_entity_browser_small')->delete();
   Drupal::configFactory()->getEditable('image.style.file_entity_browser_thumbnail')->delete();
   Drupal::configFactory()->getEditable('embed.button.file_browser')->delete();
 }
@@ -69,5 +72,36 @@ https://github.com/desandro/masonry/releases and place it in /libraries'
     );
   }
 
+  // Prevent installation if the webserver cannot write to "public://" .
+  if (!\Drupal::isConfigSyncing() && !is_writable('public://')) {
+    $requirements['public_files_not_writable'] = [
+      'title' => t('Public files directory not writable'),
+      'description' => t('The webserver needs to be able to write to the public files directory (public://). Please check your server configuration and try again.'),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+
   return $requirements;
+}
+
+/**
+ * Updates entity browser configuration to remove outdated values.
+ */
+function file_browser_update_8001() {
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
+  $config_factory = \Drupal::service('config.factory');
+  $list = $config_factory->listAll('entity_browser.browser');
+
+  foreach (['entity_browser.browser.browse_files', 'entity_browser.browser.browse_files_modal'] as $name) {
+    if (in_array($name, $list, TRUE)) {
+      $entity_browser = $config_factory->getEditable($name);
+      if ($text = $entity_browser->get('display_configuration.widget_ids')) {
+        $entity_browser->clear('display_configuration.widget_ids');
+      }
+      if ($name === 'entity_browser.browser.browse_files_modal') {
+        $entity_browser->set('display_configuration.auto_open', FALSE);
+      }
+      $entity_browser->save();
+    }
+  }
 }

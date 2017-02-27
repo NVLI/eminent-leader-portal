@@ -8,6 +8,9 @@
 use Drupal\editor\Entity\Editor;
 use Drupal\Core\Form\FormStateInterface;
 
+// The documentation URL for the WYSIWYG filter.
+define('VIDEO_EMBED_WYSIWYG_DOCUMENTATION_URL', 'https://www.drupal.org/node/2805545');
+
 /**
  * Implements hook_ckeditor_css_alter().
  */
@@ -42,7 +45,7 @@ function video_embed_wysiwyg_toolbar_filter_validate($form, FormStateInterface $
   }
   // The button and filter can either both be enabled or disabled.
   if ($filter_enabled !== $button_enabled) {
-    $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('To embed videos, make sure you have enabled the "Video Embed WYSIWYG" filter and dragged the video icon into the WYSIWYG toolbar.'));
+    $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('To embed videos, make sure you have enabled the "Video Embed WYSIWYG" filter and dragged the video icon into the WYSIWYG toolbar. For more information <a href="@url">read the documentation</a>.', ['@url' => VIDEO_EMBED_WYSIWYG_DOCUMENTATION_URL]));
   }
 }
 
@@ -61,14 +64,14 @@ function video_embed_wysiwyg_filter_weight_validate($form, FormStateInterface $f
   if (!empty($form_state->getValue(['filters', 'filter_url', 'status']))) {
     $filter_weight = $form_state->getValue(['filters', 'filter_url', 'weight']);
     if ($wysiwyg_weight > $filter_weight) {
-      $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('The "Video Embed WYSIWYG" filter must run before the "Convert URLs into links" filter to function correctly.'));
+      $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('The "Video Embed WYSIWYG" filter must run before the "Convert URLs into links" filter to function correctly. For more information <a href="@url">read the documentation</a>.', ['@url' => VIDEO_EMBED_WYSIWYG_DOCUMENTATION_URL]));
     }
   }
   // Check the WYSIWYG filter runs after the HTML tag filter.
   if (!empty($form_state->getValue(['filters', 'filter_html', 'status']))) {
     $html_filter_weight = $form_state->getValue(['filters', 'filter_html', 'weight']);
     if ($wysiwyg_weight < $html_filter_weight) {
-      $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('The "Video Embed WYSIWYG" filter must run after the "Limit allowed HTML tags" filter to function correctly.'));
+      $form_state->setError($form['filters']['status']['video_embed_wysiwyg'], t('The "Video Embed WYSIWYG" filter must run after the "Limit allowed HTML tags" filter to function correctly. For more information <a href="@url">read the documentation</a>.', ['@url' => VIDEO_EMBED_WYSIWYG_DOCUMENTATION_URL]));
     }
   }
 }

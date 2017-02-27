@@ -5,6 +5,18 @@
   "type": "drupal-module",
   "license": "GPL-2.0+",
   "homepage": "https://drupal.org/project/blazy",
+  "authors": [
+    {
+      "name": "Gaus Surahman",
+      "homepage": "https://www.drupal.org/u/gausarts",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Contributors",
+      "homepage": "https://www.drupal.org/node/2663268/committers",
+      "role": "Contributor"
+    }
+  ],
   "support": {
     "issues": "https://drupal.org/project/issues/blazy",
     "source": "http://cgit.drupalcode.org/blazy"

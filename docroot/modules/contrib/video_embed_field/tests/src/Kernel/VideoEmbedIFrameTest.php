@@ -75,6 +75,14 @@ class VideoEmbedIFrameTest extends KernelTestBase {
         ],
         '<iframe width="100"></iframe>',
       ],
+      'Fragment' => [
+        [
+          '#type' => 'video_embed_iframe',
+          '#url' => 'https://example.com',
+          '#fragment' => 'test fragment',
+        ],
+        '<iframe src="https://example.com#test fragment"></iframe>',
+      ],
       'XSS Testing' => [
         [
           '#type' => 'video_embed_iframe',
@@ -83,8 +91,9 @@ class VideoEmbedIFrameTest extends KernelTestBase {
           ],
           '#query' => ['xss' => '">'],
           '#url' => '">',
+          '#fragment' => '">',
         ],
-        '<iframe xss="&quot;&gt;" src="&quot;&gt;?xss=%22%3E"></iframe>',
+        '<iframe xss="&quot;&gt;" src="&quot;&gt;?xss=%22%3E#&quot;&gt;"></iframe>',
       ],
     ];
   }

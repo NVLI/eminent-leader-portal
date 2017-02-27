@@ -1,12 +1,11 @@
 /**
  * @file
  * Provides media integration with pure CSS fluid video wrapper.
- *
- * @todo move to Blazy for re-usability across Blazy, GridStack, Mason, Slick.
  */
 
 .litebox,
-.media__iframe {
+.media__iframe,
+[data-blazy] iframe {
   border: 0 none;
   display: block;
   max-width: 100%;
@@ -114,6 +113,7 @@
 
 .media--switch .media__image,
 .media__icon--play,
+.media:hover .media__icon--litebox,
 .is-playing .media__iframe,
 .is-playing.media--ratio > iframe,
 .is-playing:hover .media__icon--close {
@@ -139,13 +139,33 @@
 /**
  * Fallback non-JS.
  */
-.no-js .media--switch .media__image,
-.no-js .media--switch .media__icon {
+.no-js .media--player .media__image,
+.no-js .media--player .media__icon {
   opacity: 0;
   visibility: hidden;
 }
 
-.no-js .media--switch .media__iframe {
+.no-js .media--player .media__iframe {
   opacity: 1;
   visibility: visible;
+}
+
+/** Prevents Twitter iframe from breaking grid, even if unholy. */
+.grid .twitter-tweet-rendered {
+  margin: 0 !important;
+  min-width: 1px !important;
+}
+
+/** Fix for overflowing Facebook/ Twitter iframes. */
+.grid .media,
+.grid .fb_iframe_widget {
+  overflow: hidden;
+}
+
+.grid .fb_iframe_widget span {
+  width: 100% !important;
+}
+
+.grid .fb_iframe_widget iframe {
+  position: relative !important;
 }

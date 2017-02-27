@@ -3,11 +3,12 @@
 namespace Drupal\slick_views\Plugin\views\style;
 
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\slick\SlickDefault;
-use Drupal\slick\SlickManagerInterface;
+use Drupal\blazy\Blazy;
 use Drupal\blazy\BlazyManagerInterface;
 use Drupal\blazy\Dejavu\BlazyStylePluginBase;
+use Drupal\slick\SlickDefault;
+use Drupal\slick\SlickManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Slick style plugin.
@@ -16,7 +17,7 @@ use Drupal\blazy\Dejavu\BlazyStylePluginBase;
  *
  * @ViewsStyle(
  *   id = "slick",
- *   title = @Translation("Slick carousel"),
+ *   title = @Translation("Slick Carousel"),
  *   help = @Translation("Display the results in a Slick carousel."),
  *   theme = "slick_wrapper",
  *   register_theme = FALSE,
@@ -66,7 +67,7 @@ class SlickViews extends BlazyStylePluginBase {
   }
 
   /**
-   * Overrides \Drupal\views\Plugin\views\style\StylePluginBase::buildOptionsForm().
+   * Overrides parent::buildOptionsForm().
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     $fields = [
@@ -89,12 +90,20 @@ class SlickViews extends BlazyStylePluginBase {
 
     $this->admin()->buildSettingsForm($form, $definition);
 
+    $count = count($definition['captions']);
+    $wide = $count > 2 ? ' form--wide form--caption-' . $count : ' form--caption-' . $count;
     $title = '<p class="form__header form__title">';
-    $title .= $this->t('Check Vanilla slick if using content, not fields. <small>See it under <strong>Format > Show</strong> section. Otherwise slick markups apply which require some fields added below.</small>');
+    $title .= $this->t('Check Vanilla if using content/custom markups, not fields. <small>See it under <strong>Format > Show</strong> section. Otherwise slick markups apply which require some fields added below.</small>');
     $title .= '</p>';
-    $form['opening']['#markup'] = '<div class="form--slick form--views form--half form--vanilla has-tooltip">' . $title;
-    $form['image']['#description'] .= ' ' . $this->t('Use Blazy formatter to have it lazyloaded. Other supported Formatters: Colorbox, Intense, Responsive image, Video Embed Field, Youtube Field.');
-    $form['overlay']['#description'] .= ' ' . $this->t('Be sure to CHECK "<strong>Style settings > Use field template</strong>" _only if using Slick formatter for nested sliders, otherwise keep it UNCHECKED!');
+
+    $form['opening']['#markup'] = '<div class="form--slick form--views form--half form--vanilla has-tooltip' . $wide . '">' . $title;
+
+    if (isset($form['image'])) {
+      $form['image']['#description'] .= ' ' . $this->t('Use Blazy formatter to have it lazyloaded. Other supported Formatters: Colorbox, Intense, Responsive image, Video Embed Field, Youtube Field.');
+    }
+    if (isset($form['overlay'])) {
+      $form['overlay']['#description'] .= ' ' . $this->t('Be sure to CHECK "<strong>Style settings > Use field template</strong>" _only if using Slick formatter for nested sliders, otherwise keep it UNCHECKED!');
+    }
   }
 
   /**
@@ -103,31 +112,35 @@ class SlickViews extends BlazyStylePluginBase {
   public function render() {
     $view      = $this->view;
     $count     = count($view->result);
-    $blazy     = $this->blazyManager();
     $settings  = $this->options;
     $view_name = $view->storage->id();
     $view_mode = $view->current_display;
-    $id        = $blazy::getHtmlId("slick-views-{$view_name}-{$view_mode}", $settings['id']);
+    $id        = Blazy::getHtmlId("slick-views-{$view_name}-{$view_mode}", $settings['id']);
 
     $settings += [
-      'cache_metadata'    => ['keys'=> [$id, $view_mode, $settings['optionset']]],
+      'cache_metadata'    => [
+        'keys' => [$id, $view_mode, $settings['optionset']],
+      ],
       'count'             => $count,
       'current_view_mode' => $view_mode,
       'view_name'         => $view_name,
     ];
 
-    $settings['id']        = $id;
-    $settings['item_id']   = 'slide';
-    $settings['caption']   = array_filter($settings['caption']);
-    $settings['namespace'] = 'slick';
-    $settings['nav']       = !$settings['vanilla'] && $settings['optionset_thumbnail'] && isset($view->result[1]);
+    $settings['id']           = $id;
+    $settings['item_id']      = 'slide';
+    $settings['caption']      = array_filter($settings['caption']);
+    $settings['namespace']    = 'slick';
+    $settings['nav']          = !$settings['vanilla'] && $settings['optionset_thumbnail'] && isset($view->result[1]);
+    $settings['overridables'] = empty($settings['override']) ? array_filter($settings['overridables']) : $settings['overridables'];
 
     $elements = [];
     foreach ($this->renderGrouping($view->result, $settings['grouping']) as $rows) {
       $build = $this->buildElements($settings, $rows);
 
       // Supports Blazy formatter multi-breakpoint images if available.
-      $blazy->isBlazy($settings, $build['items'][0]);
+      if (empty($settings['vanilla'])) {
+        $this->blazyManager()->isBlazy($settings, $build['items'][0]);
+      }
 
       $build['settings'] = $settings;
 
@@ -140,12 +153,14 @@ class SlickViews extends BlazyStylePluginBase {
   /**
    * Returns slick contents.
    */
-  public function buildElements($settings = [], $rows) {
+  public function buildElements(array $settings, $rows) {
     $build   = [];
     $view    = $this->view;
     $keys    = array_keys($view->field);
     $item_id = $settings['item_id'];
 
+    // @todo enable after proper checks.
+    // $settings = array_filter($settings);
     foreach ($rows as $index => $row) {
       $view->row_index = $index;
 
@@ -160,14 +175,14 @@ class SlickViews extends BlazyStylePluginBase {
       }
 
       // Use Vanilla slick if so configured, ignoring Slick markups.
-      if ($settings['vanilla']) {
+      if (!empty($settings['vanilla'])) {
         $slide[$item_id] = $view->rowPlugin->render($row);
       }
       else {
         $this->buildElement($slide, $row, $index);
 
-        if ($settings['nav']) {
-          $thumb[$item_id]  = empty($settings['thumbnail'])         ? [] : $this->getFieldRendered($index, $settings['thumbnail']);
+        if (!empty($settings['nav'])) {
+          $thumb[$item_id]  = empty($settings['thumbnail']) ? [] : $this->getFieldRendered($index, $settings['thumbnail']);
           $thumb['caption'] = empty($settings['thumbnail_caption']) ? [] : $this->getFieldRendered($index, $settings['thumbnail_caption']);
 
           $build['thumb']['items'][$index] = $thumb;

@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\JobItemInterface.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
- * Interface for tmgmt_job entity.
+ * Interface for tmgmt_job_item entity.
  *
  * @ingroup tmgmt_job
  */
@@ -310,7 +305,7 @@ interface JobItemInterface extends ContentEntityInterface {
    *   (optional) Statically set to status.
    *
    * @return int
-   *   The updated state of the job if it could be set.
+   *   The updated state of the job item if it could be set.
    *
    * @see Job::addMessage()
    */
@@ -468,13 +463,13 @@ interface JobItemInterface extends ContentEntityInterface {
   public function acceptTranslation();
 
   /**
-   * Returns all job messages attached to this job item.
+   * Returns all job item messages attached to this job item.
    *
    * @param array $conditions
    *   An array of conditions.
    *
    * @return array
-   *   An array of translation job messages.
+   *   An array of translation job item messages.
    */
   public function getMessages($conditions = array());
 
@@ -487,15 +482,15 @@ interface JobItemInterface extends ContentEntityInterface {
   public function getSiblings();
 
   /**
-   * Returns all job messages attached to this job item with timestamp newer
-   * than $time.
+   * Returns all job item messages attached to this job item with timestamp
+   * newer than $time.
    *
    * @param int $time
    *   (Optional) Messages need to have a newer timestamp than $time. Defaults
    *   to REQUEST_TIME.
    *
    * @return array
-   *   An array of translation job messages.
+   *   An array of translation job item messages.
    */
   public function getMessagesSince($time = NULL);
 

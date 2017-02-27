@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_local\LocalTaskItemInterface.
- */
-
 namespace Drupal\tmgmt_local;
 
 use Drupal\Core\Entity\ContentEntityInterface;

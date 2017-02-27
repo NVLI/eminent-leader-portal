@@ -5,4 +5,6 @@ definition:
     path: 'public://library-definitions'
   remote:
     enable: TRUE
-    url: 'http://cgit.drupalcode.org/libraries_registry/plain/registry/8'
+    urls:
+      - 'http://cgit.drupalcode.org/libraries_registry/plain/registry/8'
+global_locators: []

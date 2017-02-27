@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\ListBuilder\JobListBuilder.
- */
 
 namespace Drupal\tmgmt_local\Entity\ListBuilder;
 

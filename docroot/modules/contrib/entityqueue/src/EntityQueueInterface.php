@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntityQueueInterface.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
@@ -72,6 +67,20 @@ interface EntityQueueInterface extends ConfigEntityInterface {
   public function getActAsQueue();
 
   /**
+   * Returns the behavior of editing the queue's items.
+   *
+   * Ordinarily, queues are arranged with the front of the queue (where items
+   * will be removed) on top, and the back (where items will be added) on the
+   * bottom.
+   *
+   * If TRUE, this will display the queue such that items will be added to the
+   * top and removed from the bottom.
+   *
+   * @return bool
+   */
+  public function getReverseInAdmin();
+
+  /**
    * Gets the selection settings used by a subqueue's 'items' reference field.
    *
    * @return array
@@ -93,6 +102,8 @@ interface EntityQueueInterface extends ConfigEntityInterface {
    *   - max_size: The maximum number of items that this queue can hold.
    *   - act_as_queue: The behavior of exceeding the maximum number of queue
    *     items.
+   *   - reverse_in_admin: Show the items in reverse order when editing a
+   *     subqueue.
    */
   public function getQueueSettings();
 

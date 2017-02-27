@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\ContinuousSourceInterface.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Form\FormStateInterface;

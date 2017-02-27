@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\SourcePreviewInterface.
- */
-
 namespace Drupal\tmgmt;
 
 /**

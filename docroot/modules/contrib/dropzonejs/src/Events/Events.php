@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dropzonejs\Events\Events.
- */
-
 namespace Drupal\dropzonejs\Events;
 
 /**
@@ -13,6 +8,8 @@ namespace Drupal\dropzonejs\Events;
 final class Events {
 
   /**
+   * The MEDIA_ENTITY_CREATE event.
+   *
    * The MEDIA_ENTITY_CREATE event occurs when creating a new Media Entity,
    * before it is saved to the database.
    *

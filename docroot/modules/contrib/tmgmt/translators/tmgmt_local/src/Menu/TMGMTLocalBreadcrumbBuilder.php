@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains of \Drupal\tmgmt_local\Menu\TMGMTLocalBreadcrumbBuilder.
- */
-
 namespace Drupal\tmgmt_local\Menu;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;

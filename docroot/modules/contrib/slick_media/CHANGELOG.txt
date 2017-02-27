@@ -1,4 +1,33 @@
 
+Slick Media 8.x-1.0-dev, 2016-12-27
+-----------------------------------
+- Marked it Beta7.
+- Updated to latest Slick Beta6.
+
+Slick Media 8.x-1.0-dev, 2016-12-09
+-----------------------------------
+- Supported Media Entity to set dimensions once to reduce method calls.
+
+Slick Media 8.x-1.0-dev, 2016-11-30
+-----------------------------------
+- #2831509 by gausarts, joville: Incorrect module dependency?
+
+Slick Media 8.x-1.0-dev, 2016-11-29
+-----------------------------------
+- Updated to latest Blazy Beta5 and Slick Beta5.
+
+Slick Media 8.x-1.0-dev, 2016-10-26
+-----------------------------------
+- Updated to latest Blazy and Slick.
+
+Slick Media 8.x-1.0-dev, 2016-10-13
+-----------------------------------
+- Removed the no-longer-used \Drupal\video_embed_field\ProviderManagerInterface.
+
+Slick Media 8.x-1.0-dev, 2016-09-29
+-----------------------------------
+- Added optional third parameter to SlickMediaFormatter::buildMedia().
+
 Slick Media 8.x-1.0-dev, 2016-08-30
 -----------------------------------
 - Changed formatter name to Title case.
