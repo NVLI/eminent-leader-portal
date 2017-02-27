@@ -1,0 +1,79 @@
+diff --git a/src/Plugin/Field/FieldFormatter/ViewerJsFormatter.php b/src/Plugin/Field/FieldFormatter/ViewerJsFormatter.php
+index 29021ac..37b4911 100644
+--- a/src/Plugin/Field/FieldFormatter/ViewerJsFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/ViewerJsFormatter.php
+@@ -116,7 +116,7 @@ class ViewerJsFormatter extends FormatterBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public function viewElements(FieldItemListInterface $items, $langcode) {
++  public function viewElements(FieldItemListInterface $items) {
+     global $base_url;
+     $elements = array(
+       '#type' => 'markup',
+@@ -158,8 +158,7 @@ class ViewerJsFormatter extends FormatterBase {
+           '#file' => $item->entity,
+           '#description' => $item->description,
+           '#size' => $size,
+-          '#download_link' => base64_encode($download_url),
+-          '#base_url' => $base_url,
++          '#download_link' => $download_url,
+           '#preview_link' => $preview_link,
+           '#attributes' => array(),
+         );
+diff --git a/templates/viewerjs.html.twig b/templates/viewerjs.html.twig
+index 4844d31..072c3c8 100755
+--- a/templates/viewerjs.html.twig
++++ b/templates/viewerjs.html.twig
+@@ -18,6 +18,14 @@
+ #}
+ <div class="viewerjs-field-item">
+     <div {{ attributes }}>
+-        <iframe src = "{{ base_url }}/libraries/viewerjs/index.html#{{ download_link }}" width="100%" height="{{ preview_link.height }}" allowfullscreen webkitallowfullscreen></iframe>
++      {{ description }}
++      <span class="size">{{ size }}</span>
++      <a href="{{ download_link }}" target="_blank" class="download">{{ 'Download'|t }}</a>
++      {% if(preview_link) %}
++        <a class="{{ preview_link.class }}" href="{{ preview_link.path }}"
++            data-viewerjs-overlay-width="{{ preview_link.width }}"
++            data-viewerjs-overlay-height="{{ preview_link.height }}"
++            data-viewerjs-overlay-id="{{ preview_link.id }}" >{{ 'Preview'|t }}</a>
++      {% endif %}
+     </div>
+-</div>
++</div>
+\ No newline at end of file
+diff --git a/viewerjs.module b/viewerjs.module
+index 9ea91f3..133b5ae 100644
+--- a/viewerjs.module
++++ b/viewerjs.module
+@@ -4,7 +4,7 @@
+  * File previewer using ViewerJS Library.
+  */
+ 
+-use Drupal\Component\Utility\SafeMarkup;
++use Drupal\Component\Utility\String;
+ use Drupal\Core\Render\Element;
+ use Drupal\Core\Template\Attribute;
+ use Drupal\Core\Extension;
+@@ -73,7 +73,6 @@ function viewerjs_theme() {
+         'size' => NULL,
+         'thumbnail' => NULL,
+         'download_link' => NULL,
+-        'base_url' => NULL,
+         'preview_link' => array(),
+         'attributes' => array(),
+       ),
+@@ -90,10 +89,10 @@ function template_preprocess_viewerjs(&$variables) {
+   $preview_link = $variables['preview_link'];
+ 
+   if (!empty($variables['description'])) {
+-    $variables['description'] = SafeMarkup::checkPlain($variables['description']);
++    $variables['description'] = String::checkPlain($variables['description']);
+   }
+   else {
+-    $variables['description'] = SafeMarkup::checkPlain($file->getFilename());
++    $variables['description'] = String::checkPlain($file->getFilename());
+   }
+ 
+   // Classes to add to the file field for icons.
