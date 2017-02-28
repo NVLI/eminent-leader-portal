@@ -1,0 +1,38 @@
+uuid: 4144b7b2-6aaa-463b-a813-5e31d6c2c87b
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:583faca9-6527-46d1-9290-44a0107e0e4c'
+  module:
+    - block_content
+    - facets
+    - system
+  theme:
+    - eminent_sardar
+id: quotesdescription
+theme: eminent_sardar
+region: page_title
+weight: -18
+provider: null
+plugin: 'block_content:583faca9-6527-46d1-9290-44a0107e0e4c'
+settings:
+  id: 'block_content:583faca9-6527-46d1-9290-44a0107e0e4c'
+  label: 'Quotes Description'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: /quotes
+    negate: false
+    context_mapping: {  }

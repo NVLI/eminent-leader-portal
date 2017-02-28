@@ -1,0 +1,31 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        bundle:
+          label: પ્રદાતા
+        uid:
+          label: લેખક
+        status:
+          label: સ્થિતિ
+        changed:
+          label: 'અધતન થયું'
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સાચું
+          group_info:
+            group_items:
+              1:
+                title: પ્રકાશિત
+        bundle:
+          expose:
+            label: પ્રદાતા
+        langcode:
+          expose:
+            label: ભાષા

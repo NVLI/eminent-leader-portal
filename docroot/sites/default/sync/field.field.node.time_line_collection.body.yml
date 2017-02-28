@@ -1,0 +1,24 @@
+uuid: a63a9cc1-1710-4689-9115-1b240d4d8a25
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.time_line_collection
+  module:
+    - text
+_core:
+  default_config_hash: dsRD2edZYq3a-LLSX_24YiqMr9PMJC5iaygS9rvc-vo
+id: node.time_line_collection.body
+field_name: body
+entity_type: node
+bundle: time_line_collection
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

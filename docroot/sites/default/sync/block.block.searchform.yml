@@ -1,0 +1,27 @@
+uuid: 5b6acfdb-6095-4b2e-a4f6-08d1bce8fc97
+langcode: en
+status: true
+dependencies:
+  module:
+    - eminent_custom
+    - facets
+  theme:
+    - eminent_sardar
+id: searchform
+theme: eminent_sardar
+region: search_filters
+weight: -25
+provider: null
+plugin: eminent_search
+settings:
+  id: eminent_search
+  label: 'Search Form'
+  provider: eminent_custom
+  label_display: '0'
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

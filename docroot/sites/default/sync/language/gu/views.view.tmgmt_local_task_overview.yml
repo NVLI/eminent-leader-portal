@@ -1,0 +1,126 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ફિલ્ટર
+      fields:
+        title:
+          label: શિર્ષક
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+  closed:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+      menu:
+        title: બંધ
+  completed:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+  eligible:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+  my_tasks:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+  pending:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+  rejected:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+        title:
+          expose:
+            label: શિર્ષક
+  unassigned:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        status:
+          expose:
+            label: સ્થિતિ
+      tab_options:
+        title: ભાષાંતર

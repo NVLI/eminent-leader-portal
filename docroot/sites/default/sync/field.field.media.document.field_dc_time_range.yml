@@ -1,0 +1,19 @@
+uuid: 4108295c-9a9f-439e-9102-8f28f70b87b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_time_range
+    - media_entity.bundle.document
+id: media.document.field_dc_time_range
+field_name: field_dc_time_range
+entity_type: media
+bundle: document
+label: 'DC Time Range'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

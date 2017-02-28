@@ -1,0 +1,21 @@
+uuid: ea744e2e-e670-4aa6-b88d-6d377ceb1b3b
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_collection
+id: field_collection_item.field_quiz_option
+field_name: field_quiz_option
+entity_type: field_collection_item
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,83 @@
+uuid: 1b1156f6-891a-4089-a360-f38d97c8a382
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser
+    - field.field.media.document.field_dc_content_type
+    - field.field.media.document.field_dc_contributor
+    - field.field.media.document.field_dc_creator
+    - field.field.media.document.field_dc_date
+    - field.field.media.document.field_dc_description
+    - field.field.media.document.field_dc_format
+    - field.field.media.document.field_dc_identifier
+    - field.field.media.document.field_dc_language
+    - field.field.media.document.field_dc_location
+    - field.field.media.document.field_dc_publisher
+    - field.field.media.document.field_dc_relation
+    - field.field.media.document.field_dc_rights
+    - field.field.media.document.field_dc_source
+    - field.field.media.document.field_dc_subject
+    - field.field.media.document.field_dc_time_range
+    - field.field.media.document.field_dc_title
+    - field.field.media.document.field_dc_type
+    - field.field.media.document.field_dummy_document
+    - field.field.media.document.field_filehash
+    - field.field.media.document.field_media_document
+    - field.field.media.document.field_subject_classification
+    - image.style.exhibition_grid
+    - media_entity.bundle.document
+  module:
+    - image
+_core:
+  default_config_hash: Cl6szq36rMNuC1Yy-YYm_rTNwItU-sG4adDbBk8fNn8
+id: media.document.teaser
+targetEntityType: media
+bundle: document
+mode: teaser
+content:
+  field_dc_description:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  name:
+    type: string
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 1
+    label: hidden
+    settings:
+      image_style: exhibition_grid
+      image_link: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_content_type: true
+  field_dc_contributor: true
+  field_dc_creator: true
+  field_dc_date: true
+  field_dc_format: true
+  field_dc_identifier: true
+  field_dc_language: true
+  field_dc_location: true
+  field_dc_publisher: true
+  field_dc_relation: true
+  field_dc_rights: true
+  field_dc_source: true
+  field_dc_subject: true
+  field_dc_time_range: true
+  field_dc_title: true
+  field_dc_type: true
+  field_dummy_document: true
+  field_filehash: true
+  field_media_document: true
+  field_subject_classification: true
+  langcode: true
+  uid: true

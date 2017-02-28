@@ -1,0 +1,79 @@
+uuid: b9c4f8c3-4540-4d20-a6f0-d91638a2e85f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.slick
+    - field.field.media.audio.field_dc_content_type
+    - field.field.media.audio.field_dc_contributor
+    - field.field.media.audio.field_dc_creator
+    - field.field.media.audio.field_dc_date
+    - field.field.media.audio.field_dc_description
+    - field.field.media.audio.field_dc_format
+    - field.field.media.audio.field_dc_identifier
+    - field.field.media.audio.field_dc_language
+    - field.field.media.audio.field_dc_location
+    - field.field.media.audio.field_dc_publisher
+    - field.field.media.audio.field_dc_relation
+    - field.field.media.audio.field_dc_rights
+    - field.field.media.audio.field_dc_source
+    - field.field.media.audio.field_dc_subject
+    - field.field.media.audio.field_dc_time_range
+    - field.field.media.audio.field_dc_title
+    - field.field.media.audio.field_dc_type
+    - field.field.media.audio.field_filehash
+    - field.field.media.audio.field_media_audio
+    - field.field.media.audio.field_subject_classification
+    - media_entity.bundle.audio
+  module:
+    - audiofield
+_core:
+  default_config_hash: qIEqI60HrS7ZJq3wx0V9YTglNrtFWcXmBZm8eLWX9L4
+id: media.audio.slick
+targetEntityType: media
+bundle: audio
+mode: slick
+content:
+  field_dc_description:
+    type: basic_string
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_media_audio:
+    type: audiofield_audioplayer
+    weight: 19
+    label: hidden
+    settings:
+      audio_player: default_mp3_player
+    third_party_settings: {  }
+  name:
+    type: string
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_content_type: true
+  field_dc_contributor: true
+  field_dc_creator: true
+  field_dc_date: true
+  field_dc_format: true
+  field_dc_identifier: true
+  field_dc_language: true
+  field_dc_location: true
+  field_dc_publisher: true
+  field_dc_relation: true
+  field_dc_rights: true
+  field_dc_source: true
+  field_dc_subject: true
+  field_dc_time_range: true
+  field_dc_title: true
+  field_dc_type: true
+  field_filehash: true
+  field_subject_classification: true
+  langcode: true
+  thumbnail: true
+  uid: true

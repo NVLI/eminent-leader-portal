@@ -1,0 +1,47 @@
+uuid: 3a5d6aea-1473-4163-a28e-bf78ca4203a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_time_line_image
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - content_translation
+    - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
+_core:
+  default_config_hash: mTVcOUww7A7OEEqHB3KJp-BF34WtB0O9dCoGUwBzcU4
+id: paragraph.time_line_story.field_time_line_image
+field_name: field_time_line_image
+entity_type: paragraph
+bundle: time_line_story
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

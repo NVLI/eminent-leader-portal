@@ -1,0 +1,6 @@
+display:
+  default:
+    display_options:
+      use_more_text: আরও
+  block_1:
+    display_title: ব্লক

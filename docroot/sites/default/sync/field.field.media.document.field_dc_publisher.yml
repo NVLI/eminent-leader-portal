@@ -1,0 +1,19 @@
+uuid: 4213bcea-cfa7-42ce-8c58-087cd3c382af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_publisher
+    - media_entity.bundle.document
+id: media.document.field_dc_publisher
+field_name: field_dc_publisher
+entity_type: media
+bundle: document
+label: 'DC Publisher'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

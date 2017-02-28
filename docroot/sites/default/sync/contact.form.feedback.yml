@@ -1,0 +1,17 @@
+uuid: d7a9172e-71aa-4e53-b430-47bb1023a503
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: c4zaT5cyPxuTXI6JOWt3qRtMvICT9tHB6d9a5VG-CmQ
+id: feedback
+label: 'Website feedback'
+recipients:
+  - feedback@nvli.in
+  - safallia.joseph.zyxware@gmail.com
+  - p.sunthar@gmail.com
+  - sardarpatel.nvli@gmail.com
+reply: ''
+weight: 0
+message: 'Thank you for your feedback. We will review it and get back to you if required.'
+redirect: ''

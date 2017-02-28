@@ -1,0 +1,32 @@
+uuid: 00bbcfa4-2ea8-4478-aee7-65cc54cafaf2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:fab9c005-ff60-4fa5-a995-576374c311e1'
+  module:
+    - block_content
+    - facets
+  theme:
+    - eminent_sardar
+id: bottomfooterfirst
+theme: eminent_sardar
+region: bottom_footer_first
+weight: -20
+provider: null
+plugin: 'block_content:fab9c005-ff60-4fa5-a995-576374c311e1'
+settings:
+  id: 'block_content:fab9c005-ff60-4fa5-a995-576374c311e1'
+  label: 'Bottom footer first'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

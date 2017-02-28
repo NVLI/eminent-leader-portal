@@ -1,0 +1,209 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: வடிகட்டி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- அனைத்தும் -'
+          tags:
+            previous: '‹ முந்திய'
+            next: 'அடுத்த ›'
+            first: '« முதல்'
+            last: 'கடந்த »'
+      fields:
+        title:
+          label: அடையாளம்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+  closed:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+      menu:
+        title: மூடப்பட்டது
+  completed:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+  eligible:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+  my_tasks:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+  pending:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          separator: ', '
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+  rejected:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+        title:
+          expose:
+            label: அடையாளம்
+  unassigned:
+    display_options:
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        title:
+          label: அடையாளம்
+          separator: ', '
+        source_language:
+          label: அனுப்புநர்
+          separator: ', '
+        target_language:
+          label: பெறுநர்
+          separator: ', '
+        item_count:
+          label: உருப்படிகள்
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+      tab_options:
+        title: மொழிபெயர்ச்சி

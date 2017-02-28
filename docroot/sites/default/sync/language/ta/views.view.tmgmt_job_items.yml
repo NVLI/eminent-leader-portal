@@ -1,0 +1,47 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: விண்ணப்பி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- அனைத்தும் -'
+          tags:
+            previous: '‹ முந்திய'
+            next: 'அடுத்த ›'
+            first: '« முதல்'
+            last: 'கடைசி »'
+      fields:
+        label:
+          label: அடையாளம்
+        type:
+          label: வகை
+        word_count:
+          separator: ', '
+        tags_count:
+          label: குறிச்சொற்கள்
+          separator: ', '
+        changed:
+          label: மாற்றப்பட்டது
+        operations:
+          label: செயல்பாடுகள்
+      arguments:
+        tjid:
+          exception:
+            title: எல்லா
+  checkout:
+    display_options:
+      fields:
+        label:
+          label: அடையாளம்
+        type:
+          label: வகை
+        word_count:
+          separator: ', '
+        changed:
+          label: மாற்றப்பட்டது
+          separator: ', '

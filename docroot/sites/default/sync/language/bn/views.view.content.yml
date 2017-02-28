@@ -1,0 +1,44 @@
+label: কনটেন্ট
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ফিল্টার
+      fields:
+        title:
+          label: শিরোনাম
+        type:
+          label: 'কন্টেন্টের ধরণ'
+        name:
+          label: লেখক
+        status:
+          label: স্ট্যাটাস
+        changed:
+          label: আপডেটকৃত
+        operations:
+          label: কার্যাবলী
+      filters:
+        status:
+          expose:
+            label: স্ট্যাটাস
+          group_info:
+            group_items:
+              1:
+                title: প্রকাশিত
+        type:
+          expose:
+            label: 'কন্টেন্টের ধরণ'
+        title:
+          expose:
+            label: শিরোনাম
+        langcode:
+          expose:
+            label: ভাষা
+      title: কনটেন্ট
+  page_1:
+    display_options:
+      menu:
+        title: কনটেন্ট
+      tab_options:
+        title: কনটেন্ট

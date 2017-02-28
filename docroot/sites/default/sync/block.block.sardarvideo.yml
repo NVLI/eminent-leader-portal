@@ -1,0 +1,32 @@
+uuid: b92fd430-987d-47d6-bf79-82a6fba8a09c
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:14c9e0b0-be64-4e55-833a-0f2c45d24be0'
+  module:
+    - block_content
+    - facets
+  theme:
+    - eminent_sardar
+id: sardarvideo
+theme: eminent_sardar
+region: '-1'
+weight: -12
+provider: null
+plugin: 'block_content:14c9e0b0-be64-4e55-833a-0f2c45d24be0'
+settings:
+  id: 'block_content:14c9e0b0-be64-4e55-833a-0f2c45d24be0'
+  label: 'Sardar Video'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,40 @@
+uuid: 8fe47c47-c420-47c7-87aa-26110c45c118
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.play_list_story.field_play_list_description
+    - field.field.paragraph.play_list_story.field_play_list_media_reference
+    - field.field.paragraph.play_list_story.field_play_list_title
+    - paragraphs.paragraphs_type.play_list_story
+  module:
+    - text
+id: paragraph.play_list_story.default
+targetEntityType: paragraph
+bundle: play_list_story
+mode: default
+content:
+  field_play_list_description:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_play_list_media_reference:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: slick_nav
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+  field_play_list_title:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  created: true
+  uid: true

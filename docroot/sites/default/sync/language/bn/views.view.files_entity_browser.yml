@@ -1,0 +1,18 @@
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            previous: '‹ পূর্ববর্তী'
+            next: 'পরবর্তী ›'
+            first: '« প্রথম'
+            last: 'শেষ »'
+      filters:
+        filename:
+          expose:
+            label: 'ফাইলের নাম'
+      sorts:
+        filename:
+          expose:
+            label: 'ফাইলের নাম'

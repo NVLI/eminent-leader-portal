@@ -1,0 +1,16 @@
+uuid: 15353b9e-14d9-49c2-9bdb-3489aab3983c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.play_list
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.play_list
+target_entity_type_id: node
+target_bundle: play_list
+default_langcode: site_default
+language_alterable: true

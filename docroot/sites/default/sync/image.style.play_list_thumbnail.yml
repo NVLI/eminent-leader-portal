@@ -1,0 +1,16 @@
+uuid: 19617263-fa9f-4f57-bd53-573481449e2a
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: b3j8dSRMUbFpYTVjiaNm7NRnvRogi7Jhn1hKNz8v0ns
+name: play_list_thumbnail
+label: 'Play list  thumbnail'
+effects:
+  00f4e168-0ed3-4cb8-8e73-42060bd4e633:
+    uuid: 00f4e168-0ed3-4cb8-8e73-42060bd4e633
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 350
+      height: 250

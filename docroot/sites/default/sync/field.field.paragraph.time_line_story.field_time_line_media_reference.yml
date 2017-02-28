@@ -1,0 +1,36 @@
+uuid: c79574b0-74e1-4c25-839f-cf535d9eb8af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_time_line_media_reference
+    - media_entity.bundle.audio
+    - media_entity.bundle.document
+    - media_entity.bundle.image
+    - media_entity.bundle.video
+    - paragraphs.paragraphs_type.time_line_story
+_core:
+  default_config_hash: TNEVOie-qgpKrN81dH3F1zJXrB7H3iuOE_Wu7SbLrD8
+id: paragraph.time_line_story.field_time_line_media_reference
+field_name: field_time_line_media_reference
+entity_type: paragraph
+bundle: time_line_story
+label: 'Media Reference'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+      document: document
+      image: image
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: audio
+field_type: entity_reference

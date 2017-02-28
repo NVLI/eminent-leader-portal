@@ -1,0 +1,22 @@
+uuid: d6d8fdb9-4ea6-4ed1-b6ec-8b845f9225d4
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - eminent_svp
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: eminent_svp_messages
+theme: eminent_svp
+region: '-1'
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

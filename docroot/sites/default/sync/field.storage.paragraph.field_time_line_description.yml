@@ -1,0 +1,21 @@
+uuid: b9cb5efb-84c1-4337-b6d7-d310cdf78910
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: XZ0JGMdAQiYRsnBFI4YrKhpvjqTEIQG2aikTnAaa5dQ
+id: paragraph.field_time_line_description
+field_name: field_time_line_description
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

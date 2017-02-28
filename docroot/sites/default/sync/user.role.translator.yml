@@ -1,0 +1,14 @@
+uuid: 9f0b61fb-269e-4038-be69-45efbc1ecc9c
+langcode: en
+status: true
+dependencies: {  }
+id: translator
+label: Translator
+weight: 4
+is_admin: null
+permissions:
+  - 'provide translation services'
+  - 'use text format full_html'
+  - 'view the administration theme'
+  - 'access toolbar'
+  - 'use exclude node title'

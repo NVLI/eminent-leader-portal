@@ -1,0 +1,28 @@
+uuid: ddb1332c-fa5c-4c12-b589-2b3ac7324bfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_subject_classification
+    - media_entity.bundle.audio
+    - taxonomy.vocabulary.subject_classification
+id: media.audio.field_subject_classification
+field_name: field_subject_classification
+entity_type: media
+bundle: audio
+label: 'Subject Classification'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject_classification: subject_classification
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

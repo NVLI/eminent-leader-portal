@@ -1,0 +1,28 @@
+uuid: 3ece95d5-9ad2-46f6-a703-2f006dd8a288
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_subject
+    - media_entity.bundle.audio
+    - taxonomy.vocabulary.subject
+id: media.audio.field_dc_subject
+field_name: field_dc_subject
+entity_type: media
+bundle: audio
+label: 'Free Tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject: subject
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

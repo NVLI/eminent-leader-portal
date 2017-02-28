@@ -1,0 +1,23 @@
+uuid: 3b36cda1-39ae-4e7c-8267-607b157a042b
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+_core:
+  default_config_hash: EV3xOQNytgAE_TziGHDGb2bHn_kx80pOnwJ1is640Xw
+id: node.field_time_line_collection_story
+field_name: field_time_line_collection_story
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

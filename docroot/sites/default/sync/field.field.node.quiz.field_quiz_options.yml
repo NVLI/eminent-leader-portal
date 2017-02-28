@@ -1,0 +1,22 @@
+uuid: 92e51eb6-e7cf-4a55-bccc-94e4a4c6e085
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quiz_options
+    - node.type.quiz
+  module:
+    - field_collection
+id: node.quiz.field_quiz_options
+field_name: field_quiz_options
+entity_type: node
+bundle: quiz
+label: Options
+description: ''
+required: false
+translatable: true
+default_value:
+  - {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_collection

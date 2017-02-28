@@ -1,0 +1,16 @@
+uuid: 8053e84d-ba84-4d74-b9c5-3f5af8d301b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.time_line_story
+target_entity_type_id: paragraph
+target_bundle: time_line_story
+default_langcode: site_default
+language_alterable: true

@@ -1,0 +1,32 @@
+uuid: df2246e6-60e0-4879-be12-57df146b3771
+langcode: en
+status: true
+dependencies: {  }
+id: curator
+label: Curator
+weight: 3
+is_admin: null
+permissions:
+  - 'add playlist'
+  - 'add quote'
+  - 'add timeline'
+  - 'create media'
+  - 'update media'
+  - 'create play_list content'
+  - 'edit any play_list content'
+  - 'create quote content'
+  - 'edit any quote content'
+  - 'create time_line_collection content'
+  - 'edit any time_line_collection content'
+  - 'create quiz content'
+  - 'edit any quiz content'
+  - 'remove media from playlist'
+  - 'remove media from timeline'
+  - 'update any media'
+  - 'administer translation tasks'
+  - 'use text format full_html'
+  - 'create translation jobs'
+  - 'submit translation jobs'
+  - 'view the administration theme'
+  - 'access toolbar'
+  - 'use exclude node title'

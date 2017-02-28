@@ -1,0 +1,19 @@
+uuid: c93a080d-5903-45c5-bb79-28da7dc9a32b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_rights
+    - media_entity.bundle.image
+id: media.image.field_dc_rights
+field_name: field_dc_rights
+entity_type: media
+bundle: image
+label: 'DC Rights'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

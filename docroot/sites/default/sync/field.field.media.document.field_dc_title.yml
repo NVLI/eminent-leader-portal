@@ -1,0 +1,21 @@
+uuid: a8b8d998-b2c5-4a4c-ba11-f958fc16a63b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_title
+    - media_entity.bundle.document
+_core:
+  default_config_hash: C3jBQz_Bc2cr3EofwR9Sr45vwEGQH0ObkotBnYgBMV0
+id: media.document.field_dc_title
+field_name: field_dc_title
+entity_type: media
+bundle: document
+label: 'DC Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

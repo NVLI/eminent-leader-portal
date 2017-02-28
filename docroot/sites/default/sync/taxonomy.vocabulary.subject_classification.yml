@@ -1,0 +1,9 @@
+uuid: d52002e9-a022-4469-b090-cffe9912ef31
+langcode: en
+status: true
+dependencies: {  }
+name: 'Subject Classification'
+vid: subject_classification
+description: 'Classification of terms'
+hierarchy: 1
+weight: 0

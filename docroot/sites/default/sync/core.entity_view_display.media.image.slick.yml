@@ -1,0 +1,81 @@
+uuid: 32005a3d-2a8c-4c47-922f-579a19be6988
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.slick
+    - field.field.media.image.field_dc_content_type
+    - field.field.media.image.field_dc_contributor
+    - field.field.media.image.field_dc_creator
+    - field.field.media.image.field_dc_date
+    - field.field.media.image.field_dc_description
+    - field.field.media.image.field_dc_format
+    - field.field.media.image.field_dc_identifier
+    - field.field.media.image.field_dc_language
+    - field.field.media.image.field_dc_location
+    - field.field.media.image.field_dc_publisher
+    - field.field.media.image.field_dc_relation
+    - field.field.media.image.field_dc_rights
+    - field.field.media.image.field_dc_source
+    - field.field.media.image.field_dc_subject
+    - field.field.media.image.field_dc_time_range
+    - field.field.media.image.field_dc_title
+    - field.field.media.image.field_dc_type
+    - field.field.media.image.field_filehash
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_subject_classification
+    - image.style.slick_main_image
+    - media_entity.bundle.image
+  module:
+    - image
+_core:
+  default_config_hash: Wvd-Zagt76_qFG6IH5AeOQYQAMY6PVCcks5XTGr205I
+id: media.image.slick
+targetEntityType: media
+bundle: image
+mode: slick
+content:
+  field_dc_description:
+    type: basic_string
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_media_image:
+    type: image
+    weight: 8
+    label: hidden
+    settings:
+      image_style: slick_main_image
+      image_link: ''
+    third_party_settings: {  }
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_content_type: true
+  field_dc_contributor: true
+  field_dc_creator: true
+  field_dc_date: true
+  field_dc_format: true
+  field_dc_identifier: true
+  field_dc_language: true
+  field_dc_location: true
+  field_dc_publisher: true
+  field_dc_relation: true
+  field_dc_rights: true
+  field_dc_source: true
+  field_dc_subject: true
+  field_dc_time_range: true
+  field_dc_title: true
+  field_dc_type: true
+  field_filehash: true
+  field_subject_classification: true
+  langcode: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,33 @@
+uuid: 236ad415-0e56-43a8-b407-a71a4fac6918
+langcode: en
+status: true
+dependencies:
+  module:
+    - eminent_custom
+    - facets
+    - system
+  theme:
+    - eminent_sardar
+id: eminentrelatedmedia
+theme: eminent_sardar
+region: content
+weight: -23
+provider: null
+plugin: eminent_related_media
+settings:
+  id: eminent_related_media
+  label: 'Eminent Related Media'
+  provider: eminent_custom
+  label_display: '0'
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '/media/*'
+    negate: false
+    context_mapping: {  }

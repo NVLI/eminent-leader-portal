@@ -1,0 +1,19 @@
+uuid: d0936390-dd60-40b5-a8e8-2301ace8fb51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quiz_question
+    - node.type.quiz
+id: node.quiz.field_quiz_question
+field_name: field_quiz_question
+entity_type: node
+bundle: quiz
+label: Question
+description: 'The quiz question.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

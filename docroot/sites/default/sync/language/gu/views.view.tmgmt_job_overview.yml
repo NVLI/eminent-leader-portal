@@ -1,0 +1,19 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        label:
+          label: શિર્ષક
+        translator:
+          label: પ્રદાતા
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        translator:
+          expose:
+            label: પ્રદાતા
+  page_1:
+    display_title: પ્રુષ્ઠ

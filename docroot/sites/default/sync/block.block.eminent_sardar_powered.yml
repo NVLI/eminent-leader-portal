@@ -1,0 +1,22 @@
+uuid: 405a5b63-36c1-49c0-a1ca-3ae81fa7ffb7
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: eminent_sardar_powered
+theme: eminent_sardar
+region: '-1'
+weight: -15
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

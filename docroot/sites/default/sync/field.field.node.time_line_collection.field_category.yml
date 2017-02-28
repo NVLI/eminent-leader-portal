@@ -1,0 +1,28 @@
+uuid: b396ef3f-57cb-4918-b4ee-851b5639bdd4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.time_line_collection
+    - taxonomy.vocabulary.subject_classification
+id: node.time_line_collection.field_category
+field_name: field_category
+entity_type: node
+bundle: time_line_collection
+label: Category
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject_classification: subject_classification
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

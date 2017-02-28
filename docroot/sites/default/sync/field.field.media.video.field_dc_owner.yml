@@ -1,0 +1,19 @@
+uuid: 7e579a9f-cdc6-4977-a76f-e8c0a6cce929
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_owner
+    - media_entity.bundle.video
+id: media.video.field_dc_owner
+field_name: field_dc_owner
+entity_type: media
+bundle: video
+label: 'DC Owner'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

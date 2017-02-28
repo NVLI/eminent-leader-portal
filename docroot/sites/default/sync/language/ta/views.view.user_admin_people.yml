@@ -1,0 +1,67 @@
+label: நபர்கள்
+description: 'உங்கள் தளத்தில் தொடர்புகொள்ளும் மக்கள் கண்டுபிடிக்கவும் மற்றும் மேலாண்மை.'
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: வடிகட்டி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          tags:
+            previous: '‹ முந்திய'
+            next: 'அடுத்த ›'
+            first: '« முதல்'
+            last: 'கடந்த »'
+          expose:
+            items_per_page_options_all_label: '- அனைத்தும் -'
+      fields:
+        name:
+          label: பயனர்பெயர்
+        status:
+          label: நிலை
+        roles_target_id:
+          label: பாத்திரங்கள்
+        created:
+          label: பயனாளராக
+        access:
+          label: 'கடைசி அனுகல்'
+        operations:
+          label: செயல்பாடுகள்
+        mail:
+          separator: ', '
+      filters:
+        combine:
+          expose:
+            label: 'பெயர் அல்லது மின்னஞ்சல் கொண்டுள்ளது'
+        roles_target_id:
+          expose:
+            label: பாத்திரம்
+        permission:
+          expose:
+            label: அனுமதி
+        status:
+          group_info:
+            label: நிலை
+            group_items:
+              1:
+                title: நடைமுறையிலுள்ளது
+                value: '1'
+              2:
+                title: தடுக்கப்பட்டது
+      title: நபர்கள்
+      empty:
+        area_text_custom:
+          content: 'எந்த நபரும் இல்லை.'
+      use_more_text: மேலும்
+  page_1:
+    display_title: பக்கம்
+    display_options:
+      menu:
+        title: பட்டியல்
+        description: 'உங்கள் தளத்தில் தொடர்புகொள்ளும் மக்கள் கண்டுபிடிக்கவும் மற்றும் மேலாண்மை.'
+      tab_options:
+        title: நபர்கள்
+        description: 'பயனர் அங்கத்துவங்கள், பாத்திரங்கள் மற்றும் அனுமதிகளை நிர்வகி'

@@ -1,0 +1,16 @@
+uuid: 3b87a16a-378d-4cf4-9200-8942ccf1bca6
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: OhvNWJDhhJwZjka3nmnvkS3ip13wq5QOdcr9cTL9CvU
+name: play_list_main
+label: 'Play list main'
+effects:
+  b6a23df9-4d71-4952-a0cd-03e05b5fe117:
+    uuid: b6a23df9-4d71-4952-a0cd-03e05b5fe117
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 640
+      height: 480

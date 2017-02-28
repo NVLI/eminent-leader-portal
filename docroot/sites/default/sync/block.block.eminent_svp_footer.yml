@@ -1,0 +1,26 @@
+uuid: dc13ab3c-8ad4-4a4f-af4e-25e9cd0d5dc4
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - eminent_svp
+_core:
+  default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
+id: eminent_svp_footer
+theme: eminent_svp
+region: '-1'
+weight: -10
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

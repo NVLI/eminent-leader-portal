@@ -1,0 +1,28 @@
+uuid: 9afe8d77-899c-43b2-84fd-920d5d4f58a6
+langcode: en
+status: false
+dependencies:
+  module:
+    - contact_block
+    - facets
+  theme:
+    - eminent_sardar
+id: contactblock
+theme: eminent_sardar
+region: '-1'
+weight: -9
+provider: null
+plugin: contact_block
+settings:
+  id: contact_block
+  label: 'Share your Feedback'
+  provider: contact_block
+  label_display: visible
+  contact_form: feedback
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

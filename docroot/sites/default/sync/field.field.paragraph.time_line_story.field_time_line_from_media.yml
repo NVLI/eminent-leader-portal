@@ -1,0 +1,23 @@
+uuid: 6f19e43d-dcb0-4c8e-8fb0-51e4fb1c6c7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_time_line_from_media
+    - paragraphs.paragraphs_type.time_line_story
+id: paragraph.time_line_story.field_time_line_from_media
+field_name: field_time_line_from_media
+entity_type: paragraph
+bundle: time_line_story
+label: 'Import DC data from media entity'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Import DC data from media entity'
+  off_label: 'Import DC data from media entity'
+field_type: boolean

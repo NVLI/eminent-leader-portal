@@ -1,0 +1,14 @@
+uuid: 3fbb4519-76fc-4517-936b-948943f574b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.translation_reviewer
+  module:
+    - user
+id: user_remove_role_action.translation_reviewer
+label: 'Remove the Translation Reviewer role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: translation_reviewer

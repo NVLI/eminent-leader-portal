@@ -1,0 +1,22 @@
+uuid: f8be9576-3383-4990-b3ea-6960a6604890
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: eminent_sardar_messages
+theme: eminent_sardar
+region: content
+weight: -26
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

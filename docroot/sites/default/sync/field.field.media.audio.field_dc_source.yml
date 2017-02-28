@@ -1,0 +1,19 @@
+uuid: d0bda5db-253f-4e58-982f-3bb42445b31a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_source
+    - media_entity.bundle.audio
+id: media.audio.field_dc_source
+field_name: field_dc_source
+entity_type: media
+bundle: audio
+label: 'DC Source'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

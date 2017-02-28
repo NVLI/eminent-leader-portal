@@ -1,0 +1,20 @@
+uuid: 841f27c1-36ea-4731-828f-dbfe7f20c95b
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - media_entity
+id: media.field_dc_date
+field_name: field_dc_date
+entity_type: media
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

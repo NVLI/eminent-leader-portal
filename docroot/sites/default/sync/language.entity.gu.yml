@@ -1,0 +1,9 @@
+uuid: 4c1622ae-caae-4e53-acc9-015ce8f7ad8c
+langcode: en
+status: true
+dependencies: {  }
+id: gu
+label: Gujarati
+direction: ltr
+weight: 2
+locked: false

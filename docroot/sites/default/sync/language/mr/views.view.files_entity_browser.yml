@@ -1,0 +1,27 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: पुर्ववत
+          exposed_sorts_label: 'क्रमवारी नुसार लावा'
+      pager:
+        options:
+          tags:
+            previous: '‹ मागे'
+            next: 'पुढे ›'
+            first: '« प्रथम'
+            last: 'अंतिम »'
+      fields:
+        filename:
+          separator: ', '
+        filesize:
+          separator: ', '
+      filters:
+        filename:
+          expose:
+            label: 'फाईलचे नाव'
+      sorts:
+        filename:
+          expose:
+            label: 'फाईलचे नाव'

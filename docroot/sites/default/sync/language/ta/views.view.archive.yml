@@ -1,0 +1,29 @@
+label: பெட்டகம்
+description: 'மாதவாரியாக அனைத்து உள்ளடக்கம்'
+display:
+  default:
+    display_options:
+      title: 'மாதாந்திர தொகுப்புகள்'
+      exposed_form:
+        options:
+          submit_button: விண்ணப்பி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- அனைத்தும் -'
+          tags:
+            previous: ‹‹
+            next: ››
+      arguments:
+        created_year_month:
+          title: '{{ arguments.created_year_month }}'
+  block_1:
+    display_title: பெட்டி
+    display_options:
+      arguments:
+        created_year_month:
+          title: '{{ arguments.created_year_month }}'
+  page_1:
+    display_title: பக்கம்

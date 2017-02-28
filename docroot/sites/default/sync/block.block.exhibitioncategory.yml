@@ -1,0 +1,28 @@
+uuid: 485ea0b9-7ada-4d81-bfb3-7e474c10f998
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.exhibition_category
+  module:
+    - facets
+  theme:
+    - eminent_sardar
+id: exhibitioncategory
+theme: eminent_sardar
+region: search_facets
+weight: 0
+provider: null
+plugin: 'facet_block:exhibition_category'
+settings:
+  id: 'facet_block:exhibition_category'
+  label: 'Exhibition Category'
+  provider: facets
+  label_display: visible
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

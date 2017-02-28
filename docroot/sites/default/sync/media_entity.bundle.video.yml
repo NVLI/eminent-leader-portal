@@ -1,0 +1,14 @@
+uuid: 67f865fd-6ad2-41d9-9d0e-5616d12753bb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: oJqp9zdgR0_M0_x5y9VwCO5oKHhOMfp8RsIq0GB_IIg
+id: video
+label: Video
+description: 'The video media bundle.'
+type: generic
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration: {  }
+field_map: {  }

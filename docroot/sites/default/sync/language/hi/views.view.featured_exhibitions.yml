@@ -1,0 +1,14 @@
+display:
+  default:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "<div class=\"recent-work-wrap\">\r\n  {{ field_playlist_image }}\r\n<div class=\"overlay\">\r\n   <div class=\"recent-work-inner\">\r\n       <h3>{{ title }}</h3>\r\n      <p> {{ field_description }} </p>\r\n       <a class=\"preview\" href= {{ path }}><i class=\"fa fa-eye\"></i> View</a>\r\n  </div>\r\n</div>\r\n</div>"
+  block_1:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "<div class=\"recent-work-wrap\">\r\n  {{ field_playlist_image }}\r\n<div class=\"overlay\">\r\n   <div class=\"recent-work-inner\">\r\n       <h3>{{ title }}</h3>\r\n       <a class=\"preview\" href= {{ path }} tabindex=\"0\"> Read Story</a>\r\n  </div>\r\n</div>\r\n</div>"
+      title: विषय

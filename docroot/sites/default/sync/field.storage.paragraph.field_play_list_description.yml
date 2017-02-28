@@ -1,0 +1,19 @@
+uuid: 8127a99b-12d3-48da-9da1-5ea91f3c1c54
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_play_list_description
+field_name: field_play_list_description
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,36 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: விண்ணப்பி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- அனைத்தும் -'
+          tags:
+            previous: '‹ முந்திய'
+            next: 'அடுத்த ›'
+            first: '« முதல்'
+            last: 'கடந்த »'
+      fields:
+        status:
+          label: நிலை
+          format_plural_string: "1\x03@count"
+        label:
+          label: அடையாளம்
+        item_type:
+          label: வகை
+          separator: ', '
+        word_count:
+          separator: ', '
+        operations:
+          label: செயல்பாடுகள்
+      arguments:
+        tltid:
+          exception:
+            title: எல்லா
+  block_1:
+    display_title: பெட்டி

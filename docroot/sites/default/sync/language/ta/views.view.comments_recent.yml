@@ -1,0 +1,13 @@
+label: 'சமீபத்தைய பின்னூட்டங்கள்'
+description: 'அண்மைய கருத்துக்கள்.'
+display:
+  default:
+    display_options:
+      title: 'சமீபத்தைய பின்னூட்டங்கள்'
+      empty:
+        area_text_custom:
+          content: 'பின்னூட்டங்கள் இல்லை'
+  block_1:
+    display_title: பெட்டி
+    display_options:
+      block_description: 'சமீபத்தைய பின்னூட்டங்கள்'

@@ -1,0 +1,21 @@
+uuid: da3ff42c-a5dc-461b-89d0-e68c28f49973
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.field_dc_contributor
+field_name: field_dc_contributor
+entity_type: media
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

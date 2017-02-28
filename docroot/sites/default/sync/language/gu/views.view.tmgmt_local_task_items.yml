@@ -1,0 +1,19 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        status:
+          label: સ્થિતિ
+        label:
+          label: શિર્ષક
+        item_type:
+          label: પ્રકાર
+        operations:
+          label: ક્રિયાઓ
+      arguments:
+        tltid:
+          exception:
+            title: બધા

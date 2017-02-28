@@ -1,0 +1,26 @@
+uuid: 3502b98f-a8c7-4b6a-868e-3cba206272ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.quiz.field_quiz_correct_feedback
+    - field.field.node.quiz.field_quiz_options
+    - field.field.node.quiz.field_quiz_question
+    - field.field.node.quiz.field_quiz_wrong_feedback
+    - node.type.quiz
+  module:
+    - user
+id: node.quiz.teaser
+targetEntityType: node
+bundle: quiz
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_quiz_correct_feedback: true
+  field_quiz_options: true
+  field_quiz_question: true
+  field_quiz_wrong_feedback: true
+  langcode: true

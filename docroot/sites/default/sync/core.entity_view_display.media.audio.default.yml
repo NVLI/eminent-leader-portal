@@ -1,0 +1,183 @@
+uuid: 7f2fa332-c725-4cc9-97c8-1783af9bcff6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_dc_content_type
+    - field.field.media.audio.field_dc_contributor
+    - field.field.media.audio.field_dc_creator
+    - field.field.media.audio.field_dc_date
+    - field.field.media.audio.field_dc_description
+    - field.field.media.audio.field_dc_format
+    - field.field.media.audio.field_dc_identifier
+    - field.field.media.audio.field_dc_language
+    - field.field.media.audio.field_dc_location
+    - field.field.media.audio.field_dc_owner
+    - field.field.media.audio.field_dc_publisher
+    - field.field.media.audio.field_dc_relation
+    - field.field.media.audio.field_dc_rights
+    - field.field.media.audio.field_dc_source
+    - field.field.media.audio.field_dc_subject
+    - field.field.media.audio.field_dc_time_range
+    - field.field.media.audio.field_dc_title
+    - field.field.media.audio.field_dc_type
+    - field.field.media.audio.field_filehash
+    - field.field.media.audio.field_media_audio
+    - field.field.media.audio.field_subject_classification
+    - media_entity.bundle.audio
+  module:
+    - audiofield
+    - datetime
+_core:
+  default_config_hash: qIEqI60HrS7ZJq3wx0V9YTglNrtFWcXmBZm8eLWX9L4
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  field_dc_content_type:
+    weight: 22
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_contributor:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_creator:
+    weight: 9
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_date:
+    weight: 3
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_dc_description:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_dc_format:
+    weight: 19
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_identifier:
+    weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_language:
+    weight: 20
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_location:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_owner:
+    weight: 24
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_publisher:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_relation:
+    weight: 14
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_rights:
+    weight: 15
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_dc_source:
+    weight: 16
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_subject:
+    weight: 18
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_dc_time_range:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_type:
+    weight: 21
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_media_audio:
+    weight: 5
+    label: hidden
+    settings:
+      audio_player: default_mp3_player
+    third_party_settings: {  }
+    type: audiofield_audioplayer
+  field_subject_classification:
+    weight: 23
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_title: true
+  field_filehash: true
+  langcode: true
+  thumbnail: true
+  uid: true

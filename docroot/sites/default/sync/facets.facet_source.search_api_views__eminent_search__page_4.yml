@@ -1,0 +1,8 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+id: search_api_views__eminent_search__page_4
+name: 'search_api_views:eminent_search:page_4'
+filter_key: null
+url_processor: query_string

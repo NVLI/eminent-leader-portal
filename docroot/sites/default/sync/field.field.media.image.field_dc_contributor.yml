@@ -1,0 +1,19 @@
+uuid: 7b877985-5e95-470e-ac01-d38ea030952f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_contributor
+    - media_entity.bundle.image
+id: media.image.field_dc_contributor
+field_name: field_dc_contributor
+entity_type: media
+bundle: image
+label: 'DC Contributor'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

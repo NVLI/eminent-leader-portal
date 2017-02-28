@@ -1,0 +1,24 @@
+uuid: 5d03e934-d025-40a5-a811-cac6c3cfdddb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: home_page_content
+label: 'Home Page Biography Queue'
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+queue_settings:
+  min_size: 0
+  max_size: 0
+  act_as_queue: false

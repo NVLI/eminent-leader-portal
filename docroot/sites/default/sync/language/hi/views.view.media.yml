@@ -1,0 +1,41 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'लागू करें'
+          reset_button_label: 'दोबारा से स्थापित करें|'
+          exposed_sorts_label: 'क्रमबद्ध द्वारा'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'विषय प्रति पृष्ठ'
+            items_per_page_options_all_label: '-सभी-'
+      fields:
+        bundle:
+          label: प्रदाता
+        uid:
+          label: लेखक
+        status:
+          label: अवस्था
+        changed:
+          label: अद्यतित
+        operations:
+          label: कार्यवाही
+      filters:
+        status:
+          expose:
+            label: सही
+          group_info:
+            group_items:
+              1:
+                title: प्रकाशित
+                value: '1'
+              2:
+                title: अप्रकाशित
+        bundle:
+          expose:
+            label: प्रदाता
+        langcode:
+          expose:
+            label: भाषा

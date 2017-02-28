@@ -1,0 +1,19 @@
+uuid: 324dbc8f-a117-408e-802a-153adf110907
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_content_type
+    - media_entity.bundle.video
+id: media.video.field_dc_content_type
+field_name: field_dc_content_type
+entity_type: media
+bundle: video
+label: 'DC Content Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

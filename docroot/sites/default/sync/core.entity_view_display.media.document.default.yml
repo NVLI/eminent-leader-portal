@@ -1,0 +1,195 @@
+uuid: d3942edb-18b1-47cd-abb2-fbd59d40d28b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.document.field_dc_content_type
+    - field.field.media.document.field_dc_contributor
+    - field.field.media.document.field_dc_creator
+    - field.field.media.document.field_dc_date
+    - field.field.media.document.field_dc_description
+    - field.field.media.document.field_dc_format
+    - field.field.media.document.field_dc_identifier
+    - field.field.media.document.field_dc_language
+    - field.field.media.document.field_dc_location
+    - field.field.media.document.field_dc_owner
+    - field.field.media.document.field_dc_publisher
+    - field.field.media.document.field_dc_relation
+    - field.field.media.document.field_dc_rights
+    - field.field.media.document.field_dc_source
+    - field.field.media.document.field_dc_subject
+    - field.field.media.document.field_dc_time_range
+    - field.field.media.document.field_dc_title
+    - field.field.media.document.field_dc_type
+    - field.field.media.document.field_dummy_document
+    - field.field.media.document.field_filehash
+    - field.field.media.document.field_media_document
+    - field.field.media.document.field_subject_classification
+    - media_entity.bundle.document
+  module:
+    - datetime
+    - file
+    - viewerjs
+_core:
+  default_config_hash: Cl6szq36rMNuC1Yy-YYm_rTNwItU-sG4adDbBk8fNn8
+id: media.document.default
+targetEntityType: media
+bundle: document
+mode: default
+content:
+  field_dc_content_type:
+    weight: 24
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_contributor:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_creator:
+    weight: 10
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_date:
+    weight: 5
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_dc_description:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_dc_format:
+    weight: 20
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_identifier:
+    weight: 12
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_language:
+    weight: 21
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_location:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_owner:
+    weight: 26
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_publisher:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_relation:
+    weight: 15
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_rights:
+    weight: 16
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_dc_source:
+    weight: 17
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_subject:
+    weight: 19
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_dc_time_range:
+    weight: 9
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dc_type:
+    weight: 22
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_dummy_document:
+    weight: 23
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_media_document:
+    weight: 5
+    label: hidden
+    settings:
+      link_type: overlay
+      template: index.html
+      overlay_size: 630x500
+      preview_max_size: 630x500
+      max_image_size: viewerjs
+    third_party_settings: {  }
+    type: viewerjs
+  field_subject_classification:
+    weight: 25
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_title: true
+  field_filehash: true
+  langcode: true
+  thumbnail: true
+  uid: true

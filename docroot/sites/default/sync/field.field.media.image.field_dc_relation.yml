@@ -1,0 +1,19 @@
+uuid: 4a8cc737-e9e0-49d5-8b33-748ff033a79a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_relation
+    - media_entity.bundle.image
+id: media.image.field_dc_relation
+field_name: field_dc_relation
+entity_type: media
+bundle: image
+label: 'DC Relation'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

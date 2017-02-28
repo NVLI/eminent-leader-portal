@@ -1,0 +1,14 @@
+uuid: 96e667bf-9ee7-4f18-ad00-172634e665b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.translator
+  module:
+    - user
+id: user_remove_role_action.translator
+label: 'Remove the Translator role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: translator

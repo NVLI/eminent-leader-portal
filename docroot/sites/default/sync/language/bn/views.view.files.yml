@@ -1,0 +1,26 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ফিল্টার
+      fields:
+        filename:
+          label: নাম
+        filesize:
+          label: সাইজ
+        status:
+          label: স্ট্যাটাস
+      filters:
+        filename:
+          expose:
+            label: 'ফাইলের নাম'
+        status:
+          expose:
+            label: স্ট্যাটাস
+  page_2:
+    display_options:
+      arguments:
+        fid:
+          exception:
+            title: সমস্ত

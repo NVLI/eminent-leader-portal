@@ -1,0 +1,31 @@
+uuid: c9c763ef-10ae-4e1f-9207-7963f1765e74
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.general_quiz
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_svp
+id: views_block__general_quiz_block_1
+theme: eminent_svp
+region: home_quiz
+weight: -10
+provider: null
+plugin: 'views_block:general_quiz-block_1'
+settings:
+  id: 'views_block:general_quiz-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

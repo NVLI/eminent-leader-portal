@@ -1,0 +1,11 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'लागू करें'
+          reset_button_label: 'दोबारा से स्थापित करें|'
+          exposed_sorts_label: 'क्रमबद्ध द्वारा'
+      use_more_text: अधिक
+  block_1:
+    display_title: ब्लॉक

@@ -1,0 +1,34 @@
+uuid: 069021bf-a2fc-4879-a38c-f6d7b9ebc540
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_play_list_media_reference
+    - media_entity.bundle.audio
+    - media_entity.bundle.document
+    - media_entity.bundle.image
+    - media_entity.bundle.video
+    - paragraphs.paragraphs_type.play_list_story
+id: paragraph.play_list_story.field_play_list_media_reference
+field_name: field_play_list_media_reference
+entity_type: paragraph
+bundle: play_list_story
+label: 'Media Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+      document: document
+      image: image
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: audio
+field_type: entity_reference

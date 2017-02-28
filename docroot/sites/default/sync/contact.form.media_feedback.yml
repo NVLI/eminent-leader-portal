@@ -1,0 +1,15 @@
+uuid: 33970ade-5055-411a-abd4-b7ddcd4d636a
+langcode: en
+status: true
+dependencies: {  }
+id: media_feedback
+label: 'Media Feedback'
+recipients:
+  - feedback@nvli.in
+  - muhammed.ru5bc.zyxware@gmail.com
+  - p.sunthar@gmail.com
+  - sardarpatel.nvli@gmail.com
+reply: ''
+weight: 0
+message: 'Thank you for your time in providing the feedback.  We will review it and get back to you if required.'
+redirect: ''

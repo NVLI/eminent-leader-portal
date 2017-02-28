@@ -1,0 +1,19 @@
+uuid: a1fbfa51-d0b2-473a-bf82-792514d1f720
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_creator
+    - media_entity.bundle.video
+id: media.video.field_dc_creator
+field_name: field_dc_creator
+entity_type: media
+bundle: video
+label: 'DC Creator'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

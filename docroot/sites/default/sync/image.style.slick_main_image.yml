@@ -1,0 +1,15 @@
+uuid: 62a03061-9dc6-4bda-b21f-997e1b62ad48
+langcode: en
+status: true
+dependencies: {  }
+name: slick_main_image
+label: 'Slick Main Image'
+effects:
+  d283d178-c3f5-4e34-944e-b03ae03f58b1:
+    uuid: d283d178-c3f5-4e34-944e-b03ae03f58b1
+    id: image_scale
+    weight: 2
+    data:
+      width: 800
+      height: 350
+      upscale: true

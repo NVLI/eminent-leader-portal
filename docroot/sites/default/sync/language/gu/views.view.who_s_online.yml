@@ -1,0 +1,11 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      title: 'કોણ ઉપલબ્ધ છે'
+  who_s_online_block:
+    display_title: 'કોણ ઉપલબ્ધ છે'
+    display_options:
+      block_description: 'કોણ ઉપલબ્ધ છે'

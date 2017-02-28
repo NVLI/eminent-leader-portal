@@ -1,0 +1,21 @@
+uuid: cd0409b9-47d0-4c53-9189-47d572313dfb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_title
+    - media_entity.bundle.image
+_core:
+  default_config_hash: cNyxnjyPVmvhp-SaV2vbkY3kyZ8tC_14hLnhxsOW4rw
+id: media.image.field_dc_title
+field_name: field_dc_title
+entity_type: media
+bundle: image
+label: 'DC Title'
+description: 'The Dublin core meta-data title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,193 @@
+uuid: c3b68212-06b5-43c0-abd5-72cb25c4f8d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_dc_content_type
+    - field.field.media.audio.field_dc_contributor
+    - field.field.media.audio.field_dc_creator
+    - field.field.media.audio.field_dc_date
+    - field.field.media.audio.field_dc_description
+    - field.field.media.audio.field_dc_format
+    - field.field.media.audio.field_dc_identifier
+    - field.field.media.audio.field_dc_language
+    - field.field.media.audio.field_dc_location
+    - field.field.media.audio.field_dc_owner
+    - field.field.media.audio.field_dc_publisher
+    - field.field.media.audio.field_dc_relation
+    - field.field.media.audio.field_dc_rights
+    - field.field.media.audio.field_dc_source
+    - field.field.media.audio.field_dc_subject
+    - field.field.media.audio.field_dc_time_range
+    - field.field.media.audio.field_dc_title
+    - field.field.media.audio.field_dc_type
+    - field.field.media.audio.field_filehash
+    - field.field.media.audio.field_media_audio
+    - field.field.media.audio.field_subject_classification
+    - media_entity.bundle.audio
+  module:
+    - datetime
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+  field_dc_content_type:
+    weight: 20
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_contributor:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_creator:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_date:
+    type: datetime_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_dc_description:
+    type: string_textarea
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_dc_format:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_identifier:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_language:
+    weight: 18
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_location:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_owner:
+    weight: 21
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_publisher:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_relation:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_rights:
+    weight: 14
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_dc_source:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_subject:
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_dc_time_range:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_dc_type:
+    weight: 19
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_subject_classification:
+    weight: 22
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  langcode:
+    type: language_select
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 12
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_dc_title: true
+  field_filehash: true
+  field_media_audio: true

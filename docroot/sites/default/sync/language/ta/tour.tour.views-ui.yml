@@ -1,0 +1,22 @@
+label: 'காட்சி திருத்து பக்கம்'
+tips:
+  views-main:
+    label: 'காட்சி அமைப்புகளை நிர்வகி'
+    body: 'கட்டமைப்பை பார்க்க அல்லது திருத்த'
+  views-ui-displays:
+    label: 'இந்த காட்சியில் காட்டப்படும்'
+  views-ui-view-admin:
+    label: 'பார்வை நிர்வாகம்'
+  views-ui-format:
+    label: 'வெளியீட்டு வடிவம்'
+  views-ui-filter:
+    label: 'உங்கள் பார்வையை வடிகட்டு'
+  views-ui-filter-operations:
+    label: 'செயல்கள் வடிகட்டு'
+    body: 'வடிகட்டிகளைச் சேர்க்க, மறுசீரமைக்க மற்றும் அகற்ற.'
+  views-ui-sorts-operations:
+    label: 'செயல்கள் வரிசைப்படுத்து'
+    body: 'வரிசை விதிகள் சேர்க்க, மறுசீரமைக்க மற்றும் அகற்ற.'
+  views-ui-preview:
+    label: முன்மாதிரி
+    body: 'காட்சி வெளியீட்டு முன்னோட்டத்தை காண்பிக்கவும்.'

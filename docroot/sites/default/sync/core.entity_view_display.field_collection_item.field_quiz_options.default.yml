@@ -1,0 +1,30 @@
+uuid: db9f5ef1-72d1-4d4a-9143-164ee3dfdefc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.field_collection_item.field_quiz_options.field_quiz_option
+    - field.field.field_collection_item.field_quiz_options.field_quiz_option_correct
+    - field_collection.field_collection.field_quiz_options
+id: field_collection_item.field_quiz_options.default
+targetEntityType: field_collection_item
+bundle: field_quiz_options
+mode: default
+content:
+  field_quiz_option:
+    type: string
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_quiz_option_correct:
+    type: boolean
+    weight: 1
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+hidden: {  }

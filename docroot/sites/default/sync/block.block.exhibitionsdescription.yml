@@ -1,0 +1,38 @@
+uuid: 4f6a2577-c2ab-4c1f-a8bf-4a5983d069df
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:d9950141-a7ed-4e29-a8a9-bbfed41383ba'
+  module:
+    - block_content
+    - facets
+    - system
+  theme:
+    - eminent_sardar
+id: exhibitionsdescription
+theme: eminent_sardar
+region: page_title
+weight: -19
+provider: null
+plugin: 'block_content:d9950141-a7ed-4e29-a8a9-bbfed41383ba'
+settings:
+  id: 'block_content:d9950141-a7ed-4e29-a8a9-bbfed41383ba'
+  label: 'Exhibitions Description'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: /exhibitions
+    negate: false
+    context_mapping: {  }

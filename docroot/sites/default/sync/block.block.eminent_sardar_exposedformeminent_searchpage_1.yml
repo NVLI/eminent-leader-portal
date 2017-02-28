@@ -1,0 +1,30 @@
+uuid: 7a259e37-3bff-48f9-89d4-a0bec3f83151
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.eminent_search
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_sardar
+id: eminent_sardar_exposedformeminent_searchpage_1
+theme: eminent_sardar
+region: '-1'
+weight: -22
+provider: null
+plugin: 'views_exposed_filter_block:eminent_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:eminent_search-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

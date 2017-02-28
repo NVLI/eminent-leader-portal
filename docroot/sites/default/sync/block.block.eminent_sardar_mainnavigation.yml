@@ -1,0 +1,31 @@
+uuid: 405439dd-e0a7-4179-bf75-73341ecf4451
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - facets
+    - system
+  theme:
+    - eminent_sardar
+id: eminent_sardar_mainnavigation
+theme: eminent_sardar
+region: header
+weight: -26
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

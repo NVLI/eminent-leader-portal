@@ -1,0 +1,31 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ફિલ્ટર
+      fields:
+        name:
+          label: ઉપભોક્તા
+        status:
+          label: સ્થિતિ
+        roles_target_id:
+          label: હોદ્દાઓ
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        roles_target_id:
+          expose:
+            label: હોદો
+        status:
+          group_info:
+            label: સ્થિતિ
+            group_items:
+              1:
+                title: સક્રિય
+      use_more_text: વધુ
+  page_1:
+    display_title: પ્રુષ્ઠ
+    display_options:
+      menu:
+        title: સૂચિ

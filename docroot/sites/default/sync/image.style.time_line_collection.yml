@@ -1,0 +1,16 @@
+uuid: 5e6c0d20-c025-41a5-b80e-8de1e4e4d72c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: qrJEMLAoesJ63JwlMskip1XULdZq6VSy5lClcBwBgJA
+name: time_line_collection
+label: 'Time line collection'
+effects:
+  0d8fb442-3542-44ce-b785-686187c137ee:
+    uuid: 0d8fb442-3542-44ce-b785-686187c137ee
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 200

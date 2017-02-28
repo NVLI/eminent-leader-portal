@@ -1,0 +1,15 @@
+uuid: 588d79d7-e120-4c66-af1e-ea6f6c453da3
+langcode: en
+status: true
+dependencies: {  }
+name: details_page_style
+label: 'Details Page Style'
+effects:
+  8beab74c-caac-45f3-8a0f-f158e9bb5555:
+    uuid: 8beab74c-caac-45f3-8a0f-f158e9bb5555
+    id: image_scale
+    weight: 2
+    data:
+      width: 800
+      height: null
+      upscale: true

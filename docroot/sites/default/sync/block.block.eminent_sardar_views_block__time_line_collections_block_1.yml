@@ -1,0 +1,31 @@
+uuid: 919c3046-3b9f-41db-8358-61bb130f497e
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.time_line_collections
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_sardar
+id: eminent_sardar_views_block__time_line_collections_block_1
+theme: eminent_sardar
+region: '-1'
+weight: -7
+provider: null
+plugin: 'views_block:time_line_collections-block_1'
+settings:
+  id: 'views_block:time_line_collections-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

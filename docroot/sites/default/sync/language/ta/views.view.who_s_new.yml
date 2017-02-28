@@ -1,0 +1,17 @@
+label: 'யார் புதியவர்கள்'
+description: 'ஒரு பட்டியல் தளத்தில் உள்ள புதிய பயனர் கணக்குகளைக் காட்டுகிறது.'
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: விண்ணப்பி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      title: 'யார் புதியவர்கள்'
+  block_1:
+    display_title: 'யார் புதியவர்கள்'
+    display_options:
+      display_description: 'புதிய பயனர்கள் பட்டியல்'
+      block_description: 'யார் புதியவர்கள்'
+      block_category: பயனர்

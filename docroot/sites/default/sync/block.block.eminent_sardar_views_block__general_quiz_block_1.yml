@@ -1,0 +1,31 @@
+uuid: e104b511-c080-4840-b132-4bf34354a170
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.general_quiz
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_sardar
+id: eminent_sardar_views_block__general_quiz_block_1
+theme: eminent_sardar
+region: home_quiz
+weight: -10
+provider: null
+plugin: 'views_block:general_quiz-block_1'
+settings:
+  id: 'views_block:general_quiz-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,31 @@
+uuid: 579b24e7-3567-4703-b865-8f7faeba1009
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.home_page_articles
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_sardar
+id: views_block__home_page_articles_block_1
+theme: eminent_sardar
+region: content_middle
+weight: -22
+provider: null
+plugin: 'views_block:home_page_articles-block_1'
+settings:
+  id: 'views_block:home_page_articles-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

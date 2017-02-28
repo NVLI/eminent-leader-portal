@@ -1,0 +1,23 @@
+uuid: 7a67bd1d-6b88-4f6b-80b5-62a3276f1607
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_playlist_featured
+    - node.type.play_list
+id: node.play_list.field_playlist_featured
+field_name: field_playlist_featured
+entity_type: node
+bundle: play_list
+label: Featured
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Featured PlayList'
+  off_label: 'Featured PlayList'
+field_type: boolean

@@ -1,0 +1,19 @@
+uuid: e65b6b4e-80fd-4a69-89d8-e969d51a0393
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filehash
+    - media_entity.bundle.image
+id: media.image.field_filehash
+field_name: field_filehash
+entity_type: media
+bundle: image
+label: Filehash
+description: '<em>Hash</em> to check for duplicate file.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

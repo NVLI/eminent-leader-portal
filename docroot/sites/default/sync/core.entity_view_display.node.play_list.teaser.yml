@@ -1,0 +1,44 @@
+uuid: 11dcdef9-86e8-40ea-9988-473b427cb19e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.play_list.field_category
+    - field.field.node.play_list.field_description
+    - field.field.node.play_list.field_play_list_story
+    - field.field.node.play_list.field_playlist_featured
+    - field.field.node.play_list.field_playlist_image
+    - image.style.play_list_thumbnail
+    - node.type.play_list
+  module:
+    - image
+    - text
+    - user
+_core:
+  default_config_hash: IOSrdI9JbZUd2DaeaA2fsagsbYaZO36ibY2xRWEjfSI
+id: node.play_list.teaser
+targetEntityType: node
+bundle: play_list
+mode: teaser
+content:
+  field_description:
+    type: text_default
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_playlist_image:
+    type: image
+    weight: 0
+    label: above
+    settings:
+      image_style: play_list_thumbnail
+      image_link: content
+    third_party_settings: {  }
+hidden:
+  field_category: true
+  field_play_list_story: true
+  field_playlist_featured: true
+  langcode: true
+  links: true

@@ -1,0 +1,21 @@
+uuid: dbd47287-a377-475e-a62e-433ea436f756
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_play_list_description
+    - paragraphs.paragraphs_type.play_list_story
+  module:
+    - text
+id: paragraph.play_list_story.field_play_list_description
+field_name: field_play_list_description
+entity_type: paragraph
+bundle: play_list_story
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

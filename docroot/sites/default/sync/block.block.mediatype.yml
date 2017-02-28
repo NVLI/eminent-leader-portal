@@ -1,0 +1,28 @@
+uuid: 4062ac93-b07e-44dd-bfa7-46b1b7d2172a
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.media_type
+  module:
+    - facets
+  theme:
+    - eminent_sardar
+id: mediatype
+theme: eminent_sardar
+region: search_facets
+weight: 0
+provider: null
+plugin: 'facet_block:media_type'
+settings:
+  id: 'facet_block:media_type'
+  label: 'Media Type'
+  provider: facets
+  label_display: visible
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

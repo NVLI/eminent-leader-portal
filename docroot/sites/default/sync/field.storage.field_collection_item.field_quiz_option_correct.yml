@@ -1,0 +1,18 @@
+uuid: b965787c-731f-4417-8ac9-cefaf07600dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_collection
+id: field_collection_item.field_quiz_option_correct
+field_name: field_quiz_option_correct
+entity_type: field_collection_item
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

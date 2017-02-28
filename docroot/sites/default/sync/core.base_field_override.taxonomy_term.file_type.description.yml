@@ -1,0 +1,20 @@
+uuid: e5dadf40-2805-491c-86f5-c367c579ab21
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.file_type
+  module:
+    - text
+id: taxonomy_term.file_type.description
+field_name: description
+entity_type: taxonomy_term
+bundle: file_type
+label: Description
+description: 'A description of the term.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

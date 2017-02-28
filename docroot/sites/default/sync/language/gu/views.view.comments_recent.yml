@@ -1,0 +1,11 @@
+label: 'તાજેતરની ટીપ્પણીઓ'
+display:
+  default:
+    display_options:
+      title: 'તાજેતરની ટીપ્પણીઓ'
+      empty:
+        area_text_custom:
+          content: 'કોઈ ટિપ્પણીઓ ઉપલબ્ધ નથી.'
+  block_1:
+    display_options:
+      block_description: 'તાજેતરની ટીપ્પણીઓ'

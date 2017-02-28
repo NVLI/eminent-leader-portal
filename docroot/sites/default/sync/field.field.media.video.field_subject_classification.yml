@@ -1,0 +1,28 @@
+uuid: d79fbcae-b4ff-4736-94e0-b96f881c345f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_subject_classification
+    - media_entity.bundle.video
+    - taxonomy.vocabulary.subject_classification
+id: media.video.field_subject_classification
+field_name: field_subject_classification
+entity_type: media
+bundle: video
+label: 'Subject Classification'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject_classification: subject_classification
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

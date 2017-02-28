@@ -1,0 +1,16 @@
+uuid: 90bdd8ef-e2bc-4d8d-b6e6-d0f1f1019429
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.time_line_collection
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.time_line_collection
+target_entity_type_id: node
+target_bundle: time_line_collection
+default_langcode: site_default
+language_alterable: true

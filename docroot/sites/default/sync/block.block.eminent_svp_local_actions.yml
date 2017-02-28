@@ -1,0 +1,20 @@
+uuid: 966d2eae-a152-438a-a619-0331b4de62ed
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eminent_svp
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: eminent_svp_local_actions
+theme: eminent_svp
+region: '-1'
+weight: -6
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

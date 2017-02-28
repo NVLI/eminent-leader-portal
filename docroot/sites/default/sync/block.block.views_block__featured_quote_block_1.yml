@@ -1,0 +1,31 @@
+uuid: 9f26d703-d8dc-4b07-8113-41e315121ba6
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.featured_quote
+  module:
+    - facets
+    - views
+  theme:
+    - eminent_svp
+id: views_block__featured_quote_block_1
+theme: eminent_svp
+region: quotes
+weight: -11
+provider: null
+plugin: 'views_block:featured_quote-block_1'
+settings:
+  id: 'views_block:featured_quote-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

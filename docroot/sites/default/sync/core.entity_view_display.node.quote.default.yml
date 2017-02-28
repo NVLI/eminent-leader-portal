@@ -1,0 +1,28 @@
+uuid: 2e28d325-dc5a-4b86-b0de-b36e7f71c7b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.quote.body
+    - field.field.node.quote.field_category
+    - field.field.node.quote.field_quote_featured
+    - node.type.quote
+  module:
+    - text
+    - user
+id: node.quote.default
+targetEntityType: node
+bundle: quote
+mode: default
+content:
+  body:
+    type: text_default
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_category: true
+  field_quote_featured: true
+  langcode: true
+  links: true

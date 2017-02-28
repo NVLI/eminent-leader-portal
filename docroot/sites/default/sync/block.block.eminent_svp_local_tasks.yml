@@ -1,0 +1,22 @@
+uuid: 6ecbc3a8-5d50-4809-9c18-4dc0a72eafc9
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eminent_svp
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: eminent_svp_local_tasks
+theme: eminent_svp
+region: '-1'
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

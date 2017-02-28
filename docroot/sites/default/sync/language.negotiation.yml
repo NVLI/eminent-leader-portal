@@ -1,0 +1,21 @@
+session:
+  parameter: language
+url:
+  source: path_prefix
+  prefixes:
+    en: ''
+    hi: hi
+    gu: gu
+    ta: ta
+    bn: bn
+    mr: mr
+  domains:
+    en: ''
+    hi: ''
+    gu: ''
+    ta: ''
+    bn: ''
+    mr: ''
+selected_langcode: site_default
+_core:
+  default_config_hash: uEePITI9tV6WqzmsTb7MfPCi5yPWXSxAN1xeLcYFQbM

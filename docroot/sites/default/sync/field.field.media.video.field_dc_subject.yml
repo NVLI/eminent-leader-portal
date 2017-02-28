@@ -1,0 +1,28 @@
+uuid: ad381bfc-b19d-49b6-b1df-a086068b900e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_subject
+    - media_entity.bundle.video
+    - taxonomy.vocabulary.subject
+id: media.video.field_dc_subject
+field_name: field_dc_subject
+entity_type: media
+bundle: video
+label: 'Free tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject: subject
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

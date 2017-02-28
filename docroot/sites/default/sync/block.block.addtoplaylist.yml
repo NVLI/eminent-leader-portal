@@ -1,0 +1,41 @@
+uuid: 95adcce2-cbbd-49a7-9bb9-1e33ee8768f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - eminent_admin
+    - facets
+    - system
+    - user
+  theme:
+    - eminent_svp
+id: addtoplaylist
+theme: eminent_svp
+region: content
+weight: -9
+provider: null
+plugin: add_to_playlist
+settings:
+  id: add_to_playlist
+  label: 'Add to playlist'
+  provider: eminent_admin
+  label_display: '0'
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '/media/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

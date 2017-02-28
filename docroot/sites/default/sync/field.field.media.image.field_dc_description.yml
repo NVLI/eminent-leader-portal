@@ -1,0 +1,21 @@
+uuid: adad8a72-d731-4518-8a0d-4472ea6c314d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_description
+    - media_entity.bundle.image
+_core:
+  default_config_hash: frHxuvWKn_USYmHIIoQjRSU9ILdWXphe6jEMwRSZlKg
+id: media.image.field_dc_description
+field_name: field_dc_description
+entity_type: media
+bundle: image
+label: 'DC Description'
+description: 'The Dublin core meta-data description.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
