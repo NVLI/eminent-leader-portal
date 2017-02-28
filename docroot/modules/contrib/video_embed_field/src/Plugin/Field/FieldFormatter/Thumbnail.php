@@ -57,15 +57,22 @@ class Thumbnail extends FormatterBase implements ContainerFactoryPluginInterface
     $element = [];
     foreach ($items as $delta => $item) {
       $provider = $this->providerManager->loadProviderFromInput($item->value);
-      $url = FALSE;
-      if ($this->getSetting('link_image_to') == static::LINK_CONTENT) {
-        $url = $items->getEntity()->toUrl();
+
+      if (!$provider) {
+        $element[$delta] = ['#theme' => 'video_embed_field_missing_provider'];
       }
-      elseif ($this->getSetting('link_image_to') == static::LINK_PROVIDER) {
-        $url = Url::fromUri($item->value);
+      else {
+        $url = FALSE;
+        if ($this->getSetting('link_image_to') == static::LINK_CONTENT) {
+          $url = $items->getEntity()->toUrl();
+        }
+        elseif ($this->getSetting('link_image_to') == static::LINK_PROVIDER) {
+          $url = Url::fromUri($item->value);
+        }
+        $provider->downloadThumbnail();
+        $element[$delta] = $provider->renderThumbnail($this->getSetting('image_style'), $url);
       }
-      $provider->downloadThumbnail();
-      $element[$delta] = $provider->renderThumbnail($this->getSetting('image_style'), $url);
+
     }
     return $element;
   }

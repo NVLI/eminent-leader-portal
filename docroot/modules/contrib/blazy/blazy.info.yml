@@ -5,10 +5,10 @@ description: "Provides basic Blazy integration for lazy loading and multi-servin
 # core: 8.x
 package: Blazy
 dependencies:
-  - image
+  - drupal:image
 
-# Information added by Drupal.org packaging script on 2016-09-29
-version: '8.x-1.0-beta4'
+# Information added by Drupal.org packaging script on 2017-01-23
+version: '8.x-1.0-rc1'
 core: '8.x'
 project: 'blazy'
-datestamp: 1475149383
+datestamp: 1485194002

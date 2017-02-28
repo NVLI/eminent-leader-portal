@@ -99,6 +99,7 @@ class FormatterConfigurationTest extends BrowserTestBase {
     $this->find('input[name="refresh_rows"]')->setValue($this->fieldName);
     $this->submitForm([
       'fields[' . $this->fieldName . '][type]' => $formatter,
+      'fields[' . $this->fieldName . '][region]' => 'content',
     ], t('Refresh'));
     $this->submitForm([], t('Save'));
   }

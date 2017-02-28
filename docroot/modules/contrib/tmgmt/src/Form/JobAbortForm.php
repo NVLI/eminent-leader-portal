@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Form\JobAbortForm.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
@@ -42,25 +37,10 @@ class JobAbortForm extends ContentEntityConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\tmgmt\Entity\Job $entity */
     $entity = $this->entity;
-    if (!$entity->abortTranslation()) {
-      // This is the case when a translator does not support the abort
-      // operation.
-      // It would make more sense to not display the button for the action,
-      // however we do not know if the translator is able to abort a job until
-      // we trigger the action.
-      foreach ($entity->getMessagesSince() as $message) {
-        /** @var \Drupal\tmgmt\MessageInterface $message */
-        if ($message->getType() == 'debug') {
-          continue;
-        }
-        if ($text = $message->getMessage()) {
-          // We want to persist also the type therefore we will set the
-          // messages directly and not return them.
-          drupal_set_message($text, $message->getType());
-        }
-      }
-    }
-    else {
+    // It would make more sense to not display the button for the action,
+    // however we do not know if the translator is able to abort a job until
+    // we trigger the action.
+    if ($entity->abortTranslation()) {
       $entity->addMessage('The user ordered aborting the Job through the UI.');
     }
     tmgmt_write_request_messages($entity);

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Entity\Controller\LocalTaskAccessControlHandler.
- */
-
 namespace Drupal\tmgmt_local\Entity\Controller;
 
 use Drupal\Core\Access\AccessResult;

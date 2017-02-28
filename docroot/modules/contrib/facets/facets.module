@@ -126,8 +126,10 @@ function facets_entity_presave(EntityInterface $entity) {
  */
 function facets_preprocess_block(&$variables) {
   if ($variables['configuration']['provider'] == 'facets') {
-    $facet = Facet::load($variables['derivative_plugin_id']);
-    $variables['attributes']['class'][] = 'block-facets--' . Html::cleanCssIdentifier($facet->getWidget()['type']);
+    if (!empty($variables['derivative_plugin_id'])) {
+      $facet = Facet::load($variables['derivative_plugin_id']);
+      $variables['attributes']['class'][] = 'block-facet--' . Html::cleanCssIdentifier($facet->getWidget()['type']);
+    }
   }
 }
 

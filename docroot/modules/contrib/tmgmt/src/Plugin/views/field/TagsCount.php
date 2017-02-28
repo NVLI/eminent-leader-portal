@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\TagsCount.
- */
-
 namespace Drupal\tmgmt\Plugin\views\field;
 
 use Drupal\views\ResultRow;

@@ -27,7 +27,7 @@
   }
 }
 
-/* The lazyloaded element: IMG, IFRAME, DIV */
+/* The lazyloaded element: IMG, IFRAME, DIV. */
 .b-lazy,
 .b-responsive {
   display: block;
@@ -36,11 +36,8 @@
   transition: opacity 500ms ease-in-out;
 }
 
-.b-loaded {
-  opacity: 1;
-}
-
 /* Needed to display preloader with CSS BG image, otherwise hidden. */
+.b-loaded,
 .media--loading.media--background {
   opacity: 1;
 }
@@ -64,11 +61,13 @@
   margin-left: -15px;
   margin-top: -15px;
   font-size: 0;
-  z-index: 9;
+  z-index: 22;
   -webkit-animation: rotateplane 1.2s infinite ease-in-out;
   animation: rotateplane 1.2s infinite ease-in-out;
 }
 
 .media--background {
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

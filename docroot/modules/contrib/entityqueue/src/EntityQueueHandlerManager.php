@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntityQueueHandlerManager.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\Core\Cache\CacheBackendInterface;

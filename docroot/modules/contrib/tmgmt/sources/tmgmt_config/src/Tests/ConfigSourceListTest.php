@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_config\Tests\ConfigSourceListTest.
- */
-
 namespace Drupal\tmgmt_config\Tests;
 
 use Drupal\Component\Utility\SafeMarkup;

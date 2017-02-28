@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\ContinuousManager.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -139,7 +134,11 @@ class ContinuousManager {
       // Only submit the item if cron submission is disabled.
       if (!$this->configFactory->get('tmgmt.settings')->get('submit_job_item_on_cron')) {
         $translator = $job->getTranslatorPlugin();
-        $translator->requestJobItemsTranslation([$job_item]);
+        \Drupal::moduleHandler()->invokeAll('tmgmt_job_before_request_translation', [[$job_item]]);
+        if ($job_item->getCountPending() > 0) {
+          $translator->requestJobItemsTranslation([$job_item]);
+        }
+        \Drupal::moduleHandler()->invokeAll('tmgmt_job_after_request_translation', [[$job_item]]);
       }
       return $job_item;
     }

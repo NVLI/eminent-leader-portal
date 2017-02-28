@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Controller\SettingsForm.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -93,16 +88,29 @@ class SettingsForm extends ConfigFormBase {
         ),
       ),
     );
-    $form['plaintext'] = array(
+    $form['text_formats'] = [
       '#type' => 'details',
-      '#title' => t('Text settings'),
+      '#title' => t('Text format settings'),
       '#open' => TRUE,
-    );
-    $form['plaintext']['respect_text_format'] = array(
+    ];
+    $form['text_formats']['respect_text_format'] = array(
       '#type' => 'checkbox',
       '#title' => t('Respect text format'),
       '#description' => t("Disabling will force all textareas to plaintext. No editors will be shown."),
       '#default_value' => $config->get('respect_text_format'),
+    );
+
+    $options = array();
+    foreach (filter_formats() as $format) {
+      $options[$format->id()] = $format->label();
+    }
+
+    $form['text_formats']['allowed_formats'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Allowed formats'),
+      '#description' => t("Allows to prevent content with a certain text format from being translated. If none are selected, all are allowed."),
+      '#options' => $options,
+      '#default_value' => (array) $config->get('allowed_formats'),
     );
     return parent::buildForm($form, $form_state);
   }
@@ -116,6 +124,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('purge_finished', $form_state->getValue('tmgmt_purge_finished'))
       ->set('anonymous_access', $form_state->getValue('tmgmt_anonymous_access'))
       ->set('respect_text_format', $form_state->getValue('respect_text_format'))
+      ->set('allowed_formats', array_keys(array_filter($form_state->getValue('allowed_formats'))))
       ->set('submit_job_item_on_cron', $form_state->getValue('tmgmt_submit_job_item_on_cron'))
       ->set('job_items_cron_limit', $form_state->getValue('job_items_cron_limit'))
       ->save();

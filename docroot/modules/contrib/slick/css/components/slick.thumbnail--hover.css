@@ -7,9 +7,8 @@
 .slick .slick-dots--thumbnail-hover {
   list-style: none;
   overflow: visible;
-  position: absolute;
+  position: relative;
   text-align: center;
-  white-space: nowrap;
   width: 100%;
   z-index: 3;
 }
@@ -99,4 +98,10 @@
 .block .slick .slick-dots--thumbnail-hover {
   margin-left: 0;
   padding: 0;
+}
+
+@media (min-width: 720px) {
+  .slick .slick-dots--thumbnail-hover {
+    position: absolute;
+  }
 }

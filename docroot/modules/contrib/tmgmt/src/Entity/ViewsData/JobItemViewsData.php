@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\\JobItemViewsData.
- */
 
 namespace Drupal\tmgmt\Entity\ViewsData;
 

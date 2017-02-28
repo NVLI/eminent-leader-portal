@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\filter\TaskEligible.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\FilterPluginBase;

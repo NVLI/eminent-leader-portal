@@ -1,10 +1,5 @@
 <?php
 
-/*
- * @file
- * Contains Drupal\tmgmt\Plugin\Core\Entity\Message.
- */
-
 namespace Drupal\tmgmt\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;

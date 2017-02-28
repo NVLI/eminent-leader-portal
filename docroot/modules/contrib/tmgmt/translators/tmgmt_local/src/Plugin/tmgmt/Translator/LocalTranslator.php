@@ -1,12 +1,8 @@
 <?php
 
-/**
- * @file
- * Provides the user translator plugin controller.
- */
-
 namespace Drupal\tmgmt_local\Plugin\tmgmt\Translator;
 
+use Drupal\tmgmt\ContinuousTranslatorInterface;
 use Drupal\tmgmt\JobInterface;
 use Drupal\tmgmt\TranslatorInterface;
 use Drupal\tmgmt\TranslatorPluginBase;
@@ -24,7 +20,7 @@ use Drupal\tmgmt_local\LocalTaskInterface;
  *   map_remote_languages = FALSE
  * )
  */
-class LocalTranslator extends TranslatorPluginBase {
+class LocalTranslator extends TranslatorPluginBase implements ContinuousTranslatorInterface {
 
   protected $language_pairs = array();
 
@@ -32,9 +28,23 @@ class LocalTranslator extends TranslatorPluginBase {
    * {@inheritdoc}
    */
   public function requestTranslation(JobInterface $job) {
+    $items = $job->getItems();
+    $this->requestJobItemsTranslation($items);
+
+    // The translation job has been successfully submitted.
+    $job->submitted();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function requestJobItemsTranslation(array $job_items) {
+    /** @var \Drupal\tmgmt\Entity\Job $job */
+    $job = reset($job_items)->getJob();
     $tuid = $job->getSetting('translator');
 
     // Create local task for this job.
+    /** @var \Drupal\tmgmt_local\LocalTaskInterface $local_task */
     $local_task = tmgmt_local_task_create(array(
       'uid' => $job->getOwnerId(),
       'tuid' => $tuid,
@@ -48,12 +58,10 @@ class LocalTranslator extends TranslatorPluginBase {
     $local_task->save();
 
     // Create task items.
-    foreach ($job->getItems() as $item) {
+    foreach ($job_items as $item) {
       $local_task->addTaskItem($item);
+      $item->active();
     }
-
-    // The translation job has been successfully submitted.
-    $job->submitted();
   }
 
   /**

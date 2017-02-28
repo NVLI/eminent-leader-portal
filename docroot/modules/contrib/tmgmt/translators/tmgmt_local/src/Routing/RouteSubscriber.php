@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Routing\RouteSubscriber.
- */
-
 namespace Drupal\tmgmt_local\Routing;
 
 use Drupal\Core\Config\ConfigFactoryInterface;

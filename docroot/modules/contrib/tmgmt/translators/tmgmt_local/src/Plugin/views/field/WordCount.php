@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\WordCount.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\field;
 
 use Drupal\tmgmt\Plugin\views\field\StatisticsBase;

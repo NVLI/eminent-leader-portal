@@ -28,13 +28,10 @@ class FacetSourceEditForm extends EntityForm {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
-    $entity_type_manager = $container->get('entity_type.manager');
-
-    /** @var \Drupal\facets\UrlProcessor\UrlProcessorPluginManager $url_processor_plugin_manager */
-    $url_processor_plugin_manager = $container->get('plugin.manager.facets.url_processor');
-
-    return new static($entity_type_manager, $url_processor_plugin_manager);
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('plugin.manager.facets.url_processor')
+    );
   }
 
   /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\JobItemCart.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\tmgmt\Entity\JobItem;

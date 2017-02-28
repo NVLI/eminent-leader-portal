@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\field\LoopCount.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\field;
 
 use Drupal\views\Plugin\views\field\FieldPluginBase;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\FileTranslatorUi:
- */
-
 namespace Drupal\tmgmt_file;
 
 use Drupal\Component\Utility\Html;

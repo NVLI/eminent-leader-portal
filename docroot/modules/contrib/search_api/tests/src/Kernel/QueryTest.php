@@ -69,22 +69,13 @@ class QueryTest extends KernelTestBase {
       'id' => 'test_index',
       'status' => 1,
       'datasource_settings' => array(
-        'search_api_test' => array(
-          'plugin_id' => 'search_api_test',
-          'settings' => array(),
-        ),
+        'search_api_test' => array(),
       ),
       'processor_settings' => array(
-        'search_api_test' => array(
-          'plugin_id' => 'search_api_test',
-          'settings' => array(),
-        ),
+        'search_api_test' => array(),
       ),
       'tracker_settings' => array(
-        'default' => array(
-          'plugin_id' => 'default',
-          'settings' => array(),
-        ),
+        'default' => array(),
       ),
       'server' => $server->id(),
       'options' => array('index_directly' => FALSE),
@@ -125,6 +116,7 @@ class QueryTest extends KernelTestBase {
     if ($hooks_and_processors_invoked) {
       $expected = array(
         'Funky blue note',
+        'Search id: ',
         'Stepping into tomorrow',
         'Llama',
       );

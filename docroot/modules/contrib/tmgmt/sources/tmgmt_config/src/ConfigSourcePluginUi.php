@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_config\ConfigSourcePluginUi.
- */
-
 namespace Drupal\tmgmt_config;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;

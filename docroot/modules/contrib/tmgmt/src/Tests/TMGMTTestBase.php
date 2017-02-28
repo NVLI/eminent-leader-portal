@@ -1,10 +1,5 @@
 <?php
 
-/*
- * @file
- * Contains Drupal\tmgmt\Tests\TMGMTTestBase.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 use Drupal\language\Entity\ConfigurableLanguage;

@@ -24,8 +24,6 @@ class MediaEntityBrowserTest extends JavascriptTestBase {
     'media_entity_browser',
     'video_embed_media',
     'ctools',
-    // @todo, fix after https://www.drupal.org/node/2746203.
-    'block',
   ];
 
   /**
@@ -59,7 +57,7 @@ class MediaEntityBrowserTest extends JavascriptTestBase {
     $this->getSession()->getPage()->find('css', '.views-row')->press();
     $this->assertSession()->elementExists('css', '.views-row.checked');
 
-    $this->assertSession()->buttonExists('Select Media');
+    $this->assertSession()->buttonExists('Select entities');
   }
 
 }

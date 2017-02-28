@@ -1,24 +1,14 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Form\EntityQueueForm.
- */
-
 namespace Drupal\entityqueue\Form;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityTypeRepositoryInterface;
-use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\RenderElement;
-use Drupal\entityqueue\Entity\EntitySubqueue;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -161,7 +151,7 @@ class EntityQueueForm extends BundleEntityFormBase {
     ];
     $form['queue_settings']['act_as_queue'] = [
       '#type' => 'checkbox',
-      '#title' => t('Act as queue'),
+      '#title' => $this->t('Act as queue'),
       '#default_value' => $queue->getActAsQueue(),
       '#description' => $this->t('When enabled, adding more than the maximum number of items will remove extra items from the top of the queue.'),
       '#states' => [
@@ -169,6 +159,12 @@ class EntityQueueForm extends BundleEntityFormBase {
           ':input[name="queue_settings[max_size]"]' => ['value' => 0],
         ],
       ],
+    ];
+    $form['queue_settings']['reverse_in_admin'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Reverse order in admin view'),
+      '#default_value' => $queue->getReverseInAdmin(),
+      '#description' => $this->t('Ordinarily queues are arranged with the front of the queue (where items will be removed) on top and the back (where items will be added) on the bottom. If checked, this will display the queue such that items will be added to the top and removed from the bottom.'),
     ];
 
     // We have to duplicate all the code from

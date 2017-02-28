@@ -88,12 +88,15 @@ function tmgmt_content_form_tmgmt_settings_form_alter(array &$form, FormStateInt
   module_load_include('inc', 'views', 'views.views');
   $entity_types = \Drupal::entityManager()->getDefinitions();
 
-  $form['content']['embedded_fields'] = array(
+  $form['content'] = array(
     '#type' => 'details',
     '#title' => t('Embedded references'),
     '#description' => t('All checked reference fields will automatically add the translatable data of the reference to the job. This is only available when the reference is untranslatable and the target is enabled for translation.'),
-    '#tree' => TRUE,
     '#open' => TRUE,
+  );
+
+  $form['content']['embedded_fields'] = array(
+    '#tree' => TRUE,
   );
 
   $content_translation_manager = \Drupal::service('content_translation.manager');
@@ -173,7 +176,7 @@ function tmgmt_content_form_tmgmt_settings_form_alter(array &$form, FormStateInt
     }
   }
   if (!empty($always_embedded)) {
-    $form['content']['embedded_fields']['always_embedded'] = array(
+    $form['content']['always_embedded'] = array(
       '#type' => 'item',
       '#title' => t('Always embedded'),
       '#description' => t('These references are always embedded in the translatable data.'),

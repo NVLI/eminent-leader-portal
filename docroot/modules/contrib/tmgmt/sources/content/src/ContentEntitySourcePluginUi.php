@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_content\ContentEntitySourcePluginUi.
- */
-
 namespace Drupal\tmgmt_content;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -178,6 +173,15 @@ class ContentEntitySourcePluginUi extends SourcePluginUiBase {
       }
 
       $build = $this->buildTranslationStatus($translation_status, isset($current_job_items[$langcode]) ? $current_job_items[$langcode] : NULL);
+
+      if ($translation_status != 'missing' && $entity->hasLinkTemplate('canonical')) {
+        $build['source'] = [
+          '#type' => 'link',
+          '#url' => $entity->toUrl('canonical', ['language' => $language]),
+          '#title' => $build['source'],
+          ];
+      }
+
       $row['langcode-' . $langcode] = [
         'data' => \Drupal::service('renderer')->render($build),
         'class' => array('langstatus-' . $langcode),
@@ -452,7 +456,7 @@ class ContentEntitySourcePluginUi extends SourcePluginUiBase {
     // Searching for sources with missing translation.
     if (!empty($property_conditions['target_status']) && !empty($property_conditions['target_language']) && in_array($property_conditions['target_language'], $languages)) {
 
-      $translation_table_alias = db_escape_field('translation_' . $property_conditions['target_language']);
+      $translation_table_alias = db_escape_table('translation_' . $property_conditions['target_language']);
       $query->leftJoin($data_table, $translation_table_alias, "%alias.$id_key= e.$id_key AND %alias.langcode = :language",
         array(':language' => $property_conditions['target_language']));
 

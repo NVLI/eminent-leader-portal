@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\Translator\AvailableResult.
- */
-
 namespace Drupal\tmgmt\Translator;
 
 /**

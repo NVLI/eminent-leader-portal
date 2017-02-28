@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_config\Form\ConfigTranslateForm.
- */
-
 namespace Drupal\tmgmt_config\Form;
 
 use Drupal\Core\Form\FormBase;

@@ -6,6 +6,8 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
+use Drupal\facets_summary\Entity\FacetsSummary;
+use Drupal\facets_summary\FacetsSummaryInterface;
 
 /**
  * Builds a listing of facet entities.
@@ -50,7 +52,27 @@ class FacetListBuilder extends ConfigEntityListBuilder {
           'url' => $entity->toUrl('delete-form'),
         );
       }
-
+    }
+    elseif ($entity instanceof FacetsSummaryInterface) {
+      $operations['edit'] = array(
+        'title' => $this->t('Edit'),
+        'weight' => 10,
+        'url' => $entity->toUrl('edit-form'),
+      );
+      if ($entity->access('update') && $entity->hasLinkTemplate('settings-form')) {
+        $operations['settings'] = array(
+          'title' => $this->t('Facet Summary settings'),
+          'weight' => 20,
+          'url' => $entity->toUrl('settings-form'),
+        );
+      }
+      if ($entity->access('delete') && $entity->hasLinkTemplate('delete-form')) {
+        $operations['delete'] = array(
+          'title' => $this->t('Delete'),
+          'weight' => 100,
+          'url' => $entity->toUrl('delete-form'),
+        );
+      }
     }
 
     return $operations;
@@ -77,25 +99,48 @@ class FacetListBuilder extends ConfigEntityListBuilder {
     $row = parent::buildRow($entity);
     $facet = $entity;
 
-    return array(
-      'data' => array(
-        'type' => array(
-          'data' => 'Facet',
-          'class' => array('facets-type'),
+    if ($facet instanceof FacetInterface) {
+      return array(
+        'data' => array(
+          'type' => array(
+            'data' => 'Facet',
+            'class' => array('facets-type'),
+          ),
+          'title' => array(
+            'data' => array(
+              '#type' => 'link',
+              '#title' => $facet->label(),
+              '#suffix' => '<div>' . $entity->getFieldAlias() . ' - ' . $facet->getWidget()['type'] . '</div>',
+            ) + $facet->toUrl('edit-form')->toRenderArray(),
+            'class' => array('search-api-title'),
+          ),
+          'operations' => $row['operations'],
         ),
-        'title' => array(
-          'data' => array(
-            '#type' => 'link',
-            '#title' => $facet->label(),
-            '#suffix' => '<div>' . $facet->getFieldAlias() . ' - ' . $facet->getWidget()['type'] . '</div>',
-          ) + $facet->toUrl('edit-form')->toRenderArray(),
-          'class' => array('search-api-title'),
+        'title' => $this->t('ID: @name', array('@name' => $facet->id())),
+        'class' => array('facet'),
+      );
+    }
+    elseif ($entity instanceof FacetsSummaryInterface) {
+      return array(
+        'data' => array(
+          'type' => array(
+            'data' => 'Facets Summary',
+            'class' => array('facets-summary-type'),
+          ),
+          'title' => array(
+            'data' => array(
+              '#type' => 'link',
+              '#title' => $facet->label(),
+            ) + $facet->toUrl('edit-form')->toRenderArray(),
+            'class' => array('search-api-title'),
+          ),
+          'operations' => $row['operations'],
         ),
-        'operations' => $row['operations'],
-      ),
-      'title' => $this->t('ID: @name', array('@name' => $facet->id())),
-      'class' => array('facet'),
-    );
+        'title' => $this->t('ID: @name', array('@name' => $facet->id())),
+        'class' => array('facet'),
+      );
+    }
+    return [];
   }
 
   /**
@@ -191,6 +236,10 @@ class FacetListBuilder extends ConfigEntityListBuilder {
   public function loadGroups() {
     $facet_source_plugin_manager = \Drupal::service('plugin.manager.facets.facet_source');
     $facets = $this->storage->loadMultiple();
+    $facets_summaries = [];
+    if (\Drupal::moduleHandler()->moduleExists('facets_summary')) {
+      $facets_summaries = FacetsSummary::loadMultiple();
+    }
     $facet_sources = $facet_source_plugin_manager->getDefinitions();
 
     $this->sortAlphabetically($facets);
@@ -209,6 +258,16 @@ class FacetListBuilder extends ConfigEntityListBuilder {
           // Remove this facet from $facet so it will finally only contain those
           // facets not belonging to any facet_source.
           unset($facets[$facet->id()]);
+        }
+      }
+
+      foreach ($facets_summaries as $summary) {
+        /** @var \Drupal\facets_summary\FacetsSummaryInterface $summary */
+        if ($summary->getFacetSourceId() == $facet_source['id']) {
+          $facet_source_groups[$facet_source['id']]['facets'][$summary->id()] = $summary;
+          // Remove this facet from $facet so it will finally only contain those
+          // facets not belonging to any facet_source.
+          unset($facets_summaries[$summary->id()]);
         }
       }
     }

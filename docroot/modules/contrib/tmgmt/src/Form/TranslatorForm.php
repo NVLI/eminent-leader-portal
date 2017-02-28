@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Form\TranslatorForm.
- */
-
 namespace Drupal\tmgmt\Form;
 
 use Drupal\Component\Utility\Xss;

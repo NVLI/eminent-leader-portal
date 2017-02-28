@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\views\sort\EntityQueuePosition.
- */
-
 namespace Drupal\entityqueue\Plugin\views\sort;
 
 use Drupal\Core\Session\AccountInterface;
@@ -66,8 +61,10 @@ class EntityQueuePosition extends SortPluginBase {
 
     // Try to find an entity queue relationship in this view, and pick the first
     // one available.
+    $entity_queue_relationship = NULL;
     foreach ($this->view->relationship as $id => $relationship) {
       if ($relationship instanceof EntityQueueRelationship) {
+        $entity_queue_relationship = $relationship;
         $this->options['relationship'] = $id;
         $this->setRelationship();
 
@@ -75,8 +72,9 @@ class EntityQueuePosition extends SortPluginBase {
       }
     }
 
-    if (isset($this->relationship) && ($subqueue_items_table_alias = $this->query->ensureTable($this->definition['field table'], $this->relationship))) {
+    if ($entity_queue_relationship) {
       // Add the field.
+      $subqueue_items_table_alias = $entity_queue_relationship->first_alias;
       $this->query->addOrderBy($subqueue_items_table_alias, $this->realField, $this->options['order']);
     }
     else {

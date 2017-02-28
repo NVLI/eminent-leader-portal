@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\JobItem.
- */
 
 namespace Drupal\tmgmt\Entity;
 
@@ -388,7 +384,10 @@ class JobItem extends ContentEntityBase implements JobItemInterface {
    */
   public function getSourceData() {
     if ($plugin = $this->getSourcePlugin()) {
-      return $plugin->getData($this);
+      $data = $plugin->getData($this);
+      /** @var \Drupal\tmgmt\SegmenterInterface $segmenter */
+      $segmenter = \Drupal::service('tmgmt.segmenter');
+      return $segmenter->getSegmentedData($data);
     }
     return array();
   }

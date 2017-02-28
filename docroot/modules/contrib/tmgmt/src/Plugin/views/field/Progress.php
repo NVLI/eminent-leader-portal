@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\Progress.
- */
-
 namespace Drupal\tmgmt\Plugin\views\field;
 
 use Drupal\tmgmt\JobInterface;

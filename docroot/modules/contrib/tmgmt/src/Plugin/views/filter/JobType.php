@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\filter\JobType.
- */
-
 namespace Drupal\tmgmt\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;

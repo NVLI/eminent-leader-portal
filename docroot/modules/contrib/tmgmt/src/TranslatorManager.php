@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\TranslatorManager.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Cache\CacheBackendInterface;

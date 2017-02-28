@@ -43,3 +43,18 @@ function tmgmt_test_tmgmt_file_text_processor_plugin_info() {
     ),
   );
 }
+
+/**
+ * Implements hook_tmgmt_data_item_text_output_alter().
+ */
+function tmgmt_test_tmgmt_data_item_text_output_alter(&$source_text, &$translation_text, array $context) {
+  $source_text = str_replace('First', 'Second', $source_text);
+  $translation_text = str_replace('First', 'Second', $translation_text);
+}
+
+/**
+ * Implements hook_tmgmt_data_item_text_input_alter().
+ */
+function tmgmt_test_tmgmt_data_item_text_input_alter(&$translation_text, array $context) {
+  $translation_text = str_replace('Second', 'First', $translation_text);
+}

@@ -13,6 +13,7 @@ use Drupal\entity_browser\WidgetInterface;
 use Drupal\entity_browser\WidgetSelectorInterface;
 use Drupal\entity_browser\SelectionDisplayInterface;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\views\Entity\View;
 
 /**
  * Tests the entity_browser config entity.
@@ -26,12 +27,19 @@ class EntityBrowserTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'user', 'views', 'entity_browser', 'entity_browser_test'];
+  public static $modules = [
+    'system',
+    'user',
+    'views',
+    'file',
+    'entity_browser',
+    'entity_browser_test',
+  ];
 
   /**
    * The entity browser storage.
    *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface.
+   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
    */
   protected $controller;
 
@@ -61,12 +69,13 @@ class EntityBrowserTest extends KernelTestBase {
     $this->routeProvider = $this->container->get('router.route_provider');
 
     $this->installSchema('system', ['router', 'key_value_expire', 'sequences']);
+    View::create(['id' => 'test_view'])->save();
   }
 
   /**
    * Tests CRUD operations.
    */
-  public function testEntityBrowserCRUD() {
+  public function testEntityBrowserCrud() {
     $this->assertTrue($this->controller instanceof ConfigEntityStorage, 'The entity_browser storage is loaded.');
 
     // Run each test method in the same installation.
@@ -102,7 +111,11 @@ class EntityBrowserTest extends KernelTestBase {
       ],
     ];
 
-    foreach (['display' => 'getDisplay', 'selection_display' => 'getSelectionDisplay', 'widget_selector' => 'getWidgetSelector'] as $plugin_type => $function_name) {
+    foreach ([
+      'display' => 'getDisplay',
+      'selection_display' => 'getSelectionDisplay',
+      'widget_selector' => 'getWidgetSelector',
+    ] as $plugin_type => $function_name) {
       $current_plugin = $plugin;
       unset($current_plugin[$plugin_type]);
 
@@ -136,7 +149,9 @@ class EntityBrowserTest extends KernelTestBase {
     $this->assertTrue($entity instanceof EntityBrowserInterface, 'The newly created entity is an Entity browser.');
 
     // Verify all of the properties.
-    $actual_properties = $this->container->get('config.factory')->get('entity_browser.browser.test_browser')->get();
+    $actual_properties = $this->container->get('config.factory')
+      ->get('entity_browser.browser.test_browser')
+      ->get();
 
     $this->assertTrue(!empty($actual_properties['uuid']), 'The entity browser UUID is set.');
     unset($actual_properties['uuid']);
@@ -146,6 +161,7 @@ class EntityBrowserTest extends KernelTestBase {
       'langcode' => $this->container->get('language_manager')->getDefaultLanguage()->getId(),
       'status' => TRUE,
       'dependencies' => [
+        'config' => ['views.view.test_view'],
         'module' => ['views'],
       ],
       'name' => 'test_browser',
@@ -166,6 +182,7 @@ class EntityBrowserTest extends KernelTestBase {
             'view' => 'test_view',
             'view_display' => 'test_display',
             'submit_text' => 'Select entities',
+            'auto_select' => FALSE,
           ],
         ],
       ],
@@ -230,7 +247,7 @@ class EntityBrowserTest extends KernelTestBase {
     $this->installConfig(['entity_browser_test']);
     $this->container->get('router.builder')->rebuild();
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('test');
     $route = $entity->route();
 
@@ -262,13 +279,17 @@ class EntityBrowserTest extends KernelTestBase {
     $this->installConfig(['entity_browser_test']);
     $permissions = $this->container->get('user.permissions')->getPermissions();
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('test');
 
     $expected_permission_name = 'access ' . $entity->id() . ' entity browser pages';
     $expected_permission = [
-      'title' => $this->container->get('string_translation')->translate('Access @name pages', ['@name' => $entity->label()])->render(),
-      'description' => $this->container->get('string_translation')->translate('Access pages that %browser uses to operate.', ['%browser' => $entity->label()])->render(),
+      'title' => $this->container->get('string_translation')
+        ->translate('Access @name pages', ['@name' => $entity->label()])
+        ->render(),
+      'description' => $this->container->get('string_translation')
+        ->translate('Access pages that %browser uses to operate.', ['%browser' => $entity->label()])
+        ->render(),
       'provider' => 'entity_browser',
     ];
 
@@ -283,7 +304,7 @@ class EntityBrowserTest extends KernelTestBase {
   public function testDefaultWidget() {
     $this->installConfig(['entity_browser_test']);
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('test');
 
     /** @var \Drupal\entity_browser\EntityBrowserFormInterface $form_object */
@@ -311,7 +332,7 @@ class EntityBrowserTest extends KernelTestBase {
   public function testSelectedEvent() {
     $this->installConfig(['entity_browser_test']);
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('dummy_widget');
 
     /** @var \Drupal\entity_browser\EntityBrowserFormInterface $form_object */
@@ -322,12 +343,19 @@ class EntityBrowserTest extends KernelTestBase {
     $entity->getWidgets()->get($entity->getFirstWidget())->entity = $entity;
 
     $this->container->get('form_builder')->buildForm($form_object, $form_state);
-    $this->assertEquals(0, count($form_state->get(['entity_browser', 'selected_entities'])), 'Correct number of entities was propagated.');
+    $this->assertEquals(0, count($form_state->get([
+      'entity_browser',
+      'selected_entities',
+    ])), 'Correct number of entities was propagated.');
 
     $this->container->get('form_builder')->submitForm($form_object, $form_state);
 
-    // Event should be dispatched from widget and added to list of selected entities.
-    $selected_entities = $form_state->get(['entity_browser', 'selected_entities']);
+    // Event should be dispatched from widget and added to list of selected
+    // entities.
+    $selected_entities = $form_state->get([
+      'entity_browser',
+      'selected_entities',
+    ]);
     $this->assertEquals($selected_entities, [$entity], 'Expected selected entities detected.');
   }
 
@@ -338,7 +366,7 @@ class EntityBrowserTest extends KernelTestBase {
     $this->installConfig(['entity_browser_test']);
     $this->installEntitySchema('user');
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('test');
 
     /** @var \Drupal\user\UserInterface $user */
@@ -365,7 +393,10 @@ class EntityBrowserTest extends KernelTestBase {
 
     $form = [];
     $form_object->buildForm($form, $form_state);
-    $propagated_entities = $form_state->get(['entity_browser', 'selected_entities']);
+    $propagated_entities = $form_state->get([
+      'entity_browser',
+      'selected_entities',
+    ]);
     $this->assertEquals(1, count($propagated_entities), 'Correct number of entities was propagated.');
     $this->assertEquals($user->id(), $propagated_entities[0]->id(), 'Propagated entity ID is correct.');
     $this->assertEquals($user->getAccountName(), $propagated_entities[0]->getAccountName(), 'Propagated entity name is correct.');
@@ -379,7 +410,7 @@ class EntityBrowserTest extends KernelTestBase {
     $this->installConfig(['entity_browser_test']);
     $this->installEntitySchema('user');
 
-    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $entity */
     $entity = $this->controller->load('test');
 
     /** @var \Drupal\user\UserInterface $user */
@@ -414,7 +445,8 @@ class EntityBrowserTest extends KernelTestBase {
     $validators = $form_state->get(['entity_browser', 'validators']);
     $this->assertSame($validators, $storage['validators'], 'Correct validators were passed to form');
 
-    // Set a valid triggering element (see \Drupal\entity_browser\WidgetBase::validate())
+    // Set a valid triggering element
+    // (see \Drupal\entity_browser\WidgetBase::validate())
     $element = [
       '#array_parents' => ['submit'],
     ];

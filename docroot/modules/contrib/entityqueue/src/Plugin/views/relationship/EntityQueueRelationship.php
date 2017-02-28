@@ -1,16 +1,13 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\views\relationship\EntityQueueRelationship.
- */
-
 namespace Drupal\entityqueue\Plugin\views\relationship;
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\entityqueue\Entity\EntityQueue;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\relationship\RelationshipPluginBase;
+use Drupal\views\Plugin\views\relationship\EntityReverse;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -20,7 +17,7 @@ use Drupal\views\ViewExecutable;
  *
  * @ViewsRelationship("entity_queue")
  */
-class EntityQueueRelationship extends RelationshipPluginBase {
+class EntityQueueRelationship extends EntityReverse implements CacheableDependencyInterface {
 
   /**
    * {@inheritdoc}
@@ -78,6 +75,58 @@ class EntityQueueRelationship extends RelationshipPluginBase {
     }
 
     return $dependencies;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    $tags = [];
+
+    if ($this->options['limit_queue']) {
+      $queue = EntityQueue::load($this->options['limit_queue']);
+      $tags = $queue->getCacheTags();
+    }
+
+    return $tags;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return Cache::PERMANENT;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function query() {
+    parent::query();
+
+    // Add a 'where' condition if needed.
+    if (!empty($this->definition['extra'])) {
+      $bundles = [];
+
+      // Future-proofing: support any number of selected bundles.
+      foreach ($this->definition['extra'] as $extra) {
+        if ($extra['field'] == 'bundle') {
+          $bundles[] = $extra['value'];
+        }
+      }
+      $this->definition['join_extra'][] = [
+        'field' => 'bundle',
+        'operator' => 'IN',
+        'value' => [$bundles],
+      ];
+    }
   }
 
 }

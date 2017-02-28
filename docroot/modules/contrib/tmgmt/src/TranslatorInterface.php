@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\tmgmt\TranslatorInterface.
- */
 
 namespace Drupal\tmgmt;
 

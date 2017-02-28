@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\DefaultSourcePluginController.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Component\Plugin\PluginBase;

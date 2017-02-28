@@ -1,10 +1,5 @@
 <?php
 
-/*
- * @file
- * Contains Drupal\Tests\tmgmt\Kernel\PluginsTest.
- */
-
 namespace Drupal\Tests\tmgmt\Kernel;
 
 use Drupal\tmgmt\Entity\Job;

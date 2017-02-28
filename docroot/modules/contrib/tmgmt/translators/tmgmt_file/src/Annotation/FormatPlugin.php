@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\Annotation\FormatPlugin.
- */
-
 namespace Drupal\tmgmt_file\Annotation;
 
 use Drupal\Component\Annotation\Plugin;

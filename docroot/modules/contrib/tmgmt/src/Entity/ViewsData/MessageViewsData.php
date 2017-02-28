@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\ViewsData\MessageViewsData.
- */
 
 namespace Drupal\tmgmt\Entity\ViewsData;
 

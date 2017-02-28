@@ -43,9 +43,15 @@ body {
   z-index: 998;
 }
 
-.slick-wrapper--fullscreen .slick--thumbnail {
+.slick-wrapper--fullscreen .slick.slick--thumbnail {
   bottom: 0;
   top: auto;
+  z-index: 999;
+}
+
+.slick-wrapper--fullscreen.slick-wrapper--tn-top .slick.slick--thumbnail {
+  bottom: auto;
+  top: 0;
   z-index: 999;
 }
 
@@ -59,6 +65,7 @@ body {
   min-height: 100%;
 }
 
+/** @todo better way than over-specificity to support nested slicks. */
 .slick--skin--fullscreen .slick-list,
 .slick--skin--fullscreen .slick-track,
 .slick--skin--fullscreen .slick__slide,
@@ -154,6 +161,20 @@ body.path-admin {
 
 .path-admin .slick--skin--fullscreen .slick__slider {
   min-height: 120px;
+}
+
+/** Nested slicks overrides. */
+.slick-wrapper--fullscreen .slick .slick {
+  position: relative;
+}
+
+.slick--skin--fullscreen .slick__slider .slick__slider {
+  height: auto;
+}
+
+.slick--skin--fullscreen .slick-list .slick-list {
+  height: auto !important;
+  min-height: 40px;
 }
 
 @media (min-width: 65em) {

@@ -12,8 +12,8 @@ use Drupal\search_api\Entity\Server;
 use Drupal\search_api\IndexInterface;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api\Query\ResultSetInterface;
-use Drupal\search_api\Tests\ExampleContentTrait;
 use Drupal\search_api\Utility\Utility;
+use Drupal\Tests\search_api\Functional\ExampleContentTrait;
 
 /**
  * Provides a base class for backend tests.
@@ -192,12 +192,10 @@ abstract class BackendTestBase extends KernelTestBase {
    */
   protected function disableHtmlFilter() {
     $index = $this->getIndex();
-    $index->removeField('body');
     $index->removeProcessor('html_filter');
     $index->save();
 
     $this->assertArrayNotHasKey('html_filter', $index->getProcessors(), 'HTML filter processor is removed.');
-    $this->assertArrayNotHasKey('body', $index->getFields(), 'Body field is removed.');
   }
 
   /**
@@ -458,6 +456,8 @@ abstract class BackendTestBase extends KernelTestBase {
     $this->regressionTest2469547();
     $this->regressionTest1403916();
     $this->regressionTest2783987();
+    $this->regressionTest2809753();
+    $this->regressionTest2767609();
   }
 
   /**
@@ -785,6 +785,75 @@ abstract class BackendTestBase extends KernelTestBase {
   }
 
   /**
+   * Regression test for multiple facets.
+   *
+   * @see https://www.drupal.org/node/2809753
+   */
+  protected function regressionTest2809753() {
+    $query = $this->buildSearch();
+    $condition_group = $query->createConditionGroup('OR', array('facet:type'));
+    $condition_group->addCondition('type', 'article');
+    $query->addConditionGroup($condition_group);
+    $facets['type'] = array(
+      'field' => 'type',
+      'limit' => 0,
+      'min_count' => 1,
+      'missing' => FALSE,
+      'operator' => 'or',
+    );
+    $facets['category'] = array(
+      'field' => 'category',
+      'limit' => 0,
+      'min_count' => 1,
+      'missing' => FALSE,
+      'operator' => 'or',
+    );
+    $query->setOption('search_api_facets', $facets);
+    $results = $query->execute();
+
+    $this->assertResults(array(4, 5), $results, 'Multi-facets query');
+    $expected = array(
+      array('count' => 3, 'filter' => '"item"'),
+      array('count' => 2, 'filter' => '"article"'),
+    );
+    $type_facets = $results->getExtraData('search_api_facets')['type'];
+    usort($type_facets, array($this, 'facetCompare'));
+    $this->assertEquals($expected, $type_facets, 'Correct facets were returned for first facet');
+    $expected = array(
+      array('count' => 2, 'filter' => '"article_category"'),
+    );
+    $category_facets = $results->getExtraData('search_api_facets')['category'];
+    $this->assertEquals($expected, $category_facets, 'Correct facets were returned for second facet');
+  }
+
+  /**
+   * Regression test for conditions with empty strings as values.
+   *
+   * @see https://www.drupal.org/node/2767609
+   */
+  protected function regressionTest2767609() {
+    $results = $this->buildSearch(NULL, array('type,'))->execute();
+    $this->assertResults(array(), $results, 'Search for empty-string type');
+
+    $results = $this->buildSearch(NULL, array('category,'))->execute();
+    $this->assertResults(array(), $results, 'Search for empty-string category');
+
+    $results = $this->buildSearch()
+      ->addCondition('category', '', '<>')
+      ->execute();
+    $this->assertResults(array(1, 2, 3, 4, 5), $results, 'Search for items with category not an empty string');
+
+    // It's not clear what the results for "category < ''" should be, but in
+    // combination with the BETWEEN this should never return results.
+    $results = $this->buildSearch()
+      ->addCondition('category', '', '<')
+      ->addCondition('category', array('', 'foo'), 'BETWEEN')
+      ->addCondition('category', array('', 'a', 'b'), 'NOT IN')
+      ->execute();
+    $this->assertResults(array(), $results, 'Search with various empty-string filters');
+  }
+
+  /**
    * Compares two facet filters to determine their order.
    *
    * Used as a callback for usort() in regressionTests().
@@ -836,6 +905,7 @@ abstract class BackendTestBase extends KernelTestBase {
     $this->regressionTest1916474();
     $this->regressionTest2284199();
     $this->regressionTest2471509();
+    $this->regressionTest2616804();
   }
 
   /**
@@ -900,11 +970,6 @@ abstract class BackendTestBase extends KernelTestBase {
    * @see https://www.drupal.org/node/2616268
    */
   protected function regressionTest2471509() {
-    $index = $this->getIndex();
-    $this->addField($index, 'body');
-    $index->save();
-    $this->indexItems($this->indexId);
-
     $this->addTestEntity(8, array(
       'name' => 'Article with long body',
       'type' => 'article',
@@ -924,7 +989,7 @@ abstract class BackendTestBase extends KernelTestBase {
     $results = $query->execute();
     $this->assertResults(array(8), $results, 'Filter on new string field');
 
-    $index->removeField('body');
+    $index->getField('body')->setType('text');
     $index->save();
   }
 
@@ -933,7 +998,7 @@ abstract class BackendTestBase extends KernelTestBase {
    *
    * @see https://www.drupal.org/node/2616804
    */
-  protected function regressionTests2616804() {
+  protected function regressionTest2616804() {
     // The word has 28 Unicode characters but 56 bytes. Verify that it is still
     // indexed correctly.
     $mb_word = 'äöüßáŧæøðđŋħĸµäöüßáŧæøðđŋħĸµ';
@@ -945,9 +1010,8 @@ abstract class BackendTestBase extends KernelTestBase {
       'type' => 'item',
       'body' => $mb_body,
     ));
-    $entity_count = count($this->entities);
     $count = $this->indexItems($this->indexId);
-    $this->assertEquals($entity_count, $count, 'Indexing an item with a word with 28 multi-byte characters worked.');
+    $this->assertEquals(1, $count, 'Indexing an item with a word with 28 multi-byte characters worked.');
 
     $query = $this->buildSearch($mb_word);
     $results = $query->execute();
@@ -962,7 +1026,8 @@ abstract class BackendTestBase extends KernelTestBase {
     $index = $this->getIndex();
     $index->getField('body')->setType('string');
     $index->save();
-    $count = $index->indexItems();
+    $entity_count = count($this->entities);
+    $count = $this->indexItems($this->indexId);
     $this->assertEquals($entity_count, $count, 'Switching type from text to string worked.');
 
     $query = $this->buildSearch(NULL, array("body,$mb_body"));
@@ -990,16 +1055,10 @@ abstract class BackendTestBase extends KernelTestBase {
       'status' => TRUE,
       'server' => $this->serverId,
       'datasource_settings' => array(
-        'entity:entity_test_mulrev_changed' => array(
-          'plugin_id' => 'entity:entity_test_mulrev_changed',
-          'settings' => array(),
-        ),
+        'entity:entity_test_mulrev_changed' => array(),
       ),
       'tracker_settings' => array(
-        'default' => array(
-          'plugin_id' => 'default',
-          'settings' => array(),
-        ),
+        'default' => array(),
       ),
     ));
     $index->save();

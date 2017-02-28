@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\Field\FieldWidget\EntityqueueDragtableWidget.
- */
-
 namespace Drupal\entityqueue\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\Html;
@@ -63,7 +58,7 @@ class EntityqueueDragtableWidget extends EntityReferenceAutocompleteWidget {
         'remove' => [
           '#type' => 'submit',
           '#name' => strtr($id_prefix, '-', '_') . '_remove',
-          '#value' => t('Remove'),
+          '#value' => $this->t('Remove'),
           '#attributes' => ['class' => ['remove-item-submit', 'align-right']],
           '#submit' => [[get_class($this), 'removeSubmit']],
           '#ajax' => [

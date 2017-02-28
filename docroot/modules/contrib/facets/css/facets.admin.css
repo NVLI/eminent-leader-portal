@@ -24,10 +24,10 @@
 .facets-groups-list tr.facet-source .search-api-title {
   font-weight: bold;
 }
+.facets-groups-list tr.facet .facets-summary-type,
 .facets-groups-list tr.facet .facets-type {
   padding-left: 3em;
 }
-
 
 /*
  * Facets Display page

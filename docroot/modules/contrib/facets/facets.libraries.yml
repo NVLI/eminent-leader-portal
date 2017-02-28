@@ -30,6 +30,12 @@ drupal.facets.checkbox-widget:
     - core/drupal
     - core/jquery.once
 
+drupal.facets.hierarchical:
+  version: VERSION
+  css:
+    theme:
+      css/hierarchical.css: {}
+
 drupal.facets.dropdown-widget:
   version: VERSION
   js:

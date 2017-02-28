@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_content\Tests\ContentEntitySourceListTest.
- */
-
 namespace Drupal\tmgmt_content\Tests;
 
 use Drupal\tmgmt\Entity\JobItem;
@@ -134,7 +129,7 @@ class ContentEntitySourceListTest extends EntityTestBase {
 
     // Test statuses: Source, Missing.
     $this->drupalGet('admin/tmgmt/sources/content/node');
-    $langstatus_en = $this->xpath('//table[@id="edit-items"]/tbody/tr[1]/td[@class="langstatus-en"]/img/@title');
+    $langstatus_en = $this->xpath('//table[@id="edit-items"]/tbody/tr[1]/td[@class="langstatus-en"]/a/img/@title');
     $langstatus_de = $this->xpath('//table[@id="edit-items"]/tbody/tr[1]/td[@class="langstatus-de"]/img/@title');
 
     $this->assertEqual($langstatus_en[0]['title'], t('Source language'));
@@ -164,7 +159,7 @@ class ContentEntitySourceListTest extends EntityTestBase {
     }
 
     $this->drupalGet('admin/tmgmt/sources/content/node');
-    $langstatus_de = $this->xpath('//table[@id="edit-items"]/tbody/tr[1]/td[@class="langstatus-de"]/img/@title');
+    $langstatus_de = $this->xpath('//table[@id="edit-items"]/tbody/tr[1]/td[@class="langstatus-de"]/a/img/@title');
 
     $this->assertEqual($langstatus_de[0]['title'], t('Translation up to date'));
   }

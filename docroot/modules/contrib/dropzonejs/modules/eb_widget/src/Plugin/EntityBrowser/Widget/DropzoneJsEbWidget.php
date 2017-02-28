@@ -4,6 +4,8 @@ namespace Drupal\dropzonejs_eb_widget\Plugin\EntityBrowser\Widget;
 
 use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxyInterface;
@@ -20,7 +22,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * @EntityBrowserWidget(
  *   id = "dropzonejs",
  *   label = @Translation("DropzoneJS"),
- *   description = @Translation("Adds DropzoneJS upload integration.")
+ *   description = @Translation("Adds DropzoneJS upload integration."),
+ *   auto_select = TRUE
  * )
  */
 class DropzoneJsEbWidget extends WidgetBase {
@@ -45,13 +48,6 @@ class DropzoneJsEbWidget extends WidgetBase {
    * @var \Drupal\Core\Utility\Token
    */
   protected $token;
-
-  /**
-   * Uploaded files.
-   *
-   * @var \Drupal\file\FileInterface[]
-   */
-  protected $files;
 
   /**
    * Constructs widget plugin.
@@ -105,7 +101,7 @@ class DropzoneJsEbWidget extends WidgetBase {
   public function defaultConfiguration() {
     return [
       'upload_location' => 'public://[date:custom:Y]-[date:custom:m]',
-      'dropzone_description' => t('Drop files here to upload them'),
+      'dropzone_description' => $this->t('Drop files here to upload them'),
       'max_filesize' => file_upload_max_size() / pow(Bytes::KILOBYTE, 2) . 'M',
       'extensions' => 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp',
     ] + parent::defaultConfiguration();
@@ -117,19 +113,46 @@ class DropzoneJsEbWidget extends WidgetBase {
   public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
     $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
 
+    $cardinality = 0;
+    $validators = $form_state->get(['entity_browser', 'validators']);
+    if (!empty($validators['cardinality']['cardinality'])) {
+      $cardinality = $validators['cardinality']['cardinality'];
+    }
     $config = $this->getConfiguration();
     $form['upload'] = [
-      '#title' => t('File upload'),
+      '#title' => $this->t('File upload'),
       '#type' => 'dropzonejs',
       '#required' => TRUE,
       '#dropzone_description' => $config['settings']['dropzone_description'],
       '#max_filesize' => $config['settings']['max_filesize'],
       '#extensions' => $config['settings']['extensions'],
+      '#max_files' => ($cardinality > 0) ? $cardinality : 0,
     ];
 
+    $form['#attached']['library'][] = 'dropzonejs/widget';
     // Disable the submit button until the upload sucesfully completed.
     $form['#attached']['library'][] = 'dropzonejs_eb_widget/common';
     $original_form['#attributes']['class'][] = 'dropzonejs-disable-submit';
+
+    // Add hidden element used to make execution of auto-select of form.
+    if (!empty($config['settings']['auto_select'])) {
+      $form['auto_select_handler'] = [
+        '#type' => 'hidden',
+        '#name' => 'auto_select_handler',
+        '#id' => 'auto_select_handler',
+        '#attributes' => ['id' => 'auto_select_handler'],
+        '#submit' => ['::submitForm'],
+        '#executes_submit_callback' => TRUE,
+        '#ajax' => [
+          'wrapper' => 'auto_select_handler',
+          'callback' => [get_class($this), 'handleAjaxCommand'],
+          'event' => 'auto_select_enity_browser_widget',
+          'progress' => [
+            'type' => 'fullscreen',
+          ],
+        ],
+      ];
+    }
 
     return $form;
   }
@@ -158,9 +181,16 @@ class DropzoneJsEbWidget extends WidgetBase {
   protected function getFiles(array $form, FormStateInterface $form_state) {
     $config = $this->getConfiguration();
     $additional_validators = ['file_validate_size' => [Bytes::toInt($config['settings']['max_filesize']), 0]];
-    if (!$this->files) {
-      $this->files = [];
-      foreach ($form_state->getValue(['upload', 'uploaded_files'], []) as $file) {
+
+    $files = $form_state->get(['dropzonejs', $this->uuid(), 'files']);
+
+    if (!$files) {
+      $files = [];
+    }
+
+    // We do some casting because $form_state->getValue() might return NULL.
+    foreach ((array) $form_state->getValue(['upload', 'uploaded_files'], []) as $file) {
+      if (file_exists($file['path'])) {
         $entity = $this->dropzoneJsUploadSave->createFile(
           $file['path'],
           $this->getUploadLocation(),
@@ -168,11 +198,17 @@ class DropzoneJsEbWidget extends WidgetBase {
           $this->currentUser,
           $additional_validators
         );
-        $this->files[] = $entity;
+        $files[] = $entity;
       }
     }
 
-    return $this->files;
+    if ($form['widget']['upload']['#max_files']) {
+      $files = array_slice($files, -$form['widget']['upload']['#max_files']);
+    }
+
+    $form_state->set(['dropzonejs', $this->uuid(), 'files'], $files);
+
+    return $files;
   }
 
   /**
@@ -194,20 +230,20 @@ class DropzoneJsEbWidget extends WidgetBase {
     // Validate if we are in fact uploading a files and all of them have the
     // right extensions. Although DropzoneJS should not even upload those files
     // it's still better not to rely only on client side validation.
-    if ($trigger['#type'] == 'submit' && $trigger['#name'] == 'op') {
+    if (($trigger['#type'] == 'submit' && $trigger['#name'] == 'op') || $trigger['#name'] === 'auto_select_handler') {
       $upload_location = $this->getUploadLocation();
       if (!file_prepare_directory($upload_location, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
-        $form_state->setError($form['widget']['upload'], t('Files could not be uploaded because the destination directory %destination is not configured correctly.', ['%destination' => $this->getConfiguration()['settings']['upload_location']]));
+        $form_state->setError($form['widget']['upload'], $this->t('Files could not be uploaded because the destination directory %destination is not configured correctly.', ['%destination' => $this->getConfiguration()['settings']['upload_location']]));
       }
 
       $files = $this->getFiles($form, $form_state);
       if (in_array(FALSE, $files)) {
         // @todo Output the actual errors from validateFile.
-        $form_state->setError($form['widget']['upload'], t('Some files that you are trying to upload did not pass validation. Requirements are: max file %size, allowed extensions are %extensions', ['%size' => $this->getConfiguration()['settings']['max_filesize'], '%extensions' => $this->getConfiguration()['settings']['extensions']]));
+        $form_state->setError($form['widget']['upload'], $this->t('Some files that you are trying to upload did not pass validation. Requirements are: max file %size, allowed extensions are %extensions', ['%size' => $this->getConfiguration()['settings']['max_filesize'], '%extensions' => $this->getConfiguration()['settings']['extensions']]));
       }
 
       if (empty($files)) {
-        $form_state->setError($form['widget']['upload'], t('At least one valid file should be uploaded.'));
+        $form_state->setError($form['widget']['upload'], $this->t('At least one valid file should be uploaded.'));
       }
 
       // If there weren't any errors set, run the normal validators.
@@ -228,10 +264,23 @@ class DropzoneJsEbWidget extends WidgetBase {
       $files[] = $file;
     }
 
-    if (!empty(array_filter($files))) {
-      $this->selectEntities($files, $form_state);
-      $this->clearFormValues($element, $form_state);
+    $this->selectEntities($files, $form_state);
+    $this->clearFormValues($element, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function selectEntities(array $entities, FormStateInterface $form_state) {
+    if (!empty(array_filter($entities))) {
+      $config = $this->getConfiguration();
+
+      if (empty($config['settings']['auto_select'])) {
+        parent::selectEntities($entities, $form_state);
+      }
     }
+
+    $form_state->set(['dropzonejs', 'added_entities'], $entities);
   }
 
   /**
@@ -247,6 +296,7 @@ class DropzoneJsEbWidget extends WidgetBase {
     // remove them from our values.
     $form_state->setValueForElement($element['upload']['uploaded_files'], '');
     NestedArray::setValue($form_state->getUserInput(), $element['upload']['uploaded_files']['#parents'], '');
+    $form_state->set(['dropzonejs', $this->uuid(), 'files'], []);
   }
 
   /**
@@ -348,6 +398,59 @@ class DropzoneJsEbWidget extends WidgetBase {
    */
   public function __sleep() {
     return array_diff(parent::__sleep(), ['files']);
+  }
+
+  /**
+   * Handling of automated submit of uploaded files.
+   *
+   * @param array $form
+   *   Form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse|array
+   *   Returns ajax commands that will be executed in front-end.
+   */
+  public static function handleAjaxCommand(array $form, FormStateInterface $form_state) {
+    // If there are some errors during submitting of form they should be
+    // displayed, that's why we are returning status message here and generated
+    // errors will be displayed properly in front-end.
+    if (count($form_state->getErrors()) > 0) {
+      return [
+        '#type' => 'status_messages',
+      ];
+    }
+
+    // Output correct response if everything passed without any error.
+    $ajax = new AjaxResponse();
+
+    if (($triggering_element = $form_state->getTriggeringElement()) && $triggering_element['#name'] === 'auto_select_handler') {
+      $entity_ids = [];
+
+      $added_entities = $form_state->get(['dropzonejs', 'added_entities']);
+      /** @var \Drupal\Core\Entity\EntityInterface $entity */
+      if (!empty($added_entities)) {
+        foreach ($added_entities as $entity) {
+          $entity_ids[] = $entity->getEntityTypeId() . ':' . $entity->id();
+        }
+      }
+
+      // Add command to clear list of uploaded files. It's important to set
+      // empty string value, in other case it will act as getter.
+      $ajax->addCommand(
+        new InvokeCommand('[data-drupal-selector="edit-upload-uploaded-files"]', 'val', [''])
+      );
+
+      // Add Invoke command to select uploaded entities.
+      $ajax->addCommand(
+        new InvokeCommand('.entities-list', 'trigger', [
+          'add-entities',
+          [$entity_ids],
+        ])
+      );
+    }
+
+    return $ajax;
   }
 
 }

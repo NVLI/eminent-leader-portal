@@ -67,8 +67,8 @@ class VideoEmbedField extends FieldItemBase {
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $form = [];
     $form['allowed_providers'] = [
-      '#title' => t('Allowed Providers'),
-      '#description' => t('Restrict users from entering information from the following providers. If none are selected any video provider can be used.'),
+      '#title' => $this->t('Allowed Providers'),
+      '#description' => $this->t('Restrict users from entering information from the following providers. If none are selected any video provider can be used.'),
       '#type' => 'checkboxes',
       '#default_value' => $this->getSetting('allowed_providers'),
       '#options' => $this->providerManager->getProvidersOptionList(),

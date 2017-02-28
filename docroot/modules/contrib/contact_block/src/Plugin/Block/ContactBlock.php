@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\contact_block\Plugin\Block\ContactBlock.
- */
-
 namespace Drupal\contact_block\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
@@ -199,9 +194,28 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $form = $this->entityFormBuilder->getForm($contact_message);
       $form['#cache']['contexts'][] = 'user.permissions';
       $this->renderer->addCacheableDependency($form, $contact_form);
+
+      $form['#contextual_links']['contact_block'] = [
+        'route_parameters' => ['contact_form' => $contact_form->id()],
+      ];
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+
+    $dependencies = array_merge_recursive(parent::calculateDependencies(), ['config' => []]);
+
+    // Add the contact form as a dependency.
+    if ($contact_form = $this->getContactForm()) {
+      $dependencies['config'][] = $contact_form->getConfigDependencyName();
+    }
+
+    return $dependencies;
   }
 
   /**

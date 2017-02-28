@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\EntityQueueHandler\Simple.
- */
-
 namespace Drupal\entityqueue\Plugin\EntityQueueHandler;
 
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -43,7 +38,7 @@ class Simple extends EntityQueueHandlerBase {
     // Simple queues have just one subqueue so we can link directly to the edit
     // form.
     $operations['edit_subqueue'] = [
-      'title' => t('Edit items'),
+      'title' => $this->t('Edit items'),
       'weight' => -9,
       'url' => EntitySubqueue::load($this->queue->id())->urlInfo('edit-form'),
     ];
@@ -61,6 +56,7 @@ class Simple extends EntityQueueHandlerBase {
         'queue' => $queue->id(),
         'name' => $queue->id(),
         'title' => $queue->label(),
+        'langcode' => $queue->language()->getId(),
       ]);
       $subqueue->save();
     }

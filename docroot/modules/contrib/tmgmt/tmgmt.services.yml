@@ -19,3 +19,5 @@ services:
     class: Drupal\tmgmt\Menu\JobItemBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 101 }
+  tmgmt.segmenter:
+      class: Drupal\tmgmt\NullSegmenter

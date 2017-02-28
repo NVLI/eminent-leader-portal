@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\TranslatorUIControllerInterface.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

@@ -21,7 +21,8 @@ use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
  * @EntityBrowserWidget(
  *   id = "entity_form",
  *   label = @Translation("Entity form"),
- *   description = @Translation("Provides entity form widget.")
+ *   description = @Translation("Provides entity form widget."),
+ *   auto_select = FALSE
  * )
  */
 class EntityForm extends WidgetBase {
@@ -97,12 +98,12 @@ class EntityForm extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function getForm(array &$original_form, FormStateInterface $form_state, array $aditional_widget_parameters) {
+  public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
     if (empty($this->configuration['entity_type']) || empty($this->configuration['bundle'])  || empty($this->configuration['form_mode'])) {
       return ['#markup' => $this->t('The settings for this widget (Entity type, Bundle or Form mode) are not configured correctly.')];
     }
 
-    $form = parent::getForm($original_form, $form_state, $aditional_widget_parameters);
+    $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
 
     // Pretend to be IEFs submit button.
     $form['#submit'] = [['Drupal\inline_entity_form\ElementSubmit', 'trigger']];
@@ -131,14 +132,16 @@ class EntityForm extends WidgetBase {
    * {@inheritdoc}
    */
   public function submit(array &$element, array &$form, FormStateInterface $form_state) {
-    $entities = $this->prepareEntities($form, $form_state);
-    array_walk(
-      $entities,
-      function (EntityInterface $entity) {
-        $entity->save();
-      }
-    );
-    $this->selectEntities($entities, $form_state);
+    if (!empty($form_state->getTriggeringElement()['#eb_widget_main_submit'])) {
+      $entities = $this->prepareEntities($form, $form_state);
+      array_walk(
+        $entities,
+        function (EntityInterface $entity) {
+          $entity->save();
+        }
+      );
+      $this->selectEntities($entities, $form_state);
+    }
   }
 
   /**

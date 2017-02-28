@@ -72,11 +72,11 @@ class QueryString extends UrlProcessorPluginBase {
     if ($facet->getFacetSource()->getPath()) {
       $request = Request::create($facet->getFacetSource()->getPath());
     }
-    $url = Url::createFromRequest($request);
-    $url->setOption('attributes', ['rel' => 'nofollow']);
-
     /** @var \Drupal\facets\Result\ResultInterface[] $results */
     foreach ($results as &$result) {
+      // Reset the URL for each result.
+      $url = Url::createFromRequest($request);
+      $url->setOption('attributes', ['rel' => 'nofollow']);
       // Sets the url for children.
       if ($children = $result->getChildren()) {
         $this->buildUrls($facet, $children);
@@ -93,10 +93,28 @@ class QueryString extends UrlProcessorPluginBase {
             unset($filter_params[$key]);
           }
         }
+        if ($facet->getEnableParentWhenChildGetsDisabled() && $facet->getUseHierarchy()) {
+          // Enable parent id again if exists.
+          $parent_ids = $facet->getHierarchyInstance()->getParentIds($result->getRawValue());
+          if (isset($parent_ids[0]) && $parent_ids[0]) {
+            $filter_params[] = $this->urlAlias . self::SEPARATOR . $parent_ids[0];
+          }
+        }
       }
       // If the value is not active, add the filter string.
       else {
         $filter_params[] = $filter_string;
+
+        if ($facet->getUseHierarchy()) {
+          // If hierarchy is active, unset parent trail and every child when
+          // building the enable-link to ensure those are not enabled anymore.
+          $parent_ids = $facet->getHierarchyInstance()->getParentIds($result->getRawValue());
+          $child_ids = $facet->getHierarchyInstance()->getNestedChildIds($result->getRawValue());
+          $parents_and_child_ids = array_merge($parent_ids, $child_ids);
+          foreach ($parents_and_child_ids as $id) {
+            $filter_params = array_diff($filter_params, [$this->urlAlias . self::SEPARATOR . $id]);
+          }
+        }
         // Exclude currently active results from the filter params if we are in
         // the show_only_one_result mode.
         if ($facet->getShowOnlyOneResult()) {
@@ -116,7 +134,9 @@ class QueryString extends UrlProcessorPluginBase {
       $result_get_params->set($this->filterKey, array_values($filter_params));
 
       $url = clone $url;
-      $url->setOption('query', $result_get_params->all());
+      if ($result_get_params->all() !== [$this->filterKey => []]) {
+        $url->setOption('query', $result_get_params->all());
+      }
 
       $result->setUrl($url);
     }

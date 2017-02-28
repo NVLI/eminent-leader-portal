@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_config\Controller\ConfigTranslationControllerOverride.
- */
-
 namespace Drupal\tmgmt_config\Controller;
 
 use Drupal\config_translation\Controller\ConfigTranslationController;

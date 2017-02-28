@@ -15,7 +15,6 @@ services:
 
   blazy:
     class: Drupal\blazy\Blazy
-    parent: blazy.manager
 
   blazy.admin.base:
     abstract: true

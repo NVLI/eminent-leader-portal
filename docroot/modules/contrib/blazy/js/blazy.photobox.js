@@ -11,8 +11,8 @@
 
   Drupal.behaviors.blazyPhotobox = {
     attach: function (context) {
-      $('div[data-blazy], .slick--photobox', context).once('blazy-photobox').each(function () {
-        $(this).photobox('a[data-photobox]', {thumb: '> [data-thumb]', thumbAttr: 'data-thumb'}, Drupal.blazy.photobox);
+      $('[data-photobox-gallery]', context).once('blazy-photobox').each(function () {
+        $(this).photobox('a[data-photobox-trigger]', {thumb: '> [data-thumb]', thumbAttr: 'data-thumb'}, Drupal.blazy.photobox);
       });
     }
   };

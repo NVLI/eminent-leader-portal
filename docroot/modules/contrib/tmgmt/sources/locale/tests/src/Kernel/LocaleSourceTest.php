@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\tmgmt_locale\Kernel\LocaleSourceTest.
- */
-
 namespace Drupal\Tests\tmgmt_locale\Kernel;
 
 use Drupal\locale\Gettext;

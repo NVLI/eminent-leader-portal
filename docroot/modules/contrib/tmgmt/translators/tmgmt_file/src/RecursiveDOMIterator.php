@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_file\RecursiveDOMIterator.
- */
-
 namespace Drupal\tmgmt_file;
 
 /**

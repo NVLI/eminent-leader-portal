@@ -8,6 +8,7 @@ use Drupal\Core\Render\Element;
 use Drupal\entity_browser\WidgetBase;
 use Drupal\Core\Url;
 use Drupal\entity_browser\WidgetValidationManager;
+use Drupal\views\Entity\View as ViewEntity;
 use Drupal\views\Views;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -22,7 +23,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  *   id = "view",
  *   label = @Translation("View"),
  *   provider = "views",
- *   description = @Translation("Uses a view to provide entity listing in a browser's widget.")
+ *   description = @Translation("Uses a view to provide entity listing in a browser's widget."),
+ *   auto_select = TRUE
  * )
  */
 class View extends WidgetBase implements ContainerFactoryPluginInterface {
@@ -105,11 +107,11 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
     }
 
     if (!empty($this->configuration['arguments'])) {
-      if (!empty($aditional_widget_parameters['path_parts'])) {
+      if (!empty($additional_widget_parameters['path_parts'])) {
         $arguments = [];
         // Map configuration arguments with original path parts.
         foreach ($this->configuration['arguments'] as $argument) {
-          $arguments[] = isset($aditional_widget_parameters['path_parts'][$argument]) ? $aditional_widget_parameters['path_parts'][$argument] : '';
+          $arguments[] = isset($additional_widget_parameters['path_parts'][$argument]) ? $additional_widget_parameters['path_parts'][$argument] : '';
         }
         $view->setArguments(array_values($arguments));
       }
@@ -257,11 +259,24 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues()['table'][$this->uuid()]['form'];
     $this->configuration['submit_text'] = $values['submit_text'];
+    $this->configuration['auto_select'] = $values['auto_select'];
     if (!empty($values['view'])) {
       list($view_id, $display_id) = explode('.', $values['view']);
       $this->configuration['view'] = $view_id;
       $this->configuration['view_display'] = $display_id;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = [];
+    if ($this->configuration['view']) {
+      $view = ViewEntity::load($this->configuration['view']);
+      $dependencies[$view->getConfigDependencyKey()] = [$view->getConfigDependencyName()];
+    }
+    return $dependencies;
   }
 
 }

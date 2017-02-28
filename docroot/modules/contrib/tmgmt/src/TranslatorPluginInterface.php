@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\TranslatorPluginInterface.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
@@ -117,8 +112,14 @@ interface TranslatorPluginInterface extends PluginInspectionInterface {
    *
    * Submits the translation request and sends it to the translation provider.
    *
+   * During the translation process, Job::getItems() will only return job items
+   * that are not already fully translated.
+   *
    * @param \Drupal\tmgmt\JobInterface $job
    *   The job that should be submitted.
+   *
+   * @see hook_tmgmt_job_before_request_translation()
+   * @see hook_tmgmt_job_after_request_translation()
    *
    * @ingroup tmgmt_remote_languages_mapping
    */

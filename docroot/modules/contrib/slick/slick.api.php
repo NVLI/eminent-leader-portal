@@ -25,13 +25,16 @@
  */
 
 /**
- * 1. Quick sample.
+ * Quick sample #1.
  *
  * @see \Drupal\slick\SlickManager::build()
  * @see template_preprocess_slick_wrapper()
  * @see template_preprocess_slick()
+ *
+ * @return array
+ *   The renderable array of a slick instance.
  */
-
+function my_module_render_slick() {
   // Invoke the plugin class, or use a DI service container accordingly.
   $slick = \Drupal::service('slick.manager');
 
@@ -45,7 +48,7 @@
   $items[] = [
     // Use $formatter->getImage($element) to have lazyLoad where $element
     // contains:
-    // item: Drupal\image\Plugin\Field\FieldType\ImageItem
+    // item: Drupal\image\Plugin\Field\FieldType\ImageItem.
     'slide'   => '<img src="https://drupal.org/files/One.gif" />',
     'caption' => ['title' => t('Description #1')],
   ];
@@ -79,13 +82,13 @@
   $variables['slick'] = $element;
 
   // Render the slick at a .twig.html file.
-  # {{ slick }}
-
+  // {{ slick }}
   // Or simply return the $element if a renderable array is expected.
   return $element;
+}
 
 /**
- * 2. Detailed sample.
+ * Detailed sample #2.
  *
  * This can go to some hook_preprocess() of a target html.twig, or any relevant
  * PHP file.
@@ -93,8 +96,11 @@
  * The goal is to create a vertical newsticker, or tweets, with pure text only.
  * First, create an unformatted Views block, says 'Ticker' containing ~ 10
  * titles, or any data for the contents -- using EFQ, or static array will do.
+ *
+ * @return array
+ *   The renderable array of a slick instance.
  */
-
+function my_module_render_slick_detail() {
   // Invoke the plugin class, or use a DI service container accordingly.
   $slick = \Drupal::service('slick.manager');
 
@@ -111,10 +117,8 @@
   $build['settings'] = [
     // Optional optionset name, otherwise fallback to default.
     // 'optionset' => 'blog',
-
     // Optional skin name fetched from hook_slick_skins_info(), otherwise none.
-   // 'skin' => 'fullwidth',
-
+    // 'skin' => 'fullwidth',
     // Define the main ID. The rest are managed by the module.
     // If you provide ID, be sure unique per instance as it is cached.
     // Leave empty to be provided by the module.
@@ -131,7 +135,6 @@
   // which can be pure and simple text, or any image/media file.
   // Meaning $rows can be text only, or image/audio/video, or a combination
   // of both.
-
   // To add caption/overlay, use 'caption' key with the supported sub-keys:
   // alt, data, link, overlay, title for complex content.
   // Sanitize each sub-key content accordingly.
@@ -187,47 +190,55 @@
   $variables['slick'] = $element;
 
   // Render the slick at a .twig.html file.
-  # {{ slick }}
-
+  // {{ slick }}
   // Or simply return the $element if a renderable array is expected.
   return $element;
+}
 
 /**
- * 3. AsNavFor sample.
+ * AsNavFor sample #3.
  *
  * The only requirement for asNavFor is:
- * - $build['settings']['optionset_thumbnail']
+ * @code
+ *   $build['settings']['optionset'] = 'optionset_name';
+ *   $build['settings']['optionset_thumbnail'] = 'optionset_thumbnail_name';
+ * @endcode
  *
  * The rest are optional, and will fallback to default:
- *   - $build['settings']['optionset'] = 'optionset_name';
  *   - $build['settings']['optionset_thumbnail'] = 'optionset_thumbnail_name';
  *     Defined at the main settings.
  *
  *   - $build['settings']['id'] = 'slick-asnavfor';
  *     Only main display ID is needed. The thumbnail ID will be
  *     automatically created: 'slick-asnavfor-thumbnail', including the content
- *     attributes accordingly. If none provided, will fallback to incremented ID.
+ *     attributes accordingly. If none provided, will fallback to incremented
+ *     ID.
  *
- *     See the HTML structure below to get a clear idea.
+ * See the HTML structure below to get a clear idea.
  *
  * 1. Main slider:
- * <div id="slick-asnavfor" class="slick slick-processed">
- *   <div id="slick-asnavfor-slider" class="slick__slider slick-initialized slick-slider">
- *     <div class="slick__slide"></div>
+ * \n @code
+ *   <div id="slick-asnavfor" class="slick">
+ *     <div class="slick__slider slick-initialized slick-slider">
+ *       <div class="slick__slide"></div>
+ *     </div>
  *   </div>
- * </div>
- *
+ * @endcode \n
  * 2. Thumbnail slider:
- * <div id="slick-asnavfor-thumbnail" class="slick slick-processed">
- *   <div id="slick-asnavfor-thumbnail-slider" class="slick__slider slick-initialized slick-slider">
- *     <div class="slick__slide"></div>
+ * \n @code
+ *   <div id="slick-asnavfor-thumbnail" class="slick">
+ *     <div class="slick__slider slick-initialized slick-slider">
+ *       <div class="slick__slide"></div>
+ *     </div>
  *   </div>
- * </div>
- *
+ * @endcode \n
  * The asnavfor targets are the 'slick-initialized' attributes, and managed by
  * the module automatically when using SlickManager::build().
+ *
+ * @return array
+ *   The renderable array of slick instances.
  */
-
+function my_module_render_slick_asnavfor() {
   // Invoke the plugin class, or use a DI service container accordingly.
   $slick = \Drupal::service('slick.manager');
 
@@ -237,7 +248,6 @@
   $build = [];
 
   // 1. Main slider ------------------------------------------------------------
-
   // Add the main display items.
   $build['items'] = [];
 
@@ -249,7 +259,7 @@
 
       // Use $formatter->getImage($element) to have lazyLoad where $element
       // contains:
-      // item: Drupal\image\Plugin\Field\FieldType\ImageItem
+      // item: Drupal\image\Plugin\Field\FieldType\ImageItem.
       'slide'   => '<img src="/sites/all/images/image-0' . $key . '.jpg" width="1140" />',
 
       // Main caption contains: alt, data, link, overlay, title keys which serve
@@ -257,7 +267,7 @@
       // nor remembering what HTML tags and where to place to provide for each
       // purpose cosnsitently. CSS will do layout regardless HTML composition.
       // If having more complex caption data, use 'data' key instead.
-      // If the common layout doesn't satisfy the need, simply override the twig.
+      // If the common layout doesn't satisfy the need, just override the twig.
       'caption' => ['title' => 'Description #' . $key],
     ];
   }
@@ -317,16 +327,16 @@
   $variables['slick'] = $element;
 
   // Render the slick at a .twig.html file.
-  # {{ slick }}
-
+  // {{ slick }}
   // Or simply return the $element if a renderable array is expected.
   return $element;
+}
 
 /**
  * Implements hook_slick_skins_info().
  *
  * Registers a class that should hold skin definitions and implements
- * \Drupal\slick\SlickSkinInterface
+ * \Drupal\slick\SlickSkinInterface.
  *
  * @deprecated, will be removed anytime when a core solution is available.
  * @see #2233261
@@ -355,12 +365,12 @@ class HookSlickSkin implements SlickSkinInterface {
    * {@inheritdoc}
    */
   public function skins() {
-    $theme_path = drupal_get_path('theme', 'my_theme');
+    $theme_path = base_path() . drupal_get_path('theme', 'my_theme');
 
     return [
       'skin_name' => [
         // Human readable skin name.
-        'name' => t('Skin name'),
+        'name' => 'Skin name',
         // Description of the skin.
         'description' => t('Skin description.'),
         // To reduce confusion on form selection: main, thumbnail.
@@ -376,8 +386,8 @@ class HookSlickSkin implements SlickSkinInterface {
         ],
         'js' => [
           // Full path to a JS file to include with the skin.
-          $theme_path . '/js/my-theme--slider.js',
-          $theme_path . '/js/my-theme--carousel.js',
+          $theme_path . '/js/my-theme--slider.js' => [],
+          $theme_path . '/js/my-theme--carousel.js' => [],
           // If you want to act on afterSlick event, or any other slick events,
           // put a lighter weight before slick.load.min.js (0).
           $theme_path . '/js/slick.skin.menu.min.js' => ['weight' => -2],
@@ -387,17 +397,35 @@ class HookSlickSkin implements SlickSkinInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the Slick dot skins.
+   *
+   * The provided dot skins will be available at sub-module UI form.
+   * A skin dot named 'hop' will have a class 'slick-dots--hop' for the UL.
+   *
+   * The array is similar to the self::skins(), excluding group, JS.
+   *
+   * @return array
+   *   The array of the dot skins.
    */
   public function dots() {
     // Create an array of dot skins.
+    return [];
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the Slick arrow skins.
+   *
+   * The provided arrow skins will be available at sub-module UI form.
+   * A skin arrow 'slit' will have a class 'slick__arrow--slit' for the NAV.
+   *
+   * The array is similar to the self::skins(), excluding group, JS.
+   *
+   * @return array
+   *   The array of the arrow skins.
    */
   public function arrows() {
     // Create an array of arrow skins.
+    return [];
   }
 
 }

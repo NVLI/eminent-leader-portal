@@ -22,7 +22,7 @@ class FileBrowserPreview extends FieldPluginBase {
    */
   public function render(ResultRow $values) {
     /** @var \Drupal\file\Entity\File $file */
-    $file = $values->_entity;
+    $file = $this->getEntity($values);
     $build = [];
 
     // Check if this file is an image.

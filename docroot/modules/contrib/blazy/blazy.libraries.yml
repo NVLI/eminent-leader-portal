@@ -4,65 +4,73 @@ blazy:
   version: 1.x
   license:
     name: MIT
-    url: http://opensource.org/licenses/MIT
+    url: https://github.com/dinbror/blazy/blob/master/LICENSE
     gpl-compatible: true
   js:
     /libraries/blazy/blazy.min.js: { weight: -4, minified: true }
 
 loading:
-  version: VERSION
   css:
     component:
       css/components/blazy.loading.css: {}
 
 ratio:
-  version: VERSION
   css:
     component:
       css/components/blazy.ratio.css: {}
 
+grid:
+  css:
+    component:
+      css/components/blazy.grid.css: {}
+
+column:
+  css:
+    component:
+      css/components/blazy.column.css: {}
+
+dblazy:
+  js:
+    js/dblazy.min.js: { weight: -2, minified: true }
+
 load:
-  version: VERSION
   js:
     js/blazy.load.min.js: { weight: -1, minified: true }
   dependencies:
-    - core/jquery
-    - core/jquery.once
     - core/drupal
-    - core/drupalSettings
     - blazy/blazy
+    - blazy/dblazy
     - blazy/loading
 
 media:
-  version: VERSION
   js:
     js/blazy.media.min.js: {}
   css:
     component:
       css/components/blazy.media.css: {}
   dependencies:
-    - core/jquery
     - core/drupal
-    - core/drupalSettings
-    - core/jquery.once
     - blazy/ratio
 
+lightbox:
+  css:
+    component:
+      css/components/blazy.lightbox.css: {}
+
 colorbox.skin:
-  version: VERSION
   css:
     component:
       css/components/blazy.colorbox.css: {}
-      css/components/blazy.lightbox.css: {}
   dependencies:
     - colorbox/colorbox
 
 colorbox:
-  version: VERSION
   js:
     js/blazy.colorbox.min.js: { minified: true }
   dependencies:
     - core/drupal
-    - core/drupalSettings
+    - blazy/load
+    - blazy/ratio
     - blazy/colorbox.skin
 
 photobox:
@@ -78,18 +86,15 @@ photobox:
   css:
     base:
       /libraries/photobox/photobox/photobox.css: {}
-    component:
-      css/components/blazy.lightbox.css: {}
   dependencies:
     - core/jquery
     - core/jquery.once
     - core/drupal
-    - core/drupalSettings
+    - blazy/load
     # use photobox when available instead.
     # - photobox/photobox
 
 admin:
-  version: VERSION
   js:
     js/blazy.admin.min.js: { minified: true }
   css:

@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\tmgmt\MessageInterface.
- */
 
 namespace Drupal\tmgmt;
 use Drupal\Core\Entity\ContentEntityInterface;

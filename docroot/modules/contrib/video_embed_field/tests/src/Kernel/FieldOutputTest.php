@@ -188,6 +188,38 @@ class FieldOutputTest extends KernelTestBase {
           ],
         ],
       ],
+      'Vimeo: Autoplaying Embed Code' => [
+        'https://vimeo.com/80896303#t=150s',
+        [
+          'type' => 'video_embed_field_video',
+          'settings' => [
+            'width' => 100,
+            'height' => 100,
+            'autoplay' => TRUE,
+            'responsive' => FALSE,
+          ],
+        ],
+        [
+          '#type' => 'video_embed_iframe',
+          '#provider' => 'vimeo',
+          '#url' => 'https://player.vimeo.com/video/80896303',
+          '#query' => [
+            'autoplay' => '1',
+          ],
+          '#fragment' => 't=150s',
+          '#attributes' => [
+            'width' => '100',
+            'height' => '100',
+            'frameborder' => '0',
+            'allowfullscreen' => 'allowfullscreen',
+          ],
+          '#cache' => [
+            'contexts' => [
+              'user.permissions',
+            ],
+          ],
+        ],
+      ],
       'Linked Thumbnail: Content' => [
         'https://vimeo.com/80896303',
         [
@@ -367,6 +399,53 @@ class FieldOutputTest extends KernelTestBase {
             'contexts' => [
               'user.permissions',
             ],
+          ],
+        ],
+      ],
+      'No provider (video formatter)' => [
+        'http://example.com/not/a/video/url',
+        [
+          'type' => 'video_embed_field_video',
+          'settings' => [],
+        ],
+        [
+          '#theme' => 'video_embed_field_missing_provider',
+        ],
+      ],
+      'No provider (thumbnail formatter)' => [
+        'http://example.com/not/a/video/url',
+        [
+          'type' => 'video_embed_field_thumbnail',
+          'settings' => [],
+        ],
+        [
+          '#theme' => 'video_embed_field_missing_provider',
+        ],
+      ],
+      'No provider (colorbox modal)' => [
+        'http://example.com/not/a/video/url',
+        [
+          'type' => 'video_embed_field_colorbox',
+        ],
+        [
+          '#type' => 'container',
+          '#attributes' => [
+            'data-video-embed-field-modal' => 'No video provider was found to handle the given URL. See <a href="https://www.drupal.org/node/2842927">the documentation</a> for more information.',
+            'class' => ['video-embed-field-launch-modal'],
+          ],
+          '#attached' => [
+            'library' => [
+              'video_embed_field/colorbox',
+              'video_embed_field/responsive-video',
+            ],
+          ],
+          '#cache' => [
+            'contexts' => [
+              'user.permissions',
+            ],
+          ],
+          'children' => [
+            '#theme' => 'video_embed_field_missing_provider',
           ],
         ],
       ],

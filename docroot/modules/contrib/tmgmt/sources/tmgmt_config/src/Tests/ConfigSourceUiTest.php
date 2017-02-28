@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_config\Tests\ConfigSourceUiTest.
- */
-
 namespace Drupal\tmgmt_config\Tests;
 
 use Drupal\Core\Url;

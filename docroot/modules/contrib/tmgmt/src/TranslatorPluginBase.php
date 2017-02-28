@@ -1,13 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\TranslatorPluginBase.
- */
-
 namespace Drupal\tmgmt;
 
-use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Plugin\PluginBase;
 use Drupal\tmgmt\Translator\AvailableResult;
 use Drupal\tmgmt\Translator\TranslatableResult;
 

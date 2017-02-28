@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\SourcePluginUiBase.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -47,7 +42,17 @@ class SourcePluginUiBase extends PluginBase implements SourcePluginUiInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Builds the overview form for the source entities.
+   *
+   * @param array $form
+   *   Drupal form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   * @param string $type
+   *   Entity type.
+   *
+   * @return array
+   *   Drupal form array.
    */
   public function overviewForm(array $form, FormStateInterface $form_state, $type) {
     $form += $this->overviewSearchFormPart($form, $form_state, $type);
@@ -71,7 +76,14 @@ class SourcePluginUiBase extends PluginBase implements SourcePluginUiInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Submit handler for the source entities overview form.
+   *
+   * @param array $form
+   *   Drupal form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   * @param string $type
+   *   Entity type.
    */
   public function overviewFormSubmit(array $form, FormStateInterface $form_state, $type) {
     // Nothing to do here by default.

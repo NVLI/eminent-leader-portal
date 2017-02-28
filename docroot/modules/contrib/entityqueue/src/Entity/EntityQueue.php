@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Entity\EntityQueue.
- */
-
 namespace Drupal\entityqueue\Entity;
 
 use Drupal\Core\Cache\Cache;
@@ -92,6 +87,7 @@ class EntityQueue extends ConfigEntityBundleBase implements EntityQueueInterface
     'min_size' => 0,
     'max_size' => 0,
     'act_as_queue' => FALSE,
+    'reverse_in_admin' => FALSE,
   ];
 
   /**
@@ -141,6 +137,13 @@ class EntityQueue extends ConfigEntityBundleBase implements EntityQueueInterface
    */
   public function getActAsQueue() {
     return $this->queue_settings['act_as_queue'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getReverseInAdmin() {
+    return isset($this->queue_settings['reverse_in_admin']) ? $this->queue_settings['reverse_in_admin'] : FALSE;
   }
 
   /**
@@ -307,7 +310,7 @@ class EntityQueue extends ConfigEntityBundleBase implements EntityQueueInterface
   public function getCacheTagsToInvalidate() {
     // A newly created or deleted queue could alter views data relationships, so
     // we must invalidate the associated 'views_data' cache tag.
-    return ['views_data', 'entity_field_info'];
+    return Cache::mergeTags(parent::getCacheTagsToInvalidate(), ['views_data', 'entity_field_info']);
   }
 
   /**

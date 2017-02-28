@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntityQueueHandlerInterface.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\Core\Entity\EntityStorageInterface;

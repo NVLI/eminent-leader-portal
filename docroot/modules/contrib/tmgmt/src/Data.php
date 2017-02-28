@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Data.
- */
 
 namespace Drupal\tmgmt;
 
@@ -105,7 +101,7 @@ class Data {
    *
    * @param string $text
    *
-   * @return int $count
+   * @return int
    *   Returns count of words of text.
    */
   public function wordCount($text) {
@@ -130,7 +126,7 @@ class Data {
    *
    * @param string $text
    *
-   * @return int $count
+   * @return int
    *   Returns count of tags of text.
    */
   public function tagsCount($text) {
@@ -153,7 +149,7 @@ class Data {
    *   The key can be either be an array containing the keys of a nested array
    *   hierarchy path or a string with '][' or '|' as delimiter.
    *
-   * @return array $key
+   * @return array
    *   Array of keys.
    */
   public function ensureArrayKey($key) {
@@ -181,7 +177,7 @@ class Data {
    * @param string $delimiter
    *   Delimiter to be use in the keys string. Default is ']['.
    *
-   * @return string $key
+   * @return string
    *    Keys string.
    */
   public function ensureStringKey($key, $delimiter = Data::TMGMT_ARRAY_DELIMITER) {
@@ -197,7 +193,7 @@ class Data {
    * @param array $value
    *   Array of values to filter.
    *
-   * @return string $key
+   * @return string
    *    Keys string.
    */
   public function filterData(array $value) {

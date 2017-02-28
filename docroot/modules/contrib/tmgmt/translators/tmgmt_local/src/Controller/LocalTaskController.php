@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Controller\LocalTaskController.
- */
-
 namespace Drupal\tmgmt_local\Controller;
 
 use Drupal\Component\Render\FormattableMarkup;

@@ -1,39 +1,60 @@
 /**
- * @file dropzone.integration.js
+ * @file
+ * dropzone.integration.js
  *
  * Defines the behaviors needed for dropzonejs integration.
- *
- * @todo Implement maxfilesexceeded.
- *
  */
+
 (function ($, Drupal, drupalSettings) {
-  "use strict";
+  'use strict';
 
   Drupal.dropzonejsInstances = [];
 
+  /* global Dropzone */
   Drupal.behaviors.dropzonejsIntegraion = {
     attach: function (context) {
       Dropzone.autoDiscover = false;
-      var selector = $(".dropzone-enable");
-      selector.addClass("dropzone");
+
+      // @todo Init functionality should support multiple drop zones on page.
+      var selector = $('.dropzone-enable');
+      selector.addClass('dropzone');
       var input = selector.siblings('input');
 
       // Initiate dropzonejs.
       var config = {
         url: input.attr('data-upload-path'),
-        addRemoveLinks: true
+        addRemoveLinks: false
       };
       var instanceConfig = drupalSettings.dropzonejs.instances[selector.attr('id')];
-      if (instanceConfig.instance !== undefined) {
+
+      // If DropzoneJS instance is already registered on Element. There is no
+      // need to register it again.
+      if (selector.once('register-dropzonejs').length !== selector.length) {
+        return;
+      }
+
+      // If instance exists for configuration, but it's detached from element
+      // then destroy detached instance and create new instance.
+      if (instanceConfig.instance !== void 0) {
         instanceConfig.instance.destroy();
       }
-      var dropzoneInstance = new Dropzone("#" + selector.attr("id"), $.extend({}, instanceConfig, config));
+
+      // Initialize DropzoneJS instance for element.
+      var dropzoneInstance = new Dropzone('#' + selector.attr('id'), $.extend({}, instanceConfig, config));
 
       // Other modules might need instances.
-      drupalSettings["dropzonejs"]["instances"][selector.attr("id")]["instance"] = dropzoneInstance;
+      drupalSettings['dropzonejs']['instances'][selector.attr('id')]['instance'] = dropzoneInstance;
+
+      dropzoneInstance.on('addedfile', function (file) {
+        file._removeIcon = Dropzone.createElement("<div class='dropzonejs-remove-icon' title='Remove'></div>");
+        file.previewElement.appendChild(file._removeIcon);
+        file._removeIcon.addEventListener('click', function () {
+          dropzoneInstance.removeFile(file);
+        });
+      });
 
       // React on add file. Add only accepted files.
-      dropzoneInstance.on("success", function (file, response) {
+      dropzoneInstance.on('success', function (file, response) {
         var uploadedFilesElement = selector.siblings(':hidden');
         var currentValue = uploadedFilesElement.attr('value') || '';
 
@@ -45,16 +66,16 @@
       });
 
       // React on file removing.
-      dropzoneInstance.on("removedfile", function (file) {
+      dropzoneInstance.on('removedfile', function (file) {
         var uploadedFilesElement = selector.siblings(':hidden');
         var currentValue = uploadedFilesElement.attr('value');
 
         // Remove the file from the element.
         if (currentValue.length) {
-          var fileNames = currentValue.split(";");
+          var fileNames = currentValue.split(';');
           for (var i in fileNames) {
             if (fileNames[i] === file.processedName) {
-              fileNames.splice(i,1);
+              fileNames.splice(i, 1);
               break;
             }
           }
@@ -63,8 +84,15 @@
           uploadedFilesElement.attr('value', newValue);
         }
       });
+
+      // React on maxfilesexceeded. Remove all rejected files.
+      dropzoneInstance.on('maxfilesexceeded', function () {
+        var rejectedFiles = dropzoneInstance.getRejectedFiles();
+        for (var i = 0; i < rejectedFiles.length; i++) {
+          dropzoneInstance.removeFile(rejectedFiles[i]);
+        }
+      });
     }
   };
-
 
 }(jQuery, Drupal, drupalSettings));

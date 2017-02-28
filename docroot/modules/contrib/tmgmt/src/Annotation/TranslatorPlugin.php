@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Annotation\TranslatorPlugin.
- */
-
 namespace Drupal\tmgmt\Annotation;
 
 use Drupal\Component\Annotation\Plugin;

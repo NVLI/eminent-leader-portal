@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\ListBuilder\TranslatorListBuilder.
- */
-
 namespace Drupal\tmgmt\Entity\ListBuilder;
 
 use Drupal\Core\Config\Entity\DraggableListBuilder;
@@ -72,7 +67,7 @@ class TranslatorListBuilder extends DraggableListBuilder implements EntityListBu
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'tmgmt_translator_overview';
   }
 

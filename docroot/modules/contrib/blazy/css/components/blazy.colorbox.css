@@ -32,12 +32,12 @@
   overflow: visible !important;
 }
 
-.colorbox-on--media .media--ratio {
+#cboxLoadedContent.media--ratio {
   height: 0 !important;
   padding-bottom: 56%;
 }
 
-.colorbox-on--media #cboxLoadedContent .cboxIframe {
+#cboxLoadedContent.media--ratio .cboxIframe {
   background-clip: padding-box;
   border-radius: 0;
   border: 8px solid #37465b;

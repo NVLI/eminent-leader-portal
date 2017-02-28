@@ -1,15 +1,15 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Form\EntitySubqueueForm.
- */
-
 namespace Drupal\entityqueue\Form;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\EntityChangedInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\inline_entity_form\Plugin\Field\FieldWidget\InlineEntityFormBase;
 use Psr\Log\LoggerInterface;
@@ -39,6 +39,7 @@ class EntitySubqueueForm extends ContentEntityForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('entity.manager'),
       $container->get('logger.factory')->get('entityqueue')
     );
   }
@@ -49,7 +50,9 @@ class EntitySubqueueForm extends ContentEntityForm {
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
    */
-  public function __construct(LoggerInterface $logger) {
+  public function __construct(EntityManagerInterface $entity_manager, LoggerInterface $logger) {
+    parent::__construct($entity_manager);
+
     $this->logger = $logger;
   }
 
@@ -57,6 +60,14 @@ class EntitySubqueueForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
+    // Reverse the items in the admin form if the queue uses the 'Reverse order
+    // in admin view' option.
+    if ($this->entity->getQueue()->getReverseInAdmin()) {
+      $subqueue_items = $this->entity->get('items');
+      $items_values = $subqueue_items->getValue();
+      $subqueue_items->setValue(array_reverse($items_values));
+    }
+
     $form = parent::form($form, $form_state);
 
     $form['#title'] = $this->t('Edit subqueue %label', ['%label' => $this->entity->label()]);
@@ -160,6 +171,11 @@ class EntitySubqueueForm extends ContentEntityForm {
       $items_widget->extractFormValues($subqueue_items, $form, $form_state);
       $items_values = $subqueue_items->getValue();
 
+      // Revert the effect of the 'Reverse order in admin view' option.
+      if ($entity->getQueue()->getReverseInAdmin()) {
+        $items_values = array_reverse($items_values);
+      }
+
       switch ($op) {
         case 'reverse':
           $subqueue_items->setValue(array_reverse($items_values));
@@ -226,6 +242,14 @@ class EntitySubqueueForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $subqueue = $this->entity;
+
+    // Revert the effect of the 'Reverse order in admin view' option.
+    if ($subqueue->getQueue()->getReverseInAdmin()) {
+      $subqueue_items = $subqueue->get('items');
+      $items_values = $subqueue_items->getValue();
+      $subqueue_items->setValue(array_reverse($items_values));
+    }
+
     $status = $subqueue->save();
 
     $edit_link = $subqueue->toLink($this->t('Edit'), 'edit-form')->toString();
@@ -244,6 +268,16 @@ class EntitySubqueueForm extends ContentEntityForm {
     }
     else {
       $form_state->setRedirectUrl($queue->toUrl('collection'));
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function updateChangedTime(EntityInterface $entity) {
+    // @todo Remove this method when Drupal 8.2.x is no longer supported.
+    if ($entity->getEntityType()->isSubclassOf(EntityChangedInterface::class)) {
+      $entity->setChangedTime(REQUEST_TIME);
     }
   }
 

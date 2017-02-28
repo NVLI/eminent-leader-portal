@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Plugin\views\field\ItemCount.
- */
-
 namespace Drupal\tmgmt_local\Plugin\views\field;
 
 use Drupal\Core\Form\FormStateInterface;

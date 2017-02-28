@@ -194,7 +194,11 @@ class SearchApiQuery extends QueryPluginBase {
       $this->query = $this->index->query();
       $this->query->addTag('views');
       $this->query->addTag('views_' . $view->id());
-      $this->query->setSearchId('views_page:' . $view->id() . '__' . $view->current_display);
+      $display_type = $display->getPluginId();
+      if ($display_type === 'rest_export') {
+        $display_type = 'rest';
+      }
+      $this->query->setSearchId("views_$display_type:" . $view->id() . '__' . $view->current_display);
       $this->query->setOption('search_api_view', $view);
     }
     catch (\Exception $e) {
@@ -533,6 +537,30 @@ class SearchApiQuery extends QueryPluginBase {
 
       $view->result[] = new ResultRow($values);
     }
+  }
+
+  /**
+   * Retrieves the conditions placed on this query.
+   *
+   * @return array
+   *   The conditions placed on this query, separated by groups, as an
+   *   associative array with a structure like this:
+   *   - GROUP_ID:
+   *     - type: "AND"/"OR"
+   *     - conditions:
+   *       - [FILTER, VALUE, OPERATOR]
+   *       - [FILTER, VALUE, OPERATOR]
+   *       …
+   *     - condition_groups:
+   *       - ConditionGroupInterface object
+   *       - ConditionGroupInterface object
+   *       …
+   *   - GROUP_ID:
+   *     …
+   *   Returned by reference.
+   */
+  public function &getWhere() {
+    return $this->where;
   }
 
   /**

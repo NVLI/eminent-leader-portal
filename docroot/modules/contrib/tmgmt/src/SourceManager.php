@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\SourceManager.
- */
-
 namespace Drupal\tmgmt;
 
 use Drupal\Core\Cache\CacheBackendInterface;

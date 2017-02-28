@@ -72,8 +72,8 @@ class VideoEmbedField extends MediaTypeBase {
       $form['source_field'] = [
         '#type' => 'select',
         '#required' => TRUE,
-        '#title' => t('Source Video Field'),
-        '#description' => t('The field on the media entity that contains the video URL.'),
+        '#title' => $this->t('Source Video Field'),
+        '#description' => $this->t('The field on the media entity that contains the video URL.'),
         '#default_value' => empty($this->configuration['source_field']) ? VideoEmbedField::VIDEO_EMBED_FIELD_DEFAULT_NAME : $this->configuration['source_field'],
         '#options' => $options,
       ];

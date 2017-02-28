@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Annotation\EntityQueueHandler.
- */
-
 namespace Drupal\entityqueue\Annotation;
 
 use Drupal\Component\Annotation\Plugin;

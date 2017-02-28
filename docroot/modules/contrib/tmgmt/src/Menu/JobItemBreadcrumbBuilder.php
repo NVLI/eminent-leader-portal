@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains of \Drupal\tmgmt\Menu\JobItemBreadcrumbBuilder.
- */
-
 namespace Drupal\tmgmt\Menu;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;

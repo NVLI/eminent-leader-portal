@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\TranslatableResult.
- */
 
 namespace Drupal\tmgmt\Translator;
 

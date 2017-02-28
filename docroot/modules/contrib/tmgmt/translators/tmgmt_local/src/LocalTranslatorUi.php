@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\LocalTranslatorUi.
- */
-
 namespace Drupal\tmgmt_local;
 
 use Drupal\Component\Utility\Xss;

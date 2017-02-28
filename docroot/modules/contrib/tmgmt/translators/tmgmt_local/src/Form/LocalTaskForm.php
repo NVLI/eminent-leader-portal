@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt_local\Form\LocalTaskForm.
- */
-
 namespace Drupal\tmgmt_local\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
@@ -52,7 +47,7 @@ class LocalTaskForm extends ContentEntityForm {
       '#type' => 'select',
       '#options' => $assignees,
       '#empty_option' => t('- Unassigned -'),
-      '#default_value' => $local_task->getAssignee()->id(),
+      '#default_value' => $local_task->getAssignee() ? $local_task->getAssignee()->id() : NULL,
       '#access' => \Drupal::currentUser()->hasPermission('administer tmgmt') || \Drupal::currentUser()->hasPermission('administer translation tasks'),
     );
 

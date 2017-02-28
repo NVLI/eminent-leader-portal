@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Plugin\views\filter\EntityQueueInQueue.
- */
-
 namespace Drupal\entityqueue\Plugin\views\filter;
 
 use Drupal\Core\Session\AccountInterface;
@@ -66,8 +61,10 @@ class EntityQueueInQueue extends BooleanOperator {
 
     // Try to find an entity queue relationship in this view, and pick the first
     // one available.
+    $entity_queue_relationship = NULL;
     foreach ($this->view->relationship as $id => $relationship) {
       if ($relationship instanceof EntityQueueRelationship) {
+        $entity_queue_relationship = $relationship;
         $this->options['relationship'] = $id;
         $this->setRelationship();
 
@@ -75,22 +72,17 @@ class EntityQueueInQueue extends BooleanOperator {
       }
     }
 
-    if (isset($this->relationship) && ($subqueue_items_table_alias = $this->query->ensureTable($this->definition['field table'], $this->relationship))) {
+    if ($entity_queue_relationship) {
+      $subqueue_items_table_alias = $entity_queue_relationship->first_alias;
       $field_field = $this->definition['field field'];
       $operator  = $this->value ? 'IS NOT NULL' : 'IS NULL';
       $condition = "$subqueue_items_table_alias.$field_field $operator";
 
       $this->query->addWhereExpression($this->options['group'], $condition);
-
-      // Limit to a specific queue if the relationship specifies it.
-      if (isset($relationship) && !empty($relationship->options['limit_queue'])) {
-        $column = "$subqueue_items_table_alias.bundle";
-        $this->query->addWhere($this->options['group'], $column, $relationship->options['limit_queue'], '=');
-      }
     }
     else {
       if ($this->currentUser->hasPermission('administer views')) {
-        drupal_set_message($this->t('In order to sort by the queue position, you need to add the Entityqueue: Queue relationship on View: @view with display: @display', ['@view' => $this->view->storage->label(), '@display' => $this->view->current_display]), 'error');
+        drupal_set_message($this->t('In order to filter on items from the queue, you need to add the Entityqueue: Queue relationship on View: @view with display: @display', ['@view' => $this->view->storage->label(), '@display' => $this->view->current_display]), 'error');
       }
     }
   }

@@ -34,6 +34,14 @@ interface ResultInterface {
   public function getCount();
 
   /**
+   * Sets the count for the result.
+   *
+   * @param int|null $count
+   *   The amount of items for the result or NULL.
+   */
+  public function setCount($count);
+
+  /**
    * Returns the url.
    *
    * @return \Drupal\Core\Url
@@ -60,10 +68,18 @@ interface ResultInterface {
   /**
    * Returns true if the value is active (selected).
    *
-   * @return bool $active
+   * @return bool
    *   A boolean indicating the active state.
    */
   public function isActive();
+
+  /**
+   * Returns true if the value has active children(selected).
+   *
+   * @return bool
+   *   A boolean indicating the active state of children.
+   */
+  public function hasActiveChildren();
 
   /**
    * Overrides the display value of a result.
@@ -76,15 +92,15 @@ interface ResultInterface {
   /**
    * Sets children results.
    *
-   * @param \Drupal\facets\Result\ResultInterface $children
+   * @param \Drupal\facets\Result\ResultInterface[] $children
    *   The children to be added.
    */
-  public function setChildren(ResultInterface $children);
+  public function setChildren(array $children);
 
   /**
    * Returns children results.
    *
-   * @return \Drupal\facets\Result\ResultInterface[] $children
+   * @return \Drupal\facets\Result\ResultInterface[]
    *   The children results.
    */
   public function getChildren();

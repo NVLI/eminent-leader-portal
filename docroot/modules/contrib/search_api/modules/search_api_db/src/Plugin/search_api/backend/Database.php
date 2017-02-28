@@ -1261,11 +1261,15 @@ class Database extends BackendPluginBase implements PluginFormInterface {
             $field_name = self::getTextFieldName($field_id);
             $boost = $field_info['boost'];
             foreach ($unique_tokens as $token) {
+              $score = round($token['score'] * $boost * self::SCORE_MULTIPLIER);
+              // Take care that the score doesn't exceed the maximum value for
+              // the database column (2^32-1).
+              $score = min((int) $score, 4294967295);
               $text_inserts[] = array(
                 'item_id' => $item_id,
                 'field_name' => $field_name,
                 'word' => $token['value'],
-                'score' => (int) round($token['score'] * $boost * self::SCORE_MULTIPLIER),
+                'score' => $score,
               );
             }
           }
@@ -1315,7 +1319,7 @@ class Database extends BackendPluginBase implements PluginFormInterface {
       $this->getKeyValueStore()->set($index->id(), $db_info);
     }
     catch (\Exception $e) {
-      $transaction->rollback();
+      $transaction->rollBack();
       throw $e;
     }
   }
@@ -2112,6 +2116,14 @@ class Database extends BackendPluginBase implements PluginFormInterface {
             $nested_condition->isNull($column);
             $db_condition->condition($nested_condition);
           }
+          elseif ($not_equals) {
+            // Since SQL never returns TRUE for comparison with NULL values, we
+            // need to include "OR field IS NULL" explicitly for some operators.
+            $nested_condition = new Condition('OR');
+            $nested_condition->condition($column, $value, $operator);
+            $nested_condition->isNull($column);
+            $db_condition->condition($nested_condition);
+          }
           else {
             $db_condition->condition($column, $value, $operator);
           }
@@ -2340,6 +2352,7 @@ class Database extends BackendPluginBase implements PluginFormInterface {
       $select->addExpression('COUNT(DISTINCT t.item_id)', 'num');
       $select->groupBy('value');
       $select->orderBy('num', 'DESC');
+      $select->orderBy('value', 'ASC');
 
       $limit = $facet['limit'];
       if ((int) $limit > 0) {
@@ -2546,6 +2559,7 @@ class Database extends BackendPluginBase implements PluginFormInterface {
         }
         $field_query = $this->database->select($fields[$field]['table'], 't');
         $field_query->fields('t', array('word', 'item_id'))
+          ->condition('field_name', $field)
           ->condition('item_id', $all_results, 'IN');
         if ($pass == 1) {
           $field_query->condition('word', $incomplete_like, 'LIKE')
@@ -2571,7 +2585,7 @@ class Database extends BackendPluginBase implements PluginFormInterface {
       $incomp_len = strlen($incomplete_key);
       foreach ($db_query->execute() as $row) {
         $suffix = ($pass == 1) ? substr($row->word, $incomp_len) : ' ' . $row->word;
-        $suggestions[] = Suggestion::fromSuggestionSuffix($suffix, $row->results);
+        $suggestions[] = Suggestion::fromSuggestionSuffix($suffix, $row->results, $user_input);
       }
     }
 

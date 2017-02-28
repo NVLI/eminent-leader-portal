@@ -8,6 +8,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  * Implements SlickSkinInterface.
  */
 class SlickSkin implements SlickSkinInterface {
+
   use StringTranslationTrait;
 
   /**

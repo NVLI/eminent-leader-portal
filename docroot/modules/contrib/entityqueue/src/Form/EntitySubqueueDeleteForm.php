@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Form\EntitySubqueueDeleteForm.
- */
-
 namespace Drupal\entityqueue\Form;
 
 use Drupal\Core\Entity\ContentEntityDeleteForm;

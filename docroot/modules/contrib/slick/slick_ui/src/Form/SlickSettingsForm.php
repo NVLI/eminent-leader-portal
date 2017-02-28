@@ -13,7 +13,7 @@ class SlickSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'slick_settings_form';
   }
 
@@ -35,6 +35,7 @@ class SlickSettingsForm extends ConfigFormBase {
       '#title'         => $this->t('Enable Slick module slick.theme.css'),
       '#description'   => $this->t('Uncheck to permanently disable the module slick.theme.css, normally included along with skins.'),
       '#default_value' => $config->get('module_css'),
+      '#prefix'        => $this->t("Note! Slick doesn't need Slick UI to run. It is always safe to uninstall Slick UI once done with optionsets."),
     ];
 
     $form['slick_css'] = [

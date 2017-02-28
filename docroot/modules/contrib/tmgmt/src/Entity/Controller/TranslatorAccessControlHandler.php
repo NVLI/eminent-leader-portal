@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Entity\Controller\TranslatorAccessControlHandler
- */
-
 namespace Drupal\tmgmt\Entity\Controller;
 
 use Drupal\Core\Access\AccessResult;

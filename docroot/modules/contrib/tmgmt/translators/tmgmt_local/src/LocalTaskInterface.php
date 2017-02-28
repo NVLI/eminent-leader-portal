@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt_local\LocalTaskInterface.
- */
-
 namespace Drupal\tmgmt_local;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -48,8 +43,8 @@ interface LocalTaskInterface extends ContentEntityInterface, EntityChangedInterf
   /**
    * Return the user assigned to this task.
    *
-   * @return \Drupal\Core\Session\AccountInterface
-   *   The user assigned to this task.
+   * @return \Drupal\Core\Session\AccountInterface|null
+   *   The user assigned to this task or NULL if there is no user assigned.
    */
   public function getAssignee();
 

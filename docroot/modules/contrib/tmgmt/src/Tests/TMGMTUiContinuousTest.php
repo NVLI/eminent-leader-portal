@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\Tests\TMGMTUiContinuousTest.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 use Drupal\tmgmt\Entity\Job;

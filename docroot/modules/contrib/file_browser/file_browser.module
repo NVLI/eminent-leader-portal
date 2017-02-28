@@ -29,38 +29,48 @@ function file_browser_form_alter(&$form, FormStateInterface &$form_state) {
   if (isset($form['#form_id'])) {
     if ($form['#form_id'] == 'entity_browser_browse_files_form' ||
         $form['#form_id'] == 'entity_browser_browse_files_modal_form') {
-      // Attach our library.
-      $form['#attached']['library'][] = 'file_browser/view';
-      $form['#attached']['library'][] = 'file_browser/dropzone_css';
-
-      // Wrap actions so we can float them at the bottom of the browser.
-      $form['actions_wrap'] = [
-        '#type' => 'container',
-        '#attributes' => [
-          'class' => 'file-browser-actions',
-        ],
-      ];
-
-      if (isset($form['actions'])) {
-        $form['actions_wrap'][] = $form['actions'];
-        unset($form['actions']);
-      }
-
-      if (isset($form['widget']) && isset($form['widget']['actions'])) {
-        $form['actions_wrap'][] = $form['widget']['actions'];
-        unset($form['widget']['actions']);
-      }
-
-      if (!empty($form['selection_display'])) {
-        $form['selection_display']['#weight'] = 100;
-        $form['actions_wrap'][] = $form['selection_display'];
-        unset($form['selection_display']);
-      }
-
-      // Add a class for generic styling.
-      $form['#attributes']['class'][] = 'file-browser-form';
+      file_browser_attatch_file_browser_to_form($form);
     }
   }
+}
+
+/**
+ * Attach the file_browser functionality into a form.
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ */
+function file_browser_attatch_file_browser_to_form(&$form) {
+  // Attach our library.
+  $form['#attached']['library'][] = 'file_browser/view';
+  $form['#attached']['library'][] = 'file_browser/dropzone_css';
+
+  // Wrap actions so we can float them at the bottom of the browser.
+  $form['actions_wrap'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['file-browser-actions'],
+    ],
+  ];
+
+  if (isset($form['actions'])) {
+    $form['actions_wrap'][] = $form['actions'];
+    unset($form['actions']);
+  }
+
+  if (isset($form['widget']) && isset($form['widget']['actions'])) {
+    $form['actions_wrap'][] = $form['widget']['actions'];
+    unset($form['widget']['actions']);
+  }
+
+  if (!empty($form['selection_display'])) {
+    $form['selection_display']['#weight'] = 100;
+    $form['actions_wrap'][] = $form['selection_display'];
+    unset($form['selection_display']);
+  }
+
+  // Add a class for generic styling.
+  $form['#attributes']['class'][] = 'file-browser-form';
 }
 
 /**

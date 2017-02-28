@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\filter\JobState.
- */
-
 namespace Drupal\tmgmt\Plugin\views\filter;
 
 use Drupal\tmgmt\ContinuousTranslatorInterface;

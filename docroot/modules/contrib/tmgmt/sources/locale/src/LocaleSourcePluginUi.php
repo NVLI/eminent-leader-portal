@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Provides the I18nString source controller.
- */
-
 namespace Drupal\tmgmt_locale;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -51,7 +46,7 @@ class LocaleSourcePluginUi extends SourcePluginUiBase {
     // later.
     $langcode_to_filed_alias_map = array();
     foreach ($languages as $langcode) {
-      $table_alias = $select->leftJoin('locales_target', db_escape_field("lt_$langcode"), "ls.lid = %alias.lid AND %alias.language = '$langcode'");
+      $table_alias = $select->leftJoin('locales_target', db_escape_table("lt_$langcode"), "ls.lid = %alias.lid AND %alias.language = '$langcode'");
       $langcode_to_filed_alias_map[$langcode] = $select->addField($table_alias, 'language');
     }
     unset($field_alias);
@@ -94,7 +89,7 @@ class LocaleSourcePluginUi extends SourcePluginUiBase {
   }
 
   /**
-   * Implements TMGMTSourceUIControllerInterface::overviewForm().
+   * {@inheritdoc}
    */
   public function overviewForm(array $form, FormStateInterface $form_state, $type) {
     $form = parent::overviewForm($form, $form_state, $type);
@@ -243,7 +238,7 @@ class LocaleSourcePluginUi extends SourcePluginUiBase {
   }
 
   /**
-   * Implements TMGMTSourceUIControllerInterface::overviewFormSubmit().
+   * {@inheritdoc}
    */
   public function overviewFormSubmit(array $form, FormStateInterface $form_state, $type) {
     // Handle search redirect.

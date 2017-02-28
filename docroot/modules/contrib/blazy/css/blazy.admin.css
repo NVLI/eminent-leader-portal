@@ -23,7 +23,9 @@ body.path-admin .form--slick *,
   position: relative;
 }
 
-.form--slick::after {
+.form--slick::after,
+.form--slick .fieldset-wrapper::after,
+.form--slick .form-checkboxes {
   content: "";
   display: table;
   clear: both;
@@ -31,6 +33,11 @@ body.path-admin .form--slick *,
 
 .form--slick .form-actions {
   clear: both;
+}
+
+.form--slick ~ .form-actions {
+  float: left;
+  width: 100%;
 }
 
 .form--half,
@@ -57,7 +64,7 @@ body.path-admin .form--slick *,
 }
 
 .form--slick #edit-delete {
-  float: right;
+  display: block;
 }
 
 .form--vanilla {
@@ -374,6 +381,11 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
   width: 100%;
 }
 
+/** Third party settings. */
+.form--slick ~ .form-item {
+  clear: both;
+}
+
 .form--slick > div[id^="field-"] fieldset {
   border-left: 0;
   border-right: 0;
@@ -426,6 +438,10 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
   text-align: left;
   white-space: normal;
   z-index: 99;
+}
+
+.has-tooltip .form-item--tooltip-wide > .description {
+  min-width: 320px;
 }
 
 .has-tooltip .form-item > .description ul {
@@ -573,21 +589,17 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
  * Form items
  */
 .form--slick .form-item {
-  background: white;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmYWZhZmEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.6)), color-stop(100%, #fafafa));
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, #fafafa 100%);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, #fafafa 100%);
+  background: none;
   border-bottom: 1px solid #dadada;
   border-top: 1px solid white;
+  bottom: -1px;
   float: left;
   font-size: 13px;
   font-size: 0.8125rem;
   line-height: 32px;
   margin: 0;
   min-height: 72px;
-  padding: 20px 0 12px;
+  padding: 20px 12px 12px;
   position: relative;
   width: 100%;
 }
@@ -657,7 +669,7 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
   line-height: 18px; /* Fix for Chrome linux */
   min-height: 28px;
   min-width: 120px;
-  padding: 4px 2px 2px; /* Fix for Chrome linux */
+  padding: 4px 4px 2px; /* Fix for Chrome linux */
   vertical-align: middle;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -699,15 +711,15 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
 .form--slick .form-item label {
   display: block;
   /* Overrides over-specified Seven */
-  padding: 2px 5px 2px 5px !important;
+  padding: 2px 5px 2px 0 !important;
   margin: 0;
-  text-align: right;
+  /* text-align: right; */
   white-space: normal;
 }
 
 .form--slick .form-item.form-type-textfield input {
   width: auto;
-  max-width: 140px;
+  max-width: 150px;
 }
 
 .form--slick .form-item.form-type-textfield .form-text--int {
@@ -942,7 +954,9 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
 
 .form--slick .form-checkboxes {
   border-top: 2px solid #e7e7e7;
+  clear: both;
   margin-top: -1px;
+  width: 100%;
 }
 
 /**
@@ -973,12 +987,20 @@ html.js .form--slick .collapsed .details-legend .details-legend-prefix::after {
   width: 100%;
 }
 
+.form--slick .form-item.form-item--sizes {
+  background: none;
+  border: 0;
+  min-height: 42px;
+  padding: 10px 0;
+}
+
 td .form__title {
   margin: -10px auto;
 }
 
 .field-ui-overview td .form__title {
   margin: 0 auto;
+  position: relative;
 }
 
 .form--vanilla .form__header {
@@ -993,6 +1015,7 @@ td .form__title {
   background: none;
   border: 0;
   display: block;
+  height: 62px;
   left: 0;
   position: absolute;
   top: 0;
@@ -1037,6 +1060,10 @@ td .form__title {
 .form--slick .form__header .form-item input {
   width: 210px;
   max-width: 210px;
+}
+
+.form--slick .form__header .form-item .form-checkbox {
+  max-width: 100%;
 }
 
 .form--slick .form__header .form-item label {
@@ -1098,10 +1125,6 @@ td .form__title {
 .ui-dialog-content .form--slick .form-item,
 .ui-dialog-content .form--slick .form-item .form-item {
   clear: none;
-}
-
-.ui-dialog-content .form--views {
-  /* padding-top: 40px; */
 }
 
 .ui-dialog-content .form--views > .details-wrapper {
@@ -1172,6 +1195,10 @@ td .form__title {
   margin: 30px auto;
 }
 
+.form--views.form--half {
+  margin-top: 60px;
+}
+
 .form--slick .form-item label {
   line-height: 16px;
 }
@@ -1216,6 +1243,13 @@ td .form__title {
 @media screen and (min-width: 760px) {
   .form--slick .form-item {
     border-right: 1px solid #e7e7e7;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .form--slick .form-item label {
+    /* Overrides over-specified Seven */
+    padding: 2px 5px 2px 5px !important;
   }
 
   .form--optionset .form-item,
@@ -1227,6 +1261,10 @@ td .form__title {
   .form--slick .vertical-tabs__menu-item,
   .form--slick .vertical-tabs__menu-item.is-selected {
     float: left;
+  }
+
+  .form--slick .form-item label {
+    text-align: right;
   }
 
   .form--half .form-item,
@@ -1263,9 +1301,46 @@ td .form__title {
 
   .form--slick .form-item label {
     float: left;
-    width: 180px;
+    width: 160px;
     text-align: right;
     white-space: normal;
+  }
+
+  .form--slick.form--half .form-checkboxes .form-item {
+    width: 33.3333%;
+  }
+
+  .form--slick.form--image .form-wrapper--caption .form-item {
+    width: 49.9999%;
+  }
+
+  .field-plugin-settings-editing .form--slick {
+    margin-top: 62px;
+  }
+
+  .form--slick.form--half {
+    margin-bottom: 42px;
+  }
+
+  .scroll .form--slick.form--half .form-item--style,
+  .field-plugin-settings-editing .form--slick .form-item--style {
+    background: none;
+    border: 0;
+    height: 62px;
+    min-height: 32px;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: -42px;
+    z-index: 9;
+  }
+
+  .form--slick .form__header .form-type-checkbox {
+    max-width: 160px;
+  }
+
+  .form--slick #edit-delete {
+    float: right;
   }
 }
 
@@ -1302,5 +1377,57 @@ td .form__title {
     float: right;
     width: auto;
   }
+
+  .form--slick.form--half .form-checkboxes .form-item {
+    width: 24.9999%;
+  }
+
+  .form--slick.form--image .form-wrapper--caption .form-item,
+  .form--slick.form--caption-2 .form-wrapper--caption .form-item {
+    width: 49.9999%;
+  }
+
+  .form--slick.form--caption-3 .form-wrapper--caption .form-item {
+    width: 33.3333%;
+  }
+
+  .has-tooltip .form-item--tooltip-wide > .description {
+    max-width: 480px;
+    min-width: 480px;
+  }
+
+  .form--slick .form-item label {
+    width: 180px;
+  }
+
+  .form--slick.form--half {
+    max-width: 960px;
+  }
 }
 
+@media screen and (min-width: 1400px) {
+  .form--slick .form-item input,
+  .form--slick .form-item select {
+    max-width: 180px;
+    min-width: 180px;
+  }
+}
+
+/** Declutter form when Vanilla is enabled coz table form states are broken. */
+.form--vanilla-on .form__title--media-switch,
+.form--vanilla-on .form__title--fields,
+.form--vanilla-on .form__title--breakpoints,
+.form--vanilla-on .tableresponsive-toggle-columns,
+.form--vanilla-on .form-wrapper--table-breakpoints,
+.form--responsive-image-on .form__title--breakpoints,
+.form--responsive-image-on .tableresponsive-toggle-columns,
+.form--responsive-image-on .form-wrapper--table-breakpoints,
+.form--responsive-image-on .form-item--sizes,
+.form--media-switch-rendered .form__title--breakpoints,
+.form--media-switch-rendered .tableresponsive-toggle-columns,
+.form--media-switch-rendered .form-wrapper--table-breakpoints,
+.form--media-switch-rendered .form-item--background,
+.form--media-switch-rendered .form-item--image-style,
+.form--media-switch-rendered .form-item--ratio {
+  display: none !important;
+}

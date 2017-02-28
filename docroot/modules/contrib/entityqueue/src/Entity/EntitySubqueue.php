@@ -1,12 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Entity\EntitySubqueue.
- */
-
 namespace Drupal\entityqueue\Entity;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -35,10 +31,10 @@ use Drupal\user\UserInterface;
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
  *     },
- *     "list_builder" = "Drupal\entityqueue\EntitySubqueueListBuilder"
+ *     "list_builder" = "Drupal\entityqueue\EntitySubqueueListBuilder",
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   base_table = "entity_subqueue",
- *   data_table = "entity_subqueue_field_data",
  *   entity_keys = {
  *     "id" = "name",
  *     "bundle" = "queue",
@@ -315,6 +311,28 @@ class EntitySubqueue extends ContentEntityBase implements EntitySubqueueInterfac
     $url->setRouteParameter('entity_queue', $this->bundle());
 
     return $url;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTagsToInvalidate() {
+    $tags = [];
+
+    // Use the cache tags of the entity queue.
+    // @todo Allow queue handlers to control this?
+    if ($queue = $this->getQueue()) {
+      $tags = Cache::mergeTags(parent::getCacheTagsToInvalidate(), $queue->getCacheTags());
+
+      // Sadly, Views handlers have no way of influencing the cache tags of the
+      // views result cache plugins, so we have to invalidate the target entity
+      // type list tag.
+      // @todo Reconsider this when https://www.drupal.org/node/2710679 is fixed.
+      $target_entity_type = $this->entityTypeManager()->getDefinition($this->getQueue()->getTargetEntityTypeId());
+      $tags = Cache::mergeTags($tags, $target_entity_type->getListCacheTags());
+    }
+
+    return $tags;
   }
 
 }

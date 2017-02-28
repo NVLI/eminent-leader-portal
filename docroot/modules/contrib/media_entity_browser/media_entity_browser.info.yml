@@ -22,8 +22,8 @@ config_devel:
   - entity_browser.browser.media_entity_browser
   - embed.button.media_entity_embed
 
-# Information added by Drupal.org packaging script on 2016-06-11
-version: '8.x-1.x-dev'
+# Information added by Drupal.org packaging script on 2017-02-22
+version: '8.x-1.0-beta3'
 core: '8.x'
 project: 'media_entity_browser'
-datestamp: 1465644560
+datestamp: 1487741886

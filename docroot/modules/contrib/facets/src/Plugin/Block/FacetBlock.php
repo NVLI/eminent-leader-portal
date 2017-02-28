@@ -29,7 +29,7 @@ class FacetBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * The entity storage used for facets.
    *
-   * @var \Drupal\Core\Entity\EntityStorageInterface $facetStorage
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $facetStorage;
 
@@ -57,17 +57,12 @@ class FacetBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    /** @var \Drupal\facets\FacetManager\DefaultFacetManager $facet_manager */
-    $facet_manager = $container->get('facets.manager');
-    /** @var \Drupal\Core\Entity\EntityStorageInterface $facet_storage */
-    $facet_storage = $container->get('entity_type.manager')->getStorage('facets_facet');
-
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $facet_manager,
-      $facet_storage
+      $container->get('facets.manager'),
+      $container->get('entity_type.manager')->getStorage('facets_facet')
     );
   }
 

@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\entity_browser\SelectionDisplayBase;
 use Drupal\views\Views;
+use Drupal\views\Entity\View as ViewEntity;
 
 /**
  * Displays current selection in a View.
@@ -13,8 +14,10 @@ use Drupal\views\Views;
  * @EntityBrowserSelectionDisplay(
  *   id = "view",
  *   label = @Translation("View selection display"),
- *   description = @Translation("Displays current selection in a View."),
- *   acceptPreselection = TRUE
+ *   description = @Translation("Use a pre-configured view as selection area."),
+ *   acceptPreselection = TRUE,
+ *   provider = "views",
+ *   js_commands = FALSE
  * )
  */
 class View extends SelectionDisplayBase {
@@ -113,6 +116,18 @@ class View extends SelectionDisplayBase {
       $this->configuration['view'] = $view_id;
       $this->configuration['view_display'] = $display_id;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = [];
+    if ($this->configuration['view']) {
+      $view = ViewEntity::load($this->configuration['view']);
+      $dependencies[$view->getConfigDependencyKey()] = [$view->getConfigDependencyName()];
+    }
+    return $dependencies;
   }
 
 }

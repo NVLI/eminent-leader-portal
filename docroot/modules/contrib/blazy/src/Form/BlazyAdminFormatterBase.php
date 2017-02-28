@@ -18,190 +18,41 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
     $image_styles  = image_style_options(FALSE);
     $is_responsive = function_exists('responsive_image_get_image_dimensions');
 
-    $form['image_style'] = [
-      '#type'        => 'select',
-      '#title'       => t('Image style'),
-      '#options'     => $image_styles,
-      '#description' => t('The content image style. This will be treated as the fallback image, which is normally smaller, if Breakpoints are provided. Otherwise this is the only image displayed.'),
-      '#weight'      => -100,
-    ];
-
-    if (isset($definition['thumbnail_styles'])) {
-      $form['thumbnail_style'] = [
-        '#type'        => 'select',
-        '#title'       => t('Thumbnail style'),
-        '#options'     => $image_styles,
-        '#description' => t('Usages: Photobox thumbnail, or custom work with thumbnails. Leave empty to not use thumbnails.'),
-        '#access'      => isset($definition['thumbnail_styles']),
-        '#weight'      => -100,
-      ];
+    if (empty($definition['no_image_style'])) {
+      $form['image_style'] = $this->baseForm($definition)['image_style'];
     }
 
-    if ($is_responsive && !empty($definition['responsive_images'])) {
+    if (!empty($definition['thumbnail_style'])) {
+      $form['thumbnail_style'] = $this->baseForm($definition)['thumbnail_style'];
+    }
+
+    if ($is_responsive && !empty($definition['responsive_image'])) {
       $form['responsive_image_style'] = [
         '#type'        => 'select',
-        '#title'       => t('Responsive image'),
+        '#title'       => $this->t('Responsive image'),
         '#options'     => $this->getResponsiveImageOptions(),
-        '#description' => t('Responsive image style for the main stage image is more reasonable for large images. Only expects multi-serving IMG, but not PICTURE element. Not compatible with breakpoints and aspect ratio, yet. Leave empty to disable.'),
+        '#description' => $this->t('Responsive image style for the main stage image is more reasonable for large images. Works with multi-serving IMG, or PICTURE element. Not compatible with breakpoints and aspect ratio, yet. Leave empty to disable.'),
         '#access'      => $this->getResponsiveImageOptions(),
         '#weight'      => -100,
       ];
+
+      if (!empty($definition['background'])) {
+        $form['background']['#states'] = $this->getState(static::STATE_RESPONSIVE_IMAGE_STYLE_DISABLED, $definition);
+      }
     }
 
-    if (isset($definition['thumbnail_effects'])) {
+    if (!empty($definition['thumbnail_effect'])) {
       $form['thumbnail_effect'] = [
-        '#type'        => 'select',
-        '#title'       => t('Thumbnail effect'),
-        '#options'     => isset($definition['thumbnail_effects']) ? $definition['thumbnail_effects'] : [],
-        '#access'      => isset($definition['thumbnail_effects']),
-        '#weight'      => -100,
-        // '#states'      => $this->getState(static::STATE_THUMBNAIL_STYLE_ENABLED, $definition),
+        '#type'    => 'select',
+        '#title'   => $this->t('Thumbnail effect'),
+        '#options' => isset($definition['thumbnail_effect']) ? $definition['thumbnail_effect'] : [],
+        '#weight'  => -100,
       ];
     }
 
     if ($is_responsive && isset($form['responsive_image_style'])) {
       $url = Url::fromRoute('entity.responsive_image_style.collection')->toString();
-      $form['responsive_image_style']['#description'] .= ' ' . t('<a href=":url" target="_blank">Manage responsive image styles</a>.', [':url' => $url]);
-    }
-
-    if (isset($form['background'])) {
-      $form['background']['#states'] = $this->getState(static::STATE_RESPONSIVE_IMAGE_STYLE_DISABLED, $definition);
-    }
-  }
-
-  /**
-   * Returns re-usable media switch form elements.
-   */
-  public function mediaSwitchForm(array &$form, $definition = []) {
-    $is_colorbox  = function_exists('colorbox_theme');
-    $is_photobox  = function_exists('photobox_theme');
-    $is_token     = function_exists('token_theme');
-    $image_styles = image_style_options(FALSE);
-    $photobox     = \Drupal::root() . '/libraries/photobox/photobox/jquery.photobox.js';
-
-    if (is_file($photobox)) {
-      $is_photobox = TRUE;
-    }
-
-    $form['media_switch'] = [
-      '#type'        => 'select',
-      '#title'       => t('Media switcher'),
-      '#options'     => [
-        'content' => t('Image linked to content'),
-      ],
-      '#description' => t('May depend on the enabled supported modules: colorbox, photobox. Be sure to add Thumbnail style if using Photobox.'),
-      '#prefix'      => '<h3 class="form__title">' . t('Media switcher') . '</h3>',
-      '#weight'      => -99,
-      '#access'      => isset($definition['media_switch_form']),
-    ];
-
-    // http://en.wikipedia.org/wiki/List_of_common_resolutions
-    $ratio = ['1:1', '3:2', '4:3', '8:5', '16:9', 'fluid', 'enforced'];
-    $form['ratio'] = [
-      '#type'        => 'select',
-      '#title'       => t('Aspect ratio'),
-      '#options'     => array_combine($ratio, $ratio),
-      '#description' => t('Aspect ratio to get consistently responsive images and iframes. And to fix layout reflow and excessive height issues. <a href="@dimensions" target="_blank">Image styles and video dimensions</a> must <a href="@follow" target="_blank">follow the aspect ratio</a>. If not, images will be unexpectedly distorted. Choose <strong>fluid</strong> if unsure. Choose <strong>enforced</strong> if you can stick to one aspect ratio and want multi-serving, or Responsive images. <a href="@link" target="_blank">Learn more</a>, or leave empty if you care not for aspect ratio, or prefer to DIY. <br /><strong>Note!</strong> Only compatible with Blazy multi-serving images, but not with Responsive image, unless they stick to one aspect ratio with an <strong>enforced</strong> ratio.', [
-        '@dimensions' => '//size43.com/jqueryVideoTool.html',
-        '@follow'     => '//en.wikipedia.org/wiki/Aspect_ratio_%28image%29',
-        '@link'       => '//www.smashingmagazine.com/2014/02/27/making-embedded-content-work-in-responsive-design/',
-      ]),
-      '#access'       => isset($definition['media_switch_form']),
-      '#weight'       => -96,
-      '#states'       => $this->getState(static::STATE_RESPONSIVE_IMAGE_STYLE_DISABLED, $definition),
-    ];
-
-    $form['iframe_lazy'] = [
-      '#type'        => 'checkbox',
-      '#title'       => t('Lazy iframe'),
-      '#description' => t('Check to make the video/audio iframes truly lazyloaded, and speed up loading time. Depends on JS enabled at client side. <a href=":more" target="_blank">Read more</a> to <a href=":url" target="_blank">decide</a>.', [':more' => '//goo.gl/FQLFQ6', ':url' => '//goo.gl/f78pMl']),
-      '#access'      => isset($definition['multimedia']),
-      '#weight'      => -96,
-      '#states'      => $this->getState(static::STATE_IFRAME_ENABLED, $definition),
-    ];
-
-    $form['view_mode'] = [
-      '#type'        => 'select',
-      '#options'     => isset($definition['target_type']) ? $this->getViewModeOptions($definition['target_type']) : [],
-      '#title'       => t('View mode'),
-      '#description' => t('Required to grab the fields. Be sure the selected "View mode" is enabled, and the enabled fields here are not hidden there. Manage view modes on the <a href=":view_modes">View modes page</a>.', [':view_modes' => Url::fromRoute('entity.entity_view_mode.collection')->toString()]),
-      '#access'      => isset($definition['fieldable_form']) && isset($definition['target_type']),
-      '#weight'      => -96,
-      '#enforced'    => TRUE,
-    ];
-
-    // Optional lightbox integration.
-    if ($is_colorbox || $is_photobox || isset($definition['lightbox'])) {
-      if ($is_colorbox) {
-        $form['media_switch']['#options']['colorbox'] = t('Image to colorbox');
-      }
-
-      if ($is_photobox) {
-        $form['media_switch']['#options']['photobox'] = t('Image to photobox');
-      }
-
-      // Re-use the same image style for both lightboxes.
-      $form['box_style'] = [
-        '#type'    => 'select',
-        '#title'   => t('Lightbox image style'),
-        '#options' => $image_styles,
-        '#weight'  => -99,
-      ];
-
-      if (!isset($definition['lightbox'])) {
-        $form['box_style']['#states'] = $this->getState(static::STATE_LIGHTBOX_ENABLED, $definition);
-      }
-
-      $box_captions = [
-        'auto'         => t('Automatic'),
-        'alt'          => t('Alt text'),
-        'title'        => t('Title text'),
-        'alt_title'    => t('Alt and Title'),
-        'title_alt'    => t('Title and Alt'),
-        'entity_title' => t('Content title'),
-        'custom'       => t('Custom'),
-      ];
-
-      $form['box_caption'] = [
-        '#type'        => 'select',
-        '#title'       => t('Lightbox caption'),
-        '#options'     => $box_captions,
-        '#access'      => isset($definition['box_captions']),
-        '#weight'      => -99,
-        '#states'      => $this->getState(static::STATE_LIGHTBOX_ENABLED, $definition),
-        '#description' => t('Automatic will search for Alt text first, then Title text.'),
-      ];
-
-      $form['box_caption_custom'] = [
-        '#title'       => t('Lightbox custom caption'),
-        '#type'        => 'textfield',
-        '#access'      => isset($definition['box_captions']),
-        '#weight'      => -99,
-        '#states'      => $this->getState(static::STATE_LIGHTBOX_CUSTOM, $definition),
-        '#description' => t('Multi-value rich text field will be mapped to each image by its delta.'),
-      ];
-
-      if ($is_token) {
-        $types = isset($definition['entity_type']) ? [$definition['entity_type']] : [];
-        $types = isset($definition['target_type']) ? array_merge($types, [$definition['target_type']]) : $types;
-        $form['box_caption_custom']['#field_suffix'] = [
-          '#theme'       => 'token_tree_link',
-          '#text'        => t('Tokens'),
-          '#token_types' => $types,
-        ];
-      }
-      else {
-        $form['box_caption_custom']['#description'] .= ' ' . t('Install Token module to browse available tokens.');
-      }
-
-      $form['dimension'] = [
-        '#type'        => 'textfield',
-        '#title'       => t('Lightbox media dimension'),
-        '#description' => t('Use WIDTHxHEIGHT, e.g.: 640x360. This allows video dimensions for the lightbox to be different from the lightbox image style.'),
-        '#access'      => isset($definition['multimedia']),
-        '#weight'      => -99,
-        '#states'      => $this->getState(static::STATE_LIGHTBOX_ENABLED, $definition),
-      ];
+      $form['responsive_image_style']['#description'] .= ' ' . $this->t('<a href=":url" target="_blank">Manage responsive image styles</a>.', [':url' => $url]);
     }
   }
 
@@ -220,6 +71,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
 
     unset($image_styles['']);
 
+    $extras = ['details', 'fieldset', 'hidden', 'markup', 'item', 'table'];
     foreach ($settings as $key => $setting) {
       $type = isset($elements[$key]['#type']) ? $elements[$key]['#type'] : '';
 
@@ -227,7 +79,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
         continue;
       }
 
-      if (in_array($type, ['button', 'hidden', 'markup', 'item', 'submit']) || empty($type)) {
+      if (in_array($type, $extras) || empty($type)) {
         continue;
       }
 
@@ -248,8 +100,8 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
           }
         }
 
-        $title   = t('Breakpoints');
-        $setting = $widths ? implode(', ', $widths) : t('None');
+        $title   = $this->t('Breakpoints');
+        $setting = $widths ? implode(', ', $widths) : $this->t('None');
       }
       else {
         if (empty($title) || $vanilla || !$access) {
@@ -261,7 +113,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
         }
 
         if (is_bool($setting) && $setting) {
-          $setting = t('Yes');
+          $setting = $this->t('Yes');
         }
         elseif (is_string($setting) && $key != 'cache') {
           // The value is based on select options.
@@ -303,7 +155,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       }
 
       if (isset($settings[$key])) {
-        $summary[] = t('@title: <strong>@setting</strong>', [
+        $summary[] = $this->t('@title: <strong>@setting</strong>', [
           '@title'   => $title,
           '@setting' => $setting,
         ]);
@@ -325,9 +177,15 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       $target_bundles = $bundle_service->getBundleInfo($entity_type);
     }
 
+    // Declutters options from less relevant options.
+    $excludes = $this->getExcludedFieldOptions();
+
     foreach ($target_bundles as $bundle => $label) {
       if ($fields = $storage->loadByProperties(['entity_type' => $entity_type, 'bundle' => $bundle])) {
         foreach ((array) $fields as $field_name => $field) {
+          if (in_array($field->getName(), $excludes)) {
+            continue;
+          }
           if (empty($allowed_field_types)) {
             $options[$field->getName()] = $field->getLabel();
           }
@@ -343,6 +201,18 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
     }
 
     return $options;
+  }
+
+  /**
+   * Declutters options from less relevant options.
+   */
+  public function getExcludedFieldOptions() {
+    $excludes = 'field_document_size field_id field_media_in_library field_mime_type field_source field_tweet_author field_tweet_id field_tweet_url field_media_video_embed_field field_instagram_shortcode field_instagram_url';
+    $excludes = explode(' ', $excludes);
+    $excludes = array_combine($excludes, $excludes);
+
+    $this->blazyManager->getModuleHandler()->alter('blazy_excluded_field_options', $excludes);
+    return $excludes;
   }
 
   /**

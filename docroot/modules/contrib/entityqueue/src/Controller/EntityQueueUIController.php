@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\Controller\EntityQueueUIController.
- */
-
 namespace Drupal\entityqueue\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

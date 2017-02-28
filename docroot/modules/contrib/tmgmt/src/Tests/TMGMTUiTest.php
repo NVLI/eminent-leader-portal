@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tmgmt\Tests\TMGMTUiTest.
- */
 
 namespace Drupal\tmgmt\Tests;
 
@@ -153,7 +149,7 @@ class TMGMTUiTest extends EntityTestBase {
 
     // Another job.
     $job = tmgmt_job_match_item('en', 'es');
-    $job->addItem('test_source', 'test', 10);
+    $item10 = $job->addItem('test_source', 'test', 10);
 
     // Go to checkout form.
     $redirects = tmgmt_job_checkout_multiple(array($job));
@@ -190,6 +186,16 @@ class TMGMTUiTest extends EntityTestBase {
     $this->drupalPostForm(NULL, $edit, t('Submit to provider'));
     $this->assertText(t('Test translation created'));
 
+    // Now that this job item is in the reviewable state, test primary buttons.
+    $this->drupalGet('admin/tmgmt/items/' . $item10->id());
+    $this->assertRaw('Save" class="button js-form-submit form-submit"');
+    $this->drupalPostForm(NULL, NULL, t('Save'));
+    $this->clickLink('View');
+    $this->assertRaw('Save as completed" class="button button--primary js-form-submit form-submit"');
+    $this->drupalPostForm(NULL, NULL, t('Save'));
+    $this->assertRaw('Save job" class="button button--primary js-form-submit form-submit"');
+    $this->drupalPostForm(NULL, NULL, t('Save job'));
+
     // HTML tags count.
     \Drupal::state()->set('tmgmt.test_source_data', array(
       'title' => array(
@@ -220,14 +226,6 @@ class TMGMTUiTest extends EntityTestBase {
     // Test if the phantom wrapper is not displayed because of #translate FALSE.
     $this->assertNoRaw('tmgmt-ui-element-phantom-wrapper');
 
-    // Test primary buttons.
-    $this->assertRaw('Save" class="button button--primary js-form-submit form-submit"');
-    $this->drupalPostForm(NULL, NULL, t('Save'));
-    $this->clickLink('View');
-    $this->assertRaw('Save as completed" class="button button--primary js-form-submit form-submit"');
-    $this->drupalPostForm(NULL, NULL, t('Save'));
-    $this->assertRaw('Save job" class="button button--primary js-form-submit form-submit"');
-    $this->drupalPostForm(NULL, NULL, t('Save job'));
     $this->drupalGet('admin/tmgmt/jobs');
 
     // Total number of tags should be 8.
@@ -354,8 +352,11 @@ class TMGMTUiTest extends EntityTestBase {
     )));
     $end_rows = $this->xpath('//tbody/tr');
     $this->assertEqual(count($end_rows), 4);
-    $this->drupalPostForm('admin/tmgmt/items/' . $item4->id(), array(), t('Abort Item'));
+    $this->drupalGet('admin/tmgmt/items/' . $item4->id());
+    $this->clickLink('Abort');
     $this->drupalPostForm(NULL, array(), t('Confirm'));
+    $this->assertText('Aborted');
+    $this->assertNoLink('Abort');
   }
 
   /**
@@ -376,7 +377,9 @@ class TMGMTUiTest extends EntityTestBase {
     $default_translator
       ->setSetting('expose_settings', FALSE)
       ->save();
-    $job = $this->createJob();
+
+    // Create a job but do not save yet, to simulate how this works in the UI.
+    $job = tmgmt_job_create('en', 'de', 0, []);
 
     $redirects = tmgmt_job_checkout_multiple(array($job));
     $this->assertFalse($redirects);

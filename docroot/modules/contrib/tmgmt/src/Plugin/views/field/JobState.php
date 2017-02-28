@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tmgmt\Plugin\views\field\JobState.
- */
-
 namespace Drupal\tmgmt\Plugin\views\field;
 
 use Drupal\tmgmt\JobInterface;

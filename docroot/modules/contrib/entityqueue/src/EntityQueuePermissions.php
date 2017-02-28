@@ -1,15 +1,13 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entityqueue\EntityQueuePermissions.
- */
-
 namespace Drupal\entityqueue;
 
 use Drupal\entityqueue\Entity\EntityQueue;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 class EntityQueuePermissions {
+
+  use StringTranslationTrait;
 
   /**
    * @return array
@@ -34,18 +32,18 @@ class EntityQueuePermissions {
 
     if ($queue->getHandlerPlugin()->supportsMultipleSubqueues()) {
       $permissions["create $queue_id entityqueue"] = array(
-        'title' => t('Add %queue subqueues', array('%queue' => $queue->label())),
-        'description' => t('Access to create new subqueue to the %queue queue.', array('%queue' => $queue->label())),
+        'title' => $this->t('Add %queue subqueues', array('%queue' => $queue->label())),
+        'description' => $this->t('Access to create new subqueue to the %queue queue.', array('%queue' => $queue->label())),
       );
       $permissions["delete $queue_id entityqueue"] = array(
-        'title' => t('Delete %queue subqueues', array('%queue' => $queue->label())),
-        'description' => t('Access to delete subqueues of the %queue queue.', array('%queue' => $queue->label())),
+        'title' => $this->t('Delete %queue subqueues', array('%queue' => $queue->label())),
+        'description' => $this->t('Access to delete subqueues of the %queue queue.', array('%queue' => $queue->label())),
       );
     }
 
     $permissions["update $queue_id entityqueue"] = array(
-      'title' => t('Manipulate %queue queue', array('%queue' => $queue->label())),
-      'description' => t('Access to update the %queue queue.', array('%queue' => $queue->label())),
+      'title' => $this->t('Manipulate %queue queue', array('%queue' => $queue->label())),
+      'description' => $this->t('Access to update the %queue queue.', array('%queue' => $queue->label())),
     );
 
     return $permissions;

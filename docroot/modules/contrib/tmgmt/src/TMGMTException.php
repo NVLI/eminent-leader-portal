@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\tmgmt\TMGMTException.
- */
-
 namespace Drupal\tmgmt;
 
 /**

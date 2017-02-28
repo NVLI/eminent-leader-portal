@@ -13,7 +13,7 @@
   Drupal.AjaxCommands.prototype.select_entities = function (ajax, response, status) {
     var uuid = drupalSettings.entity_browser.modal.uuid;
 
-    $('input[data-uuid="' + uuid + '"]').trigger('entities-selected', [uuid, response.entities])
+    $(':input[data-uuid="' + uuid + '"]').trigger('entities-selected', [uuid, response.entities])
       .removeClass('entity-browser-processed').unbind('entities-selected');
   };
 
@@ -33,10 +33,13 @@
           }
 
           if (typeof fn === 'function') {
-            $('input[data-uuid="' + instance.uuid + '"]').not('.entity-browser-processed')
+            $(':input[data-uuid="' + instance.uuid + '"]').not('.entity-browser-processed')
               .bind('entities-selected', fn).addClass('entity-browser-processed');
           }
         });
+        if (instance.auto_open) {
+          $('input[data-uuid="' + instance.uuid + '"]').click();
+        }
       });
     }
   };
@@ -85,8 +88,7 @@
       if (dialog.options.fluid) {
         var wWidth = $(window).width();
         // Check window width against dialog width.
-        if (wWidth < (dialog.options.maxWidth + 50)) {
-          // If there is a maxWidth, don't allow a bigger size.
+        if (dialog.options.maxWidth && (wWidth > parseInt(dialog.options.maxWidth) + 50)) {
           dialog.option('width', dialog.options.maxWidth);
         }
         else {
@@ -96,8 +98,7 @@
 
         var vHeight = $(window).height();
         // Check window width against dialog width.
-        if (vHeight < (dialog.options.maxHeight + 50)) {
-          // If there is a maxHeight, don't allow a bigger size.
+        if (dialog.options.maxHeight && vHeight > (parseInt(dialog.options.maxHeight) + 50)) {
           dialog.option('height', dialog.options.maxHeight);
         }
         else {

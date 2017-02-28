@@ -1,10 +1,5 @@
 <?php
 
-/*
- * @file
- * Contains Drupal\tmgmt\Tests\TranslatorUITest.
- */
-
 namespace Drupal\tmgmt\Tests;
 
 /**

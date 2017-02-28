@@ -56,15 +56,7 @@ function tmgmt_file_import_form_submit(array $form, FormStateInterface $form_sta
       }
     }
   }
-  foreach ($job->getMessagesSince() as $message) {
-    // Ignore debug messages.
-    if ($message->getType() == 'debug') {
-      continue;
-    }
-    if ($text = $message->getMessage()) {
-      drupal_set_message($text, $message->getType());
-    }
-  }
+  tmgmt_write_request_messages($job);
 }
 
 /**

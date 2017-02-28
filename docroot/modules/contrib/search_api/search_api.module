@@ -9,6 +9,7 @@ use Drupal\comment\Entity\Comment;
 use Drupal\Core\Config\ConfigImporter;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
@@ -294,6 +295,10 @@ function search_api_node_access_records_alter(&$grants, NodeInterface $node) {
     foreach ($index->getDatasources() as $datasource_id => $datasource) {
       switch ($datasource->getEntityTypeId()) {
         case 'node':
+          // Don't index the node if search_api_skip_tracking is set on it.
+          if ($node->search_api_skip_tracking) {
+            continue 2;
+          }
           $item_id = $datasource->getItemId($node->getTypedData());
           if ($item_id !== NULL) {
             $index->trackItemsUpdated($datasource_id, array($item_id));
@@ -464,6 +469,23 @@ function search_api_search_api_index_update(IndexInterface $index) {
 function search_api_view_insert(ViewEntityInterface $view) {
   _search_api_view_crud_event($view);
 
+  // Disable Views' default caching mechanisms on Search API views.
+  $displays = $view->get('display');
+  if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+    $change = FALSE;
+    foreach ($displays as $id => $display) {
+      if (isset($display['display_options']['cache']['type']) && in_array($display['display_options']['cache']['type'], ['tag', 'time'])) {
+        $displays[$id]['display_options']['cache']['type'] = 'none';
+        $change = TRUE;
+      }
+    }
+
+    if ($change) {
+      drupal_set_message(\Drupal::translation()->translate('The selected caching mechanism does not work with views on Search API indexes. Please either use one of the Search API-specific caching options or "None". Caching was turned off for this view.'), 'warning');
+      $view->set('display', $displays);
+      $view->save();
+    }
+  }
 }
 
 /**
@@ -497,6 +519,18 @@ function _search_api_view_crud_event(ViewEntityInterface $view) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter() for form "views_ui_edit_display_form".
+ */
+function search_api_form_views_ui_edit_display_form_alter(&$form, FormStateInterface $form_state) {
+  // Disable Views' default caching mechanisms on Search API views.
+  $displays = $form_state->getStorage()['view']->get('display');
+  if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+    unset($form['options']['cache']['type']['#options']['tag']);
+    unset($form['options']['cache']['type']['#options']['time']);
+  }
+}
+
+/**
  * Returns a warning message if the Core Search module is enabled.
  *
  * @return string|null
@@ -506,11 +540,12 @@ function _search_api_view_crud_event(ViewEntityInterface $view) {
  * @see search_api_requirements()
  */
 function _search_api_search_module_warning() {
-  if (Drupal::moduleHandler()->moduleExists('search')) {
+  if (\Drupal::moduleHandler()->moduleExists('search')) {
     $args = array(
       ':url' => Url::fromRoute('system.modules_uninstall')->toString(),
+      ':documentation' => 'https://www.drupal.org/node/2010146#core-search',
     );
-    return t('The default Drupal Search module is still enabled. If you are using Search API, you probably want to <a href=":url">uninstall</a> the Search module for performance reasons.', $args);
+    return t('The default Drupal core Search module is still enabled. If you are using Search API, you probably want to <a href=":url">uninstall</a> the Search module for performance reasons. For more information see <a href=":documentation">the Search API handbook</a>.', $args);
   }
   return NULL;
 }
