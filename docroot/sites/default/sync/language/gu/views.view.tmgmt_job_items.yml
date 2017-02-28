@@ -1,0 +1,24 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        label:
+          label: શિર્ષક
+        type:
+          label: પ્રકાર
+        operations:
+          label: ક્રિયાઓ
+      arguments:
+        tjid:
+          exception:
+            title: બધા
+  checkout:
+    display_options:
+      fields:
+        label:
+          label: શિર્ષક
+        type:
+          label: પ્રકાર

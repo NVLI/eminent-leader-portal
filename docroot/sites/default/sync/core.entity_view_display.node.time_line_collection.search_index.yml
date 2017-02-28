@@ -1,0 +1,45 @@
+uuid: 68ff7f75-c4a8-4b60-8eb1-715bf554d764
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.time_line_collection.body
+    - field.field.node.time_line_collection.field_category
+    - field.field.node.time_line_collection.field_time_line_collection_front
+    - field.field.node.time_line_collection.field_time_line_collection_image
+    - field.field.node.time_line_collection.field_time_line_collection_story
+    - image.style.featured_
+    - node.type.time_line_collection
+  module:
+    - image
+    - text
+    - user
+_core:
+  default_config_hash: bYZ5neBFs4QmM77PjHZwJiDroSc_6OUHyn9OvMs5PVs
+id: node.time_line_collection.search_index
+targetEntityType: node
+bundle: time_line_collection
+mode: search_index
+content:
+  body:
+    label: hidden
+    type: text_trimmed
+    weight: 1
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+  field_time_line_collection_image:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: featured_
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  field_category: true
+  field_time_line_collection_front: true
+  field_time_line_collection_story: true
+  langcode: true
+  links: true

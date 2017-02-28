@@ -1,0 +1,19 @@
+uuid: 2d02e24b-8cb1-4ea1-af8a-bec31b0b9216
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_type
+    - media_entity.bundle.image
+id: media.image.field_dc_type
+field_name: field_dc_type
+entity_type: media
+bundle: image
+label: 'DC Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

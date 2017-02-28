@@ -1,0 +1,20 @@
+uuid: 79664ffd-6510-4c5f-8e8c-47bcd9162e73
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: eminent_sardar_local_actions
+theme: eminent_sardar
+region: '-1'
+weight: -14
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

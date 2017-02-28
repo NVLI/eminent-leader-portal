@@ -1,0 +1,27 @@
+uuid: 00100cdb-40ea-402a-bae4-f6df0e1173ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - eminent_custom
+    - facets
+  theme:
+    - eminent_sardar
+id: userloginlinks
+theme: eminent_sardar
+region: header
+weight: -25
+provider: null
+plugin: eminent_user_login_links
+settings:
+  id: eminent_user_login_links
+  label: 'User login links'
+  provider: eminent_custom
+  label_display: '0'
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

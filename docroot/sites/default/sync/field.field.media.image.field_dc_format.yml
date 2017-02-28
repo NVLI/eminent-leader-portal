@@ -1,0 +1,19 @@
+uuid: 7dfb10e8-1264-47fb-86b1-c558b34c1721
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_format
+    - media_entity.bundle.image
+id: media.image.field_dc_format
+field_name: field_dc_format
+entity_type: media
+bundle: image
+label: 'DC Format'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: ac38fc55-1ab2-4eec-a787-b7d741ff17ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_source
+    - media_entity.bundle.image
+id: media.image.field_dc_source
+field_name: field_dc_source
+entity_type: media
+bundle: image
+label: 'DC Source'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,21 @@
+uuid: a78808b1-eaf5-4e4e-9c17-d318916f9dba
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.field_dc_relation
+field_name: field_dc_relation
+entity_type: media
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

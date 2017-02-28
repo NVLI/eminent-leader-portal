@@ -1,0 +1,21 @@
+uuid: e66d9aa2-a70c-472f-918a-f4ebff9cadbd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_title
+    - media_entity.bundle.video
+_core:
+  default_config_hash: jCtIX51o8kzu1sU4iOY_2SQY14Nos-vOsI3LxpEuk0Y
+id: media.video.field_dc_title
+field_name: field_dc_title
+entity_type: media
+bundle: video
+label: 'DC Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

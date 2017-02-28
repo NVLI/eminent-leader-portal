@@ -1,0 +1,19 @@
+uuid: 087e8820-296a-46a1-806c-7e28e87eeecb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_publisher
+    - media_entity.bundle.video
+id: media.video.field_dc_publisher
+field_name: field_dc_publisher
+entity_type: media
+bundle: video
+label: 'DC Publisher'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: b7b16ae2-5ab4-4701-b1ed-977048cd20d9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.field_dc_rights
+field_name: field_dc_rights
+entity_type: media
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

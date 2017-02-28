@@ -1,0 +1,21 @@
+uuid: c92b8fbf-722d-4c7c-bbf7-99407efbdd98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_date
+    - media_entity.bundle.image
+  module:
+    - datetime
+id: media.image.field_dc_date
+field_name: field_dc_date
+entity_type: media
+bundle: image
+label: 'DC Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

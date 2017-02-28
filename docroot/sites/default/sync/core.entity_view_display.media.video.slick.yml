@@ -1,0 +1,97 @@
+uuid: 5b18404e-7270-4e76-8c97-0515d2c06580
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.slick
+    - field.field.media.video.field_dc_content_type
+    - field.field.media.video.field_dc_contributor
+    - field.field.media.video.field_dc_creator
+    - field.field.media.video.field_dc_date
+    - field.field.media.video.field_dc_description
+    - field.field.media.video.field_dc_format
+    - field.field.media.video.field_dc_identifier
+    - field.field.media.video.field_dc_language
+    - field.field.media.video.field_dc_location
+    - field.field.media.video.field_dc_publisher
+    - field.field.media.video.field_dc_relation
+    - field.field.media.video.field_dc_rights
+    - field.field.media.video.field_dc_source
+    - field.field.media.video.field_dc_subject
+    - field.field.media.video.field_dc_time_range
+    - field.field.media.video.field_dc_title
+    - field.field.media.video.field_dc_type
+    - field.field.media.video.field_filehash
+    - field.field.media.video.field_media_video
+    - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_subject_classification
+    - media_entity.bundle.video
+  module:
+    - video_embed_field
+    - videojs
+_core:
+  default_config_hash: JXN_AAzgsx9eiUku7dWFlJPF-MH_5zpQplBN8ryi8lc
+id: media.video.slick
+targetEntityType: media
+bundle: video
+mode: slick
+content:
+  field_dc_description:
+    type: basic_string
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_media_video:
+    type: videojs_player_list
+    weight: 22
+    label: hidden
+    settings:
+      width: '854'
+      height: '480'
+      controls: true
+      autoplay: false
+      loop: false
+      muted: false
+      preload: none
+    third_party_settings: {  }
+  field_media_video_embed_field:
+    type: video_embed_field_video
+    weight: 23
+    label: hidden
+    settings:
+      responsive: true
+      width: 854
+      height: 480
+      autoplay: true
+    third_party_settings: {  }
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_dc_content_type: true
+  field_dc_contributor: true
+  field_dc_creator: true
+  field_dc_date: true
+  field_dc_format: true
+  field_dc_identifier: true
+  field_dc_language: true
+  field_dc_location: true
+  field_dc_publisher: true
+  field_dc_relation: true
+  field_dc_rights: true
+  field_dc_source: true
+  field_dc_subject: true
+  field_dc_time_range: true
+  field_dc_title: true
+  field_dc_type: true
+  field_filehash: true
+  field_subject_classification: true
+  langcode: true
+  thumbnail: true
+  uid: true

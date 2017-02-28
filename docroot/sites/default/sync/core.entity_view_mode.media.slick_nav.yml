@@ -1,0 +1,10 @@
+uuid: a9fb7141-91fb-491b-ac0e-9343d12af336
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.slick_nav
+label: 'Slick Nav'
+targetEntityType: media
+cache: true

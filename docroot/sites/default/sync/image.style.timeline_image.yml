@@ -1,0 +1,15 @@
+uuid: 337e2ba1-bffc-4c27-b66f-48dcf99fc3a7
+langcode: en
+status: true
+dependencies: {  }
+name: timeline_image
+label: 'Timeline Image'
+effects:
+  d2b9840c-d428-4e5e-962a-74d9b0f07de1:
+    uuid: d2b9840c-d428-4e5e-962a-74d9b0f07de1
+    id: image_scale
+    weight: 2
+    data:
+      width: 500
+      height: 100
+      upscale: false

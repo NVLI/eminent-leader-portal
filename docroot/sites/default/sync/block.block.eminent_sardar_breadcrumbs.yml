@@ -1,0 +1,22 @@
+uuid: 22cde26b-10ec-42b7-892b-a7549abe6b18
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: eminent_sardar_breadcrumbs
+theme: eminent_sardar
+region: '-1'
+weight: -25
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

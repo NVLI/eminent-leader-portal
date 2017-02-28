@@ -1,0 +1,28 @@
+uuid: bd9fbe65-4c40-4af5-8116-44cfa70cfc2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.quotes_category
+  module:
+    - facets
+  theme:
+    - eminent_sardar
+id: quotescategory
+theme: eminent_sardar
+region: search_facets
+weight: 0
+provider: null
+plugin: 'facet_block:quotes_category'
+settings:
+  id: 'facet_block:quotes_category'
+  label: 'Quotes Category'
+  provider: facets
+  label_display: visible
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,14 @@
+uuid: bf4742ed-aeda-4e5d-9747-14688f678005
+langcode: en
+status: true
+dependencies: {  }
+name: teaser
+label: Teaser
+effects:
+  fab7677c-89f6-48a0-bc89-33f37f5ef690:
+    uuid: fab7677c-89f6-48a0-bc89-33f37f5ef690
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 700
+      height: 200

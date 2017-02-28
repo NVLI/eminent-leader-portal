@@ -1,0 +1,14 @@
+uuid: 2b9ec1e6-b8fe-40aa-948b-c5cbff31ef48
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.translation_reviewer
+  module:
+    - user
+id: user_add_role_action.translation_reviewer
+label: 'Add the Translation Reviewer role to the selected users'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: translation_reviewer

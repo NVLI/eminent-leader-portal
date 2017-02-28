@@ -1,0 +1,20 @@
+nid_list: {  }
+translation_sync: true
+search: false
+_core:
+  default_config_hash: tFcyNjovmdPA1ZVm7j2Iymt809j-r2F5uSDJAOI_QV8
+content_types:
+  article: none
+  page: none
+  play_list: none
+  quiz: none
+  quote: all
+  time_line_collection: none
+content_type_modes:
+  article: {  }
+  page: {  }
+  play_list: {  }
+  quiz: {  }
+  quote:
+    - full
+  time_line_collection: {  }

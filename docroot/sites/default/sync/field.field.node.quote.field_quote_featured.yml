@@ -1,0 +1,25 @@
+uuid: eed0ac43-7747-4623-b43f-761d9d2609e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quote_featured
+    - node.type.quote
+_core:
+  default_config_hash: QEcAADtMaiMrxm8W5A9gds74y7ahhrNQrh84cEV17zw
+id: node.quote.field_quote_featured
+field_name: field_quote_featured
+entity_type: node
+bundle: quote
+label: Featured
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Featured Quote'
+  off_label: 'Featured Quote'
+field_type: boolean

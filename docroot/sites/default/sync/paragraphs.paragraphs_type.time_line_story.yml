@@ -1,0 +1,8 @@
+uuid: 15a5899a-9d6a-49e3-827e-a80e34fa35c0
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: UtT9-rf3EGOp7WIbmHIH90fnzQY0Kx8s-zlWzgJsgXo
+id: time_line_story
+label: 'Time Line Story'

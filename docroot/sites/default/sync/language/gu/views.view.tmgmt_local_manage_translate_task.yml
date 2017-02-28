@@ -1,0 +1,101 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ફિલ્ટર
+      fields:
+        title:
+          label: શિર્ષક
+  assigned:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        uid:
+          expose:
+            label: પ્રદાતા
+        title:
+          expose:
+            label: શિર્ષક
+  closed:
+    display_title: બંધ
+    display_options:
+      menu:
+        title: બંધ
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        uid:
+          expose:
+            label: પ્રદાતા
+        title:
+          expose:
+            label: શિર્ષક
+  completed:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        uid:
+          expose:
+            label: પ્રદાતા
+        title:
+          expose:
+            label: શિર્ષક
+  pending:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        uid:
+          expose:
+            label: પ્રદાતા
+        title:
+          expose:
+            label: શિર્ષક
+  rejected:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        uid:
+          expose:
+            label: પ્રદાતા
+        title:
+          expose:
+            label: શિર્ષક
+  unassigned:
+    display_options:
+      fields:
+        status:
+          label: સ્થિતિ
+        title:
+          label: શિર્ષક
+        operations:
+          label: ક્રિયાઓ

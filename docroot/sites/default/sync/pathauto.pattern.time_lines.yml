@@ -1,0 +1,22 @@
+uuid: d66dc287-4504-48c1-97d1-e842ae40b8f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: time_lines
+label: 'Time Lines'
+type: 'canonical_entities:node'
+pattern: 'time-lines/[node:title]'
+selection_criteria:
+  05cb94fa-80e7-46a9-8176-13027e2c6c1c:
+    id: node_type
+    bundles:
+      time_line_collection: time_line_collection
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 05cb94fa-80e7-46a9-8176-13027e2c6c1c
+selection_logic: and
+weight: -5
+relationships: {  }

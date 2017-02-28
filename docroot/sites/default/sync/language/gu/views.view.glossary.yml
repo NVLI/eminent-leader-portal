@@ -1,0 +1,13 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        title:
+          label: શિર્ષક
+        name:
+          label: લેખક
+  page_1:
+    display_title: પ્રુષ્ઠ

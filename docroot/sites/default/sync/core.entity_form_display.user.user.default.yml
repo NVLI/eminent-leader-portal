@@ -1,0 +1,51 @@
+uuid: 5bbdef56-e0e6-4c77-8be2-dfe754dbd8f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.tmgmt_translation_skills
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - path
+    - tmgmt_language_combination
+    - user
+_core:
+  default_config_hash: LLAieeozVsoZDb-2PbFxRJpQqnKmpR7-4OoRJnduz-U
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: -10
+  contact:
+    weight: 5
+  google_analytics:
+    weight: 3
+  language:
+    weight: 0
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+  timezone:
+    weight: 6
+  tmgmt_translation_skills:
+    type: tmgmt_language_combination_default
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 10
+  user_picture:
+    type: image_image
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    weight: -1
+hidden:
+  langcode: true

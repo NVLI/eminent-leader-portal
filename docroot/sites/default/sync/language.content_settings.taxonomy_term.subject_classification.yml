@@ -1,0 +1,16 @@
+uuid: b5ef83a4-51c1-4bd6-b925-f32e01cf1eeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subject_classification
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.subject_classification
+target_entity_type_id: taxonomy_term
+target_bundle: subject_classification
+default_langcode: site_default
+language_alterable: true

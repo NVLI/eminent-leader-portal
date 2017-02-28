@@ -1,0 +1,32 @@
+uuid: 4cdeb809-bc16-48c9-a294-a383ad669e32
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_solr
+id: eminent
+name: Eminent
+description: ''
+backend: search_api_solr
+backend_config:
+  retrieve_data: false
+  highlight_data: false
+  excerpt: false
+  skip_schema_check: false
+  site_hash: true
+  autocorrect_spell: true
+  autocorrect_suggest_words: true
+  connector: basic_auth
+  connector_config:
+    scheme: http
+    host: 10.80.1.51
+    port: '8983'
+    path: /solr
+    core: eminent_production
+    timeout: 5
+    index_timeout: 5
+    optimize_timeout: 10
+    solr_version: ''
+    http_method: AUTO
+    username: ''
+    password: ''

@@ -1,0 +1,33 @@
+uuid: 65428a84-dc3f-4b7a-b473-cb013331acf5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_play_list_story
+    - node.type.play_list
+    - paragraphs.paragraphs_type.play_list_story
+  module:
+    - entity_reference_revisions
+id: node.play_list.field_play_list_story
+field_name: field_play_list_story
+entity_type: node
+bundle: play_list
+label: 'Play List Story'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      play_list_story: play_list_story
+    target_bundles_drag_drop:
+      play_list_story:
+        enabled: true
+        weight: 3
+      time_line_story:
+        weight: 4
+        enabled: false
+field_type: entity_reference_revisions

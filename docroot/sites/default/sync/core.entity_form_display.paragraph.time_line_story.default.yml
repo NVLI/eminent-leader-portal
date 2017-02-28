@@ -1,0 +1,65 @@
+uuid: 5c85f194-1be3-41f1-ac82-e40a7374ef87
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.time_line_story.field_time_line_date
+    - field.field.paragraph.time_line_story.field_time_line_description
+    - field.field.paragraph.time_line_story.field_time_line_from_media
+    - field.field.paragraph.time_line_story.field_time_line_image
+    - field.field.paragraph.time_line_story.field_time_line_media_reference
+    - field.field.paragraph.time_line_story.field_time_line_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.time_line_story
+  module:
+    - image
+_core:
+  default_config_hash: 7mEIr-HmRpRfujJPmYRHugBYmmCviliKnp2GOOSa4Zg
+id: paragraph.time_line_story.default
+targetEntityType: paragraph
+bundle: time_line_story
+mode: default
+content:
+  field_time_line_date:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_time_line_description:
+    type: string_textarea
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_time_line_from_media:
+    type: boolean_checkbox
+    weight: 0
+    settings:
+      display_label: false
+    third_party_settings: {  }
+  field_time_line_image:
+    type: image_image
+    weight: 4
+    settings:
+      preview_image_style: thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_time_line_media_reference:
+    type: options_select
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+  field_time_line_title:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

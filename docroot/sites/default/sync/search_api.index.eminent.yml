@@ -1,0 +1,297 @@
+uuid: 8b350ab5-6131-42d7-b1fb-ea70306bdafd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - field.storage.node.body
+    - field.storage.media.field_dc_date
+    - field.storage.media.field_dc_description
+    - field.storage.media.field_dc_title
+    - field.storage.media.field_dummy_document
+    - field.storage.node.field_category
+    - field.storage.media.field_subject_classification
+    - search_api.server.eminent
+  module:
+    - taxonomy
+    - search_api
+    - search_api_attachments
+    - node
+    - media_entity
+id: eminent
+name: Eminent
+description: 'The eminent portal search index'
+read_only: false
+field_settings:
+  rendered_item:
+    label: 'Rendered HTML output'
+    datasource_id: null
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          play_list: default
+          quote: default
+          time_line_collection: default
+        'entity:media':
+          audio: default
+          document: default
+          image: default
+          video: default
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+  field_description:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  name:
+    label: 'Media name'
+    datasource_id: 'entity:media'
+    property_path: name
+    type: string
+  bundle:
+    label: Bundle
+    datasource_id: 'entity:media'
+    property_path: bundle
+    type: string
+  mid:
+    label: 'Media ID'
+    datasource_id: 'entity:media'
+    property_path: mid
+    type: integer
+  status:
+    label: 'Publishing status'
+    datasource_id: 'entity:media'
+    property_path: status
+    type: boolean
+  field_dc_date:
+    label: 'DC Date'
+    datasource_id: 'entity:media'
+    property_path: field_dc_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.media.field_dc_date
+  field_dc_description:
+    label: 'DC Description'
+    datasource_id: 'entity:media'
+    property_path: field_dc_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_dc_description
+  field_dc_title:
+    label: 'DC Title'
+    datasource_id: 'entity:media'
+    property_path: field_dc_title
+    type: string
+    dependencies:
+      config:
+        - field.storage.media.field_dc_title
+  status_1:
+    label: null
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+  uid:
+    label: null
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+  node_grants:
+    label: 'Node access information'
+    datasource_id: null
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  field_dummy_document:
+    label: 'Dummy Document'
+    datasource_id: 'entity:media'
+    property_path: field_dummy_document
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_dummy_document
+  saa_field_dummy_document:
+    label: 'Search api attachments: Dummy Document'
+    datasource_id: null
+    property_path: saa_field_dummy_document
+    type: string
+  field_category:
+    label: Category
+    datasource_id: 'entity:node'
+    property_path: field_category
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_category
+  field_subject_classification:
+    label: 'Subject Classification'
+    datasource_id: 'entity:media'
+    property_path: field_subject_classification
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_subject_classification
+  name_1:
+    label: 'Subject Classification » Taxonomy term » Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_subject_classification:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.media.field_subject_classification
+      module:
+        - taxonomy
+  name_2:
+    label: 'Category » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_category:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_category
+      module:
+        - taxonomy
+processor_settings:
+  add_url:
+    plugin_id: add_url
+    settings: {  }
+  rendered_item:
+    plugin_id: rendered_item
+    settings: {  }
+  node_status:
+    plugin_id: node_status
+    settings: {  }
+  ignorecase:
+    plugin_id: ignorecase
+    settings:
+      fields:
+        - rendered_item
+      weights:
+        preprocess_index: -10
+        preprocess_query: -10
+  html_filter:
+    plugin_id: html_filter
+    settings:
+      fields:
+        - rendered_item
+      title: true
+      alt: true
+      tags:
+        h1: 5
+        h2: 3
+        h3: 2
+        strong: 2
+        b: 2
+      weights:
+        preprocess_index: -10
+        preprocess_query: -10
+  aggregated_field:
+    plugin_id: aggregated_field
+    settings: {  }
+  content_access:
+    plugin_id: content_access
+    settings:
+      weights:
+        preprocess_query: -10
+  transliteration:
+    plugin_id: transliteration
+    settings:
+      fields:
+        - rendered_item
+        - type
+        - bundle
+      weights:
+        preprocess_index: -10
+        preprocess_query: -10
+  highlight:
+    plugin_id: highlight
+    settings:
+      highlight: always
+      excerpt: true
+      excerpt_length: 256
+      exclude_fields: {  }
+      prefix: '<strong>'
+      suffix: '</strong>'
+      weights:
+        postprocess_query: 0
+  tokenizer:
+    plugin_id: tokenizer
+    settings:
+      fields:
+        - rendered_item
+      spaces: ''
+      overlap_cjk: 1
+      minimum_word_size: '3'
+      weights:
+        preprocess_index: -6
+        preprocess_query: -6
+  file_attachments:
+    plugin_id: file_attachments
+    settings: {  }
+options:
+  index_directly: true
+  cron_limit: 50
+datasource_settings:
+  'entity:node':
+    plugin_id: 'entity:node'
+    settings:
+      bundles:
+        default: true
+        selected:
+          - article
+          - page
+          - quiz
+      languages:
+        default: false
+        selected:
+          - en
+  'entity:media':
+    plugin_id: 'entity:media'
+    settings:
+      bundles:
+        default: false
+        selected:
+          - audio
+          - document
+          - image
+          - video
+      languages:
+        default: false
+        selected:
+          - en
+tracker_settings:
+  default:
+    plugin_id: default
+    settings: {  }
+server: eminent

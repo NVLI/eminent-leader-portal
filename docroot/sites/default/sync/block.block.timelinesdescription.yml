@@ -1,0 +1,38 @@
+uuid: 7c092531-9159-4110-bece-369fdb35658c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cca68c7a-1fc8-4102-9b7b-0b6c9e9bde16'
+  module:
+    - block_content
+    - facets
+    - system
+  theme:
+    - eminent_sardar
+id: timelinesdescription
+theme: eminent_sardar
+region: page_title
+weight: -17
+provider: null
+plugin: 'block_content:cca68c7a-1fc8-4102-9b7b-0b6c9e9bde16'
+settings:
+  id: 'block_content:cca68c7a-1fc8-4102-9b7b-0b6c9e9bde16'
+  label: 'Time lines Description'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: /time-lines
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,32 @@
+uuid: 510fbce8-5464-4eaf-af4b-846b60378eff
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ffd08fb5-6148-4407-8ad5-9e59f9a841e5'
+  module:
+    - block_content
+    - facets
+  theme:
+    - eminent_sardar
+id: banner
+theme: eminent_sardar
+region: home_banner
+weight: -26
+provider: null
+plugin: 'block_content:ffd08fb5-6148-4407-8ad5-9e59f9a841e5'
+settings:
+  id: 'block_content:ffd08fb5-6148-4407-8ad5-9e59f9a841e5'
+  label: Banner
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

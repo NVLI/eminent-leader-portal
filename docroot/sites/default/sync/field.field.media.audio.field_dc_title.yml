@@ -1,0 +1,21 @@
+uuid: 8529bfff-79d4-432f-9ad6-c1ceb15d98da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_title
+    - media_entity.bundle.audio
+_core:
+  default_config_hash: PPYxc1B7Fshg2UQn9k9zFieDyc5QGNAEFgTP8zxHg6s
+id: media.audio.field_dc_title
+field_name: field_dc_title
+entity_type: media
+bundle: audio
+label: 'DC Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

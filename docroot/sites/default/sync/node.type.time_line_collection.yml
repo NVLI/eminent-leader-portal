@@ -1,0 +1,20 @@
+uuid: 6f7ae50c-f240-4362-ae14-69d114028590
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: PKW5DC1kH4ndSOgDmg-05DGJlXKCNVSVarV5f4-Cl8k
+name: 'Time Line Collection'
+type: time_line_collection
+description: 'A Collection of time line.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

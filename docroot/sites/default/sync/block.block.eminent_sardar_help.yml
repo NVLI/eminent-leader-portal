@@ -1,0 +1,22 @@
+uuid: 6eef8904-d5c2-4961-b7aa-5ac970f5b33f
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: eminent_sardar_help
+theme: eminent_sardar
+region: '-1'
+weight: -18
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

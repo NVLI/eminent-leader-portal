@@ -1,0 +1,22 @@
+uuid: cd1b3341-8da9-4e81-aa6e-083713a36761
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - eminent_sardar
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: eminent_sardar_content
+theme: eminent_sardar
+region: content
+weight: -24
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

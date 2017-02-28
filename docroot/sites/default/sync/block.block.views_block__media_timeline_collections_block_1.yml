@@ -1,0 +1,45 @@
+uuid: f050a164-8b25-4355-8f74-bee6dd543960
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.media_timeline_collections
+  module:
+    - facets
+    - system
+    - user
+    - views
+  theme:
+    - eminent_svp
+id: views_block__media_timeline_collections_block_1
+theme: eminent_svp
+region: content
+weight: -6
+provider: null
+plugin: 'views_block:media_timeline_collections-block_1'
+settings:
+  id: 'views_block:media_timeline_collections-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '/media/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

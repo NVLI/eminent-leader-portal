@@ -1,0 +1,20 @@
+uuid: db907c36-e7c7-40b8-91df-13c79dd94809
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: RIHRk6bAFTOISzEDnHb5JO1_GTunPmDT99LpOxKM_HM
+name: 'Play List'
+type: play_list
+description: ' Content type to show collections'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

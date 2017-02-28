@@ -1,0 +1,12 @@
+label: மொழி
+tips:
+  language-overview:
+    label: மொழிகள்
+  language-add:
+    label: 'மொழிகளை சேர்க்கிறது'
+  language-reorder:
+    label: 'மொழிகளை மறுவரிசைப்படுத்து'
+  language-default:
+    label: 'ஒரு மொழியை இயல்புநிலையாக அமைக்கவும்'
+  language-continue:
+    label: 'ல் தொடர்கிறது'

@@ -1,0 +1,19 @@
+uuid: c03c4b60-e02b-4059-9b81-2265828e8e25
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_play_list_title
+    - paragraphs.paragraphs_type.play_list_story
+id: paragraph.play_list_story.field_play_list_title
+field_name: field_play_list_title
+entity_type: paragraph
+bundle: play_list_story
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

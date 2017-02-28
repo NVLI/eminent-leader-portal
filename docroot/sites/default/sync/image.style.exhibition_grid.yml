@@ -1,0 +1,14 @@
+uuid: 66df0576-64dd-42fb-a777-4d284aa557c8
+langcode: en
+status: true
+dependencies: {  }
+name: exhibition_grid
+label: 'Exhibition Grid'
+effects:
+  a978b6d4-1bf6-49b0-a3e1-9e19820f07b1:
+    uuid: a978b6d4-1bf6-49b0-a3e1-9e19820f07b1
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 128
+      height: 128

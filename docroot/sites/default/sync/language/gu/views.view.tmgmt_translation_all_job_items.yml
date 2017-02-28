@@ -1,0 +1,26 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      fields:
+        label:
+          label: શિર્ષક
+        type:
+          label: પ્રકાર
+        operations:
+          label: ક્રિયાઓ
+      filters:
+        state:
+          group_info:
+            group_items:
+              5:
+                title: સ્વીકારેલા
+        job_type:
+          group_info:
+            group_items:
+              1:
+                title: સામાન્ય
+  page_1:
+    display_title: પ્રુષ્ઠ

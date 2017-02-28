@@ -1,0 +1,36 @@
+uuid: 338ba473-b193-49aa-bbc0-351b523bce1a
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.eminent_search
+  module:
+    - facets
+    - system
+    - views
+  theme:
+    - eminent_sardar
+id: exposedformeminent_searchpage_1_3
+theme: eminent_sardar
+region: '-1'
+weight: -23
+provider: null
+plugin: 'views_exposed_filter_block:eminent_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:eminent_search-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

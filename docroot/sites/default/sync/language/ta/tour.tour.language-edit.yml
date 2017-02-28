@@ -1,0 +1,12 @@
+label: 'மொழிகளை திருத்துதல்'
+tips:
+  language-edit-overview:
+    label: 'மொழிகளை திருத்துதல்'
+  language-edit-langcode:
+    label: 'மொழி குறிமுறை'
+  language-edit-label:
+    label: 'மொழி பெயர்'
+  language-edit-direction:
+    label: 'மொழி திசை'
+  language-edit-continue:
+    label: 'ல் தொடர்கிறது'

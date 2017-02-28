@@ -1,0 +1,63 @@
+label: உள்ளடக்கம்
+description: 'உள்ளடக்க தேடல் மற்றும் மேலாண்மை.'
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: வடிகட்டி
+          reset_button_label: மீளமை
+          exposed_sorts_label: வரிசையாக
+      pager:
+        options:
+          tags:
+            previous: '‹ முந்திய'
+            next: 'அடுத்த ›'
+            first: '« முதல்'
+            last: 'கடந்த »'
+      fields:
+        title:
+          label: தலைப்பு
+        type:
+          label: 'உள்ளடக்க வகை'
+          separator: ', '
+        name:
+          label: எழுத்தாளர்
+        status:
+          label: நிலை
+        changed:
+          label: மாற்றப்பட்டது
+        operations:
+          label: செயல்பாடுகள்
+      filters:
+        status:
+          expose:
+            label: நிலை
+          group_info:
+            group_items:
+              1:
+                title: வெளியிடப்பட்டது
+                value: '1'
+              2:
+                title: வெளியிடப்படாத
+        type:
+          expose:
+            label: 'உள்ளடக்க வகை'
+        title:
+          expose:
+            label: தலைப்பு
+        langcode:
+          expose:
+            label: மொழி
+      title: உள்ளடக்கம்
+      empty:
+        area_text_custom:
+          content: 'எந்த உள்ளடக்கங்களும் இல்லை.'
+  page_1:
+    display_options:
+      menu:
+        title: உள்ளடக்கம்
+      tab_options:
+        title: உள்ளடக்கம்
+        description: 'கண்டுபிடித்து உள்ளடக்கத்தை நிர்வகிக்கவும்'
+    display_title: பக்கம்

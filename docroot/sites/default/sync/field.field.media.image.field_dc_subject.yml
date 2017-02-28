@@ -1,0 +1,28 @@
+uuid: b73bb11b-212d-4283-ad18-deeff8fc7801
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_subject
+    - media_entity.bundle.image
+    - taxonomy.vocabulary.subject
+id: media.image.field_dc_subject
+field_name: field_dc_subject
+entity_type: media
+bundle: image
+label: 'Free tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject: subject
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

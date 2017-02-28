@@ -1,0 +1,19 @@
+uuid: 476e2032-ffc2-47c4-b57f-54e9a6cd961e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_identifier
+    - media_entity.bundle.document
+id: media.document.field_dc_identifier
+field_name: field_dc_identifier
+entity_type: media
+bundle: document
+label: 'DC Identifier'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

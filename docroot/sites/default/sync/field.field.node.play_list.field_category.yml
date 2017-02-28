@@ -1,0 +1,28 @@
+uuid: 251e35f0-5b0c-4676-b2af-e1dfe94c8edd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.play_list
+    - taxonomy.vocabulary.subject_classification
+id: node.play_list.field_category
+field_name: field_category
+entity_type: node
+bundle: play_list
+label: Category
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject_classification: subject_classification
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: subject
+field_type: entity_reference

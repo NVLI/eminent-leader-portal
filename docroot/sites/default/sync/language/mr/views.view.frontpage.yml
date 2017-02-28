@@ -1,0 +1,14 @@
+display:
+  default:
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'मुख्यपानावरील साहित्य अद्याप निर्माण झालेले नाही'
+        title:
+          title: '[site:name] मध्ये आपले स्वागत'
+      exposed_form:
+        options:
+          reset_button_label: पुर्ववत
+          exposed_sorts_label: 'क्रमवारी नुसार लावा'
+  page_1:
+    display_title: पान

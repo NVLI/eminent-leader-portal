@@ -1,0 +1,17 @@
+label: மொழிபெயர்ப்பு
+tips:
+  locale-language:
+    label: 'மொழிபெயர்ப்பு மொழி'
+    body: 'நீங்கள் மொழிபெயர்க்க விரும்பும் மொழியை தேர்ந்தெடிக்கவும்.'
+  locale-search:
+    label: தேடல்
+  locale-filter:
+    label: 'தேடல் வடிகட்டி'
+  locale-submit:
+    label: 'உங்கள் தேடல் நிபந்தனையை உபயோகிக்கவும்'
+  locale-translate:
+    label: மொழிபெயர்ச்சி
+  locale-validate:
+    label: 'மொழிபெயர்ப்பை பரிசோதிக்கவும்'
+  locale-continue:
+    label: 'ல் தொடர்கிறது'

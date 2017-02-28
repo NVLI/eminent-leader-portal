@@ -1,0 +1,14 @@
+uuid: 0043bf95-3cd7-459a-ad32-7cf3d884581e
+langcode: en
+status: true
+dependencies: {  }
+name: featured_
+label: 'Featured Exhibitions'
+effects:
+  0c7f567f-e206-4d11-b56b-bac420f20a5e:
+    uuid: 0c7f567f-e206-4d11-b56b-bac420f20a5e
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 300
+      height: 380

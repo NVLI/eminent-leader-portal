@@ -1,0 +1,20 @@
+uuid: d18c4d6c-86de-4877-ad7b-93736005f476
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: pVHvT1iLHQSE4L83d85P6LEmC8KHv5zpPKfrYDhBLXo
+name: Quote
+type: quote
+description: 'Quotes by eminent personality'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

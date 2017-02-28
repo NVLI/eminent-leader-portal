@@ -1,0 +1,15 @@
+uuid: f962e1ac-b9d8-4c0a-aef3-d6bb12df973b
+langcode: en
+status: true
+dependencies: {  }
+name: biography_thumb
+label: 'Biography Thumb'
+effects:
+  b34b9b53-6700-4f79-936c-26083b86e35a:
+    uuid: b34b9b53-6700-4f79-936c-26083b86e35a
+    id: image_scale
+    weight: 1
+    data:
+      width: 500
+      height: 200
+      upscale: false

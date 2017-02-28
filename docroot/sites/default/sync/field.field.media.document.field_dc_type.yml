@@ -1,0 +1,19 @@
+uuid: 1d49a30a-7c6d-43f9-947f-c702c05effa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_type
+    - media_entity.bundle.document
+id: media.document.field_dc_type
+field_name: field_dc_type
+entity_type: media
+bundle: document
+label: 'DC Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

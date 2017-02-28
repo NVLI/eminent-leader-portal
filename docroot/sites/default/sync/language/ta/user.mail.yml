@@ -1,0 +1,18 @@
+cancel_confirm:
+  subject: '[site:name]ல் [user:display-name] கணக்கு ரத்து செய்வதற்கான கோரிக்கை'
+register_admin_created:
+  subject: '[site:name] இல் ஒரு நிர்வாகி உங்களுக்காக ஒரு கணக்கை ஆரம்பித்துள்ளார்'
+register_no_approval_required:
+  subject: '[site:name]ல் [user:display-name]னுடைய கணக்கு விவரங்கள்'
+register_pending_approval:
+  subject: '[site:name]ல் [user:display-name] கணக்கின் விவரங்கள் (நிர்வாக ஒப்புதலுக்காக நிலுவையில் உள்ளது)'
+register_pending_approval_admin:
+  body: "[user:display-name] ஒரு கணக்கிற்கு விண்ணப்பித்துள்ளார்.\r\n\r\n[user:edit-url]"
+  subject: '[site:name]ல் [user:display-name] கணக்கின் விவரங்கள் (நிர்வாக ஒப்புதலுக்காக நிலுவையில் உள்ளது)'
+status_activated:
+  subject: '[site:name]ல் [user:display-name] கணக்கின் விவரங்கள் (ஏற்றுக் கொள்ளப்பட்டது)'
+status_blocked:
+  subject: '[site:name]ல் [user:display-name] கணக்கின் விவரங்கள் (தடுக்கப்பட்டது)'
+status_canceled:
+  body: "[user:display-name],\r\n\r\n[site:name]ல் உள்ள தங்களது கணக்கு ரத்துச் செய்யப்பட்டது.\r\n\r\n--  [site:name] குழு"
+  subject: '[site:name]ல் [user:display-name] கணக்கின் விவரங்கள் (ரத்துச் செய்யப்பட்டது)'

@@ -1,0 +1,27 @@
+uuid: 32f4a777-7d56-4656-9a7b-0dda81a9f744
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_document
+    - media_entity.bundle.document
+  module:
+    - file
+id: media.document.field_media_document
+field_name: field_media_document
+entity_type: media
+bundle: document
+label: Document
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf doc png jpeg'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

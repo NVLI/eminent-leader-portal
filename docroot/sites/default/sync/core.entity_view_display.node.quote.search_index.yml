@@ -1,0 +1,29 @@
+uuid: e36d513d-94f2-42f9-a0e2-45a7c0448c22
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.quote.body
+    - field.field.node.quote.field_category
+    - field.field.node.quote.field_quote_featured
+    - node.type.quote
+  module:
+    - text
+    - user
+id: node.quote.search_index
+targetEntityType: node
+bundle: quote
+mode: search_index
+content:
+  body:
+    type: text_default
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_category: true
+  field_quote_featured: true
+  langcode: true
+  links: true

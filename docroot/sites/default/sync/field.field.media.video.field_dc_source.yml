@@ -1,0 +1,19 @@
+uuid: dbddd74d-a2d9-41bc-b905-6d7cf19208d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_source
+    - media_entity.bundle.video
+id: media.video.field_dc_source
+field_name: field_dc_source
+entity_type: media
+bundle: video
+label: 'DC Source'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

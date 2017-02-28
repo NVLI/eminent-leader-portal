@@ -1,0 +1,31 @@
+uuid: 2fa9a496-ab96-47c2-b7a4-5492334413e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - facets
+    - system
+  theme:
+    - eminent_svp
+id: mainnavigation
+theme: eminent_svp
+region: header
+weight: -10
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

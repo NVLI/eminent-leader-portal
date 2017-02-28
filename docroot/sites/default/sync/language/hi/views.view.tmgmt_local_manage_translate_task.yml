@@ -1,0 +1,152 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: फिल्टर
+          reset_button_label: 'दोबारा से स्थापित करें|'
+          exposed_sorts_label: 'क्रमबद्ध द्वारा'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'विषय प्रति पृष्ठ'
+            items_per_page_options_all_label: '-सभी-'
+      fields:
+        title:
+          label: शीर्षक
+        item_count:
+          label: वस्तुएं
+  assigned:
+    display_options:
+      fields:
+        status:
+          label: अवस्था
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही
+      filters:
+        uid:
+          expose:
+            label: प्रदाता
+        title:
+          expose:
+            label: शीर्षक
+  closed:
+    display_title: बंद
+    display_options:
+      menu:
+        title: बंद
+      fields:
+        status:
+          label: अवस्था
+        created:
+          label: निर्मित
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही
+      filters:
+        uid:
+          expose:
+            label: प्रदाता
+        title:
+          expose:
+            label: शीर्षक
+  completed:
+    display_options:
+      fields:
+        status:
+          label: अवस्था
+        created:
+          label: निर्मित
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही
+      filters:
+        uid:
+          expose:
+            label: प्रदाता
+        title:
+          expose:
+            label: शीर्षक
+  pending:
+    display_options:
+      fields:
+        status:
+          label: अवस्था
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही
+      filters:
+        uid:
+          expose:
+            label: प्रदाता
+        title:
+          expose:
+            label: शीर्षक
+  rejected:
+    display_options:
+      fields:
+        status:
+          label: अवस्था
+        created:
+          label: निर्मित
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही
+      filters:
+        uid:
+          expose:
+            label: प्रदाता
+        title:
+          expose:
+            label: शीर्षक
+  unassigned:
+    display_options:
+      fields:
+        status:
+          label: अवस्था
+        title:
+          label: शीर्षक
+        source_language:
+          label: से
+        target_language:
+          label: को
+        item_count:
+          label: वस्तुएं
+        operations:
+          label: कार्यवाही

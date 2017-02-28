@@ -1,0 +1,26 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'लागू करें'
+          reset_button_label: 'दोबारा से स्थापित करें|'
+          exposed_sorts_label: 'क्रमबद्ध द्वारा'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'विषय प्रति पृष्ठ'
+            items_per_page_options_all_label: '-सभी-'
+      fields:
+        info:
+          label: 'ब्लॉक की व्याख्या'
+        changed:
+          label: अद्यतित
+        operations:
+          label: कार्यवाही
+      filters:
+        info:
+          expose:
+            label: 'ब्लॉक की व्याख्या'
+  page_1:
+    display_title: पृष्ठ

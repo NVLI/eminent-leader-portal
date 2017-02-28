@@ -1,0 +1,28 @@
+label: মাধ্যম
+display:
+  default:
+    display_options:
+      fields:
+        uid:
+          label: লেখক
+        status:
+          label: স্ট্যাটাস
+        changed:
+          label: আপডেটকৃত
+        operations:
+          label: কার্যাবলী
+      filters:
+        status:
+          group_info:
+            group_items:
+              1:
+                title: প্রকাশিত
+        langcode:
+          expose:
+            label: ভাষা
+      title: মাধ্যম
+  media_page_list:
+    display_title: মাধ্যম
+    display_options:
+      menu:
+        title: মাধ্যম

@@ -1,0 +1,21 @@
+uuid: fe159fc1-f7df-4b2f-a43e-53d6027bbb48
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_date
+    - media_entity.bundle.video
+  module:
+    - datetime
+id: media.video.field_dc_date
+field_name: field_dc_date
+entity_type: media
+bundle: video
+label: 'DC Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

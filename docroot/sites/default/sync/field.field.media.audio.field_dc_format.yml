@@ -1,0 +1,19 @@
+uuid: d4ad2d8d-6e43-4ced-996c-da2ef4ed4105
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_format
+    - media_entity.bundle.audio
+id: media.audio.field_dc_format
+field_name: field_dc_format
+entity_type: media
+bundle: audio
+label: 'DC Format'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

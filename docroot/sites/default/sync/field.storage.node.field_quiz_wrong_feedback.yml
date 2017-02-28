@@ -1,0 +1,19 @@
+uuid: 8eb41bff-cb8b-4968-9f31-090f7e5b8234
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_quiz_wrong_feedback
+field_name: field_quiz_wrong_feedback
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

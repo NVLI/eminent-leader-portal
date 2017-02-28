@@ -1,0 +1,31 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: ફિલ્ટર
+      fields:
+        filename:
+          label: નામ
+        filemime:
+          label: 'MIME પ્રકાર'
+        filesize:
+          label: માપ
+        status:
+          label: સ્થિતિ
+      filters:
+        filemime:
+          expose:
+            label: 'MIME પ્રકાર'
+        status:
+          expose:
+            label: સ્થિતિ
+  page_2:
+    display_options:
+      fields:
+        type:
+          label: 'એન્ટિટી પ્રકાર'
+      arguments:
+        fid:
+          exception:
+            title: બધા

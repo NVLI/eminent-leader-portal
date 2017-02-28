@@ -1,0 +1,17 @@
+uuid: 6b318fb3-fda8-49d5-b39c-f12f74ebad44
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_audio
+_core:
+  default_config_hash: ksiEAuwbNPnsDIFFuKG7L10N7Nv4AAjCObDlRhJmiFE
+id: audio
+label: Audio
+description: 'The audio media bundle'
+type: audio
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: ''
+field_map: {  }

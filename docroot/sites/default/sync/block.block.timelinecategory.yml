@@ -1,0 +1,28 @@
+uuid: 84709ccb-ae8c-4879-a068-04f6a34c7777
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.timeline_category
+  module:
+    - facets
+  theme:
+    - eminent_sardar
+id: timelinecategory
+theme: eminent_sardar
+region: search_facets
+weight: 0
+provider: null
+plugin: 'facet_block:timeline_category'
+settings:
+  id: 'facet_block:timeline_category'
+  label: Category
+  provider: facets
+  label_display: visible
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }

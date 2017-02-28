@@ -1,0 +1,23 @@
+uuid: 216f4d49-2663-4b0a-b654-13933e48b24c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.field_collection_item.field_quiz_option_correct
+    - field_collection.field_collection.field_quiz_options
+id: field_collection_item.field_quiz_options.field_quiz_option_correct
+field_name: field_quiz_option_correct
+entity_type: field_collection_item
+bundle: field_quiz_options
+label: Correct
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Correct
+  off_label: Wrong
+field_type: boolean

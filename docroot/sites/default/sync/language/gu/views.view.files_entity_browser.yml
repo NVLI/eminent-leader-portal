@@ -1,0 +1,10 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'લાગુ કરો'
+      sorts:
+        filesize:
+          expose:
+            label: 'ફાઈલ માપ'

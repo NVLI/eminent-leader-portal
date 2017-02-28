@@ -1,0 +1,19 @@
+uuid: bd51c3b9-fcf8-4d16-9c76-e6412ad18f7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_dc_language
+    - media_entity.bundle.video
+id: media.video.field_dc_language
+field_name: field_dc_language
+entity_type: media
+bundle: video
+label: 'DC Language'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,22 @@
+uuid: 30ace2f9-cb56-47c2-8417-5b1261522d18
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: exhibitions
+label: Exhibitions
+type: 'canonical_entities:node'
+pattern: 'thematic-collections/[node:title]'
+selection_criteria:
+  642cffa7-9cda-450f-908b-04eca8d63908:
+    id: node_type
+    bundles:
+      play_list: play_list
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 642cffa7-9cda-450f-908b-04eca8d63908
+selection_logic: and
+weight: -5
+relationships: {  }

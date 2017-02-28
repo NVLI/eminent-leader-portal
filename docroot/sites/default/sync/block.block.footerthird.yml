@@ -1,0 +1,32 @@
+uuid: 3e40acae-8110-4545-8634-cccefa6a91a1
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:46caa5cf-d13a-4dce-9e2f-ddf22f52d02c'
+  module:
+    - block_content
+    - facets
+  theme:
+    - eminent_sardar
+id: footerthird
+theme: eminent_sardar
+region: footer_third_column
+weight: -18
+provider: null
+plugin: 'block_content:46caa5cf-d13a-4dce-9e2f-ddf22f52d02c'
+settings:
+  id: 'block_content:46caa5cf-d13a-4dce-9e2f-ddf22f52d02c'
+  label: 'Footer Third'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  other_facet:
+    id: other_facet
+    facets: ''
+    facet_value: ''
+    negate: false
+    context_mapping: {  }
