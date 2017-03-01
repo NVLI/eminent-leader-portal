@@ -75,7 +75,7 @@ h1 {
   padding-bottom: 70px;
 }
 .search-filters {
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 }
 .exhibition-slick-image iframe {
   min-height: 300px;
@@ -567,4 +567,13 @@ body {
 
 .dc-owner div {
   display: inline-block;
+}
+
+.searchresult-form .triggersearchfilter {
+  margin-left: 0px;
+  padding-left: 0px;
+  border-bottom: solid 1px #E8E8E8;
+  max-width: none;
+  border-radius: 0px;
+  cursor:pointer;
 }
