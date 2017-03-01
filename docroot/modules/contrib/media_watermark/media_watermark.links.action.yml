@@ -1,0 +1,5 @@
+media_watermark.add:
+  route_name: 'media_watermark.add'
+  title: 'Add Media Watermark'
+  appears_on:
+    - media_watermark.list
