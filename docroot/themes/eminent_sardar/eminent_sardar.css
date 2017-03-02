@@ -466,6 +466,8 @@ body {
 }
 .media-teaser img {
   margin: auto;
+  height: 128px;
+  width: 128px;
 }
 #main-slider .slider-item img:not(.mobile) {
   position: absolute;
