@@ -468,6 +468,7 @@ body {
   margin: auto;
   height: 128px;
   width: 128px;
+  margin-bottom: 20px;
 }
 #main-slider .slider-item img:not(.mobile) {
   position: absolute;
