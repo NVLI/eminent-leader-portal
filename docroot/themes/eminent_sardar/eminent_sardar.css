@@ -188,7 +188,7 @@ video,
   width: 200px;
 }
 #header .navbar-right .search {
-  margin-top: 14x;
+  margin-top: 14px;
 }
 .anonymous .logout {
   display: none !important;
@@ -383,12 +383,13 @@ body {
   color: #000;
 }
 #block-languagedropdownswitcher {
-  margin-top: 6px;
+  margin-top: 4px;
   padding: 10px;
   float: left;
 }
 #block-languagedropdownswitcher select {
-  height: 35px;
+  height: 34px;
+  padding-left: 10px;
 }
 .search-results-tab .search-result-nav {
   background: none;
