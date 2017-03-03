@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * Contains the admin functionalities of PDF to Image converter.
+ */
+
+function pdf_to_image_cron() {
+  \Drupal::logger('pdf cron')->notice("working");
+}
