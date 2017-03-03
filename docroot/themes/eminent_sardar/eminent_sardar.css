@@ -216,7 +216,7 @@ video,
   width: 200px;
   color: #fff;
 }
-#conatcat-info .captcha {
+.captcha {
   padding: 15px;
   overflow: hidden;
 }
@@ -583,4 +583,8 @@ body {
   max-width: none;
   border-radius: 0px;
   cursor:pointer;
+}
+#edit-actions #edit-submit {
+  margin-right: 15px;
+  margin-bottom: 5px;
 }
