@@ -454,6 +454,10 @@ body {
 .slick-slider .slick-arrow {
   top: auto;
   bottom: -50px;
+  width: 15%;
+}
+.quotes-by-sardar .slick-dots {
+    margin-top: 37px;
 }
 .home-search {
   background-color: #f9f9f9;
