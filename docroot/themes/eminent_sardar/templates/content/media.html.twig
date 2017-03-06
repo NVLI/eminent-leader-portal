@@ -69,15 +69,18 @@
             </div>
             {{ addtoplaylist }}
             {{ addtotimeline }}
-            <div class="clearfix">
-              <h2>{{ media_referred_timeline.view_title }}</h2>
-              {{ media_referred_timeline.view_output }}
-            </div>
-            <div class="clearfix">
-              <h2>{{ media_referred_playlist.view_title }}</h2>
-              {{ media_referred_playlist.view_output }}
-            </div>
-
+            {% if media_referred_timeline.view_title %}
+              <div class="clearfix">
+                <h2>{{ media_referred_timeline.view_title }}</h2>
+                {{ media_referred_timeline.view_output }}
+              </div>
+            {% endif %}
+            {% if media_referred_playlist.view_title %}
+              <div class="clearfix">
+                <h2>{{ media_referred_playlist.view_title }}</h2>
+                {{ media_referred_playlist.view_output }}
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>

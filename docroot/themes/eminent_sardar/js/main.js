@@ -225,10 +225,10 @@ jQuery(function ($) {'use strict',
   $(".triggersearchfilter").click(function () {
     $(this).siblings('.search-filter').toggleClass('hidden show', 1000)
     if ($('.search-filter').hasClass('show')) {
-      $(this).html("<i class='fa fa-times-circle'></i> &nbsp; Close Filters");
+      $(this).html("Close Filters &nbsp; <i class='fa fa-caret-up'></i>");
     }
     else {
-      $(this).html("<i class='fa fa-filter'></i> &nbsp; Show Filters");
+      $(this).html("Show Filters &nbsp; <i class='fa fa-caret-down'></i>");
     }
   });
   // Added the slider home page to show the quotes of Sardar Patel.
