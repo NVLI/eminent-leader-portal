@@ -1,0 +1,26 @@
+<?php
+
+function pdf_to_image_schema() {
+  $schema['pdf_to_image_status'] = array(
+    'fields' => array(
+      'id'=>array(
+        'type'=>'serial',
+        'not null' => TRUE,
+      ),
+      'mid'=>array(
+        'type' => 'int',
+        'length' => 10,
+        'not null' => TRUE,
+      ),
+      'status'=>array(
+        'type' => 'varchar',
+        'length' => 40,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+
+}

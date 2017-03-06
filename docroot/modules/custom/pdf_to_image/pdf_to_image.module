@@ -1,4 +1,6 @@
 <?php
+use Drupal\node\Entity\Media;
+use Drupal\Core\Entity\Query\QueryFactory;
 
 /**
  * @file
@@ -6,5 +8,10 @@
  */
 
 function pdf_to_image_cron() {
+  // $query = \Drupal::entityQuery('media');
+  // $query->condition('status', 0);
+  // $query->condition('type', 'document');
+  // $entity_ids = $query->execute();
+  // $media = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($entity_ids);
   \Drupal::logger('pdf cron')->notice("working");
 }
