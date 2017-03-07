@@ -3,7 +3,7 @@
 # Route name can be used in several places; e.g. links, redirects, and local
 # actions.
 eminent_watermark.Watermark:
-  path: 'watermark/video/run-script'
+  path: '/watermark/video/run-script'
   defaults:
     _controller: '\Drupal\eminent_watermark\Controller\VideoWatermark::AddWatermark'
     _title: 'Video WaterMark Script'

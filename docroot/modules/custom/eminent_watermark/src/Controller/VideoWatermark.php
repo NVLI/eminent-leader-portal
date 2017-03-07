@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\eminent_admin\Controller;
+namespace Drupal\eminent_watermark\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\Entity\Node;
@@ -43,7 +43,7 @@ class VideoWatermark extends ControllerBase {
   /**
    * Add Watermark to Video files.
    */
-  public function generate_watermark() {
+  public function AddWatermark() {
     $entity_type = 'media';
     $bundle = 'video';
     $query = $this->entity_query->get($entity_type)
@@ -74,12 +74,13 @@ class VideoWatermark extends ControllerBase {
 		// Create watermark
 		$supporting_format = array('mpg', 'mpge', 'mp4');
 		foreach ($files as $file) {
-		  if (!in_array($file->filename, $videos)) {
-			$ext = strtolower(pathinfo($file->filename, PATHINFO_EXTENSION));
+          $file_name = basename($file);
+          if (!in_array($file_name, $videos)) {
+            $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 			if (in_array($ext, $supporting_format)) {
-			  $status = $this->create_watermark($file->uri, $file->filename);
+              $status = $this->create_watermark($file, $file_name);
 			  $fh = fopen("public://archive/watermark-video-name.txt", "a+") or die("Unable to open file!");
-			  fwrite($fh, $file->filename . "\n");
+              fwrite($fh, $file_name . "\n");
 			  fclose($fh);
 			}
 		  }
@@ -123,7 +124,7 @@ class VideoWatermark extends ControllerBase {
 			'right' => 50,
 		));
 	$video
-       ->save(new \FFMpeg\Format\Video\WebM(),  $public_path_backup . $file_name);
+       ->save(new \FFMpeg\Format\Video\WebM(),  $uri);
 	return 1;
   }
 }
