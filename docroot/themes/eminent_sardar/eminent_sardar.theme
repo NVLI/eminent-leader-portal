@@ -153,6 +153,17 @@ function eminent_sardar_preprocess_media(&$variables) {
   // Fetch the media type.
   $variables['media_type'] = $variables['elements']['#media']->bundle();
 
+
+  if($variables['media_type'] == 'document') {
+    foreach($variables['elements']['#media']->pdf_to_images as $media_image){
+      $file = File::load($media_image->target_id);
+      $variables['pdf_to_images'][] = [
+        'original' => file_create_url($media_image->entity->getFileUri()),
+        'thumbnail' => ImageStyle::load('thumbnail')->buildUrl($file->getFileUri()),
+      ];
+    }
+  }
+
   // Check whether the user has permission to create Time Line Collection.
   if ($user->hasPermission('create time_line_collection content')) {
 

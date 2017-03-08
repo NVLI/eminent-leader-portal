@@ -1,0 +1,84 @@
+<?php
+use Drupal\media_entity\Entity\Media;
+use Drupal\Core\Entity\Query\QueryFactory;
+use Spatie\PdfToImage\Pdf;
+use Drupal\file\Entity\File;
+
+/**
+ * @file
+ * Contains the admin functionalities of PDF to Image converter.
+ */
+
+function pdf_to_image_cron() {
+  // To update already present media document get all media entities of document type.
+  // $query = \Drupal::entityQuery('media');
+  // $query->condition('bundle', 'document');
+  // $media_ids = $query->execute();
+  // if (!empty($media_ids)) {
+  //   \Drupal::logger('Update field started')->notice('Filed value update for all the Media document bundle.');
+  //
+  //   $medias = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($media_ids);
+  //
+  //   // Change the status of the medias.
+  //   foreach ($medias as $media) {
+  //     $media->pdf_to_image_status->value = 'Waiting for conversion';
+  //     $media->save();
+  //   }
+  // }
+  // EntityQuery to get all media entities of document type.
+  $query = \Drupal::entityQuery('media');
+  $query->condition('pdf_to_image_status', 'Waiting for conversion');
+  $query->condition('bundle', 'document');
+  $query->range(0,1);
+  $media_ids = $query->execute();
+  if (!empty($media_ids)) {
+
+    $medias = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($media_ids);
+
+    // Change the status of the medias started conversion.
+    foreach ($medias as $media) {
+      $media->pdf_to_image_status->value = 'Conversion started';
+      $media->save();
+    }
+
+    // PDF to image conversion.
+    foreach ($medias as $media) {
+      $file = drupal_realpath($media->field_media_document->entity->getFileUri());
+      //$file = drupal_realpath('public://pdf/test.pdf'); //test code.
+      \Drupal::logger('pdf to image')->notice($file);
+
+      $image_extension = '.jpg';
+      // Create a unique path for directory from current date and time stamp.
+      $image_save_path = 'public://pdf_images/' . date('Y-m', time()) . '/' . time() . '/';
+
+      if (file_prepare_directory($image_save_path, FILE_CREATE_DIRECTORY)) {
+        $pdf = new Pdf($file);
+        $num_pages = $pdf->getNumberOfPages();
+
+        for ($i=1; $i <= $num_pages; $i++) {
+          $image_name = rand(0000,9999);
+          $image_uri = $image_save_path . $image_name .  $image_extension;
+          $image = drupal_realpath($image_uri);
+
+          $pdf->setPage($i);
+          $pdf->saveImage($image);
+
+          $file = File::Create([
+            'uri' => $image_uri,
+          ]);
+          $file->save();
+
+          $media->pdf_to_images->appendItem([
+            'target_id' => $file->id(),
+          ]);
+        }
+        $media->save();
+      }
+
+    }
+  }
+  else {
+    \Drupal::logger('pdf to image')->notice('no media to convert');
+  }
+
+}
