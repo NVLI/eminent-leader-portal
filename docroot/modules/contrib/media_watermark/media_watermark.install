@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * @file
+ * Media Watermark install file.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function media_watermark_uninstall() {
+  // Remove media_watermark image style to prevent error on next module turn on.
+  $image_style = ImageStyle::load('media_watermark');
+  $image_style->delete();
+}

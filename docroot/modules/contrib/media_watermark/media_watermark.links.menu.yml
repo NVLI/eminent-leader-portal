@@ -1,0 +1,5 @@
+media_watermark.list:
+  title: 'Media Watermark'
+  description: 'Perfomr CRUD watermark actions and apply them using batch api tab.'
+  parent: system.admin_config_media
+  route_name: media_watermark.list

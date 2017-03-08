@@ -1,0 +1,41 @@
+media_watermark.list:
+  path: '/admin/config/media/media_watermark'
+  defaults:
+    _entity_list: 'media_watermark'
+    _title: 'Media Watermark Configuration'
+  requirements:
+    _permission: 'media watermark control'
+
+media_watermark.add:
+  path: '/admin/config/media/media_watermark/add'
+  defaults:
+    _entity_form: 'media_watermark.add'
+    _title: 'Add Media Watermark'
+  requirements:
+    _permission: 'media watermark control'
+
+entity.media_watermark.edit_form:
+  path: '/admin/config/media/media_watermark/{media_watermark}'
+  defaults:
+    _entity_form: 'media_watermark.edit'
+    _title: 'Edit Media Watermark'
+  requirements:
+    _permission: 'media watermark control'
+
+entity.media_watermark.delete_form:
+  path: '/admin/config/media/media_watermark/{media_watermark}/delete'
+  defaults:
+    _entity_form: 'media_watermark.delete'
+    _title: 'Delete Media Watermark'
+  requirements:
+    _permission: 'media watermark control'
+
+# Batch Watremark adding interface.
+media_watermark.batch:
+  path: 'admin/config/media/media_watermark/batch'
+  defaults:
+    #_controller: '\Drupal\media_watermark\Controller\MediaWatermarkController::adminBatch'
+    _form: 'Drupal\media_watermark\Form\BatchWatermarkForm'
+    _title: 'Media Watermark Batch'
+  requirements:
+    _permission: 'media watermark apply watermarks'

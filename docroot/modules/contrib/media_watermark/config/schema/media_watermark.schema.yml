@@ -1,0 +1,25 @@
+media_watermark.media_watermark.*:
+  type: config_entity
+  label: 'Media Watermark config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    fid:
+      type: int
+      label: 'File id'
+    label:
+      type: label
+      label: 'Label'
+    horizontalPosition:
+      type: string
+      label: 'Horizontal Position'
+    verticalPosition:
+      type: string
+      label: 'Vertical Position'
+    horizontalMargin:
+      type: string
+      label: 'Horizontal margin'
+    verticalMargin:
+      type: string
+      label: 'Vertical Margin'
