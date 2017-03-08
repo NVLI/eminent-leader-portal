@@ -57,7 +57,7 @@ function pdf_to_image_cron() {
 
         for ($i=1; $i <= $num_pages; $i++) {
           $image_name = rand(000,999);
-          $image_uri = $image_save_path . '/' . $image_name .  $image_extension;
+          $image_uri = $image_save_path . $image_name .  $image_extension;
           $image = drupal_realpath($image_uri);
 
           $pdf->setPage($i);
