@@ -1,0 +1,27 @@
+diff --git a/docroot/libraries/viewerjs/PDFViewerPlugin.js b/docroot/libraries/viewerjs/PDFViewerPlugin.js
+index f3d9627..3bf1f6b 100644
+--- a/docroot/libraries/viewerjs/PDFViewerPlugin.js
++++ b/docroot/libraries/viewerjs/PDFViewerPlugin.js
+@@ -224,7 +224,8 @@ function PDFViewerPlugin() {
+ 
+     this.isSlideshow = function () {
+         // A very simple but generally true guess - if the width is greater than the height, treat it as a slideshow
+-        return pageWidth > pageHeight;
++        //return pageWidth > pageHeight;
++        return false;
+     };
+ 
+     this.onLoad = function () {};
+diff --git a/docroot/libraries/viewerjs/index.html b/docroot/libraries/viewerjs/index.html
+index 4f18250..81ec6b0 100644
+--- a/docroot/libraries/viewerjs/index.html
++++ b/docroot/libraries/viewerjs/index.html
+@@ -34,7 +34,7 @@
+                             <button id = "next" class = "toolbarButton pageDown" title = "Next Page"></button>
+                         </div>
+                         <label id = "pageNumberLabel" class = "toolbarLabel" for = "pageNumber">Page:</label>
+-                        <input type = "number" id = "pageNumber" class = "toolbarField pageNumber"></input>
++                        <input type = "text" id = "pageNumber" class = "toolbarField pageNumber"></input>
+                         <span id = "numPages" class = "toolbarLabel"></span>
+                     </div>
+                     <div id = "toolbarMiddleContainer" class = "outerCenter">
