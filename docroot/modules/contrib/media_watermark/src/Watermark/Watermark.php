@@ -95,7 +95,6 @@ class Watermark {
   public static function createImage($file, $watermark, $type = 'add') {
     // Get file real path.
     $file_path = \Drupal::service('file_system')->realpath($file->getFileUri());
-
     // Get watermark file id.
     $fid = $watermark->getFid();
     if (!empty($fid) && is_array($fid)) {
@@ -122,13 +121,17 @@ class Watermark {
       // Check if not empty image file and extension then proceed with adding watermark.
       if (!empty($img)) {
         // Copy orignal file to another folder before create watermark.
-        $watermark_source = 'public://watermark_source/';
+        $watermark_source = 'sites/default/files/watermark_source';
         file_prepare_directory($watermark_source, FILE_CREATE_DIRECTORY);
-        $original_image = file_get_contents($file_path);
         $file_name = basename($file_path);
-        if ($original_image) {
-          $save_file = file_save_data($original_image, $watermark_source . "/" . $file_name, FILE_EXISTS_RENAME);
-        }
+        $isFileExists =  file_exists($file_path);
+        $destination_path = $watermark_source . '/' . $file_name;
+        $isBackupFileExist =  file_exists($destination_path);
+				if ($isFileExists && $isBackupFileExist != 1) {
+					if (!copy($file_path, $destination_path)) {
+							drupal_set_message(t('Please verify the write permission of backup drive.'));
+					}
+				}
         // Get watermark image.
         $get_watermark = 'imagecreatefrom' . $watermark_extension;
         $watermark_img = $get_watermark($watermark_filepath);
