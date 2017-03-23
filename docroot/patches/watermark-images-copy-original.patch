@@ -1,19 +1,23 @@
-diff --git a/docroot/modules/contrib/media_watermark/src/Watermark/Watermark.php b/docroot/modules/contrib/media_watermark/src/Watermark/Watermark.php
-index 3a81dc8..5a761c2 100644
---- a/docroot/modules/contrib/media_watermark/src/Watermark/Watermark.php
-+++ b/docroot/modules/contrib/media_watermark/src/Watermark/Watermark.php
-@@ -121,6 +121,14 @@ public static function createImage($file, $watermark, $type = 'add') {
+diff --git a/src/Watermark/Watermark.php b/src/Watermark/Watermark.php
+index 3a81dc8..341c942 100644
+--- a/src/Watermark/Watermark.php
++++ b/src/Watermark/Watermark.php
+@@ -121,6 +121,18 @@ class Watermark {
        $img = $func_name($file_path);
        // Check if not empty image file and extension then proceed with adding watermark.
        if (!empty($img)) {
-+        // Copy orignal file to another folder before create watermark.
-+        $watermark_source = 'public://watermark_source/';
++				// Copy orignal file to another folder before create watermark.
++        $watermark_source = 'sites/default/files/watermark_source';
 +        file_prepare_directory($watermark_source, FILE_CREATE_DIRECTORY);
-+        $original_image = file_get_contents($file_path);
 +        $file_name = basename($file_path);
-+        if ($original_image) {
-+          $save_file = file_save_data($original_image, $watermark_source . "/" . $file_name, FILE_EXISTS_RENAME);
-+        }
++        $isFileExists =  file_exists($file_path);
++        $destination_path = $watermark_source . '/' . $file_name;
++        $isBackupFileExist =  file_exists($destination_path);
++				if ($isFileExists && $isBackupFileExist != 1) {
++					if (!copy($file_path, $destination_path)) {
++							drupal_set_message(t('Please verify the write permission of backup drive.'));
++					}
++				}
          // Get watermark image.
          $get_watermark = 'imagecreatefrom' . $watermark_extension;
          $watermark_img = $get_watermark($watermark_filepath);
