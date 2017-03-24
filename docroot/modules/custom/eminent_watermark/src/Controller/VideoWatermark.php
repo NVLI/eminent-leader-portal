@@ -57,7 +57,7 @@ class VideoWatermark extends ControllerBase {
 					$file_referance = $node->field_media_video->getValue();
 					if (!empty($file_referance)) {
 						$fid = $file_referance[0]['target_id'];
-								$file_storage = $this->entity_manager->getStorage('file');
+						$file_storage = $this->entity_manager->getStorage('file');
 						$file = $file_storage->load($fid);
 						if (!empty($file->getFileUri())) {
 							$files[] = $file->getFileUri();
@@ -105,16 +105,22 @@ class VideoWatermark extends ControllerBase {
   public function create_watermark($uri, $file_name) {
     // Copy orignal file to another folder before create watermark.
 		$uri = drupal_realpath($uri);
-		$public_path_backup = drupal_realpath('public://archive/video-backup');
+		$public_path_backup = 'public://archive/video-backup/';
 		file_prepare_directory($public_path_backup, FILE_CREATE_DIRECTORY);
+		$public_path_backup = drupal_realpath('public://archive/video-backup');
 		$file_name = basename($uri);
 		$isFileExists =  file_exists($uri);
 		$destination_path = $public_path_backup . "/" . $file_name;
     $isBackupFileExist =  file_exists($destination_path);
-		if ($isFileExists && $isBackupFileExist != 1) {
-			if (!copy($uri, $destination_path )) {
-					return 0;
+		if ($isFileExists) {
+			if ($isBackupFileExist != 1) {
+				if (!copy($uri, $destination_path )) {
+						return 0;
+				}
 			}
+			$temp_video = drupal_realpath('public://archive/temp-video/');
+			file_prepare_directory($temp_video, FILE_CREATE_DIRECTORY);
+			$temp_video_name = $temp_video . '/' . $file_name;
 			$ffmpeg = \FFMpeg\FFMpeg::create([
 				'ffmpeg.binaries'  => exec('which ffmpeg'),
 				'ffprobe.binaries' => exec('which ffprobe'),
@@ -130,8 +136,15 @@ class VideoWatermark extends ControllerBase {
 					'right' => 50,
 				));
 			$video
-					 ->save(new \FFMpeg\Format\Video\WebM(),  $uri);
-			return 1;
+					 ->save(new \FFMpeg\Format\Video\WebM(), $temp_video_name);
+			if (file_exists($temp_video_name)) {
+        if (!copy($temp_video_name, $uri )) {
+					unlink($temp_video_name);
+					return 0;
+				}
+				unlink($temp_video_name);
+			}
+		  return 1;
 		}
 		else {
 			return 0;
