@@ -1,0 +1,8 @@
+name: Eminent Watermark
+type: module
+description: 'The Watermark functionalities of Eminent Portal'
+package: Custom
+core: 8.x
+dependencies:
+- node
+

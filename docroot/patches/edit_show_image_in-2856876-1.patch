@@ -1,0 +1,40 @@
+diff --git a/docroot/modules/contrib/media_watermark/src/Form/BatchWatermarkForm.php b/docroot/modules/contrib/media_watermark/src/Form/BatchWatermarkForm.php
+index ae45eb7..af0f2ea 100644
+--- a/docroot/modules/contrib/media_watermark/src/Form/BatchWatermarkForm.php
++++ b/docroot/modules/contrib/media_watermark/src/Form/BatchWatermarkForm.php
+@@ -15,7 +15,6 @@
+ 
+ 
+ 
+-
+ /**
+  * Class BatchWatermarkForm.
+  * @package Drupal\media_watermark\Form
+@@ -229,6 +228,15 @@ protected function getImageFiles() {
+             ),
+           ),
+         ),
++        'image_preview' => array(
++          'data' =>  array(
++            '#theme' => 'image_style',
++            '#width' => 100,
++            '#height' => NULL,
++            '#style_name' => 'media_watermark',
++            '#uri' => $file->getFileUri(),
++          ),
++        ),
+         'type' => 'image',
+         'filesize' => format_size($file->getSize()),
+         'author' => array(
+@@ -369,6 +377,11 @@ protected function buildHeader() {
+         'specifier' => 'filename',
+         //'sort' => 'desc',
+       ),
++      'image_preview' => array(
++        'data' => t('Image Preview'),
++        'field' => 'image_preview',
++        'specifier' => 'image_preview',
++      ),
+       'type' => array(
+         'data' => t('Type'),
+       ),

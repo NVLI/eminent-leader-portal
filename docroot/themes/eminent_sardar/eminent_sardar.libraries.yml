@@ -9,6 +9,8 @@ global-components:
       css/prettyPhoto.css: {}
       stylesheets/custom.css: {}
       css/slick.css: {}
+      css/viewer.css: {}
+      css/viewermain.css: {}
       eminent_sardar.css: {}
 global-js:
   js:
@@ -21,6 +23,8 @@ global-js:
     js/wow.min.js: {}
     js/timeline.js: {}
     js/jquery.matchHeight.js: {}
+    js/viewer.js: {}
+    js/viewermain.js: {}
   dependencies:
     - core/drupal
     - core/jquery

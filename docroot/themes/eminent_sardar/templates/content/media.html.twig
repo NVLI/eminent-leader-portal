@@ -23,8 +23,12 @@
                 {{ content.field_media_audio }}
               </div>
             {% elseif media_type == "document" %}
-              <div class="pdf-holder-ex">
-                {{ content.field_media_document }}
+              <div class="docs-galley">
+                <ul class="docs-pictures clearfix">
+                {% for image in pdf_to_images %}
+                  <li><img data-original="{{ image.original }}" src="{{ image.thumbnail }}"></li>
+                {% endfor %}
+                </ul>
               </div>
             {% elseif media_type == "video" %}
               <div>

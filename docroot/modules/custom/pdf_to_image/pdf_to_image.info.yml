@@ -1,0 +1,6 @@
+name: PDF to Image Converter
+type: module
+description: Converts PDF to Image to reduce the size.
+core: 8.x
+version: 8.x-1.0
+package: Custom

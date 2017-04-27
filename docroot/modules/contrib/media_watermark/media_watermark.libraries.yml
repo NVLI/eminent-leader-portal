@@ -1,0 +1,13 @@
+media_watermark.styles:
+    version: VERSION
+    css:
+      theme:
+        media_watermark.css: {}
+
+media_watermark.scripts:
+    version: VERSION
+    js:
+      js/media_watermark_admin.js: {}
+    dependencies:
+      - core/jquery
+      - core/drupalSettings

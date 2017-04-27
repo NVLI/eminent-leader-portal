@@ -55,6 +55,7 @@ class UserLoginLink extends BlockBase {
               <li><a href="/node/add/time_line_collection">Add Timeline</a></li>
               <li><a href="/node/add/play_list">Add Playlist</a></li>
               <li><a href="/node/add/quiz">Add Quiz item</a></li>
+              <li><a href="/watermark/video/run-script">Run Watermark</a></li>
             </ul>
          ';
       }

@@ -1,0 +1,7 @@
+'media watermark control':
+  title: Configure watermarks
+  description: Configure watermarks, perform CRUD actions
+
+'media watermark apply watermarks':
+  title: Add existing watermarks
+  description: Checkbox appear for controlling watermarks on file entities

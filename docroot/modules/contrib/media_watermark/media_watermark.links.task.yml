@@ -1,0 +1,8 @@
+media_watermark.canonical:
+  route_name: media_watermark.list
+  base_route: media_watermark.canonical
+  title: 'Media Watermark Settings'
+media_watermark.batch:
+  route_name: media_watermark.batch
+  base_route: media_watermark.canonical
+  title: 'Media Watermark Batch'
